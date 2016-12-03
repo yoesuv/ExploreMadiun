@@ -1,0 +1,158 @@
+<resources>
+    <string name="app_name">Info AE</string>
+    <string name="action_settings">Pengaturan</string>
+    <string name="action_exit">Keluar</string>
+
+    <!-- DRAWER MENU -->
+    <string name="drawer_opened">Pilih Menu</string>
+
+    <string name="home">Awal\u0020</string>
+    <string name="place_list">Daftar Tempat</string>
+    <string name="gallery">Galeri</string>
+    <string name="maps">Peta</string>
+    <string name="about">Tentang</string>
+
+    <string name="no_inet_connection">Tidak Ada Koneksi Internet</string>
+    <string name="connection_failed">Koneksi Bermasalah</string>
+    <string name="try_again">Coba Lagi</string>
+    <string name="please_wait">Memproses....</string>
+
+    <string name="maps_API_key">AIzaSyCVH0_5uXAKHGBpoWhOGIQ0DzKu2kBRBQ4</string>
+
+    <string name="place_feed">https://gist.githubusercontent.com/yoesuv/393a7f8720b264649816/raw/6ffa831a52e1fce4bdf28d06850a5805e621aff1/</string>
+    <string name="gallery_feed">https://gist.githubusercontent.com/yoesuv/c6d873e4243da86b8886/raw/b7912de5a9c917e8bea1b7dd7b178197878f78fc/</string>
+    <string name="pins_feed">https://gist.githubusercontent.com/yoesuv/fb28d18f05f470e72b3d/raw/1d2f32861eca3a7429f9ce51ef2ebc006cee9f4c/</string>
+
+    <string name="place_feed_kab_madiun">https://gist.githubusercontent.com/yoesuv/105e37d90933191fda15/raw/3b2af6d247c35f15404445cfa4586a716bd362a5/</string>
+    <string name="place_feed_kota_madiun">https://gist.githubusercontent.com/yoesuv/d73bc7905e006cf99397/raw/4b500985da0feaba42f7617a425663b7f3390930/</string>
+    <string name="place_feed_kab_magetan">https://gist.githubusercontent.com/yoesuv/360fb6e5b0af5be86ac6/raw/90cf1251b2ea2ca30a0997088893227ca459981b/</string>
+    <string name="place_feed_kab_ngawi">https://gist.githubusercontent.com/yoesuv/b7bf0459f7f1ef0f2e74/raw/c0b8f43097fcbfae9a6cc9b6625bd0e5aca2be78/</string>
+    <string name="place_feed_kab_ponorogo">https://gist.githubusercontent.com/yoesuv/105f88724e530af23613/raw/9d93f9afb90c1b0f4b8c99d93bdff3460197c0c6/</string>
+    <string name="place_feed_kab_pacitan">https://gist.githubusercontent.com/yoesuv/4e715cce01aaadbb0683/raw/0e15363abb192f7e16527acee6470bd9c1f9004b/</string>
+
+    <string name="home_text">
+        <![CDATA[
+            Selamat Datang,<br/><br/>
+            Aplikasi ini berisi informasi seputar tempat menarik di karesidenan Madiun (Madiun, Magetan, Ngawi, Ponorogo dan Pacitan). yang memuat tentang objek-objek
+            wisata, pusat hiburan dan tempat-tempat sejenis lainnya. semuanya dirangkum dalam satu aplikasi.<br/><br/>
+            terimakasih telah menggunakan aplikasi ini.
+        ]]>
+    </string>
+
+    <string name="semua">Semua</string>
+    <string name="kab_madiun">Kab. Madiun</string>
+    <string name="kota_madiun">Kota Madiun</string>
+    <string name="kab_magetan">Kab. Magetan</string>
+    <string name="kab_ngawi">Kab. Ngawi</string>
+    <string name="kab_ponorogo">Kab. Ponorogo</string>
+    <string name="kab_pacitan">Kab. Pacitan</string>
+
+    <string name="start">MULAI</string>
+
+    <string name="map_normal">Normal</string>
+    <string name="map_satellite">Satellite</string>
+    <string name="map_terrain">Terrain</string>
+    <string name="map_hybrid">Hybrid</string>
+
+    <string name="informasi">Informasi</string>
+    <string name="changelog">versi rilis</string>
+    <string name="thanks_to">Terima kasih</string>
+    <string name="library">Pustaka</string>
+    <string name="donation">Donasi</string>
+
+    <string-array name="tab_titles">
+        <item>@string/informasi</item>
+        <item>@string/changelog</item>
+        <item>@string/thanks_to</item>
+        <item>@string/library</item>
+    </string-array>
+
+    <!-- INFORMASI -->
+    <string name="versi">Versi</string>
+    <string name="my_name">Yusuf Saifudin</string>
+    <string name="info">Informasi</string>
+    <string name="contact">Kontak</string>
+    <string name="my_twitter">\@yoesuv</string>
+    <string name="my_email">yusuf.saifudin@gmail.com</string>
+    <string name="support">Dukungan</string>
+    <string name="rate">Beri nilai aplikasi ini jika suka, terima kasih.</string>
+    <string name="discl">Kebijakan</string>
+    <string name="disclaimer">aplikasi ini tidak menjamin semua bentuk data 100% akurat. oleh karena itu, segala bentuk kritik dan saran akan sangat diapresiasi.</string>
+
+    <!-- TERIMA KASIH -->
+    <string name="trims">
+        <![CDATA[
+        terima kasih kepada <i>blog-blog</i> maupun perorangan yang fotonya dimuat dalam aplikasi ini, dan tidak bisa
+    disebutkan satu persatu (<i>kalian luar biasa</i>....).
+        ]]>
+    </string>
+    <string name="person_1">Ahmad Sofi</string>
+    <string name="person_as">(Tester)</string>
+
+    <!-- CHANGELOG -->
+    <string name="ver_5">Versi 1.0.4</string>
+    <string name="ver_5_info">
+        <![CDATA[
+            + 3 tempat baru di ngawi<br/>
+            + 1 tempat baru di magetan<br/>
+            + 3 gambar galeri<br/>
+            + 3 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_4">Versi 1.0.3</string>
+    <string name="ver_4_info">
+        <![CDATA[
+            + 3 tempat baru di ponorogo<br/>
+            + 1 tempat baru di magetan<br/>
+            + 3 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_3">Versi 1.0.2</string>
+    <string name="ver_3_info">
+        <![CDATA[
+            • nama baru aplikasi Info AE<br/>
+            + 6 tempat baru di pacitan<br/>
+            + 1 tempat baru di ngawi<br/>
+            + 3 gambar galeri<br/>
+            + 3 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_2">Versi 1.0.1</string>
+    <string name="ver_2_info">
+        <![CDATA[
+            • menu navigasi baru<br/>
+            + 9 tempat baru di pacitan<br/>
+            + 3 gambar galeri<br/>
+            + 9 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_1">Versi 1.0.0</string>
+    <string name="ver_1_info">
+        <![CDATA[
+            • rilis perdana<br/>
+            • 50 daftar tempat<br/>
+            • 33 galeri gambar<br/>
+            • 47 tanda lokasi peta
+        ]]>
+    </string>
+
+    <!-- LIBRARY -->
+    <string name="otto">Retrofit, Picasso</string>
+    <string name="otto_copyright">Copyright 2013 Square, Inc.</string>
+    <string name="retrofit">Retrofit</string>
+    <string name="picasso">Picasso</string>
+    <string name="material_drawer">Material Drawer</string>
+    <string name="material_drawer_copyright">Copyright 2016 Mike Penz</string>
+    <string name="smart_tab">SmartTabLayout</string>
+    <string name="smart_tab_copyright_1">Copyright 2015 ogaclejapan</string>
+    <string name="smart_tab_copyright_2">Copyright 2013 The Android Open Source Project</string>
+    <string name="icons8">Icons8</string>
+    <string name="app_icons8">App icons by </string>
+    <string name="apache_license">Licensed under the Apache License, Version 2.0</string>
+    <string name="cc_license">Licensed under Creative Commons Attribution-NoDerivs 3.0 Unported</string>
+
+    <!-- ALERT DIALOG -->
+    <string name="ok">OK</string>
+    <string name="location_permission_denied">Ijin Akses Lokasi diperlukan untuk aplikasi ini.</string>
+
+</resources>

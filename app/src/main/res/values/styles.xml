@@ -1,0 +1,35 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="scrollStyle">
+        <!-- <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item> -->
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:fadeScrollbars">true</item>
+        <item name="android:scrollbarSize">5dp</item>
+        <item name="android:scrollbarFadeDuration">500</item>
+        <item name="android:scrollbarDefaultDelayBeforeFade">100</item>
+        <item name="android:scrollbarThumbVertical">@color/colorAccent</item>
+        <item name="android:scrollbarTrackVertical">@color/pink_A100</item>
+    </style>
+
+    <style name="tab_style" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">#eeeeee</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+</resources>

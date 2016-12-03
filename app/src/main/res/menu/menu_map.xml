@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/map_normal"
+            android:title="@string/map_normal"
+            android:checked="true" />
+        <item
+            android:id="@+id/map_satellite"
+            android:title="@string/map_satellite" />
+        <item
+            android:id="@+id/map_terrain"
+            android:title="@string/map_terrain" />
+        <item
+            android:id="@+id/map_hybrid"
+            android:title="@string/map_hybrid" />
+    </group>
+
+</menu>

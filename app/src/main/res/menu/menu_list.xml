@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+ <item
+     android:id="@+id/more"
+     android:icon="@drawable/menu_more_white"
+     android:title=""
+     android:orderInCategory="100"
+     app:showAsAction="ifRoom">
+
+     <menu>
+         <group android:checkableBehavior="single">
+         <item
+             android:id="@+id/semua"
+             android:icon="@drawable/list_semua_64"
+             android:title="@string/semua"
+             android:checked="true" />
+
+         <item
+             android:id="@+id/list_kab_madiun"
+             android:icon="@drawable/logo_kabupaten_madiun_64"
+             android:title="@string/kab_madiun" />
+
+         <item
+             android:id="@+id/list_kota_madiun"
+             android:icon="@drawable/logo_kota_madiun_64"
+             android:title="@string/kota_madiun" />
+
+         <item
+             android:id="@+id/list_kab_magetan"
+             android:icon="@drawable/logo_kabupaten_magetan_64"
+             android:title="@string/kab_magetan" />
+
+         <item
+             android:id="@+id/list_kab_ngawi"
+             android:icon="@drawable/logo_kabupaten_ngawi_64"
+             android:title="@string/kab_ngawi" />
+
+         <item
+             android:id="@+id/list_kab_ponorogo"
+             android:icon="@drawable/logo_kabupaten_ponorogo_64"
+             android:title="@string/kab_ponorogo" />
+
+         <item
+             android:id="@+id/list_kab_pacitan"
+             android:icon="@drawable/logo_kabupaten_pacitan_64"
+             android:title="@string/kab_pacitan" />
+         </group>
+     </menu>
+
+ </item>
+
+</menu>

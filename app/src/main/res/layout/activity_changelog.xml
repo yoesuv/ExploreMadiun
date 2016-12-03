@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:id="@+id/scrollView_changelog"
+        android:layout_gravity="center_horizontal" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/colorPrimary"
+                android:text="@string/ver_5"
+                android:id="@+id/textView_ver104" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/ver_5"
+                android:fontFamily="sans-serif-light"
+                android:id="@+id/textView_ketver_5" />
+
+            <include layout="@layout/divider" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/colorPrimary"
+                android:text="@string/ver_4"
+                android:id="@+id/textView_ver103" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/ver_4"
+                android:fontFamily="sans-serif-light"
+                android:id="@+id/textView_ketver_4" />
+
+            <include layout="@layout/divider" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/colorPrimary"
+                android:text="@string/ver_3"
+                android:id="@+id/textView_ver102" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/ver_2"
+                android:fontFamily="sans-serif-light"
+                android:id="@+id/textView_ketver_3" />
+
+            <include layout="@layout/divider" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/colorPrimary"
+                android:text="@string/ver_2"
+                android:id="@+id/textView_ver101" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/ver_2"
+                android:fontFamily="sans-serif-light"
+                android:id="@+id/textView_ketver_2" />
+
+            <include layout="@layout/divider" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?attr/colorPrimary"
+                android:text="@string/ver_1"
+                android:id="@+id/textView4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/ver_1"
+                android:fontFamily="sans-serif-light"
+                android:id="@+id/textView_ver_1" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
