@@ -22,11 +22,11 @@ import com.yoesuv.infomadiun.utils.ListPlaceApiInterface;
 
 import java.util.List;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class ListPlaceFragment extends ListFragment{
@@ -37,7 +37,7 @@ public class ListPlaceFragment extends ListFragment{
     private CoordinatorLayout cLayout;
     private Snackbar snackbar;
 
-    private int idLokasi;
+    private int idLokasi,idLokasiBefore;
 
     public static ListPlaceFragment getInstance(){
         return new ListPlaceFragment();
@@ -46,6 +46,8 @@ public class ListPlaceFragment extends ListFragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        idLokasiBefore = 100;
 
         cLayout = (CoordinatorLayout) getActivity().findViewById(R.id.coordinator_layout);
         setHasOptionsMenu(true);
@@ -116,7 +118,10 @@ public class ListPlaceFragment extends ListFragment{
         return super.onOptionsItemSelected(item);
     }
 
-    private void loadTempat(int id){
+    private void loadTempat(final int id){
+        if(idLokasiBefore==id){
+            return;
+        }
 
         setListShown(false);
         adapter.clear();
@@ -164,23 +169,17 @@ public class ListPlaceFragment extends ListFragment{
 
         callData.enqueue(new Callback<List<ListPlace>>() {
             @Override
-            public void onResponse(Response<List<ListPlace>> response, Retrofit retrofit) {
-                if(response.isSuccess()){
-                    //Log.e("sukses", "Koneksi Sukses");
+            public void onResponse(Call<List<ListPlace>> call, Response<List<ListPlace>> response) {
+                if(response.isSuccessful()){
                     for(ListPlace dt : response.body()){
-                        //Log.e("Nama", dt.getNama());
                         adapter.add(dt);
                     }
-
                     adapter.notifyDataSetChanged();
                     setListAdapter(adapter);
                     if(ListPlaceFragment.this.isVisible()) {
                         setListShown(true);
                     }
-
                 }else{
-                    //int status = response.code();
-                    //Log.e("gagal", "Koneksi Terputus " + status);
                     if(ListPlaceFragment.this.isVisible()) {
                         setListShown(true);
                         snackbar = Snackbar.make(cLayout, getResources().getString(R.string.connection_failed), Snackbar.LENGTH_INDEFINITE);
@@ -195,11 +194,10 @@ public class ListPlaceFragment extends ListFragment{
             }
 
             @Override
-            public void onFailure(Throwable t) {
-                //Log.e("gagal", "tidak ada koneksi internet " + t.getMessage());
-                if(ListPlaceFragment.this.isVisible()) {
+            public void onFailure(Call<List<ListPlace>> call, Throwable t) {
+                if(ListPlaceFragment.this.isVisible()){
                     setListShown(true);
-                    snackbar = Snackbar.make(cLayout, getResources().getString(R.string.no_inet_connection), Snackbar.LENGTH_INDEFINITE);
+                    snackbar = Snackbar.make(cLayout, getResources().getString(R.string.connection_failed), Snackbar.LENGTH_INDEFINITE);
                     snackbar.setAction(getResources().getString(R.string.try_again), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -209,12 +207,12 @@ public class ListPlaceFragment extends ListFragment{
                 }
             }
         });
+        idLokasiBefore = id;
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        //Log.e("Snackbar", "Hide List Place Snackbar");
         if(snackbar!=null) {
             if (snackbar.isShown()) {
                 snackbar.dismiss();

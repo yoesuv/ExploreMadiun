@@ -6,8 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +21,11 @@ import com.yoesuv.infomadiun.utils.InfoGalleryApiInterface;
 
 import java.util.List;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GalleryFragment extends Fragment implements AdapterView.OnItemClickListener{
 
@@ -62,7 +60,6 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
         super.onActivityCreated(savedInstanceState);
         gAdapter = new InfoGalleryAdapter(getActivity(), 0);
         gView.setAdapter(gAdapter);
-        //gView.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         gView.setVerticalScrollBarEnabled(false);
 
         if(GalleryFragment.this.isVisible()) {
@@ -92,16 +89,13 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
         Call<List<InfoGallery>> cg = infoGalleryApiInterface.call();
         cg.enqueue(new Callback<List<InfoGallery>>() {
             @Override
-            public void onResponse(Response<List<InfoGallery>> response, Retrofit retrofit) {
-                if (response.isSuccess()) {
-                    //Log.e("gallery", "Koneksi Gallery Sukses");
+            public void onResponse(Call<List<InfoGallery>> call, Response<List<InfoGallery>> response) {
+                if(response.isSuccessful()){
                     for (InfoGallery ig : response.body()) {
-                        //Log.e("thumbnail", ig.getThumbnail());
                         gAdapter.add(ig);
                     }
                     gAdapter.notifyDataSetChanged();
-                } else {
-                    //Log.e("gagal", "Koneksi Gallery Gagal");
+                }else{
                     if (GalleryFragment.this.isVisible()) {
                         snackbar = Snackbar.make(cLayout, getResources().getString(R.string.connection_failed), Snackbar.LENGTH_INDEFINITE);
                         snackbar.setAction(getResources().getString(R.string.try_again), new View.OnClickListener() {
@@ -115,8 +109,7 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
             }
 
             @Override
-            public void onFailure(Throwable t) {
-                //Log.e("Failure", "Koneksi Gallery Fail");
+            public void onFailure(Call<List<InfoGallery>> call, Throwable t) {
                 if (GalleryFragment.this.isVisible()) {
                     snackbar = Snackbar.make(cLayout, getResources().getString(R.string.no_inet_connection), Snackbar.LENGTH_INDEFINITE);
                     snackbar.setAction(getResources().getString(R.string.try_again), new View.OnClickListener() {
@@ -133,7 +126,6 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        //Log.e("Snackbar", "Hide Gallery Snackbar");
         if(snackbar!=null) {
             if (snackbar.isShown()) {
                 snackbar.dismiss();

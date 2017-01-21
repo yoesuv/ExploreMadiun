@@ -27,11 +27,11 @@ import com.yoesuv.infomadiun.utils.PinApiInterface;
 
 import java.util.List;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback,
         GoogleMap.OnMyLocationButtonClickListener{
@@ -88,18 +88,17 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         googleMap.getUiSettings().setZoomControlsEnabled(true);
 
         if(moveCamera){
-        /* LOAD PIN */
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.pins_feed))
-                .addConverterFactory(GsonConverterFactory.create()).build();
+            /* LOAD PIN */
+            Retrofit retrofit = new Retrofit.Builder().baseUrl(getResources().getString(R.string.pins_feed))
+                    .addConverterFactory(GsonConverterFactory.create()).build();
 
-        PinApiInterface pinApiInterface = retrofit.create(PinApiInterface.class);
-        Call<List<MapsPin>> cMaps = pinApiInterface.call();
+            PinApiInterface pinApiInterface = retrofit.create(PinApiInterface.class);
+            Call<List<MapsPin>> cMaps = pinApiInterface.call();
             cMaps.enqueue(new Callback<List<MapsPin>>() {
                 @Override
-                public void onResponse(Response<List<MapsPin>> response, Retrofit retrofit) {
-                    if (response.isSuccess()) {
+                public void onResponse(Call<List<MapsPin>> call, Response<List<MapsPin>> response) {
+                    if(response.isSuccessful()){
                         for (MapsPin pin : response.body()) {
-                            //Log.e("pin", pin.getName());
                             MarkerOptions options = new MarkerOptions().position(new LatLng(pin.getLatitude(), pin.getLongitude()));
                             options.title(pin.getName());
                             if (pin.getLokasi() == 6) {
@@ -116,8 +115,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                             googleMap.addMarker(options);
 
                         }
-                    } else {
-                        //Log.e("gagal", "Koneksi Anda Bermasalah");
+                    }else{
                         if (MapsFragment.this.isVisible()) {
                             snackbar = Snackbar.make(cLayout, getResources().getString(R.string.connection_failed), Snackbar.LENGTH_INDEFINITE);
                             snackbar.setAction(getResources().getString(R.string.try_again), new View.OnClickListener() {
@@ -132,8 +130,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                 }
 
                 @Override
-                public void onFailure(Throwable t) {
-                    //Log.e("failure", "Failure to Connect "+t.getMessage());
+                public void onFailure(Call<List<MapsPin>> call, Throwable t) {
                     if (MapsFragment.this.isVisible()) {
                         snackbar = Snackbar.make(cLayout, getResources().getString(R.string.no_inet_connection), Snackbar.LENGTH_INDEFINITE);
                         snackbar.setAction(getResources().getString(R.string.try_again), new View.OnClickListener() {
@@ -145,9 +142,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                         snackbar.show();
                     }
                 }
-        });
-
-        //if(moveCamera){
+            });
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-7.813882, 111.371713)));
             googleMap.animateCamera(CameraUpdateFactory.zoomTo(9));
         }

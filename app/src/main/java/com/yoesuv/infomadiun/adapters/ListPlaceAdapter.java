@@ -54,7 +54,7 @@ public class ListPlaceAdapter extends ArrayAdapter<ListPlace>{
         return convertView;
     }
 
-    class ViewHolder{
+    private class ViewHolder{
         ImageView thumbnail;
         TextView nama;
         TextView kategori;

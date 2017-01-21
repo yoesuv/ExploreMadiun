@@ -19,13 +19,13 @@
 
     <string name="maps_API_key">AIzaSyCVH0_5uXAKHGBpoWhOGIQ0DzKu2kBRBQ4</string>
 
-    <string name="place_feed">https://gist.githubusercontent.com/yoesuv/393a7f8720b264649816/raw/6ffa831a52e1fce4bdf28d06850a5805e621aff1/</string>
+    <string name="place_feed">https://gist.githubusercontent.com/yoesuv/393a7f8720b264649816/raw/ac14330c1f04c273c15cbaeb25e3bd714d6b2483/</string>
     <string name="gallery_feed">https://gist.githubusercontent.com/yoesuv/c6d873e4243da86b8886/raw/b7912de5a9c917e8bea1b7dd7b178197878f78fc/</string>
-    <string name="pins_feed">https://gist.githubusercontent.com/yoesuv/fb28d18f05f470e72b3d/raw/1d2f32861eca3a7429f9ce51ef2ebc006cee9f4c/</string>
+    <string name="pins_feed">https://gist.githubusercontent.com/yoesuv/fb28d18f05f470e72b3d/raw/e70554a219e74367acb46f3fd9eb45a398f936e7/</string>
 
     <string name="place_feed_kab_madiun">https://gist.githubusercontent.com/yoesuv/105e37d90933191fda15/raw/3b2af6d247c35f15404445cfa4586a716bd362a5/</string>
     <string name="place_feed_kota_madiun">https://gist.githubusercontent.com/yoesuv/d73bc7905e006cf99397/raw/4b500985da0feaba42f7617a425663b7f3390930/</string>
-    <string name="place_feed_kab_magetan">https://gist.githubusercontent.com/yoesuv/360fb6e5b0af5be86ac6/raw/90cf1251b2ea2ca30a0997088893227ca459981b/</string>
+    <string name="place_feed_kab_magetan">https://gist.githubusercontent.com/yoesuv/360fb6e5b0af5be86ac6/raw/9b1aa16ec492df5d657dcb8d289a2e159bb96fd7/</string>
     <string name="place_feed_kab_ngawi">https://gist.githubusercontent.com/yoesuv/b7bf0459f7f1ef0f2e74/raw/c0b8f43097fcbfae9a6cc9b6625bd0e5aca2be78/</string>
     <string name="place_feed_kab_ponorogo">https://gist.githubusercontent.com/yoesuv/105f88724e530af23613/raw/9d93f9afb90c1b0f4b8c99d93bdff3460197c0c6/</string>
     <string name="place_feed_kab_pacitan">https://gist.githubusercontent.com/yoesuv/4e715cce01aaadbb0683/raw/0e15363abb192f7e16527acee6470bd9c1f9004b/</string>
@@ -90,6 +90,13 @@
     <string name="person_as">(Tester)</string>
 
     <!-- CHANGELOG -->
+    <string name="ver_6">Versi 1.0.5</string>
+    <string name="ver_6_info">
+        <![CDATA[
+            + 1 tempat baru di magetan<br/>
+            + 1 tanda lokasi peta
+        ]]>
+    </string>
     <string name="ver_5">Versi 1.0.4</string>
     <string name="ver_5_info">
         <![CDATA[
