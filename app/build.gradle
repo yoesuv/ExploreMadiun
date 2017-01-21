@@ -46,5 +46,5 @@ dependencies {
     compile('com.mikepenz:materialdrawer:4.6.4@aar') {
         transitive = true
     }
-    compile files('libs/StartAppInApp-3.5.1.jar')
+    compile files('libs/StartAppInApp-3.5.4.jar')
 }
