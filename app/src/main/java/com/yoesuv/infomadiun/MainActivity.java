@@ -2,6 +2,9 @@ package com.yoesuv.infomadiun;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -73,57 +76,57 @@ public class MainActivity extends AppCompatActivity {
                                     currentIdentifier = 1;
                                     HomeFragment home = new HomeFragment();
                                     home.setDrawer(result);
-                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, home).commit();
+                                    changeFragment(home);
 
 
                                 } else if (drawerItem.getIdentifier() == 2) {
                                     currentTitle = getResources().getString(R.string.place_list);
                                     currentIdentifier = 2;
-                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, ListPlaceFragment.getInstance()).commit();
-
+                                    changeFragment(ListPlaceFragment.getInstance());
 
                                 } else if (drawerItem.getIdentifier() == 3) {
                                     currentTitle = getResources().getString(R.string.gallery);
                                     currentIdentifier = 3;
-                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, GalleryFragment.getInstance()).commit();
-
+                                    changeFragment(GalleryFragment.getInstance());
 
                                 } else if (drawerItem.getIdentifier() == 4) {
                                     currentTitle = getResources().getString(R.string.maps);
                                     currentIdentifier = 4;
-                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, MapsFragment.getInstance()).commit();
-
+                                    changeFragment(MapsFragment.getInstance());
 
                                 } else if (drawerItem.getIdentifier() == 5) {
                                     currentTitle = getResources().getString(R.string.about);
                                     currentIdentifier = 5;
-                                    getSupportFragmentManager().beginTransaction().replace(R.id.container, AboutFragment.getInstance()).commit();
+                                    changeFragment(AboutFragment.getInstance());
 
                                 } else {
                                     currentTitle = getResources().getString(R.string.home);
-
                                 }
 
-                                /* set toolbar title */
-                                if (getSupportActionBar() != null) {
-                                    tvTitle.setText(currentTitle);
-                                }
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        /* set toolbar title */
+                                        if (getSupportActionBar() != null) {
+                                            tvTitle.setText(currentTitle);
+                                        }
 
-                                if(currentTitle.equalsIgnoreCase(getResources().getString(R.string.about))){
-                                    if (getSupportActionBar() != null) {
-                                        getSupportActionBar().setElevation(0);
+                                        if(currentTitle.equalsIgnoreCase(getResources().getString(R.string.about))){
+                                            if (getSupportActionBar() != null) {
+                                                getSupportActionBar().setElevation(0);
+                                            }
+                                        }else{
+                                            if (getSupportActionBar() != null) {
+                                                getSupportActionBar().setElevation(5);
+                                            }
+                                        }
                                     }
-                                }else{
-                                    if (getSupportActionBar() != null) {
-                                        getSupportActionBar().setElevation(5);
-                                    }
-                                }
+                                }, getResources().getInteger(R.integer.handler_duration));
                             }
                         }
                         return false;
                     }
                 }).withSavedInstance(savedInstanceState).build();
-
 
         currentTitle = this.getResources().getString(R.string.app_name);
         if(getSupportActionBar()!=null) {
@@ -131,15 +134,12 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
-
-
         HomeFragment h = new HomeFragment();
         h.setDrawer(result);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, h).commit();
         currentIdentifier = 1;
         tvTitle.setText(currentTitle);
     }
-
 
     @Override
     protected void onResume() {
@@ -160,6 +160,17 @@ public class MainActivity extends AppCompatActivity {
             result.closeDrawer();
         }
         ads.onBackPressed();
+    }
+
+    private void changeFragment(final Fragment fragment){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                FragmentTransaction fTransaction = getSupportFragmentManager().beginTransaction();
+                fTransaction.setCustomAnimations(R.anim.fragment_enter, R.anim.fragment_exit);
+                fTransaction.replace(R.id.container, fragment).commit();
+            }
+        }, getResources().getInteger(R.integer.handler_duration));
     }
 
 }

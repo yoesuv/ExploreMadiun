@@ -4,7 +4,7 @@ import android.os.Build;
 import android.text.Html;
 
 /**
- * Created by yusuf on 1/21/17.
+ *  Created by yusuf on 1/21/17.
  */
 
 public class ActivityHelper {

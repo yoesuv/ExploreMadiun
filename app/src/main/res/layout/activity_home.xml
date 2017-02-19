@@ -171,7 +171,6 @@
             android:background="?attr/colorPrimary"
             -->
             <android.support.v7.widget.AppCompatButton
-                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/start"
@@ -180,7 +179,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginRight="@dimen/home_padding"
                 android:layout_marginBottom="10dp"
-                android:layout_marginLeft="@dimen/home_padding" />
+                android:layout_marginLeft="@dimen/home_padding"
+                android:theme="@style/buttonPrimary"/>
 
 
         </LinearLayout>

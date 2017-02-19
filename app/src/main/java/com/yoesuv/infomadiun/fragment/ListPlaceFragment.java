@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -42,6 +41,7 @@ public class ListPlaceFragment extends ListFragment{
     public static ListPlaceFragment getInstance(){
         return new ListPlaceFragment();
     }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

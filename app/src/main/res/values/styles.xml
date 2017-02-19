@@ -32,4 +32,8 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="buttonPrimary" parent="Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+    </style>
+
 </resources>
