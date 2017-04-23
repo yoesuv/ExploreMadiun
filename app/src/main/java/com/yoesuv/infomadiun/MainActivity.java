@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        StartAppSDK.init(this, "200252166", true);
-        StartAppAd.disableSplash();
+        //StartAppSDK.init(this, "200252166", true);
+        //StartAppAd.disableSplash();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

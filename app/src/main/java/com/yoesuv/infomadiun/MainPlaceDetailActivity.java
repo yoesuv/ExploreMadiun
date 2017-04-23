@@ -1,5 +1,6 @@
 package com.yoesuv.infomadiun;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +23,10 @@ public class MainPlaceDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_detail);
+
+        if(Build.VERSION.SDK_INT<=Build.VERSION_CODES.KITKAT) {
+            overridePendingTransition(R.anim.left_in, R.anim.left_out);
+        }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,9 +67,17 @@ public class MainPlaceDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                MainPlaceDetailActivity.this.finish();
+                onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(Build.VERSION.SDK_INT<=Build.VERSION_CODES.KITKAT) {
+            overridePendingTransition(R.anim.right_in, R.anim.right_out);
+        }
     }
 }

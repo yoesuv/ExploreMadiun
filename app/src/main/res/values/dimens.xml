@@ -13,4 +13,5 @@
 
     <integer name="handler_duration">1000</integer>
     <integer name="fragment_anim_duration">500</integer>
+    <integer name="activity_anim_duration">400</integer>
 </resources>
