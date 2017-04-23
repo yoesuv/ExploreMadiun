@@ -32,10 +32,10 @@
                     android:indeterminate="true"
                     android:layout_centerInParent="true"/ -->
 
-                <ImageView
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imageView_thumbnail"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
-                    android:id="@+id/imageView_thumbnail"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/img_default"
                     android:padding="5dp" />
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="New Text"
@@ -56,14 +56,16 @@
                         android:textStyle="bold"
                         android:textSize="16sp"
                         android:layout_marginTop="12dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp" />
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="New Text"
                         android:id="@+id/textView_kategori"
                         android:gravity="center_vertical"
+                        android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp" />
 
             </LinearLayout>

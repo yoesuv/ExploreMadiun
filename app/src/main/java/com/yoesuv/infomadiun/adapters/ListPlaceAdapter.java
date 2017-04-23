@@ -1,12 +1,12 @@
 package com.yoesuv.infomadiun.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -26,9 +26,9 @@ public class ListPlaceAdapter extends ArrayAdapter<ListPlace>{
             holder = new ViewHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_list_place, parent, false);
 
-            holder.nama = (TextView) convertView.findViewById(R.id.textView_nama);
-            holder.kategori = (TextView) convertView.findViewById(R.id.textView_kategori);
-            holder.thumbnail = (ImageView) convertView.findViewById(R.id.imageView_thumbnail);
+            holder.nama = (AppCompatTextView) convertView.findViewById(R.id.textView_nama);
+            holder.kategori = (AppCompatTextView) convertView.findViewById(R.id.textView_kategori);
+            holder.thumbnail = (AppCompatImageView) convertView.findViewById(R.id.imageView_thumbnail);
 
             convertView.setTag(holder);
         }else{
@@ -55,8 +55,8 @@ public class ListPlaceAdapter extends ArrayAdapter<ListPlace>{
     }
 
     private class ViewHolder{
-        ImageView thumbnail;
-        TextView nama;
-        TextView kategori;
+        AppCompatImageView thumbnail;
+        AppCompatTextView nama;
+        AppCompatTextView kategori;
     }
 }
