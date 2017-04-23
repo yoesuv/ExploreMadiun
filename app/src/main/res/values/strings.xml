@@ -162,4 +162,7 @@
     <string name="ok">OK</string>
     <string name="location_permission_denied">Ijin Akses Lokasi diperlukan untuk aplikasi ini.</string>
 
+    <!-- TRANSITION NAME -->
+    <string name="transition_gallery">transitionGallery</string>
+
 </resources>

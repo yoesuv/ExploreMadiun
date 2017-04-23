@@ -1,10 +1,12 @@
 package com.yoesuv.infomadiun.fragment;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -75,7 +77,15 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
         Intent i = new Intent(getActivity(), GalleryDetailActivity.class);
         i.putExtra(GalleryDetailActivity.EXTRA_IMAGE, ig.getImage());
         i.putExtra(GalleryDetailActivity.EXTRA_DESC, ig.getCaption());
-        startActivity(i);
+        if(Build.VERSION.SDK_INT<=Build.VERSION_CODES.KITKAT) {
+            startActivity(i);
+        }else{
+            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                getActivity(), view.findViewById(R.id.image_gallery_thumbnail),
+                    getActivity().getResources().getString(R.string.transition_gallery)
+            );
+            startActivity(i, optionsCompat.toBundle());
+        }
     }
 
 

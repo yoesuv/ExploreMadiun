@@ -4,7 +4,9 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,7 +23,7 @@ public class GalleryDetailActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView textView_desc,tvTitle;
-    private ImageView img;
+    private AppCompatImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +49,7 @@ public class GalleryDetailActivity extends AppCompatActivity {
         tvTitle.setText(R.string.gallery);
 
         textView_desc = (TextView) findViewById(R.id.textView_gallery_detail);
-        img = (ImageView) findViewById(R.id.imageView_gallery_detail);
+        img = (AppCompatImageView) findViewById(R.id.imageView_gallery_detail);
 
         textView_desc.setText(getIntent().getExtras().getString(EXTRA_DESC));
         Picasso.with(this).load(getIntent().getExtras().getString(EXTRA_IMAGE)).placeholder(R.drawable.img_default).into(img, new Callback() {
@@ -68,7 +70,11 @@ public class GalleryDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                onBackPressed();
+                if(Build.VERSION.SDK_INT<=Build.VERSION_CODES.KITKAT) {
+                    onBackPressed();
+                }else{
+                    supportFinishAfterTransition();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);

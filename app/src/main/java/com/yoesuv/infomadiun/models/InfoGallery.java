@@ -16,11 +16,7 @@ public class InfoGallery {
     }
 
     public String getThumbnail() {
-        if(thumbnail!=null) {
-            return thumbnail;
-        }else{
-            return "";
-        }
+        return thumbnail;
     }
 
     public void setThumbnail(String thumbnail) {

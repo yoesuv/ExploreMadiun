@@ -18,9 +18,11 @@
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/image_gallery_thumbnail"
+                android:transitionName="@string/transition_gallery"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="5dp"
+                android:scaleType="centerCrop"
                 android:adjustViewBounds="true"/>
 
         </RelativeLayout>
