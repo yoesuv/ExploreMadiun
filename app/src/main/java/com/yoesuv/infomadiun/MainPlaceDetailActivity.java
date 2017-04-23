@@ -3,6 +3,8 @@ package com.yoesuv.infomadiun;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -15,9 +17,7 @@ import com.yoesuv.infomadiun.models.ListPlace;
 public class MainPlaceDetailActivity extends AppCompatActivity {
 
     public static String EXTRA_PLACE = "extra_place";
-    private Toolbar toolbar;
-    private ImageView imgPlaceDetail;
-    private TextView textViewPlace, tvTitle;
+    private AppCompatImageView imgPlaceDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +28,9 @@ public class MainPlaceDetailActivity extends AppCompatActivity {
             overridePendingTransition(R.anim.left_in, R.anim.left_out);
         }
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        tvTitle = (TextView) toolbar.findViewById(R.id.textView_title);
+        TextView tvTitle = (TextView) toolbar.findViewById(R.id.textView_title);
 
         ListPlace lp = getIntent().getExtras().getParcelable(EXTRA_PLACE);
 
@@ -43,8 +43,8 @@ public class MainPlaceDetailActivity extends AppCompatActivity {
             }
         }
 
-        textViewPlace = (TextView) findViewById(R.id.textView_place_detail);
-        imgPlaceDetail = (ImageView) findViewById(R.id.imageView_place_detail);
+        AppCompatTextView textViewPlace = (AppCompatTextView) findViewById(R.id.textView_place_detail);
+        imgPlaceDetail = (AppCompatImageView) findViewById(R.id.imageView_place_detail);
 
         if(lp!=null) {
             textViewPlace.setText(lp.getDeskripsi());
@@ -67,7 +67,11 @@ public class MainPlaceDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                onBackPressed();
+                if(Build.VERSION.SDK_INT<=Build.VERSION_CODES.KITKAT) {
+                    onBackPressed();
+                }else{
+                    supportFinishAfterTransition();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);

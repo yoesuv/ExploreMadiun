@@ -35,19 +35,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <ImageView
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/imageView_place_detail"
+                            android:transitionName="@string/transition_gallery"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:scaleType="fitCenter"
                             android:layout_margin="5dp"
-                            android:id="@+id/imageView_place_detail"
                             android:contentDescription="@string/app_name"
                             android:src="@drawable/img_default"
                             android:layout_gravity="center_horizontal" />
 
                     </RelativeLayout>
 
-                    <TextView
+                    <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/textView_place_detail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

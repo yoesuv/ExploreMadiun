@@ -3,9 +3,11 @@ package com.yoesuv.infomadiun.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.ListFragment;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -71,7 +73,15 @@ public class ListPlaceFragment extends ListFragment{
 
         Intent i = new Intent(getActivity(), MainPlaceDetailActivity.class);
         i.putExtra(MainPlaceDetailActivity.EXTRA_PLACE, adapter.getItem(position));
-        startActivity(i);
+        if(Build.VERSION.SDK_INT<=Build.VERSION_CODES.KITKAT) {
+            startActivity(i);
+        }else{
+            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    getActivity(), v.findViewById(R.id.imageView_thumbnail),
+                    getActivity().getResources().getString(R.string.transition_gallery)
+            );
+            startActivity(i, optionsCompat.toBundle());
+        }
     }
 
     @Override
