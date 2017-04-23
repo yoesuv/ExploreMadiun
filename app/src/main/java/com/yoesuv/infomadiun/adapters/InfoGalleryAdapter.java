@@ -1,11 +1,12 @@
 package com.yoesuv.infomadiun.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -18,14 +19,15 @@ public class InfoGalleryAdapter extends ArrayAdapter<InfoGallery> {
         super(context, resource);
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         ThumbnailHolder holder;
         if(convertView==null){
             holder = new ThumbnailHolder();
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_gallery_thumbnail, parent , false);
 
-            holder.thumbnail = (ImageView) convertView.findViewById(R.id.image_gallery_thumbnail);
+            holder.thumbnail = (AppCompatImageView) convertView.findViewById(R.id.image_gallery_thumbnail);
             convertView.setTag(holder);
         }else{
             holder = (ThumbnailHolder) convertView.getTag();
@@ -42,10 +44,11 @@ public class InfoGalleryAdapter extends ArrayAdapter<InfoGallery> {
                 tmp.thumbnail.setImageResource(R.drawable.img_default);
             }
         });
+
         return convertView;
     }
 
-    class ThumbnailHolder{
-        ImageView thumbnail;
+    private class ThumbnailHolder{
+        AppCompatImageView thumbnail;
     }
 }
