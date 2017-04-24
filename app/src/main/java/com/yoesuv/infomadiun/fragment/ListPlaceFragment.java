@@ -9,6 +9,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.ListFragment;
+import android.support.v4.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -76,10 +77,16 @@ public class ListPlaceFragment extends ListFragment{
         if(Build.VERSION.SDK_INT<=Build.VERSION_CODES.KITKAT) {
             startActivity(i);
         }else{
-            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            /*ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
                     getActivity(), v.findViewById(R.id.imageView_thumbnail),
                     getActivity().getResources().getString(R.string.transition_gallery)
-            );
+            );*/
+            Pair<View, String> p1 = Pair.create(v.findViewById(R.id.imageView_thumbnail),
+                    getActivity().getResources().getString(R.string.transition_gallery));
+            Pair<View, String> p2 = Pair.create(v.findViewById(R.id.cardView_list_place),
+                    getActivity().getResources().getString(R.string.transition_cardview));
+            ActivityOptionsCompat optionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), p1, p2);
             startActivity(i, optionsCompat.toBundle());
         }
     }
