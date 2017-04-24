@@ -21,6 +21,7 @@
             android:padding="2dp">
 
             <android.support.v7.widget.CardView
+                android:transitionName="@string/transition_cardview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardElevation="2dp"
@@ -40,7 +41,6 @@
                             android:transitionName="@string/transition_gallery"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:scaleType="centerCrop"
                             android:layout_margin="5dp"
                             android:contentDescription="@string/app_name"
                             android:layout_gravity="center_horizontal" />

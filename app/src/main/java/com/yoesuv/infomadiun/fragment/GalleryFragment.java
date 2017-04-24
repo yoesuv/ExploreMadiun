@@ -8,6 +8,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,10 +81,12 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
         if(Build.VERSION.SDK_INT<=Build.VERSION_CODES.KITKAT) {
             startActivity(i);
         }else{
-            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                getActivity(), view.findViewById(R.id.image_gallery_thumbnail),
-                    getActivity().getResources().getString(R.string.transition_gallery)
-            );
+            Pair<View, String> p1 = Pair.create(view.findViewById(R.id.image_gallery_thumbnail),
+                    getActivity().getResources().getString(R.string.transition_gallery));
+            Pair<View, String> p2 = Pair.create(view.findViewById(R.id.cardView_gallery_thumbnail),
+                    getActivity().getResources().getString(R.string.transition_cardview));
+            ActivityOptionsCompat optionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(), p1, p2);
             startActivity(i, optionsCompat.toBundle());
         }
     }

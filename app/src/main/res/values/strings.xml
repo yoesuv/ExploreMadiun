@@ -164,5 +164,6 @@
 
     <!-- TRANSITION NAME -->
     <string name="transition_gallery">transitionGallery</string>
+    <string name="transition_cardview">transitionCardview</string>
 
 </resources>
