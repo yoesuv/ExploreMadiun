@@ -1,12 +1,19 @@
 package com.yoesuv.infomadiun;
 
+import android.*;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,6 +28,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.startapp.android.publish.adsCommon.StartAppAd;
 import com.startapp.android.publish.adsCommon.StartAppSDK;
 
+import com.yoesuv.infomadiun.data.Constant;
 import com.yoesuv.infomadiun.fragment.AboutFragment;
 import com.yoesuv.infomadiun.fragment.GalleryFragment;
 import com.yoesuv.infomadiun.fragment.HomeFragment;
@@ -56,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         tvTitle = (TextView) toolbar.findViewById(R.id.textView_title);
         Typeface tf = Typeface.createFromAsset(getResources().getAssets(),"pacifico.ttf");
         tvTitle.setTypeface(tf);
+
+        requestLocation();
 
         header = new AccountHeaderBuilder().withActivity(this).withHeaderBackground(R.drawable.drawer_header2)
                 .withSavedInstance(savedInstanceState).build();
@@ -177,4 +187,64 @@ public class MainActivity extends AppCompatActivity {
         }, getResources().getInteger(R.integer.handler_duration));
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Log.d("log","MainActivity # request code "+requestCode);
+        switch (requestCode){
+            case Constant.REQUEST_LOCATION_CODE:
+                if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                    Log.d(Constant.TAG_DEBUG,"location permission granted");
+                    requestStorage();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    /**
+     * request location permission
+     * @return boolean
+     */
+    private boolean requestLocation(){
+        Log.d(Constant.TAG_DEBUG,"request location permission");
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED){
+                if(ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION)){
+                    ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, Constant.REQUEST_LOCATION_CODE);
+                    return false;
+                }else{
+                    ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, Constant.REQUEST_LOCATION_CODE);
+                    return false;
+                }
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
+
+    /**
+     * request read & write external storage permission
+     * @return boolean
+     */
+    private boolean requestStorage(){
+        Log.d(Constant.TAG_DEBUG,"request storage permission");
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+            if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+                if(ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constant.REQUEST_STORAGE_CODE);
+                    return false;
+                }else{
+                    ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constant.REQUEST_STORAGE_CODE);
+                    return false;
+                }
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
 }
