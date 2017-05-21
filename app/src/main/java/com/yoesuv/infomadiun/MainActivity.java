@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -26,6 +27,8 @@ import com.yoesuv.infomadiun.fragment.HomeFragment;
 import com.yoesuv.infomadiun.fragment.ListPlaceFragment;
 import com.yoesuv.infomadiun.fragment.MapsFragment;
 
+import io.fabric.sdk.android.Fabric;
+
 public class MainActivity extends AppCompatActivity {
 
     private AccountHeader header;
@@ -41,10 +44,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
 
-        //StartAppSDK.init(this, "200252166", true);
-        //StartAppAd.disableSplash();
+        StartAppSDK.init(this, "200252166", true);
+        StartAppAd.disableSplash();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
