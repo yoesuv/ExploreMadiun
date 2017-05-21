@@ -14,7 +14,7 @@ import com.yoesuv.infomadiun.utils.ActivityHelper;
 public class ChildFragmentChangelog extends Fragment {
 
     private View v;
-    private TextView tv1,tv2,tv3,tv4,tv5,tv6;
+    private TextView tv1,tv2,tv3,tv4,tv5,tv6,tv7;
 
     @Nullable
     @Override
@@ -38,6 +38,10 @@ public class ChildFragmentChangelog extends Fragment {
 
         tv6 = (TextView) v.findViewById(R.id.textView_ketver_6);
         tv6.setText(ActivityHelper.fromHtml(getResources().getString(R.string.ver_6_info)));
+
+        tv7 = (TextView) v.findViewById(R.id.textView_ketver_7);
+        tv7.setText(ActivityHelper.fromHtml(getResources().getString(R.string.ver_7_info)));
+
         return v;
     }
 }
