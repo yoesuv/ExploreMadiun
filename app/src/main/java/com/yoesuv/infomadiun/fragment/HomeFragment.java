@@ -1,10 +1,8 @@
 package com.yoesuv.infomadiun.fragment;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +27,7 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.activity_home, container, false);
+        v = inflater.inflate(R.layout.fragment_home, container, false);
         tvHome = (TextView) v.findViewById(R.id.textView_home);
         tvHome.setText(ActivityHelper.fromHtml(v.getResources().getString(R.string.home_text)));
 
