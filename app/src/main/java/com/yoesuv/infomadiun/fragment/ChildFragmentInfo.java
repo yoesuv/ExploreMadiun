@@ -19,7 +19,7 @@ public class ChildFragmentInfo extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.activity_info, container, false);
+        v = inflater.inflate(R.layout.tab_fragment_info, container, false);
 
         tvVersion = (TextView) v.findViewById(R.id.textView_version_app);
         String ver = getResources().getString(R.string.versi)+" "+BuildConfig.VERSION_NAME;

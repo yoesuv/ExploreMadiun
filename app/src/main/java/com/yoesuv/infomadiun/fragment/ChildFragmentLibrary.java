@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.text.method.MovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,7 @@ public class ChildFragmentLibrary extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.activity_library, container, false);
+        v = inflater.inflate(R.layout.tab_fragment_library, container, false);
 
         tvIcons8 = (TextView) v.findViewById(R.id.textView_icons8_by);
         tvIcons8.setText(Html.fromHtml("<a href=\"http://icons8.com\">Icons8.com</a>"));

@@ -19,7 +19,7 @@ public class ChildFragmentChangelog extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.activity_changelog, container, false);
+        v = inflater.inflate(R.layout.tab_fragment_changelog, container, false);
 
         tv1 = (TextView) v.findViewById(R.id.textView_ver_1);
         tv1.setText(ActivityHelper.fromHtml(getResources().getString(R.string.ver_1_info)));

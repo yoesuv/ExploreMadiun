@@ -29,7 +29,7 @@ public class AboutFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.activity_about, container, false);
+        v = inflater.inflate(R.layout.fragment_about, container, false);
 
         tabLayout = (TabLayout) v.findViewById(R.id.tabLayout);
         vPager = (ViewPager) v.findViewById(R.id.viewPager);

@@ -16,7 +16,7 @@
         android:paddingBottom="10dp"
         android:paddingRight="20dp">
 
-        <TextView
+        <com.yoesuv.infomadiun.utils.RobotoRegularTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -24,17 +24,16 @@
             android:text="@string/ver_7"
             android:id="@+id/textView_ver106" />
 
-        <TextView
+        <com.yoesuv.infomadiun.utils.RobotoLightTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/ver_7"
-            android:fontFamily="sans-serif-light"
             android:id="@+id/textView_ketver_7" />
 
         <include layout="@layout/divider" />
 
-        <TextView
+        <com.yoesuv.infomadiun.utils.RobotoRegularTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -42,17 +41,16 @@
             android:text="@string/ver_6"
             android:id="@+id/textView_ver105" />
 
-        <TextView
+        <com.yoesuv.infomadiun.utils.RobotoLightTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/ver_6"
-            android:fontFamily="sans-serif-light"
             android:id="@+id/textView_ketver_6" />
 
         <include layout="@layout/divider" />
 
-        <TextView
+        <com.yoesuv.infomadiun.utils.RobotoRegularTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -60,17 +58,16 @@
             android:text="@string/ver_5"
             android:id="@+id/textView_ver104" />
 
-        <TextView
+        <com.yoesuv.infomadiun.utils.RobotoLightTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/ver_5"
-            android:fontFamily="sans-serif-light"
             android:id="@+id/textView_ketver_5" />
 
         <include layout="@layout/divider" />
 
-        <TextView
+        <com.yoesuv.infomadiun.utils.RobotoRegularTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -78,17 +75,16 @@
             android:text="@string/ver_4"
             android:id="@+id/textView_ver103" />
 
-        <TextView
+        <com.yoesuv.infomadiun.utils.RobotoLightTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/ver_4"
-            android:fontFamily="sans-serif-light"
             android:id="@+id/textView_ketver_4" />
 
         <include layout="@layout/divider" />
 
-        <TextView
+        <com.yoesuv.infomadiun.utils.RobotoRegularTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -96,17 +92,16 @@
             android:text="@string/ver_3"
             android:id="@+id/textView_ver102" />
 
-        <TextView
+        <com.yoesuv.infomadiun.utils.RobotoLightTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/ver_2"
-            android:fontFamily="sans-serif-light"
             android:id="@+id/textView_ketver_3" />
 
         <include layout="@layout/divider" />
 
-        <TextView
+        <com.yoesuv.infomadiun.utils.RobotoRegularTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -114,17 +109,16 @@
             android:text="@string/ver_2"
             android:id="@+id/textView_ver101" />
 
-        <TextView
+        <com.yoesuv.infomadiun.utils.RobotoLightTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/ver_2"
-            android:fontFamily="sans-serif-light"
             android:id="@+id/textView_ketver_2" />
 
         <include layout="@layout/divider" />
 
-        <TextView
+        <com.yoesuv.infomadiun.utils.RobotoRegularTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -132,12 +126,11 @@
             android:text="@string/ver_1"
             android:id="@+id/textView4" />
 
-        <TextView
+        <com.yoesuv.infomadiun.utils.RobotoLightTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="@string/ver_1"
-            android:fontFamily="sans-serif-light"
             android:id="@+id/textView_ver_1" />
 
     </LinearLayout>

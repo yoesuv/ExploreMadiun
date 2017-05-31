@@ -20,7 +20,7 @@ public class ChildFragmentThanks extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.activity_thanks, container, false);
+        v = inflater.inflate(R.layout.tab_fragment_thanks, container, false);
 
         tvThanks = (TextView) v.findViewById(R.id.textView_terima_kasih);
         tvThanks.setText(Html.fromHtml(getResources().getString(R.string.trims)));
