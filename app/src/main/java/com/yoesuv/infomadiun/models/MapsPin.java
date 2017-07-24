@@ -2,15 +2,16 @@ package com.yoesuv.infomadiun.models;
 
 public class MapsPin {
 
-    private String name;
+    private String name,image;
     private int lokasi;
     private double longitude,latitude;
 
-    public MapsPin(String name, int lokasi , double longitude, double latitude){
+    public MapsPin(String name, int lokasi , double longitude, double latitude, String image){
         this.name = name;
         this.lokasi = lokasi;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.image = image;
     }
 
     public double getLatitude() {
@@ -43,5 +44,13 @@ public class MapsPin {
 
     public void setLokasi(int lokasi) {
         this.lokasi = lokasi;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

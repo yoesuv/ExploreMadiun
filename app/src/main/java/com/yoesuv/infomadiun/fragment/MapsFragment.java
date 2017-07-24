@@ -1,16 +1,21 @@
 package com.yoesuv.infomadiun.fragment;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,11 +23,14 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.picasso.Picasso;
 import com.yoesuv.infomadiun.R;
 import com.yoesuv.infomadiun.data.Constant;
 import com.yoesuv.infomadiun.models.MapsPin;
 import com.yoesuv.infomadiun.utils.PinApiInterface;
+import com.yoesuv.infomadiun.utils.RobotoRegularTextView;
 
 import java.util.List;
 
@@ -33,7 +41,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MapsFragment extends SupportMapFragment implements OnMapReadyCallback,
-        GoogleMap.OnMyLocationButtonClickListener {
+        GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnInfoWindowClickListener {
 
     private CoordinatorLayout cLayout;
     private Snackbar snackbar;
@@ -41,6 +49,8 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private int mapType;
     private boolean moveCamera;
     private GoogleMap gMap;
+
+    private Marker marker;
 
     public static MapsFragment getInstance() {
         return new MapsFragment();
@@ -111,7 +121,9 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                             } else if (pin.getLokasi() == 2) {
                                 options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                             }
-                            googleMap.addMarker(options);
+                            marker = googleMap.addMarker(options);
+                            TagObject tag = new TagObject(pin.getName(), pin.getImage());
+                            marker.setTag(tag);
 
                         }
                     } else {
@@ -151,6 +163,9 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
         googleMap.getUiSettings().setCompassEnabled(true);
+
+        googleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
+        googleMap.setOnInfoWindowClickListener(this);
     }
 
 
@@ -217,5 +232,70 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
         }else{
             Log.d(Constant.TAG_DEBUG,"location is not granted");
         }
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Log.d(Constant.TAG_DEBUG,"Info Window clicked");
+        marker.hideInfoWindow();
+    }
+
+    private class TagObject{
+
+        private String title, image;
+
+        private TagObject(String title, String image){
+            this.title = title;
+            this.image = image;
+        }
+    }
+
+    private class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter{
+
+        private View mContents;
+
+        private CustomInfoWindowAdapter(){
+            mContents = LayoutInflater.from(getContext()).inflate(R.layout.infowindow_content, null);
+            mContents.setAlpha(0f);
+        }
+
+        @Override
+        public View getInfoWindow(Marker marker) {
+            render(marker, mContents);
+            return mContents;
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+            return null;
+        }
+
+        private void render(Marker marker, View view){
+            AppCompatTextView tvTitle = (AppCompatTextView) view.findViewById(R.id.textviewTitle);
+            tvTitle.setText(marker.getTitle());
+            tvTitle.setAlpha(0f);
+
+            TagObject tag = (TagObject) marker.getTag();
+            if(tag!=null){
+                AlertDialog alertDialog;
+                AlertDialog.Builder ab = new AlertDialog.Builder(getContext());
+
+                View v = LayoutInflater.from(getContext()).inflate(R.layout.dialog_maps_infowindow, null);
+                AppCompatImageView imgView = (AppCompatImageView) v.findViewById(R.id.imageviewDialogMaps);
+                Picasso.with(getContext())
+                        .load(tag.image)
+                        .placeholder(R.drawable.img_default)
+                        .error(R.drawable.img_default)
+                        .into(imgView);
+                imgView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                RobotoRegularTextView textName = (RobotoRegularTextView) v.findViewById(R.id.textviewNameDialogMaps);
+                textName.setText(tag.title);
+
+                ab.setView(v);
+                alertDialog = ab.create();
+                alertDialog.show();
+            }
+        }
+
     }
 }
