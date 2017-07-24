@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -281,12 +282,28 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                 AlertDialog.Builder ab = new AlertDialog.Builder(getContext());
 
                 View v = LayoutInflater.from(getContext()).inflate(R.layout.dialog_maps_infowindow, null);
-                AppCompatImageView imgView = (AppCompatImageView) v.findViewById(R.id.imageviewDialogMaps);
+
+                final AppCompatImageView imgView = (AppCompatImageView) v.findViewById(R.id.imageviewDialogMaps);
+                final LinearLayout layoutLoading = (LinearLayout) v.findViewById(R.id.layoutLoading);
+                imgView.setAlpha(0f);
+                layoutLoading.setAlpha(1f);
+
                 Picasso.with(getContext())
                         .load(tag.image)
-                        .placeholder(R.drawable.img_default)
                         .error(R.drawable.img_default)
-                        .into(imgView);
+                        .into(imgView, new com.squareup.picasso.Callback() {
+                            @Override
+                            public void onSuccess() {
+                                imgView.animate().alpha(1f).setDuration(Constant.VIEW_ANIM_DURATION);
+                                layoutLoading.animate().alpha(0f).setDuration(Constant.VIEW_ANIM_DURATION);
+                            }
+
+                            @Override
+                            public void onError() {
+                                imgView.animate().alpha(1f).setDuration(Constant.VIEW_ANIM_DURATION);
+                                layoutLoading.animate().alpha(0f).setDuration(Constant.VIEW_ANIM_DURATION);
+                            }
+                        });
                 imgView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 RobotoRegularTextView textName = (RobotoRegularTextView) v.findViewById(R.id.textviewNameDialogMaps);
                 textName.setText(tag.title);

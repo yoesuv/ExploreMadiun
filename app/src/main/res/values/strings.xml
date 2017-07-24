@@ -15,7 +15,8 @@
     <string name="no_inet_connection">Tidak Ada Koneksi Internet</string>
     <string name="connection_failed">Koneksi Bermasalah</string>
     <string name="try_again">Coba Lagi</string>
-    <string name="please_wait">Memproses....</string>
+    <string name="please_wait">Memproses…</string>
+    <string name="please_wait_image">Memuat Gambar…</string>
 
     <string name="maps_API_key">AIzaSyCVH0_5uXAKHGBpoWhOGIQ0DzKu2kBRBQ4</string>
 

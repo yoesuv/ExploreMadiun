@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/imageviewDialogMaps"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="210dp"
-        app:srcCompat="@drawable/img_default"/>
+        android:layout_height="210dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imageviewDialogMaps"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/img_default"/>
+
+        <LinearLayout
+            android:id="@+id/layoutLoading"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <include layout="@layout/item_loading"/>
+
+            <com.yoesuv.infomadiun.utils.RobotoRegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/please_wait_image"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
     <com.yoesuv.infomadiun.utils.RobotoRegularTextView
         android:id="@+id/textviewNameDialogMaps"
@@ -18,7 +42,6 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_below="@+id/imageviewDialogMaps"/>
+        android:paddingBottom="5dp"/>
 
-</RelativeLayout>
+</LinearLayout>
