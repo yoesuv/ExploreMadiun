@@ -37,6 +37,7 @@ android {
         targetSdkVersion 25
         versionCode 7
         versionName "1.0.6"
+        vectorDrawables.useSupportLibrary true
     }
     buildTypes {
         release {

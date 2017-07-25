@@ -2,13 +2,16 @@ package com.yoesuv.infomadiun.fragment;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -52,6 +55,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private GoogleMap gMap;
 
     private Marker marker;
+    private AlertDialog alertDialog;
 
     public static MapsFragment getInstance() {
         return new MapsFragment();
@@ -123,7 +127,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                                 options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                             }
                             marker = googleMap.addMarker(options);
-                            TagObject tag = new TagObject(pin.getName(), pin.getImage());
+                            TagObject tag = new TagObject(pin.getName(), pin.getImage(), pin.getLatitude(), pin.getLongitude());
                             marker.setTag(tag);
 
                         }
@@ -164,6 +168,7 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
 
         googleMap.getUiSettings().setMyLocationButtonEnabled(true);
         googleMap.getUiSettings().setCompassEnabled(true);
+        googleMap.getUiSettings().setMapToolbarEnabled(false);
 
         googleMap.setInfoWindowAdapter(new CustomInfoWindowAdapter());
         googleMap.setOnInfoWindowClickListener(this);
@@ -244,10 +249,13 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
     private class TagObject{
 
         private String title, image;
+        private double lat,lon;
 
-        private TagObject(String title, String image){
+        private TagObject(String title, String image, double lat, double lon){
             this.title = title;
             this.image = image;
+            this.lat = lat;
+            this.lon = lon;
         }
     }
 
@@ -271,14 +279,14 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
             return null;
         }
 
-        private void render(Marker marker, View view){
+        private void render(final Marker marker, View view){
             AppCompatTextView tvTitle = (AppCompatTextView) view.findViewById(R.id.textviewTitle);
             tvTitle.setText(marker.getTitle());
             tvTitle.setAlpha(0f);
 
-            TagObject tag = (TagObject) marker.getTag();
+            final TagObject tag = (TagObject) marker.getTag();
             if(tag!=null){
-                AlertDialog alertDialog;
+
                 AlertDialog.Builder ab = new AlertDialog.Builder(getContext());
 
                 View v = LayoutInflater.from(getContext()).inflate(R.layout.dialog_maps_infowindow, null);
@@ -287,6 +295,22 @@ public class MapsFragment extends SupportMapFragment implements OnMapReadyCallba
                 final LinearLayout layoutLoading = (LinearLayout) v.findViewById(R.id.layoutLoading);
                 imgView.setAlpha(0f);
                 layoutLoading.setAlpha(1f);
+
+                CardView cardViewDirections = (CardView) v.findViewById(R.id.cardviewDirections);
+                cardViewDirections.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(alertDialog!=null) {
+                            alertDialog.dismiss();
+                        }
+                        Uri uri = Uri.parse("google.navigation:q="+tag.lat+","+tag.lon);
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, uri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        if(mapIntent.resolveActivity(getActivity().getPackageManager())!=null) {
+                            startActivity(mapIntent);
+                        }
+                    }
+                });
 
                 Picasso.with(getContext())
                         .load(tag.image)
