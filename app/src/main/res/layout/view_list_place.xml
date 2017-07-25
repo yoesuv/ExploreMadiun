@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <com.yoesuv.infomadiun.utils.RobotoBoldTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="New Text"
@@ -61,7 +61,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginLeft="8dp" />
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <com.yoesuv.infomadiun.utils.RobotoRegularTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="New Text"

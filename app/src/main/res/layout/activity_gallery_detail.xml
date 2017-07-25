@@ -47,7 +47,7 @@
 
                     </RelativeLayout>
 
-                    <TextView
+                    <com.yoesuv.infomadiun.utils.RobotoRegularTextView
                         android:id="@+id/textView_gallery_detail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

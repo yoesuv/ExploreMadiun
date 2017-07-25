@@ -1,5 +1,6 @@
 package com.yoesuv.infomadiun;
 
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,8 @@ public class MainPlaceDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TextView tvTitle = (TextView) toolbar.findViewById(R.id.textView_title);
+        Typeface tf = Typeface.createFromAsset(getResources().getAssets(),"pacifico.ttf");
+        tvTitle.setTypeface(tf);
 
         ListPlace lp = getIntent().getExtras().getParcelable(EXTRA_PLACE);
 
