@@ -1,6 +1,5 @@
 package com.yoesuv.infomadiun;
 
-import android.*;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
