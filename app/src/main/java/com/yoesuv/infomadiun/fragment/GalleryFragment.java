@@ -9,12 +9,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 
 import com.yoesuv.infomadiun.GalleryDetailActivity;
 import com.yoesuv.infomadiun.R;
@@ -36,6 +36,7 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
     private InfoGalleryAdapter gAdapter;
     private CoordinatorLayout cLayout;
     private Snackbar snackbar;
+    private ProgressBar progressBar;
 
     public static GalleryFragment getInstance(){
         return new GalleryFragment();
@@ -52,6 +53,7 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
         super.onViewCreated(view, savedInstanceState);
 
         cLayout = (CoordinatorLayout) getActivity().findViewById(R.id.coordinator_layout);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar_gallery);
 
         gView = (GridView) view.findViewById(R.id.grid_thumbnail);
         gView.setOnItemClickListener(this);
@@ -103,6 +105,7 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
         cg.enqueue(new Callback<List<InfoGallery>>() {
             @Override
             public void onResponse(Call<List<InfoGallery>> call, Response<List<InfoGallery>> response) {
+                progressBar.setVisibility(View.INVISIBLE);
                 if(response.isSuccessful()){
                     for (InfoGallery ig : response.body()) {
                         gAdapter.add(ig);
@@ -123,6 +126,7 @@ public class GalleryFragment extends Fragment implements AdapterView.OnItemClick
 
             @Override
             public void onFailure(Call<List<InfoGallery>> call, Throwable t) {
+                progressBar.setVisibility(View.INVISIBLE);
                 if (GalleryFragment.this.isVisible()) {
                     snackbar = Snackbar.make(cLayout, getResources().getString(R.string.no_inet_connection), Snackbar.LENGTH_INDEFINITE);
                     snackbar.setAction(getResources().getString(R.string.try_again), new View.OnClickListener() {
