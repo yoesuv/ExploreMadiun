@@ -53,16 +53,15 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile "com.android.support:appcompat-v7:$project.supportLibraryVersion"
-    compile "com.android.support:design:$project.supportLibraryVersion"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation "com.android.support:appcompat-v7:$project.supportLibraryVersion"
+    implementation "com.android.support:design:$project.supportLibraryVersion"
 
-    compile files('libs/StartAppInApp-3.5.4.jar')
-    compile('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
         transitive = true
     }
-    compile 'com.google.firebase:firebase-core:11.0.2'
+    implementation "com.google.firebase:firebase-core:$project.firebaseVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'
