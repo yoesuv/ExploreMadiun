@@ -60,6 +60,7 @@ android {
                     'src/main/res-menu',
                     'src/main/res-menu/listplace',
                     'src/main/res-menu/gallery',
+                    'src/main/res-menu/maps',
                     'src/main/res-menu/other'
             ]
         }
@@ -76,6 +77,7 @@ dependencies {
         transitive = true
     }
     implementation "com.google.firebase:firebase-core:$project.firebaseVersion"
+    implementation "com.google.android.gms:play-services-maps:$project.firebaseVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
