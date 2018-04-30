@@ -16,6 +16,11 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary">
 
+            <com.yoesuv.infomadiun.widgets.ToolbarTextView
+                android:id="@+id/textViewToolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
