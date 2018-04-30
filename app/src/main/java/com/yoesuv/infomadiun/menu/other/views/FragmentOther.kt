@@ -1,4 +1,4 @@
-package com.yoesuv.infomadiun.menu.listplace.views
+package com.yoesuv.infomadiun.menu.other.views
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,22 +13,21 @@ import kotlinx.android.synthetic.main.activity_main.view.*
 /**
  *  Created by yusuf on 4/30/18.
  */
-class FragmentListPlace: Fragment() {
+class FragmentOther: Fragment() {
 
     companion object {
         fun getInstance():Fragment{
-            return FragmentListPlace()
+            return FragmentOther()
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_listplace, container, false)
+        val view = inflater.inflate(R.layout.fragment_other, container, false)
 
-        val activity:AppCompatActivity = activity as AppCompatActivity
+        val activity: AppCompatActivity = activity as AppCompatActivity
         val toolbar = activity.findViewById<Toolbar>(R.id.toolbarMain)
-        toolbar.textViewToolbar.text = getString(R.string.list_place)
+        toolbar.textViewToolbar.text = getString(R.string.menu_other)
 
-        return v
+        return view
     }
-
 }
