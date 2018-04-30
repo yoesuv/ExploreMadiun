@@ -49,7 +49,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -79,6 +79,15 @@ dependencies {
     implementation "com.google.firebase:firebase-core:$project.firebaseVersion"
     implementation "com.google.android.gms:play-services-maps:$project.firebaseVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.squareup.retrofit2:retrofit:$project.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$project.retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$project.retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$project.httpLoggingVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$project.rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$project.rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$project.rxKotlinVersion"
+    implementation "com.github.bumptech.glide:glide:$project.glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$project.glideVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'
