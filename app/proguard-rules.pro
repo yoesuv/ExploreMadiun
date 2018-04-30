@@ -15,3 +15,8 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+# BottomNavigationViewHelper
+#-keepclassmembers class android.support.design.internal.BottomNavigationMenuView {
+#    boolean mShiftingMode;
+#}
