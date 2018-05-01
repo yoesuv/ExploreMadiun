@@ -1,7 +1,6 @@
 package com.yoesuv.infomadiun.main
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.menu.gallery.views.FragmentGallery
