@@ -3,10 +3,7 @@ package com.yoesuv.infomadiun.menu.gallery.views
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
-import android.support.v7.widget.Toolbar
+import android.support.v7.widget.*
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -58,8 +55,7 @@ class FragmentGallery: Fragment(), GalleryContract.ViewGallery {
 
     private fun setupRecyclerView(view: View){
         recyclerView = view.findViewById(R.id.recyclerViewGallery)
-        val lManager = StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL)
-        lManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+        val lManager = GridLayoutManager(view.context.applicationContext, 3)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = lManager
         adapter = GalleryAdapter(activity as AppCompatActivity, listGallery)

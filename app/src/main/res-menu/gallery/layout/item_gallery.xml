@@ -10,7 +10,7 @@
     android:background="@android:color/transparent"
     android:foreground="?attr/selectableItemBackground">
 
-    <android.support.v7.widget.AppCompatImageView
+    <com.yoesuv.infomadiun.widgets.SquareImageView
         android:id="@+id/imageViewItemGallery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

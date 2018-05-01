@@ -38,7 +38,7 @@ class GalleryAdapter(activity: Activity, private val listGallery: MutableList<Ga
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
         fun setData(gallery: GalleryModel){
-            itemView.imageViewItemGallery.scaleType = ImageView.ScaleType.CENTER
+            itemView.imageViewItemGallery.scaleType = ImageView.ScaleType.CENTER_CROP
             Glide.with(itemView.context.applicationContext)
                     .load(gallery.image)
                     .apply(RequestOptions()
