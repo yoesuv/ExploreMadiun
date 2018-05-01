@@ -34,6 +34,7 @@ android {
     }
     compileSdkVersion project.compileSdkVersion.toInteger()
     buildToolsVersion project.buildToolsVersion
+    flavorDimensions "default"
     defaultConfig {
         applicationId "com.yoesuv.infomadiun"
         minSdkVersion project.minApiLevel

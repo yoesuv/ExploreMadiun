@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.yoesuv.infomadiun.menu.listplace.contracts.ListPlaceContract
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.menu.listplace.presenters.ListPlacePresenter
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.fragment_listplace.*
 
 /**
  *  Created by yusuf on 4/30/18.
@@ -32,6 +34,7 @@ class FragmentListPlace: Fragment(), ListPlaceContract.ViewListPlace {
     private lateinit var listPlacePresenter: ListPlacePresenter
     private var listPlace: MutableList<PlaceModel> = arrayListOf()
     private lateinit var adapter:ListPlaceAdapter
+    private var recyclerView:RecyclerView? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_listplace, container, false)
@@ -43,7 +46,7 @@ class FragmentListPlace: Fragment(), ListPlaceContract.ViewListPlace {
         listPlacePresenter = ListPlacePresenter(this)
         listPlacePresenter.getListPlace()
 
-        setupRecycler()
+        setupRecycler(v)
 
         return v
     }
@@ -53,11 +56,16 @@ class FragmentListPlace: Fragment(), ListPlaceContract.ViewListPlace {
         listPlacePresenter.destroy()
     }
 
-    private fun setupRecycler(){
+    private fun setupRecycler(view: View){
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
 
+        recyclerView = view.findViewById(R.id.recyclerViewListPlace)
+        recyclerView?.layoutManager = layoutManager
+        recyclerView?.setHasFixedSize(true)
+
         adapter = ListPlaceAdapter(activity as Activity, listPlace)
+        recyclerView?.adapter = adapter
     }
 
     override fun showLoading() {
@@ -70,8 +78,13 @@ class FragmentListPlace: Fragment(), ListPlaceContract.ViewListPlace {
 
     override fun setData(listPlaceModel: MutableList<PlaceModel>) {
         Log.d(Constants.TAG_DEBUG,"FragmentListPlace # jumlah lokasi ${listPlaceModel.size}")
-        listPlaceModel.clear()
-        listPlaceModel.addAll(listPlaceModel)
+        listPlace.clear()
+        if(listPlaceModel.isNotEmpty()) {
+            listPlace.addAll(listPlaceModel)
+            recyclerView?.post({
+                adapter.notifyDataSetChanged()
+            })
+        }
     }
 
 }
