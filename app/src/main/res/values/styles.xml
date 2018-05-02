@@ -28,14 +28,4 @@
         <item name="android:scrollbarTrackVertical">@color/pink_A100</item>
     </style>
 
-    <style name="tab_style" parent="TextAppearance.Design.Tab">
-        <item name="android:textColor">#eeeeee</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="buttonPrimary" parent="Theme.AppCompat.Light">
-        <item name="colorButtonNormal">@color/colorPrimary</item>
-    </style>
-
 </resources>

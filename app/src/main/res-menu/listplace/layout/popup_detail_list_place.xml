@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
-    android:padding="8dp">
+    android:layout_height="wrap_content">
 
     <com.yoesuv.infomadiun.widgets.SquareImageView
         android:id="@+id/imageViewPopupListPlace"
@@ -13,19 +11,40 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/placeholder_image"/>
 
-    <com.yoesuv.infomadiun.widgets.ToolbarTextView
-        android:id="@+id/textViewPopUpListPlaceName"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="16sp"
-        android:textColor="@android:color/white"/>
+        android:background="@color/colorPrimaryDark">
 
-    <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
-        android:id="@+id/textViewPopUpListPlaceDescription"
-        android:layout_width="wrap_content"
+        <com.yoesuv.infomadiun.widgets.ToolbarTextView
+            android:id="@+id/textViewPopUpListPlaceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/app_name"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="@android:color/white"/>
+        android:background="@color/colorPrimary">
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:id="@+id/textViewPopUpListPlaceDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/app_name"
+            android:textColor="@android:color/white"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -3,26 +3,22 @@ package com.yoesuv.infomadiun.menu.listplace.adapters
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
-import android.os.Build
+import android.graphics.drawable.ColorDrawable
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
+import android.widget.PopupWindow
+import android.widget.RelativeLayout
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.request.RequestOptions
-import com.yoesuv.infomadiun.BuildConfig
 import com.yoesuv.infomadiun.R
-import com.yoesuv.infomadiun.data.Constants
-import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
-import com.yoesuv.infomadiun.widgets.ToolbarTextView
 import kotlinx.android.synthetic.main.item_list_place.view.*
-import kotlinx.android.synthetic.main.popup_detail_list_place.*
 import kotlinx.android.synthetic.main.popup_detail_list_place.view.*
+import kotlinx.android.synthetic.main.popup_image.view.*
 
 /**
  *  Created by yusuf on 4/30/18.
@@ -46,6 +42,10 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
         holder.itemView.setOnClickListener({
             showPopUp(activity, listPlace[fixPos])
         })
+        holder.itemView.setOnLongClickListener {
+            showPopUpImage(activity, listPlace[fixPos])
+            return@setOnLongClickListener true
+        }
     }
 
     private fun showPopUp(activity: Activity?, model: PlaceModel){
@@ -56,8 +56,34 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
         view.textViewPopUpListPlaceName.text = model.name
         view.textViewPopUpListPlaceDescription.text = model.description
         view.imageViewPopupListPlace.scaleType = ImageView.ScaleType.CENTER_CROP
+        Glide.with(activity?.applicationContext)
+                .load(model.image)
+                .apply(RequestOptions()
+                        .placeholder(R.drawable.placeholder_image)
+                        .error(R.drawable.placeholder_image)
+                        .format(DecodeFormat.PREFER_ARGB_8888))
+                .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
+                .into(view.imageViewPopupListPlace)
         alertDialog = ab.create()
         alertDialog.show()
+    }
+
+    private fun showPopUpImage(activity: Activity?, model: PlaceModel){
+        val context:Context = activity!!.applicationContext
+        val contentView: View = LayoutInflater.from(context).inflate(R.layout.popup_image, null)
+        val pw = PopupWindow(contentView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, true)
+        pw.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(context, R.color.black_20)))
+
+        Glide.with(context.applicationContext)
+                .load(model.image)
+                .apply(RequestOptions()
+                        .placeholder(R.drawable.placeholder_image)
+                        .error(R.drawable.placeholder_image)
+                        .format(DecodeFormat.PREFER_ARGB_8888))
+                .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
+                .into(contentView.photoViewPopUpImage)
+
+        pw.showAtLocation(activity.findViewById(R.id.mainLayout), Gravity.CENTER, 0, 0)
     }
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
