@@ -72,7 +72,7 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
         val context:Context = activity!!.applicationContext
         val contentView: View = LayoutInflater.from(context).inflate(R.layout.popup_image, null)
         val pw = PopupWindow(contentView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT, true)
-        pw.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(context, R.color.black_20)))
+        pw.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(context, R.color.black_30)))
 
         Glide.with(context.applicationContext)
                 .load(model.image)
