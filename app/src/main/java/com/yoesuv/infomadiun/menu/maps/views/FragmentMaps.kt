@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.yoesuv.infomadiun.R
@@ -32,6 +33,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
     }
 
     private lateinit var mapPresenter: MapPresenter
+    private var googleMap: GoogleMap? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_map, container, false)
@@ -45,8 +47,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
         val mapFragment:SupportMapFragment? = childFragmentManager.findFragmentById(R.id.mapLocation) as SupportMapFragment
         mapFragment?.getMapAsync(this)
 
-        mapPresenter.getListPin()
-
         return v
     }
 
@@ -58,16 +58,15 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
 
     override fun onMapReady(googleMap: GoogleMap?) {
         Log.d(Constants.TAG_DEBUG,"FragmentMaps # Map Ready")
-
-        val marker = MarkerOptions()
-        marker.position(LatLng(0.0,0.0))
-        marker.title("Marker")
-        googleMap?.addMarker(marker)
+        googleMap?.clear()
 
         val settings = googleMap?.uiSettings
         settings?.isZoomControlsEnabled = true
         settings?.isZoomGesturesEnabled = true
         settings?.isCompassEnabled = true
+
+        this.googleMap = googleMap
+        mapPresenter.getListPin()
     }
 
     override fun showLoading() {
@@ -80,6 +79,15 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
 
     override fun setData(listPin: MutableList<PinModel>) {
         Log.d(Constants.TAG_DEBUG,"FragmentMaps # jumlah pin ${listPin.size}")
+        if(listPin.isNotEmpty()){
+            for(i:Int in 0..listPin.size){
+                val marker = MarkerOptions()
+                marker.position(LatLng(listPin[i].latitude!!, listPin[i].longitude!!))
+                marker.title(listPin[i].name)
+                marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
+                googleMap?.addMarker(marker)
+            }
+        }
     }
 
 }
