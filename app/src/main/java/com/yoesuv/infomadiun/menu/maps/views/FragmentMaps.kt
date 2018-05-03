@@ -15,12 +15,15 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.data.Constants
+import com.yoesuv.infomadiun.menu.maps.contracts.MapContract
+import com.yoesuv.infomadiun.menu.maps.models.PinModel
+import com.yoesuv.infomadiun.menu.maps.presenters.MapPresenter
 import kotlinx.android.synthetic.main.activity_main.view.*
 
 /**
  *  Created by yusuf on 4/30/18.
  */
-class FragmentMaps: Fragment(), OnMapReadyCallback {
+class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
 
     companion object {
         fun getInstance():Fragment{
@@ -28,8 +31,12 @@ class FragmentMaps: Fragment(), OnMapReadyCallback {
         }
     }
 
+    private lateinit var mapPresenter: MapPresenter
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_map, container, false)
+
+        mapPresenter = MapPresenter(this)
 
         val activity: AppCompatActivity = activity as AppCompatActivity
         val toolbar = activity.findViewById<Toolbar>(R.id.toolbarMain)
@@ -38,7 +45,14 @@ class FragmentMaps: Fragment(), OnMapReadyCallback {
         val mapFragment:SupportMapFragment? = childFragmentManager.findFragmentById(R.id.mapLocation) as SupportMapFragment
         mapFragment?.getMapAsync(this)
 
+        mapPresenter.getListPin()
+
         return v
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapPresenter.destroy()
     }
 
 
@@ -54,6 +68,18 @@ class FragmentMaps: Fragment(), OnMapReadyCallback {
         settings?.isZoomControlsEnabled = true
         settings?.isZoomGesturesEnabled = true
         settings?.isCompassEnabled = true
+    }
+
+    override fun showLoading() {
+
+    }
+
+    override fun dismissLoading() {
+
+    }
+
+    override fun setData(listPin: MutableList<PinModel>) {
+        Log.d(Constants.TAG_DEBUG,"FragmentMaps # jumlah pin ${listPin.size}")
     }
 
 }
