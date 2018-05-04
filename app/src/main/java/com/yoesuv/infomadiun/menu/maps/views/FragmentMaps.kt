@@ -8,11 +8,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.data.Constants
@@ -64,6 +66,11 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
         settings?.isZoomControlsEnabled = true
         settings?.isZoomGesturesEnabled = true
         settings?.isCompassEnabled = true
+
+        //default location
+        googleMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(-7.813882, 111.371713)))
+        googleMap?.animateCamera(CameraUpdateFactory.zoomTo(9f))
+        googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style_map))
 
         this.googleMap = googleMap
         mapPresenter.getListPin()
