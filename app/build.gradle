@@ -80,6 +80,7 @@ dependencies {
     }
     implementation "com.google.firebase:firebase-core:$project.firebaseVersion"
     implementation "com.google.android.gms:play-services-maps:$project.firebaseVersion"
+    implementation "com.google.android.gms:play-services-location:$project.firebaseVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.squareup.retrofit2:retrofit:$project.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$project.retrofitVersion"
@@ -91,6 +92,7 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$project.glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$project.glideVersion"
     implementation "com.github.chrisbanes:PhotoView:$project.photoViewVersion"
+    implementation "com.tbruyelle.rxpermissions2:rxpermissions:$project.rxPermissionVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'
