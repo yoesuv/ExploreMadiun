@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.WindowManager
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.menu.gallery.views.FragmentGallery
 import com.yoesuv.infomadiun.menu.listplace.views.FragmentListPlace
@@ -19,6 +20,7 @@ class MainActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         setContentView(R.layout.activity_main)
 
         setupNavigationMenu()

@@ -1,5 +1,6 @@
 package com.yoesuv.infomadiun.menu.maps.views
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -32,6 +33,8 @@ import com.yoesuv.infomadiun.data.Constants
 import com.yoesuv.infomadiun.menu.maps.contracts.MapContract
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.menu.maps.presenters.MapPresenter
+import com.yoesuv.infomadiun.utils.AppHelper
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_main.view.*
 
 /**
@@ -61,11 +64,15 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
         toolbar.textViewToolbar.text = getString(R.string.menu_maps)
 
         rxPermission = RxPermissions(activity)
-        displayLocationSettingsRequest()
-        requestPermission()
 
         val mapFragment:SupportMapFragment? = childFragmentManager.findFragmentById(R.id.mapLocation) as SupportMapFragment
         mapFragment?.getMapAsync(this)
+
+        if(AppHelper.checkLocationSetting(activity)){
+            requestPermission(googleMap)
+        }else{
+            displayLocationSettingsRequest()
+        }
 
         return v
     }
@@ -78,12 +85,11 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==REQUEST_FEATURE_LOCATION_PERMISSION_CODE){
-            Log.d(Constants.TAG_DEBUG,"FragmentMaps # onActivityResult => request feature location")
             if(resultCode==Activity.RESULT_OK){
-                Log.d(Constants.TAG_DEBUG,"FragmentMaps # onActivityResult => request feature location OK")
                 //setup user location
+                requestPermission(googleMap)
             }else if(resultCode==Activity.RESULT_CANCELED){
-                Log.d(Constants.TAG_DEBUG,"FragmentMaps # onActivityResult => request feature location CANCELED")
+                Toasty.error(activity, getString(R.string.location_setting_off)).show()
             }
         }
     }
@@ -119,26 +125,32 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
         }
     }
 
-    private fun requestPermission(){
+    private fun requestPermission(googleMap: GoogleMap?){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
             rxPermission.request(android.Manifest.permission.ACCESS_FINE_LOCATION)
                     .subscribe { t: Boolean? ->
                         if(t!!){
-                            Log.d(Constants.TAG_DEBUG,"FragmentMaps # requestPermission GRANTED")
+                            enableUserLocation(googleMap)
                         }else{
-                            Log.d(Constants.TAG_ERROR,"FragmentMaps # requestPermission DENIED")
+                            Toasty.error(activity, getString(R.string.access_location_denied)).show()
                         }
                     }
+        }else{
+            enableUserLocation(googleMap)
         }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun enableUserLocation(googleMap: GoogleMap?){
+        googleMap?.isMyLocationEnabled = true
+        val settings = googleMap?.uiSettings
+        settings?.isZoomControlsEnabled = true
+        settings?.isMyLocationButtonEnabled = true
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
         googleMap?.clear()
-
-        val settings = googleMap?.uiSettings
-        settings?.isZoomControlsEnabled = true
-        settings?.isZoomGesturesEnabled = true
-        settings?.isCompassEnabled = true
+        googleMap?.uiSettings?.isCompassEnabled = true
 
         //default location
         googleMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(-7.813882, 111.371713)))
