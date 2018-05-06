@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="informasi">Informasi</string>
+    <string name="changelog">versi rilis</string>
+    <string name="thanks_to">Terima kasih</string>
+    <string name="library">Pustaka</string>
+
+</resources>
