@@ -142,6 +142,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
 
     @SuppressLint("MissingPermission")
     private fun enableUserLocation(googleMap: GoogleMap?){
+        Log.d(Constants.TAG_DEBUG,"FragmentMaps # enableUserLocation")
         googleMap?.isMyLocationEnabled = true
         val settings = googleMap?.uiSettings
         settings?.isZoomControlsEnabled = true

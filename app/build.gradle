@@ -94,6 +94,7 @@ dependencies {
     implementation "com.github.chrisbanes:PhotoView:$project.photoViewVersion"
     implementation "com.tbruyelle.rxpermissions2:rxpermissions:$project.rxPermissionVersion"
     implementation "com.github.GrenderG:Toasty:$project.toastyVersion"
+    implementation "com.github.devlight.navigationtabstrip:navigationtabstrip:$project.navigationTabStripVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -92,24 +92,7 @@ class FragmentListPlace: Fragment(), ListPlaceContract.ViewListPlace {
 
     override fun dismissLoading() {
         recyclerView?.animate()?.alpha(1f)?.duration = Constants.ANIMATION_TIME
-        progressBar.animate().alpha(0f).setDuration(Constants.ANIMATION_TIME).setListener(object : Animator.AnimatorListener {
-
-            override fun onAnimationRepeat(p0: Animator?) {
-
-            }
-
-            override fun onAnimationCancel(p0: Animator?) {
-
-            }
-
-            override fun onAnimationStart(p0: Animator?) {
-
-            }
-
-            override fun onAnimationEnd(p0: Animator?) {
-                progressBar.visibility = View.INVISIBLE
-            }
-        })
+        progressBar.visibility = View.GONE
     }
 
     override fun setData(listPlaceModel: MutableList<PlaceModel>) {
