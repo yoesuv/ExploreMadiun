@@ -10,6 +10,112 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fragment_info_margin">
 
+        <!-- version 2.0.0 -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:id="@+id/textViewChangelogEight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ver_8"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:id="@+id/textViewChangelogEightDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- version 1.0.6 -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:id="@+id/textViewChangelogSeven"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ver_7"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:id="@+id/textViewChangelogSevenDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- version 1.0.5 -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:id="@+id/textViewChangelogSix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ver_6"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:id="@+id/textViewChangelogSixDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- version 1.0.4 -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:id="@+id/textViewChangelogFive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ver_5"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:id="@+id/textViewChangelogFiveDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- version 1.0.3 -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:id="@+id/textViewChangelogFour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ver_4"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:id="@+id/textViewChangelogFourDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- version 1.0.2 -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:id="@+id/textViewChangelogThree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ver_3"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:id="@+id/textViewChangelogThreeDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- version 1.0.1 -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:id="@+id/textViewChangelogTwo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ver_2"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:id="@+id/textViewChangelogTwoDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- version 1.0.0 -->
         <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
             android:id="@+id/textViewChangelogOne"
             android:layout_width="wrap_content"
@@ -20,6 +126,7 @@
             android:id="@+id/textViewChangelogOneDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:text="@string/app_name"/>
 
     </LinearLayout>

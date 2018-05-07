@@ -9,6 +9,13 @@
     <string name="info_app_version">Versi %1$s</string>
 
     <!-- CHANGELOG -->
+    <string name="ver_8">Versi 2.0.0</string>
+    <string name="ver_8_info">
+        <![CDATA[
+            • nama baru aplikasi Explore Madiun<br/>
+            • desain baru aplikasi
+        ]]>
+    </string>
     <string name="ver_7">Versi 1.0.6</string>
     <string name="ver_7_info">
         <![CDATA[
