@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fragment_info_margin">
+
+        <!-- Retrofit -->
+
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retrofit"
+            android:textSize="@dimen/title_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retrofit_url"
+            android:textSize="@dimen/url_libraries"
+            android:textColor="@color/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewRetrofitLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/retrofit_license"
+            android:textSize="@dimen/license_libraries"
+            android:textColor="@color/default_text_color"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
