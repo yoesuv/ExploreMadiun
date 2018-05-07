@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">Info AE</string>
-
-    <!-- <string name="maps_API_key">AIzaSyCVH0_5uXAKHGBpoWhOGIQ0DzKu2kBRBQ4</string> -->
+    <string name="app_name">Explore Madiun</string>
 
     <string name="place_feed">https://gist.githubusercontent.com/yoesuv/393a7f8720b264649816/raw/ec756d2bd854fccb4597bf8801084f36fd682314/</string>
     <string name="gallery_feed">https://gist.githubusercontent.com/yoesuv/c6d873e4243da86b8886/raw/b7912de5a9c917e8bea1b7dd7b178197878f78fc/</string>
