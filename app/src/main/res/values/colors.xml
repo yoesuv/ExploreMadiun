@@ -10,4 +10,5 @@
 
     <color name="white">#FFFFFF</color>
     <color name="white_transparent">#CCFFFFFF</color>
+    <color name="default_text_color">#808080</color>
 </resources>

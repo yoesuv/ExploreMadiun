@@ -15,13 +15,15 @@
             android:id="@+id/textViewChangelogEight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ver_8"/>
+            android:text="@string/ver_8"
+            android:textColor="@color/default_text_color"/>
 
         <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
             android:id="@+id/textViewChangelogEightDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"/>
+            android:text="@string/app_name"
+            android:textColor="@color/default_text_color"/>
 
         <include layout="@layout/divider"/>
 
@@ -30,13 +32,15 @@
             android:id="@+id/textViewChangelogSeven"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ver_7"/>
+            android:text="@string/ver_7"
+            android:textColor="@color/default_text_color"/>
 
         <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
             android:id="@+id/textViewChangelogSevenDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"/>
+            android:text="@string/app_name"
+            android:textColor="@color/default_text_color"/>
 
         <include layout="@layout/divider"/>
 
@@ -45,13 +49,15 @@
             android:id="@+id/textViewChangelogSix"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ver_6"/>
+            android:text="@string/ver_6"
+            android:textColor="@color/default_text_color"/>
 
         <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
             android:id="@+id/textViewChangelogSixDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"/>
+            android:text="@string/app_name"
+            android:textColor="@color/default_text_color"/>
 
         <include layout="@layout/divider"/>
 
@@ -60,13 +66,15 @@
             android:id="@+id/textViewChangelogFive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ver_5"/>
+            android:text="@string/ver_5"
+            android:textColor="@color/default_text_color"/>
 
         <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
             android:id="@+id/textViewChangelogFiveDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"/>
+            android:text="@string/app_name"
+            android:textColor="@color/default_text_color"/>
 
         <include layout="@layout/divider"/>
 
@@ -75,13 +83,15 @@
             android:id="@+id/textViewChangelogFour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ver_4"/>
+            android:text="@string/ver_4"
+            android:textColor="@color/default_text_color"/>
 
         <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
             android:id="@+id/textViewChangelogFourDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"/>
+            android:text="@string/app_name"
+            android:textColor="@color/default_text_color"/>
 
         <include layout="@layout/divider"/>
 
@@ -90,13 +100,15 @@
             android:id="@+id/textViewChangelogThree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ver_3"/>
+            android:text="@string/ver_3"
+            android:textColor="@color/default_text_color"/>
 
         <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
             android:id="@+id/textViewChangelogThreeDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"/>
+            android:text="@string/app_name"
+            android:textColor="@color/default_text_color"/>
 
         <include layout="@layout/divider"/>
 
@@ -105,13 +117,15 @@
             android:id="@+id/textViewChangelogTwo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ver_2"/>
+            android:text="@string/ver_2"
+            android:textColor="@color/default_text_color"/>
 
         <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
             android:id="@+id/textViewChangelogTwoDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"/>
+            android:text="@string/app_name"
+            android:textColor="@color/default_text_color"/>
 
         <include layout="@layout/divider"/>
 
@@ -120,14 +134,16 @@
             android:id="@+id/textViewChangelogOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ver_1"/>
+            android:text="@string/ver_1"
+            android:textColor="@color/default_text_color"/>
 
         <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
             android:id="@+id/textViewChangelogOneDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:text="@string/app_name"/>
+            android:text="@string/app_name"
+            android:textColor="@color/default_text_color"/>
 
     </LinearLayout>
 
