@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import com.gigamole.navigationtabstrip.NavigationTabStrip
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.menu.other.adapters.TabOtherAdapter
+import com.yoesuv.infomadiun.utils.ZoomOutPageTransformer
 import kotlinx.android.synthetic.main.activity_main.view.*
 
 /**
@@ -44,6 +45,7 @@ class FragmentOther: Fragment() {
         val viewPager: ViewPager = view.findViewById(R.id.viewPagerOther)
 
         viewPager.adapter = TabOtherAdapter(childFragmentManager)
+        viewPager.setPageTransformer(true, ZoomOutPageTransformer())
         tab.setViewPager(viewPager)
         tab.setTitles(getString(R.string.informasi), getString(R.string.changelog), getString(R.string.thanks_to), getString(R.string.library))
         tab.inactiveColor = ContextCompat.getColor(context!!, R.color.grey_50)
