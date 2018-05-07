@@ -8,4 +8,66 @@
 
     <string name="info_app_version">Versi %1$s</string>
 
+    <!-- CHANGELOG -->
+    <string name="ver_7">Versi 1.0.6</string>
+    <string name="ver_7_info">
+        <![CDATA[
+            + 1 tempat baru di madiun<br/>
+            + 2 tempat baru di magetan<br/>
+            + 3 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_6">Versi 1.0.5</string>
+    <string name="ver_6_info">
+        <![CDATA[
+            + 1 tempat baru di magetan<br/>
+            + 1 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_5">Versi 1.0.4</string>
+    <string name="ver_5_info">
+        <![CDATA[
+            + 3 tempat baru di ngawi<br/>
+            + 1 tempat baru di magetan<br/>
+            + 3 gambar galeri<br/>
+            + 3 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_4">Versi 1.0.3</string>
+    <string name="ver_4_info">
+        <![CDATA[
+            + 3 tempat baru di ponorogo<br/>
+            + 1 tempat baru di magetan<br/>
+            + 3 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_3">Versi 1.0.2</string>
+    <string name="ver_3_info">
+        <![CDATA[
+            • nama baru aplikasi Info AE<br/>
+            + 6 tempat baru di pacitan<br/>
+            + 1 tempat baru di ngawi<br/>
+            + 3 gambar galeri<br/>
+            + 3 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_2">Versi 1.0.1</string>
+    <string name="ver_2_info">
+        <![CDATA[
+            • menu navigasi baru<br/>
+            + 9 tempat baru di pacitan<br/>
+            + 3 gambar galeri<br/>
+            + 9 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_1">Versi 1.0.0</string>
+    <string name="ver_1_info">
+        <![CDATA[
+            • rilis perdana<br/>
+            • 50 daftar tempat<br/>
+            • 33 galeri gambar<br/>
+            • 47 tanda lokasi peta
+        ]]>
+    </string>
+
 </resources>

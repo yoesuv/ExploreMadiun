@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fragment_info_margin">
+
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:id="@+id/textViewChangelogOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ver_1"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:id="@+id/textViewChangelogOneDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

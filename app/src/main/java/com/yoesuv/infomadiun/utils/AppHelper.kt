@@ -3,6 +3,8 @@ package com.yoesuv.infomadiun.utils
 import com.yoesuv.infomadiun.R
 import android.content.Context
 import android.location.LocationManager
+import android.os.Build
+import android.text.Html
 
 /**
  *  Created by yusuf on 5/1/18.
@@ -22,6 +24,15 @@ object AppHelper {
     fun checkLocationSetting(context: Context):Boolean{
         val locationManager: LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+    }
+
+    @Suppress("DEPRECATION")
+    fun fromHtml(source: String): String{
+        return if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N) {
+            Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY).toString()
+        }else{
+            Html.fromHtml(source).toString()
+        }
     }
 
 }
