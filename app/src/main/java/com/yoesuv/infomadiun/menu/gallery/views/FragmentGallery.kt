@@ -1,5 +1,6 @@
 package com.yoesuv.infomadiun.menu.gallery.views
 
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -67,6 +68,9 @@ class FragmentGallery: Fragment(), GalleryContract.ViewGallery {
         adapter = GalleryAdapter(activity as AppCompatActivity, listGallery)
         recyclerView.adapter = adapter
         recyclerView.itemAnimator = DefaultItemAnimator()
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+            recyclerView.isNestedScrollingEnabled = true
+        }
     }
 
     private fun setupSwipeRefresh(view: View){

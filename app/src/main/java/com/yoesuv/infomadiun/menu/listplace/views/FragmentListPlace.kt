@@ -2,11 +2,13 @@ package com.yoesuv.infomadiun.menu.listplace.views
 
 import android.animation.Animator
 import android.app.Activity
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
@@ -73,6 +75,10 @@ class FragmentListPlace: Fragment(), ListPlaceContract.ViewListPlace {
 
         adapter = ListPlaceAdapter(activity as Activity, listPlace)
         recyclerView?.adapter = adapter
+        recyclerView?.itemAnimator = DefaultItemAnimator()
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
+            recyclerView?.isNestedScrollingEnabled = true
+        }
     }
 
     private fun setupSwipeRefresh(view: View){

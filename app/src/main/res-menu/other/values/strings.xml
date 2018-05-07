@@ -8,6 +8,15 @@
 
     <string name="info_app_version">Versi %1$s</string>
 
+    <!-- INFORMATION -->
+    <string name="contact">Kontak</string>
+    <string name="my_twitter">\@yoesuv</string>
+    <string name="my_email">yusuf.saifudin@gmail.com</string>
+    <string name="support">Dukungan</string>
+    <string name="rate">Beri nilai aplikasi ini jika suka, terima kasih.</string>
+    <string name="discl">Kebijakan</string>
+    <string name="disclaimer">aplikasi ini tidak menjamin semua bentuk data 100% akurat. oleh karena itu, segala bentuk kritik dan saran akan sangat diapresiasi.</string>
+
     <!-- THANKS -->
     <string name="trims">
         <![CDATA[
