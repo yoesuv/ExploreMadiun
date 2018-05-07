@@ -1,5 +1,6 @@
 package com.yoesuv.infomadiun.menu.other.views
 
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,10 @@ class ChildFragmentChangelog: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = LayoutInflater.from(context).inflate(R.layout.child_fragment_changelog, container, false)
+
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
+            view.nestedScrollViewChangelog.isNestedScrollingEnabled = true
+        }
 
         view.textViewChangelogOneDesc.text = AppHelper.fromHtml(getString(R.string.ver_1_info))
         view.textViewChangelogTwoDesc.text = AppHelper.fromHtml(getString(R.string.ver_2_info))

@@ -8,6 +8,15 @@
 
     <string name="info_app_version">Versi %1$s</string>
 
+    <!-- THANKS -->
+    <string name="trims">
+        <![CDATA[
+        terima kasih kepada <i>blog-blog</i> maupun perorangan yang fotonya dimuat dalam aplikasi ini, dan tidak bisa
+    disebutkan satu persatu (<i>kalian luar biasa</i>....).
+        ]]>
+    </string>
+    <string name="person_1">Ahmad Sofi (Tester)</string>
+
     <!-- CHANGELOG -->
     <string name="ver_8">Versi 2.0.0</string>
     <string name="ver_8_info">

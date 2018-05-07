@@ -30,14 +30,5 @@
     <string name="discl">Kebijakan</string>
     <string name="disclaimer">aplikasi ini tidak menjamin semua bentuk data 100% akurat. oleh karena itu, segala bentuk kritik dan saran akan sangat diapresiasi.</string>
 
-    <!-- TERIMA KASIH -->
-    <string name="trims">
-        <![CDATA[
-        terima kasih kepada <i>blog-blog</i> maupun perorangan yang fotonya dimuat dalam aplikasi ini, dan tidak bisa
-    disebutkan satu persatu (<i>kalian luar biasa</i>....).
-        ]]>
-    </string>
-    <string name="person_1">Ahmad Sofi</string>
-    <string name="person_as">(Tester)</string>
 
 </resources>
