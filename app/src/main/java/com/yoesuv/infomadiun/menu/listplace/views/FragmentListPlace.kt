@@ -1,6 +1,5 @@
 package com.yoesuv.infomadiun.menu.listplace.views
 
-import android.animation.Animator
 import android.app.Activity
 import android.os.Build
 import android.os.Bundle
@@ -13,9 +12,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ProgressBar
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.data.Constants
@@ -24,7 +21,6 @@ import com.yoesuv.infomadiun.menu.listplace.contracts.ListPlaceContract
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.menu.listplace.presenters.ListPlacePresenter
 import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.fragment_listplace.*
 
 /**
  *  Created by yusuf on 4/30/18.
@@ -56,12 +52,26 @@ class FragmentListPlace: Fragment(), ListPlaceContract.ViewListPlace {
         listPlacePresenter = ListPlacePresenter(this)
         listPlacePresenter.getListPlace()
 
+        setHasOptionsMenu(true)
+
         return v
     }
 
     override fun onDestroy() {
         super.onDestroy()
         listPlacePresenter.destroy()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu_list_place, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item?.itemId==R.id.menuFilterList){
+            Log.d(Constants.TAG_DEBUG,"FragmentListPlace # item filter clicked")
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setupRecycler(view: View){
