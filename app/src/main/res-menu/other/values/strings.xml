@@ -96,7 +96,7 @@
     <string name="glide_license">
         <![CDATA[
             Sam Judd<br/><br/>
-            BSD, part MIT and Apache 2.0.
+            Licensed under BSD, part MIT and Apache 2.0.
         ]]>
     </string>
     <string name="photoview">PhotoView</string>

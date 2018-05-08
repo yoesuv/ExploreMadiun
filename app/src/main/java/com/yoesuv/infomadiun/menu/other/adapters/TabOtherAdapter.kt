@@ -12,11 +12,11 @@ class TabOtherAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> ChildFragmentInfo()
-            1 -> ChildFragmentChangelog()
-            2 -> ChildFragmentThanks()
-            3 -> ChildFragmentLibraries()
-            else -> ChildFragmentInfo()
+            0 -> ChildFragmentInfo.getInstance()
+            1 -> ChildFragmentChangelog.getInstance()
+            2 -> ChildFragmentThanks.getInstance()
+            3 -> ChildFragmentLibraries.getInstance()
+            else -> ChildFragmentInfo.getInstance()
         }
     }
 

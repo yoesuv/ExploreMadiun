@@ -12,6 +12,12 @@ import kotlinx.android.synthetic.main.child_fragment_info.view.*
 
 class ChildFragmentInfo: Fragment() {
 
+    companion object {
+        fun getInstance():Fragment{
+            return ChildFragmentInfo()
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = LayoutInflater.from(context).inflate(R.layout.child_fragment_info, container, false)
 

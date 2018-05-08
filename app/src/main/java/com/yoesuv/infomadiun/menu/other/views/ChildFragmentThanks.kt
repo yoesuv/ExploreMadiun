@@ -11,6 +11,12 @@ import kotlinx.android.synthetic.main.child_fragment_thanks.view.*
 
 class ChildFragmentThanks: Fragment(){
 
+    companion object {
+        fun getInstance(): Fragment{
+            return ChildFragmentThanks()
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = LayoutInflater.from(context).inflate(R.layout.child_fragment_thanks, container, false)
         view.textViewThanks.text = AppHelper.fromHtml(getString(R.string.trims))
