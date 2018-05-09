@@ -68,9 +68,17 @@ class FragmentListPlace: Fragment(), ListPlaceContract.ViewListPlace {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if(item?.itemId==R.id.menuFilterList){
-            Log.d(Constants.TAG_DEBUG,"FragmentListPlace # item filter clicked")
+        val id = item?.itemId
+        when (id) {
+            R.id.listSemua -> listPlacePresenter.getListPlace()
+            R.id.listKabMadiun -> listPlacePresenter.getListPlaceKabMadiun()
+            R.id.listKabMagetan -> listPlacePresenter.getListPlaceKabMagetan()
+            R.id.listKabNgawi -> listPlacePresenter.getListPlaceKabNgawi()
+            R.id.listKabPacitan -> listPlacePresenter.getListPlaceKabPacitan()
+            R.id.listKabPonorogo -> listPlacePresenter.getListPlaceKabPonorogo()
+            R.id.listKotaMadiun-> listPlacePresenter.getListPlaceKotaMadiun()
         }
+        item?.isChecked = true
         return super.onOptionsItemSelected(item)
     }
 

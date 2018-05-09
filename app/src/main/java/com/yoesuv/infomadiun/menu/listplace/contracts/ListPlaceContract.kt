@@ -16,6 +16,12 @@ class ListPlaceContract {
 
     interface Presenter{
         fun getListPlace()
+        fun getListPlaceKabMadiun()
+        fun getListPlaceKabMagetan()
+        fun getListPlaceKabNgawi()
+        fun getListPlaceKabPacitan()
+        fun getListPlaceKabPonorogo()
+        fun getListPlaceKotaMadiun()
         fun destroy()
     }
 

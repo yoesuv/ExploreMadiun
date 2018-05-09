@@ -1,22 +1,11 @@
 <resources>
+
     <string name="app_name">Explore Madiun</string>
-
-    <string name="place_feed">https://gist.githubusercontent.com/yoesuv/393a7f8720b264649816/raw/ec756d2bd854fccb4597bf8801084f36fd682314/</string>
-    <string name="gallery_feed">https://gist.githubusercontent.com/yoesuv/c6d873e4243da86b8886/raw/b7912de5a9c917e8bea1b7dd7b178197878f78fc/</string>
-    <string name="pins_feed">https://gist.githubusercontent.com/yoesuv/fb28d18f05f470e72b3d/raw/12adff90dea9cb9622c3e792319cf2dc6d2e286f/</string>
-
-    <string name="place_feed_kab_madiun">https://gist.githubusercontent.com/yoesuv/105e37d90933191fda15/raw/1a8092436fed2a2f45b58e9d1c73ffff86b41a0f/</string>
-    <string name="place_feed_kota_madiun">https://gist.githubusercontent.com/yoesuv/d73bc7905e006cf99397/raw/4b500985da0feaba42f7617a425663b7f3390930/</string>
-    <string name="place_feed_kab_magetan">https://gist.githubusercontent.com/yoesuv/360fb6e5b0af5be86ac6/raw/5da0927b4b2ecf7d7e649e0fa2c0bbaef3c3ae6d/</string>
-    <string name="place_feed_kab_ngawi">https://gist.githubusercontent.com/yoesuv/b7bf0459f7f1ef0f2e74/raw/c0b8f43097fcbfae9a6cc9b6625bd0e5aca2be78/</string>
-    <string name="place_feed_kab_ponorogo">https://gist.githubusercontent.com/yoesuv/105f88724e530af23613/raw/9d93f9afb90c1b0f4b8c99d93bdff3460197c0c6/</string>
-    <string name="place_feed_kab_pacitan">https://gist.githubusercontent.com/yoesuv/4e715cce01aaadbb0683/raw/0e15363abb192f7e16527acee6470bd9c1f9004b/</string>
 
     <!-- MENU APPLICATION -->
     <string name="menu_list">Lokasi</string>
     <string name="menu_gallery">Galeri</string>
     <string name="menu_maps">Peta</string>
     <string name="menu_other">Lainnya</string>
-
 
 </resources>
