@@ -1,6 +1,8 @@
 package com.yoesuv.infomadiun.menu.listplace.views
 
 import android.app.Activity
+import android.content.Intent
+import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -80,6 +82,14 @@ class FragmentListPlace: Fragment(), ListPlaceContract.ViewListPlace {
         }
         item?.isChecked = true
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val display = activity?.windowManager?.defaultDisplay
+        val point = Point()
+        display?.getSize(point)
+        activity?.window?.setLayout(point.x, point.y)
     }
 
     private fun setupRecycler(view: View){

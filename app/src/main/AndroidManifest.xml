@@ -40,6 +40,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".main.TransparentActivity"
+            android:theme="@style/Theme.Transparent"/>
+
     </application>
 
 </manifest>
