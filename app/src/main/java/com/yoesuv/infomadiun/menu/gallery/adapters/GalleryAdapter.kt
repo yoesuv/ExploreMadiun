@@ -2,6 +2,7 @@ package com.yoesuv.infomadiun.menu.gallery.adapters
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.request.RequestOptions
 import com.yoesuv.infomadiun.R
+import com.yoesuv.infomadiun.main.TransparentActivity
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import kotlinx.android.synthetic.main.item_gallery.view.*
 import kotlinx.android.synthetic.main.popup_detail_list_place.view.*
@@ -33,10 +35,15 @@ class GalleryAdapter(private val activity: Activity, private val listGallery: Mu
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.setData(listGallery[holder.adapterPosition])
+        val fixPosition = holder.adapterPosition
+        holder.setData(listGallery[fixPosition])
         holder.itemView.setOnClickListener({
-            showPopUp(activity, listGallery[holder.adapterPosition])
+            showPopUp(activity, listGallery[fixPosition])
         })
+        holder.itemView.setOnLongClickListener {
+            showPopUpImage(activity, listGallery[fixPosition])
+            return@setOnLongClickListener true
+        }
     }
 
     private fun showPopUp(activity: Activity?, model: GalleryModel){
@@ -57,6 +64,12 @@ class GalleryAdapter(private val activity: Activity, private val listGallery: Mu
                 .into(view.imageViewPopupListPlace)
         alertDialog = ab.create()
         alertDialog.show()
+    }
+
+    private fun showPopUpImage(activity: Activity?, model: GalleryModel){
+        val intent = Intent(activity, TransparentActivity::class.java)
+        intent.putExtra(TransparentActivity.EXTRA_DATA_IMAGE, model.image)
+        activity?.startActivity(intent)
     }
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
