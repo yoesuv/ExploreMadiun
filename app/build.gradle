@@ -28,7 +28,7 @@ android {
         config {
             keyAlias 'yoesuv'
             keyPassword 'idamanmertua'
-            storeFile file('/home/yusuf/Documents/compile/-yusuf.keystore')
+            storeFile file('../-yusuf.keystore')
             storePassword 'idamanmertua'
         }
     }

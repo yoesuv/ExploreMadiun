@@ -1,7 +1,6 @@
 package com.yoesuv.infomadiun.menu.listplace.views
 
 import android.app.Activity
-import android.content.Intent
 import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
@@ -115,6 +114,7 @@ class FragmentListPlace: Fragment(), ListPlaceContract.ViewListPlace {
         swipeRefresh.setOnRefreshListener({
             listPlacePresenter.getListPlace()
             swipeRefresh.isRefreshing = false
+            activity?.invalidateOptionsMenu()
         })
     }
 
