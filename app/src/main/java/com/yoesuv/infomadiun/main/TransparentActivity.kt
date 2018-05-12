@@ -20,16 +20,21 @@ class TransparentActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transparent)
 
-        val display = this.windowManager?.defaultDisplay
-        val point = Point()
-        display?.getSize(point)
-        window.setLayout(point.x, point.y)
+        setupDisplay()
 
         Glide.with(this)
                 .load(intent.getStringExtra(EXTRA_DATA_IMAGE))
                 .apply(RequestOptions().format(DecodeFormat.PREFER_ARGB_8888))
                 .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                 .into(photoViewActivity)
+    }
+
+    private fun setupDisplay(){
+        val display = windowManager?.defaultDisplay
+        val point = Point()
+        display?.getSize(point)
+
+        window?.setLayout(point.x, point.y)
     }
 
 }

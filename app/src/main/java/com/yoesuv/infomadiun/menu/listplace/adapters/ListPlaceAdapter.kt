@@ -5,14 +5,10 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Point
-import android.graphics.drawable.ColorDrawable
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
-import android.widget.PopupWindow
-import android.widget.RelativeLayout
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
@@ -27,7 +23,7 @@ import kotlinx.android.synthetic.main.popup_detail_list_place.view.*
 /**
  *  Created by yusuf on 4/30/18.
  */
-class ListPlaceAdapter(private val activity: Activity, private val listPlace:MutableList<PlaceModel>): RecyclerView.Adapter<ListPlaceAdapter.ViewHolder>() {
+class ListPlaceAdapter(private val activity: Activity, private val listPlace:MutableList<PlaceModel>, private val recyclerView: RecyclerView?): RecyclerView.Adapter<ListPlaceAdapter.ViewHolder>() {
 
     private var inflater: LayoutInflater = LayoutInflater.from(activity)
 
@@ -48,7 +44,7 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
         })
         holder.itemView.setOnLongClickListener {
             showPopUpImage(activity, listPlace[fixPos])
-            setWindow(activity)
+            //setWindow(activity)
             return@setOnLongClickListener true
         }
     }
@@ -74,6 +70,7 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
     }
 
     private fun showPopUpImage(activity: Activity?, model: PlaceModel){
+        recyclerView?.stopScroll()
         val intent = Intent(activity, TransparentActivity::class.java)
         intent.putExtra(TransparentActivity.EXTRA_DATA_IMAGE, model.image)
         activity?.startActivity(intent)

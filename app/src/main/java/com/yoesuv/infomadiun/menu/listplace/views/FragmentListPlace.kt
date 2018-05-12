@@ -101,7 +101,7 @@ class FragmentListPlace: Fragment(), ListPlaceContract.ViewListPlace {
         recyclerView?.layoutManager = layoutManager
         recyclerView?.setHasFixedSize(true)
 
-        adapter = ListPlaceAdapter(activity as Activity, listPlace)
+        adapter = ListPlaceAdapter(activity as Activity, listPlace, recyclerView)
         recyclerView?.adapter = adapter
         recyclerView?.itemAnimator = DefaultItemAnimator()
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
