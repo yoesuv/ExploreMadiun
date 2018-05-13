@@ -2,13 +2,12 @@ package com.yoesuv.infomadiun.menu.maps.views
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import android.os.Build
 import android.os.Bundle
+import android.os.Looper
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,10 +21,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.android.gms.tasks.Task
 import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yoesuv.infomadiun.R
@@ -53,12 +49,20 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
     private lateinit var mapPresenter: MapPresenter
     private var googleMap: GoogleMap? = null
     private lateinit var rxPermission: RxPermissions
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var markerUser: Marker? = null
+    private lateinit var googleApiClient: GoogleApiClient
+    private var myLocationCallback: MyLocationCallback? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.getActivity()!!.applicationContext)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_map, container, false)
 
         mapPresenter = MapPresenter(this)
-
         activity = getActivity() as Activity
         val toolbar = activity.findViewById<Toolbar>(R.id.toolbarMain)
         toolbar.textViewToolbar.text = getString(R.string.menu_maps)
@@ -68,18 +72,15 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
         val mapFragment:SupportMapFragment? = childFragmentManager.findFragmentById(R.id.mapLocation) as SupportMapFragment
         mapFragment?.getMapAsync(this)
 
-        if(AppHelper.checkLocationSetting(activity)){
-            requestPermission(googleMap)
-        }else{
-            displayLocationSettingsRequest()
-        }
-
         return v
     }
 
     override fun onDestroy() {
         super.onDestroy()
         mapPresenter.destroy()
+        if(myLocationCallback!=null) {
+            LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(myLocationCallback)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -95,7 +96,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
     }
 
     private fun displayLocationSettingsRequest(){
-        val googleApiClient = GoogleApiClient.Builder(activity.applicationContext).addApi(LocationServices.API).build()
+        googleApiClient = GoogleApiClient.Builder(activity.applicationContext).addApi(LocationServices.API).build()
         googleApiClient.connect()
 
         val locationRequest:LocationRequest = LocationRequest.create()
@@ -142,11 +143,15 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
 
     @SuppressLint("MissingPermission")
     private fun enableUserLocation(googleMap: GoogleMap?){
-        Log.d(Constants.TAG_DEBUG,"FragmentMaps # enableUserLocation")
-        googleMap?.isMyLocationEnabled = true
-        val settings = googleMap?.uiSettings
-        settings?.isZoomControlsEnabled = true
-        settings?.isMyLocationButtonEnabled = true
+
+        myLocationCallback = MyLocationCallback(googleMap, markerUser)
+
+        googleMap?.uiSettings?.isMyLocationButtonEnabled = true
+        val locationRequest:LocationRequest = LocationRequest.create()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = 2000
+        locationRequest.fastestInterval = 1000
+        fusedLocationClient.requestLocationUpdates(locationRequest, myLocationCallback, Looper.myLooper())
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
@@ -160,6 +165,12 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
 
         this.googleMap = googleMap
         mapPresenter.getListPin()
+
+        if(AppHelper.checkLocationSetting(activity)){
+            requestPermission(googleMap)
+        }else{
+            displayLocationSettingsRequest()
+        }
     }
 
     override fun showLoading() {
@@ -178,6 +189,25 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
                 marker.title(listPin[i].name)
                 marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
                 googleMap?.addMarker(marker)
+            }
+        }
+    }
+
+    class MyLocationCallback(private val googleMap: GoogleMap?, private var markerUser: Marker?) : LocationCallback(){
+        override fun onLocationResult(locationResult: LocationResult?) {
+            super.onLocationResult(locationResult)
+            val listLocation = locationResult?.locations
+            if (listLocation?.isNotEmpty()!!){
+                Log.d(Constants.TAG_DEBUG,"FragmentMaps # found ${listLocation.size} location")
+                val markerOpt = MarkerOptions()
+                markerOpt.position(LatLng(listLocation[0].latitude, listLocation[0].longitude))
+                markerOpt.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_position))
+                markerUser = if(markerUser!=null){
+                    markerUser!!.remove()
+                    googleMap?.addMarker(markerOpt)!!
+                }else{
+                    googleMap?.addMarker(markerOpt)!!
+                }
             }
         }
     }
