@@ -16,6 +16,7 @@
     <string name="rate">Beri nilai aplikasi ini jika suka, terima kasih.</string>
     <string name="discl">Kebijakan</string>
     <string name="disclaimer">aplikasi ini tidak menjamin semua bentuk data 100% akurat. oleh karena itu, segala bentuk kritik dan saran akan sangat diapresiasi.</string>
+    <string name="github_url">https://github.com/yoesuv/ExploreMadiun</string>
 
     <!-- THANKS -->
     <string name="trims">

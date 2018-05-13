@@ -118,6 +118,17 @@
                 android:drawableLeft="@drawable/ic_high_priority"
                 android:drawableStart="@drawable/ic_high_priority"/>
 
+            <include layout="@layout/divider"/>
+
+            <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/github_url"
+                android:textColor="@color/colorPrimary"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_github"
+                android:drawableStart="@drawable/ic_github"/>
+
         </LinearLayout>
 
     </LinearLayout>
