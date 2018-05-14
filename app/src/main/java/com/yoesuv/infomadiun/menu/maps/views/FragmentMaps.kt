@@ -32,6 +32,7 @@ import com.yoesuv.infomadiun.menu.maps.presenters.MapPresenter
 import com.yoesuv.infomadiun.utils.AppHelper
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.custom_info_window.view.*
 
 /**
  *  Created by yusuf on 4/30/18.
@@ -53,6 +54,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
     private var markerUser: Marker? = null
     private lateinit var googleApiClient: GoogleApiClient
     private var myLocationCallback: MyLocationCallback? = null
+    private var marker: Marker? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -171,6 +173,11 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
         }else{
             displayLocationSettingsRequest()
         }
+
+        googleMap?.setInfoWindowAdapter(MyCustomInfoWindowAdapter(activity))
+        googleMap?.setOnInfoWindowCloseListener {
+            it.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
+        }
     }
 
     override fun showLoading() {
@@ -184,11 +191,12 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
     override fun setData(listPin: MutableList<PinModel>) {
         if(listPin.isNotEmpty()){
             for(i:Int in 0..listPin.size){
-                val marker = MarkerOptions()
-                marker.position(LatLng(listPin[i].latitude!!, listPin[i].longitude!!))
-                marker.title(listPin[i].name)
-                marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
-                googleMap?.addMarker(marker)
+                val markerOptions = MarkerOptions()
+                markerOptions.position(LatLng(listPin[i].latitude!!, listPin[i].longitude!!))
+                markerOptions.title(listPin[i].name)
+                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
+                marker = googleMap?.addMarker(markerOptions)
+                marker?.tag = listPin[i].name
             }
         }
     }
@@ -210,6 +218,22 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
                 }
             }
         }
+    }
+
+    class MyCustomInfoWindowAdapter(activity: Activity?) : GoogleMap.InfoWindowAdapter{
+
+        private val mContents:View = LayoutInflater.from(activity?.applicationContext).inflate(R.layout.custom_info_window, null)
+
+        override fun getInfoContents(marker: Marker?): View {
+            return mContents
+        }
+
+        override fun getInfoWindow(marker: Marker?): View {
+            marker?.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_selected))
+            mContents.textViewMapLocationName.text = marker?.tag.toString()
+            return mContents
+        }
+
     }
 
 }

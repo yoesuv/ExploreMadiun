@@ -7,6 +7,7 @@
 #### Build with Kotlin, Use MVP Pattern ####
 
 **List Libraries Used in this Project** <br/>
+* [Icons8 Icon](https://icons8.com/)
 * [Retrofit](https://github.com/square/retrofit)
 * [RxJava](https://github.com/ReactiveX/RxJava)
 * [RxAndroid](https://github.com/ReactiveX/RxAndroid)
