@@ -28,6 +28,22 @@
     <string name="person_1">Ahmad Sofi (Tester)</string>
 
     <!-- LIBRARIES -->
+    <string name="icons8">Icons8</string>
+    <string name="icons8_url">https://icons8.com</string>
+    <string name="icons8_license">
+        <![CDATA[
+        Licensed under Creative Commons Attribution-NoDerivs 3.0 Unported<br/><br/>
+        You are free to:<br>
+        Share — copy and redistribute the material in any medium or format
+        for any purpose, even commercially.<br/><br/>
+        The licensor cannot revoke these freedoms as long as you follow the license terms.<br/><br/>
+        Under the following terms:<br/>
+        Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but   not in any way that suggests the licensor endorses you or your use.<br/>
+        NoDerivatives — If you remix, transform, or build upon the material, you may not distribute the modified material.
+        <br/>
+        No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+        ]]>
+    </string>
     <string name="retrofit">Retrofit</string>
     <string name="retrofit_url">https://github.com/square/retrofit</string>
     <string name="retrofit_license">

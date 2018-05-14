@@ -21,6 +21,7 @@ class ChildFragmentLibraries: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = LayoutInflater.from(context).inflate(R.layout.child_fragment_libraries, container, false)
 
+        view.textViewIcons8License.text = AppHelper.fromHtml(getString(R.string.icons8_license))
         view.textViewRetrofitLicense.text = AppHelper.fromHtml(getString(R.string.retrofit_license))
         view.textViewRxJavaLicense.text = AppHelper.fromHtml(getString(R.string.rxjava_license))
         view.textViewRxAndroidLicense.text = AppHelper.fromHtml(getString(R.string.rxAndroid_license))

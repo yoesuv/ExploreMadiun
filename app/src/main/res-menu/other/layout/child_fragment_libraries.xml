@@ -12,6 +12,31 @@
         android:layout_margin="@dimen/fragment_info_margin"
         android:paddingBottom="20dp">
 
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/icons8"
+            android:textSize="@dimen/title_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/icons8_url"
+            android:textSize="@dimen/url_libraries"
+            android:textColor="@color/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewIcons8License"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/retrofit_license"
+            android:textSize="@dimen/license_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <include layout="@layout/divider"/>
+
         <!-- Retrofit -->
         <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
             android:layout_width="wrap_content"
