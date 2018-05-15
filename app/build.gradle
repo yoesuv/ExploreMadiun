@@ -42,16 +42,17 @@ android {
         versionCode project.versionCode.toInteger()
         versionName project.versionName
         vectorDrawables.useSupportLibrary true
-        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     sourceSets {
@@ -95,6 +96,7 @@ dependencies {
     implementation "com.tbruyelle.rxpermissions2:rxpermissions:$project.rxPermissionVersion"
     implementation "com.github.GrenderG:Toasty:$project.toastyVersion"
     implementation "com.github.devlight.navigationtabstrip:navigationtabstrip:$project.navigationTabStripVersion"
+    implementation "com.akexorcist:googledirectionlibrary:$project.googleDirectionLibraryVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'

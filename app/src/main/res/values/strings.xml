@@ -1,7 +1,8 @@
 <resources>
 
     <string name="app_name">Explore Madiun</string>
-    <string name="google_maps_api_key" translatable="false" templateMergeStrategy="preserve">AIzaSyD0jPyTF1_RuFotnARwu2jhlI8Ou2fABGE</string>
+    <string name="google_maps_api_key" translatable="false" templateMergeStrategy="preserve">AIzaSyCXfWuWQXTnim0aE979etdOuVnAXx-2nOU</string>
+    <string name="server_key" translatable="false" templateMergeStrategy="preserve">AIzaSyDALH9j-i1yNbWoAOvIAaahRl-Lpa5BxTM</string>
 
     <!-- MENU APPLICATION -->
     <string name="menu_list">Lokasi</string>

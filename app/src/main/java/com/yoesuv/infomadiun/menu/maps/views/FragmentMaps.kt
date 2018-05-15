@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
+import android.graphics.Color
 import android.os.*
 import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
@@ -11,6 +12,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.akexorcist.googledirection.DirectionCallback
+import com.akexorcist.googledirection.GoogleDirection
+import com.akexorcist.googledirection.constant.AvoidType
+import com.akexorcist.googledirection.constant.TransportMode
+import com.akexorcist.googledirection.model.Direction
+import com.akexorcist.googledirection.util.DirectionConverter
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResolvableApiException
@@ -36,7 +43,7 @@ import kotlinx.android.synthetic.main.custom_info_window.view.*
 /**
  *  Created by yusuf on 4/30/18.
  */
-class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
+class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContract.ViewMaps {
 
     companion object {
         const val REQUEST_FEATURE_LOCATION_PERMISSION_CODE:Int = 12
@@ -50,9 +57,12 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
     private var googleMap: GoogleMap? = null
     private lateinit var rxPermission: RxPermissions
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var markerUser: Marker? = null
+    private var markerLocation: Marker? = null
     private lateinit var googleApiClient: GoogleApiClient
     private var myLocationCallback: MyLocationCallback? = null
+
+    private lateinit var origin: LatLng
+    private val colors = arrayListOf("#7fff7272","#7f31c7c5","#7fff8a00")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -144,7 +154,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
     @SuppressLint("MissingPermission")
     private fun enableUserLocation(googleMap: GoogleMap?){
 
-        myLocationCallback = MyLocationCallback(googleMap, markerUser)
+        origin = LatLng(-7.813882, 111.371713)
+        myLocationCallback = MyLocationCallback(googleMap, origin)
 
         googleMap?.uiSettings?.isMyLocationButtonEnabled = true
         val locationRequest:LocationRequest = LocationRequest.create()
@@ -152,6 +163,20 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
         locationRequest.interval = 2000
         locationRequest.fastestInterval = 1000
         fusedLocationClient.requestLocationUpdates(locationRequest, myLocationCallback, Looper.myLooper())
+    }
+
+    private fun getDirection(marker: Marker?){
+        val tag: MarkerTag = marker?.tag as MarkerTag
+        if(tag.type==0){
+            GoogleDirection.withServerKey(activity.getString(R.string.server_key))
+                    .from(origin)
+                    .to(LatLng(tag.latitude!!, tag.longitude!!))
+                    .alternativeRoute(true)
+                    .transportMode(TransportMode.DRIVING)
+                    .avoid(AvoidType.TOLLS)
+                    .execute(this)
+
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
@@ -179,17 +204,22 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
                 it.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
             }
         }
-
+        googleMap?.setOnInfoWindowClickListener {
+            getDirection(it)
+        }
         googleMap?.setOnMarkerClickListener {
             Log.d(Constants.TAG_DEBUG,"FragmentMaps # marker clicked")
             it.showInfoWindow()
 
-            val start = SystemClock.uptimeMillis()
-            val duration =1200L
+            val tag: MarkerTag = it.tag as MarkerTag
+            if (tag.type==0) {
+                val start = SystemClock.uptimeMillis()
+                val duration = 1200L
 
-            val handler = Handler()
-            val anim = BounceAnimation(start, duration, it, handler)
-            handler.post(anim)
+                val handler = Handler()
+                val anim = BounceAnimation(start, duration, it, handler)
+                handler.post(anim)
+            }
 
             return@setOnMarkerClickListener true
         }
@@ -210,15 +240,38 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
                 markerOptions.position(LatLng(listPin[i].latitude!!, listPin[i].longitude!!))
                 markerOptions.title(listPin[i].name)
                 markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
-                markerUser = googleMap?.addMarker(markerOptions)
-                markerUser?.tag = MarkerTag(listPin[i].name!!, 0)
+                markerLocation = googleMap?.addMarker(markerOptions)
+                markerLocation?.tag = MarkerTag(listPin[i].name!!, 0, listPin[i].latitude, listPin[i].longitude)
             }
         }
     }
 
-    class MarkerTag(val title:String, val type:Int)
+    override fun onDirectionSuccess(direction: Direction?, rawBody: String?) {
+        Log.e(Constants.TAG_ERROR,"FragmentMaps # onDirectionSuccess ${direction?.errorMessage}")
+        if(direction!!.isOK){
+            var polyLine: Polyline? = null
+            for(i:Int in 0..(direction.routeList.size-1)){
+                val color = colors[i % colors.size]
+                val route = direction.routeList[i]
+                val directionPositionList = route.legList[0].directionPoint
+                polyLine?.remove()
+                polyLine = googleMap?.addPolyline(DirectionConverter.createPolyline(context, directionPositionList, 5, Color.parseColor(color)))
 
-    class MyLocationCallback(private val googleMap: GoogleMap?, private var markerUser: Marker?) : LocationCallback(){
+            }
+        }else{
+            Toasty.error(activity, "Oops.. error mendapatkan petunjuk arah")
+        }
+    }
+
+    override fun onDirectionFailure(t: Throwable?) {
+
+    }
+
+    class MarkerTag(val title:String, val type:Int, val latitude:Double?, val longitude:Double?)
+
+    class MyLocationCallback(private val googleMap: GoogleMap?, private var origin:LatLng?) : LocationCallback(){
+
+        private var markerUser: Marker? = null
 
         override fun onLocationResult(locationResult: LocationResult?) {
             super.onLocationResult(locationResult)
@@ -228,8 +281,10 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
                 val markerOpt = MarkerOptions()
                 markerOpt.position(LatLng(listLocation[0].latitude, listLocation[0].longitude))
                 markerOpt.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_position))
+                markerUser?.remove()
                 markerUser = googleMap?.addMarker(markerOpt)
-                markerUser?.tag = MarkerTag("Lokasi Anda", 1)
+                markerUser?.tag = MarkerTag("Lokasi Anda", 1, listLocation[0].latitude, listLocation[0].longitude)
+                origin = LatLng(listLocation[0].latitude, listLocation[0].longitude)
             }
         }
     }
