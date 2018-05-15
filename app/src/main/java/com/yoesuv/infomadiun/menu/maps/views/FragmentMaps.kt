@@ -54,7 +54,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
     private var markerUser: Marker? = null
     private lateinit var googleApiClient: GoogleApiClient
     private var myLocationCallback: MyLocationCallback? = null
-    private var marker: Marker? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -176,7 +175,10 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
 
         googleMap?.setInfoWindowAdapter(MyCustomInfoWindowAdapter(activity))
         googleMap?.setOnInfoWindowCloseListener {
-            it.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
+            val tag: MarkerTag = it.tag as MarkerTag
+            if(tag.type==0) {
+                it.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
+            }
         }
     }
 
@@ -195,13 +197,16 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
                 markerOptions.position(LatLng(listPin[i].latitude!!, listPin[i].longitude!!))
                 markerOptions.title(listPin[i].name)
                 markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
-                marker = googleMap?.addMarker(markerOptions)
-                marker?.tag = listPin[i].name
+                markerUser = googleMap?.addMarker(markerOptions)
+                markerUser?.tag = MarkerTag(listPin[i].name!!, 0)
             }
         }
     }
 
+    class MarkerTag(val title:String, val type:Int)
+
     class MyLocationCallback(private val googleMap: GoogleMap?, private var markerUser: Marker?) : LocationCallback(){
+
         override fun onLocationResult(locationResult: LocationResult?) {
             super.onLocationResult(locationResult)
             val listLocation = locationResult?.locations
@@ -210,17 +215,13 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
                 val markerOpt = MarkerOptions()
                 markerOpt.position(LatLng(listLocation[0].latitude, listLocation[0].longitude))
                 markerOpt.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_position))
-                markerUser = if(markerUser!=null){
-                    markerUser!!.remove()
-                    googleMap?.addMarker(markerOpt)!!
-                }else{
-                    googleMap?.addMarker(markerOpt)!!
-                }
+                markerUser = googleMap?.addMarker(markerOpt)
+                markerUser?.tag = MarkerTag("Lokasi Anda", 1)
             }
         }
     }
 
-    class MyCustomInfoWindowAdapter(activity: Activity?) : GoogleMap.InfoWindowAdapter{
+    class MyCustomInfoWindowAdapter(private val activity: Activity?) : GoogleMap.InfoWindowAdapter{
 
         private val mContents:View = LayoutInflater.from(activity?.applicationContext).inflate(R.layout.custom_info_window, null)
 
@@ -229,8 +230,15 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
         }
 
         override fun getInfoWindow(marker: Marker?): View {
-            marker?.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_selected))
-            mContents.textViewMapLocationName.text = marker?.tag.toString()
+            val tag: MarkerTag = marker?.tag as MarkerTag
+            if(tag.type==1){
+                mContents.textViewMapLocationName.text = activity?.getString(R.string.your_location)
+                mContents.imageViewMapLocationDirection.visibility = View.GONE
+            }else {
+                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_selected))
+                mContents.textViewMapLocationName.text = marker.title
+                mContents.imageViewMapLocationDirection.visibility = View.VISIBLE
+            }
             return mContents
         }
 
