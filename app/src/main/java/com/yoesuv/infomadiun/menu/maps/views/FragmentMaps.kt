@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.IntentSender
-import android.os.Build
-import android.os.Bundle
-import android.os.Looper
+import android.os.*
 import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
 import android.util.Log
@@ -30,6 +28,7 @@ import com.yoesuv.infomadiun.menu.maps.contracts.MapContract
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.menu.maps.presenters.MapPresenter
 import com.yoesuv.infomadiun.utils.AppHelper
+import com.yoesuv.infomadiun.utils.BounceAnimation
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.custom_info_window.view.*
@@ -179,6 +178,20 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, MapContract.ViewMaps {
             if(tag.type==0) {
                 it.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
             }
+        }
+
+        googleMap?.setOnMarkerClickListener {
+            Log.d(Constants.TAG_DEBUG,"FragmentMaps # marker clicked")
+            it.showInfoWindow()
+
+            val start = SystemClock.uptimeMillis()
+            val duration =1200L
+
+            val handler = Handler()
+            val anim = BounceAnimation(start, duration, it, handler)
+            handler.post(anim)
+
+            return@setOnMarkerClickListener true
         }
     }
 
