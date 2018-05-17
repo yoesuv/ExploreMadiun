@@ -245,8 +245,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
             getDirection(it)
         }
         googleMap?.setOnMarkerClickListener {
-            it.showInfoWindow()
             val tag: MarkerTag = it.tag as MarkerTag
+            Log.d(Constants.TAG_DEBUG,"FragmentMaps # Marker tag type : ${tag.type}")
             if (tag.type == 0) {
                 val start = SystemClock.uptimeMillis()
                 val duration = 1200L
@@ -254,6 +254,12 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
                 val handler = Handler()
                 val anim = BounceAnimation(start, duration, it, handler)
                 handler.post(anim)
+            }
+            if (tag.type==3) {
+                it.hideInfoWindow()
+            }else {
+                it.showInfoWindow()
+
             }
             return@setOnMarkerClickListener true
         }
@@ -287,6 +293,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
             if(direction.routeList.size>0) {
                 googleMap?.clear()
                 markerLocation = googleMap?.addMarker(MarkerOptions().position(destination).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_selected)))
+                markerLocation?.tag = MarkerTag("Destination", 3, 0.0, 0.0)
 
                 setCameraWithCoordinationBounds(direction.routeList[0])
 
@@ -295,7 +302,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
                     val route = direction.routeList[i]
                     val directionPositionList = route.legList[0].directionPoint
                     googleMap?.addPolyline(DirectionConverter.createPolyline(context, directionPositionList, 5, Color.parseColor(color)))
-                    googleMap?.setInfoWindowAdapter(null)
                 }
             }
         }else{
