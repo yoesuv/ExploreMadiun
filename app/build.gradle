@@ -42,6 +42,7 @@ android {
         versionCode project.versionCode.toInteger()
         versionName project.versionName
         vectorDrawables.useSupportLibrary true
+        resValue "string", "info_madiun_google_maps_api_key", "AIzaSyBlOlCyjJ2SeJZzVS_2uV4uxjGj-AboUQ8"
     }
     buildTypes {
         release {

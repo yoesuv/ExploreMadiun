@@ -168,7 +168,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
     private fun getDirection(marker: Marker?){
         val tag: MarkerTag = marker?.tag as MarkerTag
         if(tag.type==0){
-            GoogleDirection.withServerKey(activity.getString(R.string.server_key))
+            GoogleDirection.withServerKey(activity.getString(R.string.info_madiun_google_maps_api_key))
                     .from(origin)
                     .to(LatLng(tag.latitude!!, tag.longitude!!))
                     .alternativeRoute(true)
@@ -208,7 +208,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
             getDirection(it)
         }
         googleMap?.setOnMarkerClickListener {
-            Log.d(Constants.TAG_DEBUG,"FragmentMaps # marker clicked")
             it.showInfoWindow()
 
             val tag: MarkerTag = it.tag as MarkerTag
@@ -249,17 +248,15 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
     override fun onDirectionSuccess(direction: Direction?, rawBody: String?) {
         Log.e(Constants.TAG_ERROR,"FragmentMaps # onDirectionSuccess ${direction?.errorMessage}")
         if(direction!!.isOK){
-            var polyLine: Polyline? = null
+            Log.d(Constants.TAG_DEBUG,"FragmentMaps # found ${direction.routeList.size} direction")
             for(i:Int in 0..(direction.routeList.size-1)){
                 val color = colors[i % colors.size]
                 val route = direction.routeList[i]
                 val directionPositionList = route.legList[0].directionPoint
-                polyLine?.remove()
-                polyLine = googleMap?.addPolyline(DirectionConverter.createPolyline(context, directionPositionList, 5, Color.parseColor(color)))
-
+                googleMap?.addPolyline(DirectionConverter.createPolyline(context, directionPositionList, 5, Color.parseColor(color)))
             }
         }else{
-            Toasty.error(activity, "Oops.. error mendapatkan petunjuk arah")
+            Toasty.error(activity, activity.resources.getString(R.string.error_get_direction))
         }
     }
 
@@ -311,5 +308,12 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
         }
 
     }
+
+    /*private void setCameraWithCoordinationBounds(Route route) {
+        LatLng southwest = route.getBound().getSouthwestCoordination().getCoordination();
+        LatLng northeast = route.getBound().getNortheastCoordination().getCoordination();
+        LatLngBounds bounds = new LatLngBounds(southwest, northeast);
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
+    } */
 
 }
