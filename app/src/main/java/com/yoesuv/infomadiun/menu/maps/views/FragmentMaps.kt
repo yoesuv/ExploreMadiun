@@ -9,14 +9,13 @@ import android.os.*
 import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.akexorcist.googledirection.DirectionCallback
 import com.akexorcist.googledirection.GoogleDirection
 import com.akexorcist.googledirection.constant.AvoidType
 import com.akexorcist.googledirection.constant.TransportMode
 import com.akexorcist.googledirection.model.Direction
+import com.akexorcist.googledirection.model.Route
 import com.akexorcist.googledirection.util.DirectionConverter
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.GoogleApiClient
@@ -65,7 +64,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
     private var myLocationCallback: MyLocationCallback? = null
 
     private lateinit var origin: LatLng
-    private val colors = arrayListOf("#7fff7272","#7f31c7c5","#7fff8a00")
+    private lateinit var destination: LatLng
+    private val colors = arrayListOf("#7F2196f3","#7F4CAF50","#7FF44336")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +84,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
 
         val mapFragment:SupportMapFragment? = childFragmentManager.findFragmentById(R.id.mapLocation) as SupportMapFragment
         mapFragment?.getMapAsync(this)
+
+        setHasOptionsMenu(true)
 
         return v
     }
@@ -106,6 +108,22 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
                 Toasty.error(activity, getString(R.string.location_setting_off)).show()
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu_map, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if(item?.itemId==R.id.menuMapRefresh){
+            googleMap?.clear()
+            //default location
+            googleMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(-7.813882, 111.371713)))
+            googleMap?.animateCamera(CameraUpdateFactory.zoomTo(9f))
+            mapPresenter.getListPin()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun displayLocationSettingsRequest(){
@@ -171,6 +189,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
         val tag: MarkerTag = marker?.tag as MarkerTag
         if(tag.type==0){
 
+            destination = LatLng(tag.latitude!!, tag.longitude!!)
             val latitude: String? = App.prefHelper?.getString(PREFERENCE_LATITUDE)
             val longitude: String? = App.prefHelper?.getString(PREFERENCE_LONGITUDE)
 
@@ -179,7 +198,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
                     origin = LatLng(latitude!!.toDouble(), longitude!!.toDouble())
                     GoogleDirection.withServerKey(activity.getString(R.string.info_madiun_google_maps_api_key))
                             .from(origin)
-                            .to(LatLng(tag.latitude!!, tag.longitude!!))
+                            .to(destination)
                             .alternativeRoute(true)
                             .transportMode(TransportMode.DRIVING)
                             .avoid(AvoidType.TOLLS)
@@ -187,6 +206,14 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
                 }
             }
         }
+    }
+
+    private fun setCameraWithCoordinationBounds(route: Route){
+        val southwest:LatLng = route.bound.southwestCoordination.coordination
+        val northeast:LatLng = route.bound.northeastCoordination.coordination
+        val bounds = LatLngBounds(southwest, northeast)
+        googleMap?.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
+
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
@@ -219,9 +246,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
         }
         googleMap?.setOnMarkerClickListener {
             it.showInfoWindow()
-
             val tag: MarkerTag = it.tag as MarkerTag
-            if (tag.type==0) {
+            if (tag.type == 0) {
                 val start = SystemClock.uptimeMillis()
                 val duration = 1200L
 
@@ -229,7 +255,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
                 val anim = BounceAnimation(start, duration, it, handler)
                 handler.post(anim)
             }
-
             return@setOnMarkerClickListener true
         }
     }
@@ -259,11 +284,19 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
         Log.e(Constants.TAG_ERROR,"FragmentMaps # onDirectionSuccess ${direction?.errorMessage}")
         if(direction!!.isOK){
             Log.d(Constants.TAG_DEBUG,"FragmentMaps # found ${direction.routeList.size} direction")
-            for(i:Int in 0..(direction.routeList.size-1)){
-                val color = colors[i % colors.size]
-                val route = direction.routeList[i]
-                val directionPositionList = route.legList[0].directionPoint
-                googleMap?.addPolyline(DirectionConverter.createPolyline(context, directionPositionList, 5, Color.parseColor(color)))
+            if(direction.routeList.size>0) {
+                googleMap?.clear()
+                markerLocation = googleMap?.addMarker(MarkerOptions().position(destination).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_selected)))
+
+                setCameraWithCoordinationBounds(direction.routeList[0])
+
+                for (i: Int in 0..(direction.routeList.size - 1)) {
+                    val color = colors[i % colors.size]
+                    val route = direction.routeList[i]
+                    val directionPositionList = route.legList[0].directionPoint
+                    googleMap?.addPolyline(DirectionConverter.createPolyline(context, directionPositionList, 5, Color.parseColor(color)))
+                    googleMap?.setInfoWindowAdapter(null)
+                }
             }
         }else{
             Toasty.error(activity, activity.resources.getString(R.string.error_get_direction))
@@ -308,10 +341,10 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
 
         override fun getInfoWindow(marker: Marker?): View {
             val tag: MarkerTag = marker?.tag as MarkerTag
-            if(tag.type==1){
+            if (tag.type == 1) {
                 mContents.textViewMapLocationName.text = activity?.getString(R.string.your_location)
                 mContents.imageViewMapLocationDirection.visibility = View.GONE
-            }else {
+            } else {
                 marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_selected))
                 mContents.textViewMapLocationName.text = marker.title
                 mContents.imageViewMapLocationDirection.visibility = View.VISIBLE
@@ -320,12 +353,5 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
         }
 
     }
-
-    /*private void setCameraWithCoordinationBounds(Route route) {
-        LatLng southwest = route.getBound().getSouthwestCoordination().getCoordination();
-        LatLng northeast = route.getBound().getNortheastCoordination().getCoordination();
-        LatLngBounds bounds = new LatLngBounds(southwest, northeast);
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
-    } */
 
 }
