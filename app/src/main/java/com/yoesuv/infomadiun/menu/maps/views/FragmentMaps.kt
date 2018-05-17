@@ -29,6 +29,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.tasks.Task
 import com.tbruyelle.rxpermissions2.RxPermissions
+import com.yoesuv.infomadiun.App
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.data.Constants
 import com.yoesuv.infomadiun.menu.maps.contracts.MapContract
@@ -47,6 +48,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
 
     companion object {
         const val REQUEST_FEATURE_LOCATION_PERMISSION_CODE:Int = 12
+        const val PREFERENCE_LATITUDE = "preference_latitude"
+        const val PREFERENCE_LONGITUDE = "preference_longitude"
         fun getInstance():Fragment{
             return FragmentMaps()
         }
@@ -154,8 +157,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
     @SuppressLint("MissingPermission")
     private fun enableUserLocation(googleMap: GoogleMap?){
 
-        origin = LatLng(-7.813882, 111.371713)
-        myLocationCallback = MyLocationCallback(googleMap, origin)
+        myLocationCallback = MyLocationCallback(googleMap)
 
         googleMap?.uiSettings?.isMyLocationButtonEnabled = true
         val locationRequest:LocationRequest = LocationRequest.create()
@@ -168,14 +170,22 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
     private fun getDirection(marker: Marker?){
         val tag: MarkerTag = marker?.tag as MarkerTag
         if(tag.type==0){
-            GoogleDirection.withServerKey(activity.getString(R.string.info_madiun_google_maps_api_key))
-                    .from(origin)
-                    .to(LatLng(tag.latitude!!, tag.longitude!!))
-                    .alternativeRoute(true)
-                    .transportMode(TransportMode.DRIVING)
-                    .avoid(AvoidType.TOLLS)
-                    .execute(this)
 
+            val latitude: String? = App.prefHelper?.getString(PREFERENCE_LATITUDE)
+            val longitude: String? = App.prefHelper?.getString(PREFERENCE_LONGITUDE)
+
+            if(latitude!=""){
+                if(longitude!=""){
+                    origin = LatLng(latitude!!.toDouble(), longitude!!.toDouble())
+                    GoogleDirection.withServerKey(activity.getString(R.string.info_madiun_google_maps_api_key))
+                            .from(origin)
+                            .to(LatLng(tag.latitude!!, tag.longitude!!))
+                            .alternativeRoute(true)
+                            .transportMode(TransportMode.DRIVING)
+                            .avoid(AvoidType.TOLLS)
+                            .execute(this)
+                }
+            }
         }
     }
 
@@ -266,7 +276,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
 
     class MarkerTag(val title:String, val type:Int, val latitude:Double?, val longitude:Double?)
 
-    class MyLocationCallback(private val googleMap: GoogleMap?, private var origin:LatLng?) : LocationCallback(){
+    class MyLocationCallback(private val googleMap: GoogleMap?) : LocationCallback(){
 
         private var markerUser: Marker? = null
 
@@ -281,7 +291,9 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
                 markerUser?.remove()
                 markerUser = googleMap?.addMarker(markerOpt)
                 markerUser?.tag = MarkerTag("Lokasi Anda", 1, listLocation[0].latitude, listLocation[0].longitude)
-                origin = LatLng(listLocation[0].latitude, listLocation[0].longitude)
+
+                App.prefHelper?.setString(FragmentMaps.PREFERENCE_LATITUDE, listLocation[0].latitude.toString())
+                App.prefHelper?.setString(FragmentMaps.PREFERENCE_LONGITUDE, listLocation[0].longitude.toString())
             }
         }
     }
