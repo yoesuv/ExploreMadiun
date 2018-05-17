@@ -39,6 +39,7 @@ import com.yoesuv.infomadiun.utils.BounceAnimation
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.custom_info_window.view.*
+import kotlinx.android.synthetic.main.fragment_map.view.*
 
 /**
  *  Created by yusuf on 4/30/18.
@@ -86,6 +87,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
         mapFragment?.getMapAsync(this)
 
         setHasOptionsMenu(true)
+        v.textViewGettingDirection.visibility = View.INVISIBLE
 
         return v
     }
@@ -186,6 +188,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
     }
 
     private fun getDirection(marker: Marker?){
+        view?.textViewGettingDirection?.visibility = View.VISIBLE
         val tag: MarkerTag = marker?.tag as MarkerTag
         if(tag.type==0){
 
@@ -288,6 +291,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
 
     override fun onDirectionSuccess(direction: Direction?, rawBody: String?) {
         Log.e(Constants.TAG_ERROR,"FragmentMaps # onDirectionSuccess ${direction?.errorMessage}")
+        view?.textViewGettingDirection?.visibility = View.INVISIBLE
         if(direction!!.isOK){
             Log.d(Constants.TAG_DEBUG,"FragmentMaps # found ${direction.routeList.size} direction")
             if(direction.routeList.size>0) {
@@ -310,7 +314,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
     }
 
     override fun onDirectionFailure(t: Throwable?) {
-
+        Toasty.error(activity, activity.resources.getString(R.string.error_get_direction))
     }
 
     class MarkerTag(val title:String, val type:Int, val latitude:Double?, val longitude:Double?)
