@@ -31,6 +31,7 @@ class ChildFragmentLibraries: Fragment() {
         view.textViewRxPermissionLicense.text = AppHelper.fromHtml(getString(R.string.rx_permission_license))
         view.textViewToastyLicense.text = AppHelper.fromHtml(getString(R.string.toasty_license))
         view.textViewNavigationTabStripLicense.text = AppHelper.fromHtml(getString(R.string.navigation_tab_strip_license))
+        view.textViewGoogleDirectionLicense.text = AppHelper.fromHtml(getString(R.string.google_direction_license))
 
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
             view.nestedScrollViewLibraries.isNestedScrollingEnabled = true

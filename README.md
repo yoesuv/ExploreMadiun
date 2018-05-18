@@ -17,3 +17,4 @@
 * [RxPermission](https://github.com/tbruyelle/RxPermissions)
 * [Toasty](https://github.com/GrenderG/Toasty)
 * [NavigationTabStrip](https://github.com/Devlight/NavigationTabStrip)
+* [Android-GoogleDirectionLibrary](https://github.com/akexorcist/Android-GoogleDirectionLibrary)
