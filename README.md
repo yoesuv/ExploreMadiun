@@ -18,3 +18,4 @@
 * [Toasty](https://github.com/GrenderG/Toasty)
 * [NavigationTabStrip](https://github.com/Devlight/NavigationTabStrip)
 * [Android-GoogleDirectionLibrary](https://github.com/akexorcist/Android-GoogleDirectionLibrary)
+* [Fabric](https://www.fabric.io)
