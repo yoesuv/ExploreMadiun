@@ -195,7 +195,8 @@
     <string name="ver_8_info">
         <![CDATA[
             • nama baru aplikasi Explore Madiun<br/>
-            • desain baru aplikasi
+            • desain baru aplikasi<br/>
+            + fitur petunjuk arah
         ]]>
     </string>
     <string name="ver_7">Versi 1.0.6</string>
