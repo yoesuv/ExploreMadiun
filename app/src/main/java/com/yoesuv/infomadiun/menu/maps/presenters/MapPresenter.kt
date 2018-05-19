@@ -27,6 +27,7 @@ class MapPresenter(private val viewMaps: MapContract.ViewMaps): MapContract.Pres
                             },
                             onError = {
                                 viewMaps.dismissLoading()
+                                viewMaps.setError()
                             },
                             onComplete = {
                                 viewMaps.dismissLoading()

@@ -8,6 +8,7 @@ class MapContract {
         fun showLoading()
         fun dismissLoading()
         fun setData(listPin: MutableList<PinModel>)
+        fun setError()
     }
 
     interface Presenter{

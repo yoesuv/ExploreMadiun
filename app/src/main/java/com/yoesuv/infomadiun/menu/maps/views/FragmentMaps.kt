@@ -278,15 +278,19 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
 
     override fun setData(listPin: MutableList<PinModel>) {
         if(listPin.isNotEmpty()){
-            for(i:Int in 0..listPin.size){
+            for(pinModel in listPin){
                 val markerOptions = MarkerOptions()
-                markerOptions.position(LatLng(listPin[i].latitude!!, listPin[i].longitude!!))
-                markerOptions.title(listPin[i].name)
+                markerOptions.position(LatLng(pinModel.latitude!!, pinModel.longitude!!))
+                markerOptions.title(pinModel.name)
                 markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
                 markerLocation = googleMap?.addMarker(markerOptions)
-                markerLocation?.tag = MarkerTag(listPin[i].name!!, 0, listPin[i].latitude, listPin[i].longitude)
+                markerLocation?.tag = MarkerTag(pinModel.name!!, 0, pinModel.latitude, pinModel.longitude)
             }
         }
+    }
+
+    override fun setError() {
+        Toasty.error(activity, activity.resources.getString(R.string.ops_message)).show()
     }
 
     override fun onDirectionSuccess(direction: Direction?, rawBody: String?) {
