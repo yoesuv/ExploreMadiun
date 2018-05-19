@@ -30,6 +30,7 @@ class ListPlacePresenter(private val viewListPlace: ListPlaceContract.ViewListPl
                                 },
                                 onError = {
                                     viewListPlace.dismissLoading()
+                                    viewListPlace.setError()
                                 },
                                 onComplete = {
                                     viewListPlace.dismissLoading()
@@ -51,6 +52,7 @@ class ListPlacePresenter(private val viewListPlace: ListPlaceContract.ViewListPl
                                 },
                                 onError = {
                                     viewListPlace.dismissLoading()
+                                    viewListPlace.setError()
                                 },
                                 onComplete = {
                                     viewListPlace.dismissLoading()
@@ -72,6 +74,7 @@ class ListPlacePresenter(private val viewListPlace: ListPlaceContract.ViewListPl
                                 },
                                 onError = {
                                     viewListPlace.dismissLoading()
+                                    viewListPlace.setError()
                                 },
                                 onComplete = {
                                     viewListPlace.dismissLoading()
@@ -93,6 +96,7 @@ class ListPlacePresenter(private val viewListPlace: ListPlaceContract.ViewListPl
                                 },
                                 onError = {
                                     viewListPlace.dismissLoading()
+                                    viewListPlace.setError()
                                 },
                                 onComplete = {
                                     viewListPlace.dismissLoading()
@@ -114,6 +118,7 @@ class ListPlacePresenter(private val viewListPlace: ListPlaceContract.ViewListPl
                                 },
                                 onError = {
                                     viewListPlace.dismissLoading()
+                                    viewListPlace.setError()
                                 },
                                 onComplete = {
                                     viewListPlace.dismissLoading()
@@ -135,6 +140,7 @@ class ListPlacePresenter(private val viewListPlace: ListPlaceContract.ViewListPl
                                 },
                                 onError = {
                                     viewListPlace.dismissLoading()
+                                    viewListPlace.setError()
                                 },
                                 onComplete = {
                                     viewListPlace.dismissLoading()
@@ -156,6 +162,7 @@ class ListPlacePresenter(private val viewListPlace: ListPlaceContract.ViewListPl
                                 },
                                 onError = {
                                     viewListPlace.dismissLoading()
+                                    viewListPlace.setError()
                                 },
                                 onComplete = {
                                     viewListPlace.dismissLoading()

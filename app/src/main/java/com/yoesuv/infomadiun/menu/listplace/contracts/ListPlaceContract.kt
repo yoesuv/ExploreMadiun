@@ -11,6 +11,7 @@ class ListPlaceContract {
         fun showLoading()
         fun dismissLoading()
         fun setData(listPlaceModel: MutableList<PlaceModel>)
+        fun setError()
 
     }
 

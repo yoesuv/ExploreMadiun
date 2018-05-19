@@ -1,20 +1,14 @@
 package com.yoesuv.infomadiun.menu.listplace.views
 
 import android.app.Activity
-import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+import android.support.v7.widget.*
 import android.util.Log
 import android.view.*
-import android.widget.ProgressBar
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.data.Constants
 import com.yoesuv.infomadiun.menu.listplace.adapters.ListPlaceAdapter
@@ -22,6 +16,7 @@ import com.yoesuv.infomadiun.menu.listplace.contracts.ListPlaceContract
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.menu.listplace.presenters.ListPlacePresenter
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.android.synthetic.main.fragment_listplace.view.*
 
 /**
  *  Created by yusuf on 4/30/18.
@@ -37,8 +32,6 @@ class FragmentListPlace: Fragment(), ListPlaceContract.ViewListPlace {
     private lateinit var listPlacePresenter: ListPlacePresenter
     private var listPlace: MutableList<PlaceModel> = arrayListOf()
     private lateinit var adapter:ListPlaceAdapter
-    private var recyclerView:RecyclerView? = null
-    private lateinit var progressBar:ProgressBar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_listplace, container, false)
@@ -54,6 +47,7 @@ class FragmentListPlace: Fragment(), ListPlaceContract.ViewListPlace {
         listPlacePresenter.getListPlace()
 
         setHasOptionsMenu(true)
+        v.layoutError.visibility = View.GONE
 
         return v
     }
@@ -83,61 +77,62 @@ class FragmentListPlace: Fragment(), ListPlaceContract.ViewListPlace {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onResume() {
-        super.onResume()
-        val display = activity?.windowManager?.defaultDisplay
-        val point = Point()
-        display?.getSize(point)
-        activity?.window?.setLayout(point.x, point.y)
-    }
-
-    private fun setupRecycler(view: View){
+    private fun setupRecycler(view: View?){
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
 
-        recyclerView = view.findViewById(R.id.recyclerViewListPlace)
-        progressBar = view.findViewById(R.id.progressBar)
-        recyclerView?.layoutManager = layoutManager
-        recyclerView?.setHasFixedSize(true)
+        view?.recyclerViewListPlace?.layoutManager = layoutManager
+        view?.recyclerViewListPlace?.setHasFixedSize(true)
 
-        adapter = ListPlaceAdapter(activity as Activity, listPlace, recyclerView)
-        recyclerView?.adapter = adapter
-        recyclerView?.itemAnimator = DefaultItemAnimator()
+        adapter = ListPlaceAdapter(activity as Activity, listPlace, view?.recyclerViewListPlace)
+        view?.recyclerViewListPlace?.adapter = adapter
+        view?.recyclerViewListPlace?.itemAnimator = DefaultItemAnimator()
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
-            recyclerView?.isNestedScrollingEnabled = true
+            view?.recyclerViewListPlace?.isNestedScrollingEnabled = true
         }
     }
 
-    private fun setupSwipeRefresh(view: View){
-        val swipeRefresh = view.findViewById<SwipeRefreshLayout>(R.id.swipeRefreshListPlace)
-        swipeRefresh.setColorSchemeColors(ContextCompat.getColor(view.context, R.color.colorPrimary))
-        swipeRefresh.setOnRefreshListener({
+    private fun setupSwipeRefresh(view: View?){
+        view?.swipeRefreshListPlace?.setColorSchemeColors(ContextCompat.getColor(view.context, R.color.colorPrimary))
+        view?.swipeRefreshListPlace?.setOnRefreshListener({
             listPlacePresenter.getListPlace()
-            swipeRefresh.isRefreshing = false
+            view.swipeRefreshListPlace.isRefreshing = false
             activity?.invalidateOptionsMenu()
         })
     }
 
     override fun showLoading() {
-        progressBar.visibility = View.VISIBLE
-        progressBar.alpha = 1f
-        recyclerView?.alpha = 0f
+        view?.progressBar?.visibility = View.VISIBLE
+        view?.progressBar?.alpha = 1f
+        view?.recyclerViewListPlace?.alpha = 0f
     }
 
     override fun dismissLoading() {
-        recyclerView?.animate()?.alpha(1f)?.duration = Constants.ANIMATION_TIME
-        progressBar.visibility = View.GONE
+        view?.recyclerViewListPlace?.animate()?.alpha(1f)?.duration = Constants.ANIMATION_TIME
+        view?.progressBar?.visibility = View.GONE
     }
 
     override fun setData(listPlaceModel: MutableList<PlaceModel>) {
         Log.d(Constants.TAG_DEBUG,"FragmentListPlace # jumlah lokasi ${listPlaceModel.size}")
+        if(view?.swipeRefreshListPlace?.visibility==View.INVISIBLE){
+            view?.swipeRefreshListPlace?.visibility = View.VISIBLE
+        }
         listPlace.clear()
         if(listPlaceModel.isNotEmpty()) {
             listPlace.addAll(listPlaceModel)
-            recyclerView?.post({
+            view?.recyclerViewListPlace?.post({
                 adapter.notifyDataSetChanged()
             })
         }
+    }
+
+    override fun setError() {
+        view?.layoutError?.visibility = View.VISIBLE
+        view?.swipeRefreshListPlace?.visibility = View.INVISIBLE
+        view?.layoutError?.findViewById<AppCompatButton>(R.id.buttonErrorRefresh)?.setOnClickListener({
+            view?.layoutError?.visibility = View.INVISIBLE
+            listPlacePresenter.getListPlace()
+        })
     }
 
 }
