@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="@dimen/icon_error_size"
+            android:layout_height="@dimen/icon_error_size"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_error"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:id="@+id/textViewErrorTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:textColor="@color/default_text_color"
+            android:text="@string/ops_error"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:id="@+id/textViewErrorMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:textColor="@color/default_text_color"
+            android:text="@string/ops_message"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/buttonErrorRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_gravity="center"
+            android:text="@string/ops_button"
+            android:textColor="@color/white"
+            android:theme="@style/buttonPrimary"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

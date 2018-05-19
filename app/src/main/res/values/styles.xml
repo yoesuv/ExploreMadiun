@@ -37,4 +37,8 @@
         <item name="android:scrollbarTrackVertical">@color/pink_A100</item>
     </style>
 
+    <style name="buttonPrimary" parent="Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+    </style>
+
 </resources>
