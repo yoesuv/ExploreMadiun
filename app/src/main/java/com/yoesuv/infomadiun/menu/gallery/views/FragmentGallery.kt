@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.data.Constants
 import com.yoesuv.infomadiun.menu.gallery.adapters.GalleryAdapter
@@ -18,7 +17,6 @@ import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import com.yoesuv.infomadiun.menu.gallery.contracts.GalleryContract
 import com.yoesuv.infomadiun.menu.gallery.presenters.GalleryPresenter
 import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.fragment_gallery.*
 import kotlinx.android.synthetic.main.fragment_gallery.view.*
 
 /**
@@ -35,8 +33,6 @@ class FragmentGallery: Fragment(), GalleryContract.ViewGallery {
     private lateinit var galleryPresenter: GalleryPresenter
     private lateinit var adapter:GalleryAdapter
     private var listGallery:MutableList<GalleryModel> = arrayListOf()
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var progressBar: ProgressBar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_gallery, container, false)
@@ -45,7 +41,6 @@ class FragmentGallery: Fragment(), GalleryContract.ViewGallery {
         val toolbar = activity.findViewById<Toolbar>(R.id.toolbarMain)
         toolbar.textViewToolbar.text = getString(R.string.menu_gallery)
 
-        progressBar = v.findViewById(R.id.progressBar)
         setupRecyclerView(v)
         setupSwipeRefresh(v)
 
@@ -60,36 +55,35 @@ class FragmentGallery: Fragment(), GalleryContract.ViewGallery {
         galleryPresenter.destroy()
     }
 
-    private fun setupRecyclerView(view: View){
-        recyclerView = view.findViewById(R.id.recyclerViewGallery)
-        val lManager = GridLayoutManager(view.context.applicationContext, 3)
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = lManager
+    private fun setupRecyclerView(view: View?){
+        val lManager = GridLayoutManager(view?.context?.applicationContext, 3)
+        view?.recyclerViewGallery?.setHasFixedSize(true)
+        view?.recyclerViewGallery?.layoutManager = lManager
         adapter = GalleryAdapter(activity as AppCompatActivity, listGallery)
-        recyclerView.adapter = adapter
-        recyclerView.itemAnimator = DefaultItemAnimator()
+        view?.recyclerViewGallery?.adapter = adapter
+        view?.recyclerViewGallery?.itemAnimator = DefaultItemAnimator()
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
-            recyclerView.isNestedScrollingEnabled = true
+            view?.recyclerViewGallery?.isNestedScrollingEnabled = true
         }
     }
 
-    private fun setupSwipeRefresh(view: View){
-        view.swipeRefreshGallery.setColorSchemeColors(ContextCompat.getColor(view.context, R.color.colorPrimary))
-        view.swipeRefreshGallery.setOnRefreshListener {
+    private fun setupSwipeRefresh(view: View?){
+        view?.swipeRefreshGallery?.setColorSchemeColors(ContextCompat.getColor(view.context, R.color.colorPrimary))
+        view?.swipeRefreshGallery?.setOnRefreshListener {
             galleryPresenter.getListGallery()
             view.swipeRefreshGallery.isRefreshing = false
         }
     }
 
     override fun showLoading() {
-        progressBar.visibility = View.VISIBLE
-        progressBar.alpha = 1f
-        recyclerView.alpha = 0f
+        view?.progressBar?.visibility = View.VISIBLE
+        view?.progressBar?.alpha = 1f
+        view?.recyclerViewGallery?.alpha = 0f
     }
 
     override fun dismissLoading() {
-        recyclerView.animate().alpha(1f).duration = Constants.ANIMATION_TIME
-        progressBar.visibility = View.GONE
+        view?.recyclerViewGallery?.animate()?.alpha(1f)?.duration = Constants.ANIMATION_TIME
+        view?.progressBar?.visibility = View.GONE
     }
 
     override fun setData(listGallery: MutableList<GalleryModel>) {
@@ -97,7 +91,7 @@ class FragmentGallery: Fragment(), GalleryContract.ViewGallery {
         this.listGallery.clear()
         if(listGallery.isNotEmpty()){
             this.listGallery.addAll(listGallery)
-            recyclerView.post({
+            view?.recyclerViewGallery?.post({
                 adapter.notifyDataSetChanged()
             })
         }
