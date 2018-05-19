@@ -188,7 +188,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
     }
 
     private fun getDirection(marker: Marker?){
-        view?.textViewGettingDirection?.visibility = View.VISIBLE
         val tag: MarkerTag = marker?.tag as MarkerTag
         if(tag.type==0){
 
@@ -198,6 +197,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
 
             if(latitude!=""){
                 if(longitude!=""){
+                    view?.textViewGettingDirection?.visibility = View.VISIBLE
                     origin = LatLng(latitude!!.toDouble(), longitude!!.toDouble())
                     GoogleDirection.withServerKey(activity.getString(R.string.info_madiun_google_maps_api_key))
                             .from(origin)
