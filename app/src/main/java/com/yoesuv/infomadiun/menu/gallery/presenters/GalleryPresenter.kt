@@ -30,6 +30,7 @@ class GalleryPresenter(private val viewGallery: GalleryContract.ViewGallery): Ga
                                 },
                                 onError = {
                                     viewGallery.dismissLoading()
+                                    viewGallery.setError()
                                 },
                                 onComplete = {
                                     viewGallery.dismissLoading()

@@ -11,6 +11,7 @@ class GalleryContract {
         fun showLoading()
         fun dismissLoading()
         fun setData(listGallery: MutableList<GalleryModel>)
+        fun setError()
     }
 
     interface Presenter{

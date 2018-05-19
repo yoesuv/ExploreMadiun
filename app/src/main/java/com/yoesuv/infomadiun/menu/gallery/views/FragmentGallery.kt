@@ -46,6 +46,7 @@ class FragmentGallery: Fragment(), GalleryContract.ViewGallery {
 
         galleryPresenter = GalleryPresenter(this)
         galleryPresenter.getListGallery()
+        v.layoutGalleryError.visibility = View.INVISIBLE
 
         return v
     }
@@ -88,13 +89,25 @@ class FragmentGallery: Fragment(), GalleryContract.ViewGallery {
 
     override fun setData(listGallery: MutableList<GalleryModel>) {
         Log.d(Constants.TAG_DEBUG,"FragmentGallery # jumlah gambar gallery ${listGallery.size}")
+        if (view?.swipeRefreshGallery?.visibility == View.INVISIBLE) {
+            view?.swipeRefreshGallery?.visibility = View.VISIBLE
+        }
         this.listGallery.clear()
-        if(listGallery.isNotEmpty()){
+        if (listGallery.isNotEmpty()) {
             this.listGallery.addAll(listGallery)
             view?.recyclerViewGallery?.post({
                 adapter.notifyDataSetChanged()
             })
         }
+    }
+
+    override fun setError() {
+        view?.swipeRefreshGallery?.visibility = View.INVISIBLE
+        view?.layoutGalleryError?.visibility = View.VISIBLE
+        view?.layoutGalleryError?.findViewById<AppCompatButton>(R.id.buttonErrorRefresh)?.setOnClickListener({
+            view?.layoutGalleryError?.visibility = View.INVISIBLE
+            galleryPresenter.getListGallery()
+        })
     }
 
 }
