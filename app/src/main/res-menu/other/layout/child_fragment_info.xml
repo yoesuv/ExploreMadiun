@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fragment_info_margin">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/imageViewAppInfo"
+                android:layout_width="@dimen/image_view_app_info"
+                android:layout_height="@dimen/image_view_app_info"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/placeholder_image"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/fragment_info_margin"
+                android:layout_marginStart="@dimen/fragment_info_margin"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/imageViewAppInfo"
+                android:layout_toEndOf="@id/imageViewAppInfo">
+
+                <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+                    android:id="@+id/textViewAppName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/app_name"
+                    android:textSize="18sp"
+                    android:textColor="@color/default_text_color"/>
+
+                <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                    android:id="@+id/textViewVersion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textColor="@color/default_text_color"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/divider"/>
+
+            <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact"
+                android:textColor="@color/default_text_color"/>
+
+            <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_email"
+                android:textColor="@color/default_text_color"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_email"
+                android:drawableStart="@drawable/ic_email"/>
+
+            <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_twitter"
+                android:textColor="@color/default_text_color"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_twitter"
+                android:drawableStart="@drawable/ic_twitter"/>
+
+            <include layout="@layout/divider"/>
+
+            <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/support"
+                android:textColor="@color/default_text_color"/>
+
+            <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rate"
+                android:textColor="@color/default_text_color"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_heart"
+                android:drawableStart="@drawable/ic_heart"/>
+
+            <include layout="@layout/divider"/>
+
+            <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/discl"
+                android:textColor="@color/default_text_color"/>
+
+            <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/disclaimer"
+                android:textColor="@color/default_text_color"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_high_priority"
+                android:drawableStart="@drawable/ic_high_priority"/>
+
+            <include layout="@layout/divider"/>
+
+            <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/github_url"
+                android:textColor="@color/colorPrimary"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_github"
+                android:drawableStart="@drawable/ic_github"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

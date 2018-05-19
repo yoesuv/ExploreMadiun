@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="location_setting_off">Fitur Lokasi Dimatikan</string>
+    <string name="access_location_denied">Akses Lokasi Ditolak</string>
+    <string name="your_location">Lokasi Anda</string>
+    <string name="getting_direction">Memproses petunjuk arah</string>
+    <string name="error_get_direction">Gagal mendapatkan petunjuk arah</string>
+</resources>

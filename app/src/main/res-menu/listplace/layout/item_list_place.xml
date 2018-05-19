@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yoesuv.infomadiun.widgets.ForegroundRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutMainItemListPlace"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@android:color/transparent"
+    android:foreground="?attr/selectableItemBackground">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imageViewItemListPlace"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/placeholder_image"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/list_place_gradient"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp">
+
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:id="@+id/textViewItemListPlaceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:id="@+id/textViewItemListPlaceLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="@android:color/white"/>
+
+    </LinearLayout>
+
+</com.yoesuv.infomadiun.widgets.ForegroundRelativeLayout>

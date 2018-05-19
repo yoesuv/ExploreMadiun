@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="list_place">Daftar Lokasi</string>
+
+    <!-- menu -->
+    <string name="list_semua">Semua</string>
+    <string name="kab_madiun">Kab. Madiun</string>
+    <string name="kab_magetan">Kab. Magetan</string>
+    <string name="kab_ngawi">Kab. Ngawi</string>
+    <string name="kab_pacitan">Kab. Pacitan</string>
+    <string name="kab_ponorogo">Kab. Ponorogo</string>
+    <string name="kota_madiun">Kota Madiun</string>
+</resources>

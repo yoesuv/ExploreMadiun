@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/menuFilterList"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_sorting_options"
+        android:title="@string/menu_list"
+        app:showAsAction="ifRoom">
+
+        <!--
+        kab. ponorogo
+        kota madiun
+        -->
+
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/listSemua"
+                    android:icon="@drawable/ic_action_reset"
+                    android:title="@string/list_semua"
+                    android:checked="true" />
+
+                <item
+                    android:id="@+id/listKabMadiun"
+                    android:icon="@drawable/ic_action_kab_madiun"
+                    android:title="@string/kab_madiun" />
+
+                <item
+                    android:id="@+id/listKabMagetan"
+                    android:icon="@drawable/ic_action_kab_magetan"
+                    android:title="@string/kab_magetan" />
+
+                <item
+                    android:id="@+id/listKabNgawi"
+                    android:icon="@drawable/ic_action_kab_ngawi"
+                    android:title="@string/kab_ngawi" />
+
+                <item
+                    android:id="@+id/listKabPacitan"
+                    android:icon="@drawable/ic_action_kab_pacitan"
+                    android:title="@string/kab_pacitan" />
+
+                <item
+                    android:id="@+id/listKabPonorogo"
+                    android:icon="@drawable/ic_action_kab_ponorogo"
+                    android:title="@string/kab_ponorogo" />
+
+                <item
+                    android:id="@+id/listKotaMadiun"
+                    android:icon="@drawable/ic_action_kota_madiun"
+                    android:title="@string/kota_madiun" />
+
+                </group>
+        </menu>
+
+    </item>
+
+</menu>

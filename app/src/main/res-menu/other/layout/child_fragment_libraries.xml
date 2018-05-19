@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nestedScrollViewLibraries"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fragment_info_margin"
+        android:paddingBottom="20dp">
+
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/icons8"
+            android:textSize="@dimen/title_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/icons8_url"
+            android:textSize="@dimen/url_libraries"
+            android:textColor="@color/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewIcons8License"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/retrofit_license"
+            android:textSize="@dimen/license_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- Retrofit -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retrofit"
+            android:textSize="@dimen/title_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retrofit_url"
+            android:textSize="@dimen/url_libraries"
+            android:textColor="@color/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewRetrofitLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/retrofit_license"
+            android:textSize="@dimen/license_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- RxJava -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rxjava"
+            android:textSize="@dimen/title_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rxjava_url"
+            android:textSize="@dimen/url_libraries"
+            android:textColor="@color/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewRxJavaLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/retrofit_license"
+            android:textSize="@dimen/license_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- RxAndroid -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rxAndroid"
+            android:textSize="@dimen/title_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rxAndroid_url"
+            android:textSize="@dimen/url_libraries"
+            android:textColor="@color/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewRxAndroidLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/retrofit_license"
+            android:textSize="@dimen/license_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- RxKotlin-->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rx_kotlin"
+            android:textSize="@dimen/title_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rx_kotlin_url"
+            android:textSize="@dimen/url_libraries"
+            android:textColor="@color/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewRxKotlinLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/retrofit_license"
+            android:textSize="@dimen/license_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- Glide -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/glide"
+            android:textSize="@dimen/title_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/glide_url"
+            android:textSize="@dimen/url_libraries"
+            android:textColor="@color/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewGlideLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/retrofit_license"
+            android:textSize="@dimen/license_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- PhotoView -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/photoview"
+            android:textSize="@dimen/title_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/photoview_url"
+            android:textSize="@dimen/url_libraries"
+            android:textColor="@color/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewPhotoViewLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/retrofit_license"
+            android:textSize="@dimen/license_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- RxPermission -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rx_permission"
+            android:textSize="@dimen/title_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rx_permission_url"
+            android:textSize="@dimen/url_libraries"
+            android:textColor="@color/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewRxPermissionLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/retrofit_license"
+            android:textSize="@dimen/license_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- Toasty -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/toasty"
+            android:textSize="@dimen/title_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/toasty_url"
+            android:textSize="@dimen/url_libraries"
+            android:textColor="@color/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewToastyLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/retrofit_license"
+            android:textSize="@dimen/license_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- Navigation Tab Strip -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/navigation_tab_strip"
+            android:textSize="@dimen/title_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/navigation_tab_strip_url"
+            android:textSize="@dimen/url_libraries"
+            android:textColor="@color/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewNavigationTabStripLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/retrofit_license"
+            android:textSize="@dimen/license_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <include layout="@layout/divider"/>
+
+        <!-- Android google direction library -->
+        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/google_direction"
+            android:textSize="@dimen/title_libraries"
+            android:textColor="@color/default_text_color"/>
+
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/google_direction_url"
+            android:textSize="@dimen/url_libraries"
+            android:textColor="@color/colorPrimary"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/textViewGoogleDirectionLicense"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/retrofit_license"
+            android:textSize="@dimen/license_libraries"
+            android:textColor="@color/default_text_color"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

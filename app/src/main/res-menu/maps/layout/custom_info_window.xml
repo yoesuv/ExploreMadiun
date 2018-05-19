@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLayoutCustomInfoWindow"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="5dp">
+
+    <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+        android:id="@+id/textViewMapLocationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="@string/app_name"
+        android:textColor="@color/default_text_color"/>
+
+   <android.support.v7.widget.AppCompatImageView
+       android:id="@+id/imageViewMapLocationDirection"
+       android:layout_width="35dp"
+       android:layout_height="35dp"
+       android:layout_marginLeft="5dp"
+       android:layout_marginStart="5dp"
+       android:layout_toRightOf="@id/textViewMapLocationName"
+       android:layout_toEndOf="@id/textViewMapLocationName"
+       app:srcCompat="@drawable/ic_direction"/>
+
+</RelativeLayout>

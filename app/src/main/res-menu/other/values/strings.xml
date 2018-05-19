@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="informasi">Informasi</string>
+    <string name="changelog">versi rilis</string>
+    <string name="thanks_to">Terima kasih</string>
+    <string name="library">Pustaka</string>
+
+    <string name="info_app_version">Versi %1$s</string>
+
+    <!-- INFORMATION -->
+    <string name="contact">Kontak</string>
+    <string name="my_twitter">\@yoesuv</string>
+    <string name="my_email">yusuf.saifudin@gmail.com</string>
+    <string name="support">Dukungan</string>
+    <string name="rate">Beri nilai aplikasi ini jika suka, terima kasih.</string>
+    <string name="discl">Kebijakan</string>
+    <string name="disclaimer">aplikasi ini tidak menjamin semua bentuk data 100% akurat. oleh karena itu, segala bentuk kritik dan saran akan sangat diapresiasi.</string>
+    <string name="github_url">https://github.com/yoesuv/ExploreMadiun</string>
+
+    <!-- THANKS -->
+    <string name="trims">
+        <![CDATA[
+        terima kasih kepada <i>blog-blog</i> maupun perorangan yang fotonya dimuat dalam aplikasi ini, dan tidak bisa
+    disebutkan satu persatu (<i>kalian luar biasa</i>....).
+        ]]>
+    </string>
+    <string name="person_1">Ahmad Sofi (Tester)</string>
+
+    <!-- LIBRARIES -->
+    <string name="icons8">Icons8</string>
+    <string name="icons8_url">https://icons8.com</string>
+    <string name="icons8_license">
+        <![CDATA[
+        Licensed under Creative Commons Attribution-NoDerivs 3.0 Unported<br/><br/>
+        You are free to:<br>
+        Share — copy and redistribute the material in any medium or format
+        for any purpose, even commercially.<br/><br/>
+        The licensor cannot revoke these freedoms as long as you follow the license terms.<br/><br/>
+        Under the following terms:<br/>
+        Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but   not in any way that suggests the licensor endorses you or your use.<br/>
+        NoDerivatives — If you remix, transform, or build upon the material, you may not distribute the modified material.
+        <br/>
+        No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+        ]]>
+    </string>
+    <string name="retrofit">Retrofit</string>
+    <string name="retrofit_url">https://github.com/square/retrofit</string>
+    <string name="retrofit_license">
+        <![CDATA[
+            Copyright 2013 Square, Inc.<br/><br/>
+            Licensed under the Apache License, Version 2.0 (the "License");
+            you may not use this file except in compliance with the License.
+            You may obtain a copy of the License at<br/><br/>
+            http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+            Unless required by applicable law or agreed to in writing, software
+            distributed under the License is distributed on an "AS IS" BASIS,
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            See the License for the specific language governing permissions and
+            limitations under the License.
+        ]]>
+    </string>
+    <string name="rxjava">RxJava</string>
+    <string name="rxjava_url">https://github.com/ReactiveX/RxJava</string>
+    <string name="rxjava_license">
+        <![CDATA[
+            Copyright © 2016-present, RxJava Contributors.<br/><br/>
+            Licensed under the Apache License, Version 2.0 (the "License");
+            you may not use this file except in compliance with the License.
+            You may obtain a copy of the License at<br/><br/>
+            http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+            Unless required by applicable law or agreed to in writing, software
+            distributed under the License is distributed on an "AS IS" BASIS,
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            See the License for the specific language governing permissions and
+            limitations under the License.
+        ]]>
+    </string>
+    <string name="rxAndroid">RxAndroid</string>
+    <string name="rxAndroid_url">https://github.com/ReactiveX/RxAndroid</string>
+    <string name="rxAndroid_license">
+        <![CDATA[
+            Copyright 2015 The RxAndroid authors<br/><br/>
+            Licensed under the Apache License, Version 2.0 (the "License");
+            you may not use this file except in compliance with the License.
+            You may obtain a copy of the License at<br/><br/>
+            http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+            Unless required by applicable law or agreed to in writing, software
+            distributed under the License is distributed on an "AS IS" BASIS,
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            See the License for the specific language governing permissions and
+            limitations under the License.
+        ]]>
+    </string>
+    <string name="rx_kotlin">RxKotlin</string>
+    <string name="rx_kotlin_url">https://github.com/ReactiveX/RxKotlin</string>
+    <string name="rx_kotlin_license">
+        <![CDATA[
+            Copyright 2012 Netflix, Inc.<br/><br/>
+            Licensed under the Apache License, Version 2.0 (the "License");
+            you may not use this file except in compliance with the License.
+            You may obtain a copy of the License at<br/><br/>
+            http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+            Unless required by applicable law or agreed to in writing, software
+            distributed under the License is distributed on an "AS IS" BASIS,
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            See the License for the specific language governing permissions and
+            limitations under the License.
+        ]]>
+    </string>
+    <string name="glide">Glide</string>
+    <string name="glide_url">https://github.com/bumptech/glide</string>
+    <string name="glide_license">
+        <![CDATA[
+            Sam Judd<br/><br/>
+            Licensed under BSD, part MIT and Apache 2.0.
+        ]]>
+    </string>
+    <string name="photoview">PhotoView</string>
+    <string name="photoview_url">https://github.com/chrisbanes/PhotoView</string>
+    <string name="photoview_license">
+        <![CDATA[
+            Copyright 2017 Chris Banes<br/><br/>
+            Licensed under the Apache License, Version 2.0 (the "License");
+            you may not use this file except in compliance with the License.
+            You may obtain a copy of the License at<br/><br/>
+            http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+            Unless required by applicable law or agreed to in writing, software
+            distributed under the License is distributed on an "AS IS" BASIS,
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            See the License for the specific language governing permissions and
+            limitations under the License.
+        ]]>
+    </string>
+    <string name="rx_permission">RxPermission</string>
+    <string name="rx_permission_url">https://github.com/tbruyelle/RxPermissions</string>
+    <string name="rx_permission_license">
+        <![CDATA[
+            Copyright © 2015 Thomas Bruyelle<br/><br/>
+            Licensed under the Apache License, Version 2.0 (the "License");
+            you may not use this file except in compliance with the License.
+            You may obtain a copy of the License at<br/><br/>
+            http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+            Unless required by applicable law or agreed to in writing, software
+            distributed under the License is distributed on an "AS IS" BASIS,
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            See the License for the specific language governing permissions and
+            limitations under the License.
+        ]]>
+    </string>
+    <string name="toasty">Toasty</string>
+    <string name="toasty_url">https://github.com/GrenderG/Toasty</string>
+    <string name="toasty_license">
+        <![CDATA[
+            GNU Lesser General Public License v3.0<br/><br/>
+            Everyone is permitted to copy and distribute verbatim copies
+            of this license document, but changing it is not allowed.
+        ]]>
+    </string>
+    <string name="navigation_tab_strip">NavigationTabStrip</string>
+    <string name="navigation_tab_strip_url">https://github.com/Devlight/NavigationTabStrip</string>
+    <string name="navigation_tab_strip_license">
+        <![CDATA[
+            Copyright © 2016 Basil Miller<br/><br/>
+            Licensed under the Apache License, Version 2.0 (the "License");
+            you may not use this file except in compliance with the License.
+            You may obtain a copy of the License at<br/><br/>
+            http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+            Unless required by applicable law or agreed to in writing, software
+            distributed under the License is distributed on an "AS IS" BASIS,
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            See the License for the specific language governing permissions and
+            limitations under the License.
+        ]]>
+    </string>
+    <string name="google_direction">Android-GoogleDirectionLibrary</string>
+    <string name="google_direction_url">https://github.com/akexorcist/Android-GoogleDirectionLibrary</string>
+    <string name="google_direction_license">
+        <![CDATA[
+            Copyright © 2017 Akexorcist<br/><br/>
+            Licensed under the Apache License, Version 2.0 (the "License");
+            you may not use this file except in compliance with the License.
+            You may obtain a copy of the License at<br/><br/>
+            http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+            Unless required by applicable law or agreed to in writing, software
+            distributed under the License is distributed on an "AS IS" BASIS,
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            See the License for the specific language governing permissions and
+            limitations under the License.
+        ]]>
+    </string>
+
+    <!-- CHANGELOG -->
+    <string name="ver_8">Versi 2.0.0</string>
+    <string name="ver_8_info">
+        <![CDATA[
+            • nama baru aplikasi Explore Madiun<br/>
+            • desain baru aplikasi<br/>
+            + fitur petunjuk arah
+        ]]>
+    </string>
+    <string name="ver_7">Versi 1.0.6</string>
+    <string name="ver_7_info">
+        <![CDATA[
+            + 1 tempat baru di madiun<br/>
+            + 2 tempat baru di magetan<br/>
+            + 3 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_6">Versi 1.0.5</string>
+    <string name="ver_6_info">
+        <![CDATA[
+            + 1 tempat baru di magetan<br/>
+            + 1 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_5">Versi 1.0.4</string>
+    <string name="ver_5_info">
+        <![CDATA[
+            + 3 tempat baru di ngawi<br/>
+            + 1 tempat baru di magetan<br/>
+            + 3 gambar galeri<br/>
+            + 3 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_4">Versi 1.0.3</string>
+    <string name="ver_4_info">
+        <![CDATA[
+            + 3 tempat baru di ponorogo<br/>
+            + 1 tempat baru di magetan<br/>
+            + 3 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_3">Versi 1.0.2</string>
+    <string name="ver_3_info">
+        <![CDATA[
+            • nama baru aplikasi Info AE<br/>
+            + 6 tempat baru di pacitan<br/>
+            + 1 tempat baru di ngawi<br/>
+            + 3 gambar galeri<br/>
+            + 3 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_2">Versi 1.0.1</string>
+    <string name="ver_2_info">
+        <![CDATA[
+            • menu navigasi baru<br/>
+            + 9 tempat baru di pacitan<br/>
+            + 3 gambar galeri<br/>
+            + 9 tanda lokasi peta
+        ]]>
+    </string>
+    <string name="ver_1">Versi 1.0.0</string>
+    <string name="ver_1_info">
+        <![CDATA[
+            • rilis perdana<br/>
+            • 50 daftar tempat<br/>
+            • 33 galeri gambar<br/>
+            • 47 tanda lokasi peta
+        ]]>
+    </string>
+
+</resources>

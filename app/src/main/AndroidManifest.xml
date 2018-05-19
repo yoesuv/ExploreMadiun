@@ -9,17 +9,11 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
 
     <application
-        android:allowBackup="false"
+        android:name=".App"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -27,7 +21,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_api_key" />
+            android:value="@string/info_madiun_google_maps_api_key" />
 
         <!-- fabric -->
         <meta-data
@@ -35,7 +29,7 @@
             android:value="655bd918bd372babeb0c6904b2ab35d1187a0d5a" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
@@ -46,44 +40,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainPlaceDetailActivity"
-            android:screenOrientation="portrait" />
-
-        <activity android:name=".GalleryDetailActivity"
-            android:screenOrientation="portrait"/>
-
-        <!-- StartApp activities integration -->
-        <activity android:name="com.startapp.android.publish.ads.list3d.List3DActivity"
-            android:theme="@android:style/Theme" />
-
-        <activity android:name="com.startapp.android.publish.adsCommon.activities.OverlayActivity"
-            android:theme="@android:style/Theme.Translucent"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-
-        <activity android:name="com.startapp.android.publish.adsCommon.activities.FullScreenActivity"
-            android:theme="@android:style/Theme"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <!-- End of StartApp activities integration -->
-
-        <service android:name="com.startapp.android.publish.common.metaData.PeriodicMetaDataService" />
-        <receiver android:name="com.startapp.android.publish.common.metaData.BootCompleteListener" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
-        <service
-            android:name="com.yoesuv.infomadiun.services.MyFirebaseInstanceIDService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-            </intent-filter>
-        </service>
-        <service
-            android:name="com.yoesuv.infomadiun.services.MyFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-            </intent-filter>
-        </service>
+        <activity android:name=".main.TransparentActivity"
+            android:theme="@style/Theme.Transparent"/>
 
     </application>
 

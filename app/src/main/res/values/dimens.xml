@@ -10,6 +10,7 @@
 
     <dimen name="logo_kabupaten_size">95dp</dimen>
     <dimen name="icon_info_size">25dp</dimen>
+    <dimen name="icon_error_size">80dp</dimen>
 
     <integer name="handler_duration">1000</integer>
     <integer name="fragment_anim_duration">500</integer>
