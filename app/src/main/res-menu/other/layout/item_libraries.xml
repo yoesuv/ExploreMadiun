@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/fragment_info_margin"
+    android:layout_marginRight="@dimen/fragment_info_margin">
+
+    <!-- library name-->
+    <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+        android:id="@+id/textViewLibraryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/google_direction"
+        android:textSize="@dimen/title_libraries"
+        android:textColor="@color/default_text_color"/>
+
+    <!-- library url -->
+    <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+        android:id="@+id/textViewLibraryUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/google_direction_url"
+        android:textSize="@dimen/url_libraries"
+        android:textColor="@color/colorPrimary"/>
+
+    <!-- library license -->
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textViewLibraryLicense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
+        android:text="@string/retrofit_license"
+        android:textSize="@dimen/license_libraries"
+        android:textColor="@color/default_text_color"/>
+
+    <include
+        android:id="@+id/layoutDivider"
+        layout="@layout/divider"/>
+
+</LinearLayout>
