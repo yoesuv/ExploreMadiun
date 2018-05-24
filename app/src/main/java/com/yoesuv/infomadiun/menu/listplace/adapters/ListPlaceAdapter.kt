@@ -8,7 +8,6 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.support.v7.widget.RecyclerView
@@ -50,7 +49,6 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
         })
         holder.itemView.setOnLongClickListener {
             showPopUpImage(activity, listPlace[fixPos])
-            //setWindow(activity)
             return@setOnLongClickListener true
         }
     }
@@ -119,19 +117,6 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
                 anim.start()
             }
         }
-    }
-
-    private fun setWindow(activity: Activity?){
-
-        val display = activity?.windowManager?.defaultDisplay
-        val point = Point()
-        display?.getSize(point)
-
-        val minWidth = point.x * 90 / 100
-        val minHeight = point.y * 90/ 100
-
-        Log.d(Constants.TAG_DEBUG,"ListPlaceAdapter # $minWidth/$minHeight")
-        activity?.window?.setLayout(minWidth, minHeight)
     }
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
