@@ -98,7 +98,6 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
 
     private fun revealShow(view: View, reveal: Boolean, alertDialog:AlertDialog){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
-            //val view: View = dialogView.findViewById(R.id.popupDetailListPlace)
             val w: Double = view.width.toDouble() - (view.width.toDouble()/2)
             val h: Double = view.height.toDouble() - (view.height.toDouble()/2)
             val endRadius: Float = Math.hypot(w, h).toFloat()
