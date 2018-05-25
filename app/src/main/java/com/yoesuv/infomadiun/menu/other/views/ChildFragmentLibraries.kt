@@ -22,11 +22,8 @@ class ChildFragmentLibraries: Fragment() {
 
     private var listLibraries: MutableList<LicenseModel> = arrayListOf()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View? = LayoutInflater.from(context).inflate(R.layout.child_fragment_libraries, container, false)
-
-        view?.recyclerViewLicense?.layoutManager = LinearLayoutManager(context)
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         val icons8 = LicenseModel(context?.getString(R.string.icons8), context?.getString(R.string.icons8_url), context?.getString(R.string.icons8_license), false)
         val retrofit = LicenseModel(context?.getString(R.string.retrofit), context?.getString(R.string.retrofit_url), context?.getString(R.string.retrofit_license), false)
         val rxJava = LicenseModel(context?.getString(R.string.rxjava), context?.getString(R.string.rxjava_url), context?.getString(R.string.rxjava_license), false)
@@ -50,6 +47,12 @@ class ChildFragmentLibraries: Fragment() {
         listLibraries.add(toasty)
         listLibraries.add(navigationTabStrip)
         listLibraries.add(googleDirection)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view: View? = LayoutInflater.from(context).inflate(R.layout.child_fragment_libraries, container, false)
+
+        view?.recyclerViewLicense?.layoutManager = LinearLayoutManager(context)
 
         val adapter = LicenseAdapter(context, listLibraries)
         view?.recyclerViewLicense?.adapter = adapter

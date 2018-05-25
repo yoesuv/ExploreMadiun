@@ -23,14 +23,8 @@ class ChildFragmentChangelog: Fragment() {
 
     private var listChangelog: MutableList<ChangeLogModel> = arrayListOf()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = LayoutInflater.from(context).inflate(R.layout.child_fragment_changelog, container, false)
-
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
-            view.recyclerViewChangelog.isNestedScrollingEnabled = true
-        }
-
-        view.recyclerViewChangelog.layoutManager = LinearLayoutManager(context)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         listChangelog.add(ChangeLogModel(getString(R.string.ver_9), getString(R.string.ver_9_info), false))
         listChangelog.add(ChangeLogModel(getString(R.string.ver_8), getString(R.string.ver_8_info), false))
         listChangelog.add(ChangeLogModel(getString(R.string.ver_7), getString(R.string.ver_7_info), false))
@@ -40,6 +34,16 @@ class ChildFragmentChangelog: Fragment() {
         listChangelog.add(ChangeLogModel(getString(R.string.ver_3), getString(R.string.ver_3_info), false))
         listChangelog.add(ChangeLogModel(getString(R.string.ver_2), getString(R.string.ver_2_info), false))
         listChangelog.add(ChangeLogModel(getString(R.string.ver_1), getString(R.string.ver_1_info), true))
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view: View = LayoutInflater.from(context).inflate(R.layout.child_fragment_changelog, container, false)
+
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
+            view.recyclerViewChangelog.isNestedScrollingEnabled = true
+        }
+
+        view.recyclerViewChangelog.layoutManager = LinearLayoutManager(context)
         val adapter = ChangeLogAdapter(context, listChangelog)
         view.recyclerViewChangelog.adapter = adapter
 
