@@ -194,7 +194,9 @@
     <string name="ver_9">Versi 2.0.1</string>
     <string name="ver_9_info">
         <![CDATA[
-            • pembaruan library
+            • pembaruan library<br/>
+            + 1 tempat baru di kota madiun<br/>
+            + 1 tanda lokasi peta
         ]]>
     </string>
     <string name="ver_8">Versi 2.0.0</string>
