@@ -1,6 +1,5 @@
 package com.yoesuv.infomadiun.main
 
-import android.graphics.Point
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.bumptech.glide.GenericTransitionOptions
@@ -18,9 +17,8 @@ class TransparentActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        overridePendingTransition(R.anim.stay, R.anim.scale_down)
         setContentView(R.layout.activity_transparent)
-
-        setupDisplay()
 
         Glide.with(this)
                 .load(intent.getStringExtra(EXTRA_DATA_IMAGE))
@@ -29,12 +27,9 @@ class TransparentActivity: AppCompatActivity() {
                 .into(photoViewActivity)
     }
 
-    private fun setupDisplay(){
-        val display = windowManager?.defaultDisplay
-        val point = Point()
-        display?.getSize(point)
-
-        window?.setLayout(point.x, point.y)
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.scale_up, R.anim.stay)
     }
 
 }

@@ -1,12 +1,16 @@
 package com.yoesuv.infomadiun.menu.gallery.adapters
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
@@ -63,6 +67,21 @@ class GalleryAdapter(private val activity: Activity, private val listGallery: Mu
                 .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                 .into(view.imageViewPopupListPlace)
         alertDialog = ab.create()
+        alertDialog.setOnShowListener {
+            revealShow(view, true, alertDialog)
+        }
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP){
+            alertDialog.setOnKeyListener(DialogInterface.OnKeyListener { _, i, _ ->
+                if (i == KeyEvent.KEYCODE_BACK) {
+                    revealShow(view, false, alertDialog)
+                    return@OnKeyListener true
+                }
+                false
+            })
+            alertDialog.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            alertDialog.setCancelable(false)
+            alertDialog.setCanceledOnTouchOutside(false)
+        }
         alertDialog.show()
     }
 
@@ -70,6 +89,29 @@ class GalleryAdapter(private val activity: Activity, private val listGallery: Mu
         val intent = Intent(activity, TransparentActivity::class.java)
         intent.putExtra(TransparentActivity.EXTRA_DATA_IMAGE, model.image)
         activity?.startActivity(intent)
+    }
+
+    private fun revealShow(view: View, reveal: Boolean, alertDialog:AlertDialog){
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP) {
+            //val view: View = dialogView.findViewById(R.id.popupDetailListPlace)
+            val w: Double = view.width.toDouble() - (view.width.toDouble()/2)
+            val h: Double = view.height.toDouble() - (view.height.toDouble()/2)
+            val endRadius: Float = Math.hypot(w, h).toFloat()
+
+            if(reveal) {
+                val anim: Animator = ViewAnimationUtils.createCircularReveal(view, w.toInt(), h.toInt(), 0F, endRadius)
+                anim.start()
+            }else{
+                val anim: Animator = ViewAnimationUtils.createCircularReveal(view, w.toInt(), h.toInt(), endRadius, 0F)
+                anim.addListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator?) {
+                        super.onAnimationEnd(animation)
+                        alertDialog.dismiss()
+                    }
+                })
+                anim.start()
+            }
+        }
     }
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {

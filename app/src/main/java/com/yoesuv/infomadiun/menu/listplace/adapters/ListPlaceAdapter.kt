@@ -1,10 +1,15 @@
 package com.yoesuv.infomadiun.menu.listplace.adapters
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Point
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.*
@@ -44,7 +49,6 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
         })
         holder.itemView.setOnLongClickListener {
             showPopUpImage(activity, listPlace[fixPos])
-            //setWindow(activity)
             return@setOnLongClickListener true
         }
     }
@@ -66,6 +70,22 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
                 .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
                 .into(view.imageViewPopupListPlace)
         alertDialog = ab.create()
+        alertDialog.setOnShowListener {
+            Log.d(Constants.TAG_DEBUG,"ListPlaceAdapter # dialog on show")
+            revealShow(view, true, alertDialog)
+        }
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
+            alertDialog.setOnKeyListener(DialogInterface.OnKeyListener { _, i, _ ->
+                if (i == KeyEvent.KEYCODE_BACK) {
+                    revealShow(view, false, alertDialog)
+                    return@OnKeyListener true
+                }
+                false
+            })
+            alertDialog.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            alertDialog.setCancelable(false)
+            alertDialog.setCanceledOnTouchOutside(false)
+        }
         alertDialog.show()
     }
 
@@ -76,17 +96,26 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
         activity?.startActivity(intent)
     }
 
-    private fun setWindow(activity: Activity?){
+    private fun revealShow(view: View, reveal: Boolean, alertDialog:AlertDialog){
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
+            val w: Double = view.width.toDouble() - (view.width.toDouble()/2)
+            val h: Double = view.height.toDouble() - (view.height.toDouble()/2)
+            val endRadius: Float = Math.hypot(w, h).toFloat()
 
-        val display = activity?.windowManager?.defaultDisplay
-        val point = Point()
-        display?.getSize(point)
-
-        val minWidth = point.x * 90 / 100
-        val minHeight = point.y * 90/ 100
-
-        Log.d(Constants.TAG_DEBUG,"ListPlaceAdapter # $minWidth/$minHeight")
-        activity?.window?.setLayout(minWidth, minHeight)
+            if(reveal) {
+                val anim: Animator = ViewAnimationUtils.createCircularReveal(view, w.toInt(), h.toInt(), 0F, endRadius)
+                anim.start()
+            }else{
+                val anim: Animator = ViewAnimationUtils.createCircularReveal(view, w.toInt(), h.toInt(), endRadius, 0F)
+                anim.addListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator?) {
+                        super.onAnimationEnd(animation)
+                        alertDialog.dismiss()
+                    }
+                })
+                anim.start()
+            }
+        }
     }
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {

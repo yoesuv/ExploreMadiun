@@ -6,6 +6,7 @@
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/photoViewActivity"
+        android:background="@color/black_30"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"/>
