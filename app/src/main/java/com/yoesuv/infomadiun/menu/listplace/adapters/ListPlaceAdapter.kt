@@ -24,6 +24,9 @@ import com.yoesuv.infomadiun.main.TransparentActivity
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import kotlinx.android.synthetic.main.item_list_place.view.*
 import kotlinx.android.synthetic.main.popup_detail_list_place.view.*
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.withContext
 
 /**
  *  Created by yusuf on 4/30/18.
@@ -120,21 +123,22 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
-        val context:Context? = itemView?.context?.applicationContext
-
         fun setData(placeModel: PlaceModel){
-            itemView.textViewItemListPlaceName.text = placeModel.name
-            itemView.textViewItemListPlaceLocation.text = placeModel.location
-            itemView.imageViewItemListPlace.scaleType = ImageView.ScaleType.CENTER_CROP
-            Glide.with(context)
-                    .load(placeModel.image)
-                    .apply(RequestOptions()
-                            .placeholder(R.drawable.placeholder_image)
-                            .error(R.drawable.placeholder_image)
-                            .format(DecodeFormat.PREFER_ARGB_8888))
-                    .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
-                    .into(itemView.imageViewItemListPlace)
-
+            launch {
+                withContext(UI){
+                    itemView.textViewItemListPlaceName.text = placeModel.name
+                    itemView.textViewItemListPlaceLocation.text = placeModel.location
+                    itemView.imageViewItemListPlace.scaleType = ImageView.ScaleType.CENTER_CROP
+                    Glide.with(itemView)
+                            .load(placeModel.image)
+                            .apply(RequestOptions()
+                                    .placeholder(R.drawable.placeholder_image)
+                                    .error(R.drawable.placeholder_image)
+                                    .format(DecodeFormat.PREFER_ARGB_8888))
+                            .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
+                            .into(itemView.imageViewItemListPlace)
+                }
+            }
         }
 
     }

@@ -98,6 +98,13 @@ dependencies {
     implementation "com.github.GrenderG:Toasty:$project.toastyVersion"
     implementation "com.github.devlight.navigationtabstrip:navigationtabstrip:$project.navigationTabStripVersion"
     implementation "com.akexorcist:googledirectionlibrary:$project.googleDirectionLibraryVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$project.coroutinesAndroidVersion"
+}
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
 }
 
 apply plugin: 'com.google.gms.google-services'
