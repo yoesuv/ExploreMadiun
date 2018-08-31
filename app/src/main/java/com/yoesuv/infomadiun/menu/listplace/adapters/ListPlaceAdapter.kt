@@ -47,9 +47,9 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val fixPos:Int = holder.adapterPosition
         holder.setData(listPlace[fixPos])
-        holder.itemView.setOnClickListener({
+        holder.itemView.setOnClickListener {
             showPopUp(activity, listPlace[fixPos])
-        })
+        }
         holder.itemView.setOnLongClickListener {
             showPopUpImage(activity, listPlace[fixPos])
             return@setOnLongClickListener true

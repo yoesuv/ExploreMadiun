@@ -16,6 +16,7 @@ buildscript {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
 
 repositories {
@@ -68,6 +69,13 @@ android {
             ]
         }
     }
+    dataBinding{
+        enabled = true
+    }
+}
+
+androidExtensions {
+    experimental = true
 }
 
 dependencies {
@@ -99,6 +107,8 @@ dependencies {
     implementation "com.github.devlight.navigationtabstrip:navigationtabstrip:$project.navigationTabStripVersion"
     implementation "com.akexorcist:googledirectionlibrary:$project.googleDirectionLibraryVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$project.coroutinesAndroidVersion"
+    implementation "com.intuit.ssp:ssp-android:$project.sspVersion"
+    implementation "com.intuit.sdp:sdp-android:$project.sdpVersion"
 }
 
 kotlin {
