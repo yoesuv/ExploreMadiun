@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="changelog"
+            type="com.yoesuv.infomadiun.menu.other.viewmodels.ChildFragmentChangelogViewModel"/>
+    </data>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewChangelog"
@@ -12,4 +16,4 @@
         android:paddingBottom="@dimen/fragment_info_margin"
         android:paddingTop="@dimen/fragment_info_margin" />
 
-</RelativeLayout>
+</layout>
