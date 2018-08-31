@@ -1,21 +1,21 @@
 package com.yoesuv.infomadiun.menu.other.adapters
 
 import android.content.Context
+import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.yoesuv.infomadiun.R
+import com.yoesuv.infomadiun.databinding.ItemLibrariesBinding
 import com.yoesuv.infomadiun.menu.other.models.LicenseModel
-import com.yoesuv.infomadiun.utils.AppHelper
-import kotlinx.android.synthetic.main.item_libraries.view.*
+import com.yoesuv.infomadiun.menu.other.viewmodels.ItemLibrariesViewModel
 
 class LicenseAdapter(private val context: Context?, private var listLibraries: MutableList<LicenseModel>) : RecyclerView.Adapter<LicenseAdapter.LicenseViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LicenseViewHolder {
-        val view: View = LayoutInflater.from(context).inflate(R.layout.item_libraries, parent, false)
-        return LicenseViewHolder(view)
+        val binding: ItemLibrariesBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.item_libraries, parent, false)
+        return LicenseViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
@@ -28,15 +28,10 @@ class LicenseAdapter(private val context: Context?, private var listLibraries: M
     }
 
 
-    class LicenseViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+    class LicenseViewHolder(private val binding: ItemLibrariesBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun setupData(model: LicenseModel){
-            itemView.textViewLibraryName.text = model.title
-            itemView.textViewLibraryUrl.text = model.url
-            itemView.textViewLibraryLicense.text = AppHelper.fromHtml(model.license!!)
-            if(model.isLast!!){
-                itemView.layoutDivider.visibility = View.GONE
-            }
+            binding.itemLibraries = ItemLibrariesViewModel(model)
         }
 
     }

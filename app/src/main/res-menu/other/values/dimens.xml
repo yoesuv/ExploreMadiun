@@ -4,5 +4,5 @@
     <dimen name="fragment_info_margin">@dimen/_10sdp</dimen>
     <dimen name="title_libraries">@dimen/_14ssp</dimen>
     <dimen name="url_libraries">@dimen/_11ssp</dimen>
-    <dimen name="license_libraries">@dimen/_7ssp</dimen>
+    <dimen name="license_libraries">@dimen/_8ssp</dimen>
 </resources>
