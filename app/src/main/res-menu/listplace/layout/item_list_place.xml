@@ -1,56 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.yoesuv.infomadiun.widgets.ForegroundRelativeLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layoutMainItemListPlace"
-    android:layout_width="match_parent"
-    android:layout_height="170dp"
-    android:clickable="true"
-    android:focusable="true"
-    android:background="@android:color/transparent"
-    android:foreground="?attr/selectableItemBackground">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
+    <data>
+        <variable
+            name="itemListPlace"
+            type="com.yoesuv.infomadiun.menu.listplace.viewmodels.ItemListPlaceViewModel"/>
+    </data>
+
+    <com.yoesuv.infomadiun.widgets.ForegroundRelativeLayout
+        android:id="@+id/layoutMainItemListPlace"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/_150sdp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@android:color/transparent"
+        android:foreground="?attr/selectableItemBackground">
 
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/imageViewItemListPlace"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/placeholder_image"/>
+            android:layout_height="wrap_content">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/list_place_gradient"/>
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/imageViewItemListPlace"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/placeholder_image"/>
 
-    </FrameLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/list_place_gradient"/>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp">
+        </FrameLayout>
 
-        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
-            android:id="@+id/textViewItemListPlaceName"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"/>
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp">
 
-        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
-            android:id="@+id/textViewItemListPlaceLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textColor="@android:color/white"/>
+            <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+                android:id="@+id/textViewItemListPlaceName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{itemListPlace.name}"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_14ssp"
+                android:maxLines="1"
+                android:ellipsize="end"/>
 
-    </LinearLayout>
+            <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                android:id="@+id/textViewItemListPlaceLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{itemListPlace.location}"
+                android:textColor="@android:color/white"
+                android:maxLines="1"
+                android:ellipsize="end"/>
 
-</com.yoesuv.infomadiun.widgets.ForegroundRelativeLayout>
+        </LinearLayout>
+
+    </com.yoesuv.infomadiun.widgets.ForegroundRelativeLayout>
+
+</layout>
