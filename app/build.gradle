@@ -109,6 +109,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$project.coroutinesAndroidVersion"
     implementation "com.intuit.ssp:ssp-android:$project.sspVersion"
     implementation "com.intuit.sdp:sdp-android:$project.sdpVersion"
+    implementation "android.arch.lifecycle:extensions:$project.archLifecycleVersion"
+    kapt "android.arch.lifecycle:compiler:$project.archLifecycleVersion"
 }
 
 kotlin {
