@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/fragment_info_margin">
+        android:layout_height="match_parent">
 
-        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
-            android:id="@+id/textViewThanks"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textColor="@color/default_text_color"/>
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/fragment_info_margin">
 
-        <include layout="@layout/divider"/>
+            <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                android:id="@+id/textViewThanks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/default_text_color"/>
 
-        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/person_1"
-            android:textColor="@color/default_text_color"/>
+            <include layout="@layout/divider"/>
 
-    </LinearLayout>
+            <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/person_1"
+                android:textColor="@color/default_text_color"/>
 
-</android.support.v4.widget.NestedScrollView>
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</layout>
