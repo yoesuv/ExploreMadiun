@@ -3,7 +3,6 @@ package com.yoesuv.infomadiun.menu.listplace.views
 import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
-import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -29,7 +28,7 @@ class FragmentListPlace: Fragment() {
     private lateinit var binding: FragmentListplaceBinding
     private lateinit var viewModel: FragmentListPlaceViewModel
 
-    private var listPlace: MutableList<PlaceModel> = arrayListOf()
+    private var listPlace: MutableList<PlaceModel> = mutableListOf()
     private lateinit var adapter:ListPlaceAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,11 +45,7 @@ class FragmentListPlace: Fragment() {
         viewModel.listPlace.observe(this, Observer {
             onListDataChanged(it!!)
         })
-        viewModel.error.observe(this, Observer {
-            binding.layoutError?.visibility = View.VISIBLE
-        })
 
-        binding.layoutError?.visibility = View.GONE
         return binding.root
     }
 
@@ -89,9 +84,6 @@ class FragmentListPlace: Fragment() {
         adapter = ListPlaceAdapter(activity as Activity, listPlace, binding.recyclerViewListPlace)
         binding.recyclerViewListPlace.adapter = adapter
         binding.recyclerViewListPlace.itemAnimator = DefaultItemAnimator()
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
-            binding.recyclerViewListPlace.isNestedScrollingEnabled = true
-        }
     }
 
     private fun setupSwipeRefresh(){
@@ -109,6 +101,7 @@ class FragmentListPlace: Fragment() {
         binding.recyclerViewListPlace.post {
             adapter.notifyDataSetChanged()
         }
+        binding.recyclerViewListPlace.scrollToPosition(0)
     }
 
 }

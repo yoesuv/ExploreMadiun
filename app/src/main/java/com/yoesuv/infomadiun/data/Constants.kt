@@ -10,6 +10,6 @@ object Constants {
 
     const val BASE_URL = "https://info-madiun.firebaseapp.com/"
     const val TIME_OUT = 15 * 1000L
-    const val ANIMATION_TIME = 500L
+    const val ANIMATION_TIME = 300L
     const val PREFERENCE_NAME = "com.yoesuv.infomadiun.pref"
 }

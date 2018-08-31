@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="listPlace"
             type="com.yoesuv.infomadiun.menu.listplace.viewmodels.FragmentListPlaceViewModel"/>
@@ -16,7 +17,8 @@
             android:id="@+id/swipeRefreshListPlace"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:showView="@{safeUnbox(listPlace.isLoading)}">
+            tools:showView="@{safeUnbox(listPlace.isLoading)}"
+            android:visibility="@{safeUnbox(listPlace.isError()) ? View.INVISIBLE : View.VISIBLE }">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewListPlace"
@@ -34,6 +36,7 @@
 
         <include
             android:id="@+id/layoutError"
+            android:visibility="@{safeUnbox(listPlace.isError()) ? View.VISIBLE : View.GONE }"
             layout="@layout/include_error"/>
 
     </RelativeLayout>

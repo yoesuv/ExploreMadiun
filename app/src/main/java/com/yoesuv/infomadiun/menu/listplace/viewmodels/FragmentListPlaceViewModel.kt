@@ -17,12 +17,13 @@ class FragmentListPlaceViewModel: ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
     var listPlace: MutableLiveData<MutableList<PlaceModel>> = MutableLiveData()
-    var error: MutableLiveData<Throwable> = MutableLiveData()
 
     var isLoading: ObservableField<Boolean> = ObservableField()
+    var isError: ObservableField<Boolean> = ObservableField()
 
     fun getListPlace(){
         isLoading.set(true)
+        isError.set(false)
         compositeDisposable.add(
                 restApi.getListPlace()
                         .timeout(Constants.TIME_OUT, TimeUnit.MILLISECONDS)
@@ -33,13 +34,14 @@ class FragmentListPlaceViewModel: ViewModel() {
                             listPlace.value = it
                         },{
                             isLoading.set(false)
-                            error.value = it
+                            isError.set(true)
                         })
         )
     }
 
     fun getListPlaceKabMadiun(){
         isLoading.set(true)
+        isError.set(false)
         compositeDisposable.add(
                 restApi.getListPlaceKabMadiun()
                         .timeout(Constants.TIME_OUT, TimeUnit.MILLISECONDS)
@@ -50,13 +52,14 @@ class FragmentListPlaceViewModel: ViewModel() {
                             listPlace.value = it
                         },{
                             isLoading.set(false)
-                            error.value = it
+                            isError.set(true)
                         })
         )
     }
 
     fun getListPlaceKabMagetan(){
         isLoading.set(true)
+        isError.set(false)
         compositeDisposable.add(
                 restApi.getListPlaceKabMagetan()
                         .timeout(Constants.TIME_OUT, TimeUnit.MILLISECONDS)
@@ -67,13 +70,14 @@ class FragmentListPlaceViewModel: ViewModel() {
                             listPlace.value = it
                         },{
                             isLoading.set(false)
-                            error.value = it
+                            isError.set(true)
                         })
         )
     }
 
     fun getListPlaceKabNgawi(){
         isLoading.set(true)
+        isError.set(false)
         compositeDisposable.add(
                 restApi.getListPlaceKabNgawi()
                         .timeout(Constants.TIME_OUT, TimeUnit.MILLISECONDS)
@@ -84,13 +88,14 @@ class FragmentListPlaceViewModel: ViewModel() {
                             listPlace.value = it
                         },{
                             isLoading.set(false)
-                            error.value = it
+                            isError.set(true)
                         })
         )
     }
 
     fun getListPlaceKabPacitan(){
         isLoading.set(true)
+        isError.set(false)
         compositeDisposable.add(
                 restApi.getListPlaceKabPacitan()
                         .timeout(Constants.TIME_OUT, TimeUnit.MILLISECONDS)
@@ -101,13 +106,14 @@ class FragmentListPlaceViewModel: ViewModel() {
                             listPlace.value = it
                         },{
                             isLoading.set(false)
-                            error.value = it
+                            isError.set(true)
                         })
         )
     }
 
     fun getListPlaceKabPonorogo(){
         isLoading.set(true)
+        isError.set(false)
         compositeDisposable.add(
                 restApi.getListPlaceKabPonorogo()
                         .timeout(Constants.TIME_OUT, TimeUnit.MILLISECONDS)
@@ -118,13 +124,14 @@ class FragmentListPlaceViewModel: ViewModel() {
                             listPlace.value = it
                         },{
                             isLoading.set(false)
-                            error.value = it
+                            isError.set(true)
                         })
         )
     }
 
     fun getListPlaceKotaMadiun(){
         isLoading.set(true)
+        isError.set(false)
         compositeDisposable.add(
                 restApi.getListPlaceKotaMadiun()
                         .timeout(Constants.TIME_OUT, TimeUnit.MILLISECONDS)
@@ -135,7 +142,7 @@ class FragmentListPlaceViewModel: ViewModel() {
                             listPlace.value = it
                         },{
                             isLoading.set(false)
-                            error.value = it
+                            isError.set(true)
                         })
         )
     }

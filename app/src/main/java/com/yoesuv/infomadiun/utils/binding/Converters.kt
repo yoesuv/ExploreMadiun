@@ -5,6 +5,7 @@ import android.databinding.BindingAdapter
 import android.support.v7.widget.AppCompatImageView
 import android.view.View
 import com.bumptech.glide.GenericTransitionOptions
+import com.yoesuv.infomadiun.data.Constants
 import com.yoesuv.infomadiun.utils.glide.GlideApp
 
 class Converters {
@@ -24,7 +25,7 @@ class Converters {
         @BindingAdapter("hideView")
         fun hideView(view: View, status: Boolean){
             if (!status) {
-                view.animate().alpha(0F).setDuration(300L).setListener(object : Animator.AnimatorListener{
+                view.animate().alpha(0F).setDuration(Constants.ANIMATION_TIME).setListener(object : Animator.AnimatorListener{
                     override fun onAnimationRepeat(p0: Animator?) {
 
                     }
@@ -53,7 +54,7 @@ class Converters {
             if (status) {
                 view.alpha = 0F
             } else {
-                view.animate().alpha(1F).duration = 300L
+                view.animate().alpha(1F).duration = Constants.ANIMATION_TIME
             }
         }
 
