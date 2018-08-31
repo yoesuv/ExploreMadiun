@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="image_view_app_info">100dp</dimen>
-    <dimen name="fragment_info_margin">10dp</dimen>
-    <dimen name="title_libraries">18sp</dimen>
-    <dimen name="url_libraries">12sp</dimen>
-    <dimen name="license_libraries">11sp</dimen>
+    <dimen name="image_view_app_info">@dimen/_80sdp</dimen>
+    <dimen name="fragment_info_margin">@dimen/_10sdp</dimen>
+    <dimen name="title_libraries">@dimen/_14ssp</dimen>
+    <dimen name="url_libraries">@dimen/_11ssp</dimen>
+    <dimen name="license_libraries">@dimen/_7ssp</dimen>
 </resources>
