@@ -1,10 +1,14 @@
 package com.yoesuv.infomadiun.menu.listplace.views
 
+import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ActivityDetailListplaceBinding
+import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
+import com.yoesuv.infomadiun.menu.listplace.viewmodels.CustomDetailListPlaceViewModelFactory
 import com.yoesuv.infomadiun.menu.listplace.viewmodels.DetailListPlaceViewModel
 
 class DetailListPlaceActivity: AppCompatActivity() {
@@ -19,6 +23,29 @@ class DetailListPlaceActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail_listplace)
+        val placeModel: PlaceModel = intent.getParcelableExtra(EXTRA_DATA_LIST_PLACE)
+        viewModel = ViewModelProviders.of(this, CustomDetailListPlaceViewModelFactory(placeModel, application)).get(DetailListPlaceViewModel::class.java)
+        binding.listPlace = viewModel
+
+        setupToolbar()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId==android.R.id.home) {
+            onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
+
+    private fun setupToolbar(){
+        setSupportActionBar(binding.toolbarDetailListPlace?.toolbarInclude)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        binding.toolbarDetailListPlace?.textViewToolbarInclude?.text = getString(R.string.detail_list_place)
     }
 
 }
