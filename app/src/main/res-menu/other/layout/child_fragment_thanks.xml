@@ -11,7 +11,7 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/fragment_info_margin">
 
-            <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            <com.yoesuv.infomadiun.widgets.LatoRegularTextView
                 android:id="@+id/textViewThanks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
 
             <include layout="@layout/divider"/>
 
-            <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            <com.yoesuv.infomadiun.widgets.LatoRegularTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/person_1"

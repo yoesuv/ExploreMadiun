@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary">
 
-        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+        <com.yoesuv.infomadiun.widgets.LatoRegularTextView
             android:id="@+id/textViewPopUpListPlaceDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

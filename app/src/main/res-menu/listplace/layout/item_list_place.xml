@@ -48,7 +48,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp">
 
-            <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+            <com.yoesuv.infomadiun.widgets.LatoBoldTextView
                 android:id="@+id/textViewItemListPlaceName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
                 android:maxLines="1"
                 android:ellipsize="end"/>
 
-            <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            <com.yoesuv.infomadiun.widgets.LatoRegularTextView
                 android:id="@+id/textViewItemListPlaceLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

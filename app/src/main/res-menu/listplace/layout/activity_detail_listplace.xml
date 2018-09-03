@@ -34,7 +34,7 @@
                     app:srcCompat="@drawable/placeholder_image"
                     tools:loadImage="@{listPlace.imageUrl}"/>
 
-                <android.support.v7.widget.AppCompatTextView
+                <com.yoesuv.infomadiun.widgets.LatoBoldTextView
                     android:id="@+id/textViewDetailListPlaceName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -43,16 +43,17 @@
                     android:layout_marginRight="@dimen/_8sdp"
                     android:text="@{listPlace.title}"
                     android:textSize="@dimen/_18ssp"
-                    android:textStyle="bold"
+                    android:textColor="@color/default_text_color"
                     tools:text="@string/app_name" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <com.yoesuv.infomadiun.widgets.LatoRegularTextView
                     android:id="@+id/textViewDetailListPlaceDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_8sdp"
                     android:layout_marginRight="@dimen/_8sdp"
                     android:text="@{listPlace.description}"
+                    android:textColor="@color/default_text_color"
                     tools:text="@string/app_name"/>
 
             </LinearLayout>

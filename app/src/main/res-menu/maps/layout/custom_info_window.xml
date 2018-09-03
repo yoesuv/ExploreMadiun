@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:padding="5dp">
 
-    <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+    <com.yoesuv.infomadiun.widgets.LatoRegularTextView
         android:id="@+id/textViewMapLocationName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             class="com.google.android.gms.maps.SupportMapFragment"/>
 
-        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+        <com.yoesuv.infomadiun.widgets.LatoRegularTextView
             android:id="@+id/textViewGettingDirection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

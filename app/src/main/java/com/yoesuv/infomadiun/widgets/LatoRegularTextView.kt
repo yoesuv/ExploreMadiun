@@ -8,11 +8,11 @@ import android.util.AttributeSet
 /**
  *  Created by yusuf on 4/30/18.
  */
-class GothicA1BoldTextView @JvmOverloads constructor(
+class LatoRegularTextView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
     init {
-        val tf: Typeface = Typeface.createFromAsset(context.assets,"fonts/gothic-a-one-bold.ttf")
+        val tf: Typeface = Typeface.createFromAsset(context.assets,"fonts/lato-regular.ttf")
         typeface = tf
     }
 }

@@ -16,7 +16,7 @@
         android:layout_marginRight="@dimen/fragment_info_margin">
 
         <!-- library name-->
-        <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+        <com.yoesuv.infomadiun.widgets.LatoBoldTextView
             android:id="@+id/textViewLibraryName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:textColor="@color/default_text_color"/>
 
         <!-- library url -->
-        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+        <com.yoesuv.infomadiun.widgets.LatoRegularTextView
             android:id="@+id/textViewLibraryUrl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

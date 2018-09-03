@@ -35,7 +35,7 @@
                     android:layout_toRightOf="@id/imageViewAppInfo"
                     android:layout_toEndOf="@id/imageViewAppInfo">
 
-                    <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+                    <com.yoesuv.infomadiun.widgets.LatoBoldTextView
                         android:id="@+id/textViewAppName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                         android:textSize="@dimen/_16ssp"
                         android:textColor="@color/default_text_color"/>
 
-                    <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                    <com.yoesuv.infomadiun.widgets.LatoRegularTextView
                         android:id="@+id/textViewVersion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -62,13 +62,13 @@
 
                 <include layout="@layout/divider"/>
 
-                <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+                <com.yoesuv.infomadiun.widgets.LatoBoldTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/contact"
                     android:textColor="@color/default_text_color"/>
 
-                <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                <com.yoesuv.infomadiun.widgets.LatoRegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/my_email"
@@ -77,7 +77,7 @@
                     android:drawableLeft="@drawable/ic_email"
                     android:drawableStart="@drawable/ic_email"/>
 
-                <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                <com.yoesuv.infomadiun.widgets.LatoRegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/my_twitter"
@@ -88,13 +88,13 @@
 
                 <include layout="@layout/divider"/>
 
-                <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+                <com.yoesuv.infomadiun.widgets.LatoBoldTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/support"
                     android:textColor="@color/default_text_color"/>
 
-                <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                <com.yoesuv.infomadiun.widgets.LatoRegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/rate"
@@ -105,13 +105,13 @@
 
                 <include layout="@layout/divider"/>
 
-                <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
+                <com.yoesuv.infomadiun.widgets.LatoBoldTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/discl"
                     android:textColor="@color/default_text_color"/>
 
-                <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                <com.yoesuv.infomadiun.widgets.LatoRegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/disclaimer"
@@ -122,7 +122,7 @@
 
                 <include layout="@layout/divider"/>
 
-                <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+                <com.yoesuv.infomadiun.widgets.LatoRegularTextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/github_url"
