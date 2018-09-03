@@ -40,8 +40,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".menu.listplace.views.DetailListPlaceActivity"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".main.TransparentActivity"
-            android:theme="@style/Theme.Transparent"/>
+            android:theme="@style/Theme.Transparent"
+            android:screenOrientation="portrait"/>
 
     </application>
 

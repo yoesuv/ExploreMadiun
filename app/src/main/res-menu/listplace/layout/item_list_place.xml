@@ -17,7 +17,8 @@
         android:clickable="true"
         android:focusable="true"
         android:background="@android:color/transparent"
-        android:foreground="?attr/selectableItemBackground">
+        android:foreground="?attr/selectableItemBackground"
+        android:onClick="@{itemListPlace::clickItemListPlace}">
 
         <FrameLayout
             android:layout_width="match_parent"

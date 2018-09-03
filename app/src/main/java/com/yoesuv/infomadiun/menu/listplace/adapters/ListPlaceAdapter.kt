@@ -1,6 +1,7 @@
 package com.yoesuv.infomadiun.menu.listplace.adapters
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
@@ -10,6 +11,7 @@ import com.yoesuv.infomadiun.databinding.ItemListPlaceBinding
 import com.yoesuv.infomadiun.main.TransparentActivity
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.menu.listplace.viewmodels.ItemListPlaceViewModel
+import java.lang.ref.WeakReference
 
 /**
  *  Created by yusuf on 4/30/18.
@@ -29,7 +31,7 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val fixPos:Int = holder.adapterPosition
-        holder.setData(listPlace[fixPos])
+        holder.setData(activity, listPlace[fixPos])
         holder.itemView.setOnLongClickListener {
             showPopUpImage(activity, listPlace[fixPos])
             return@setOnLongClickListener true
@@ -45,8 +47,8 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
 
     class ViewHolder(val binding: ItemListPlaceBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(placeModel: PlaceModel){
-            binding.itemListPlace = ItemListPlaceViewModel(placeModel)
+        fun setData(context: Context, placeModel: PlaceModel){
+            binding.itemListPlace = ItemListPlaceViewModel(WeakReference(context), placeModel)
         }
 
     }
