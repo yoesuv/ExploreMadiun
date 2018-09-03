@@ -45,6 +45,19 @@ class FragmentOther: Fragment() {
         binding.navigationTabStrip.titleSize = 25F
         binding.navigationTabStrip.cornersRadius = 0F
 
+        setupAppBar(0F)
+
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        setupAppBar(8F)
+    }
+
+    private fun setupAppBar(elevation: Float){
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
+            activity?.findViewById<AppBarLayout>(R.id.mainAppBar)?.elevation = elevation
+        }
     }
 }
