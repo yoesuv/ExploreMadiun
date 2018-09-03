@@ -43,6 +43,9 @@
         <activity android:name=".menu.listplace.views.DetailListPlaceActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".menu.gallery.views.DetailGalleryActivity"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".main.TransparentActivity"
             android:theme="@style/Theme.Transparent"
             android:screenOrientation="portrait"/>

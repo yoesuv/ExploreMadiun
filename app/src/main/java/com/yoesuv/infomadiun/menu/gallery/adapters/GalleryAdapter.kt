@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Build
@@ -14,6 +15,7 @@ import com.yoesuv.infomadiun.databinding.ItemGalleryBinding
 import com.yoesuv.infomadiun.main.TransparentActivity
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import com.yoesuv.infomadiun.menu.gallery.viewmodels.ItemGalleryViewModel
+import java.lang.ref.WeakReference
 
 /**
  *  Created by yusuf on 5/1/18.
@@ -33,7 +35,7 @@ class GalleryAdapter(private val activity: Activity, private val listGallery: Mu
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val fixPosition = holder.adapterPosition
-        holder.setData(listGallery[fixPosition])
+        holder.setData(activity, listGallery[fixPosition])
         holder.itemView.setOnLongClickListener {
             showPopUpImage(activity, listGallery[fixPosition])
             return@setOnLongClickListener true
@@ -48,8 +50,9 @@ class GalleryAdapter(private val activity: Activity, private val listGallery: Mu
 
     class ViewHolder(val binding: ItemGalleryBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun setData(gallery: GalleryModel){
-            binding.itemGallery = ItemGalleryViewModel(gallery)
+        fun setData(context: Context, gallery: GalleryModel){
+            val weakContext = WeakReference(context)
+            binding.itemGallery = ItemGalleryViewModel(weakContext, gallery)
         }
     }
 }
