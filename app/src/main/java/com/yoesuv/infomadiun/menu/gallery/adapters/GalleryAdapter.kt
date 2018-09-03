@@ -21,9 +21,6 @@ import com.yoesuv.infomadiun.main.TransparentActivity
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import kotlinx.android.synthetic.main.item_gallery.view.*
 import kotlinx.android.synthetic.main.popup_detail_list_place.view.*
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.withContext
 
 /**
  *  Created by yusuf on 5/1/18.
@@ -44,9 +41,9 @@ class GalleryAdapter(private val activity: Activity, private val listGallery: Mu
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val fixPosition = holder.adapterPosition
         holder.setData(listGallery[fixPosition])
-        holder.itemView.setOnClickListener({
+        holder.itemView.setOnClickListener{
             showPopUp(activity, listGallery[fixPosition])
-        })
+        }
         holder.itemView.setOnLongClickListener {
             showPopUpImage(activity, listGallery[fixPosition])
             return@setOnLongClickListener true
@@ -120,19 +117,16 @@ class GalleryAdapter(private val activity: Activity, private val listGallery: Mu
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
         fun setData(gallery: GalleryModel){
-            launch {
-                withContext(UI){
-                    itemView.imageViewItemGallery.scaleType = ImageView.ScaleType.CENTER_CROP
-                    Glide.with(itemView.context.applicationContext)
-                            .load(gallery.image)
-                            .apply(RequestOptions()
-                                    .placeholder(R.drawable.placeholder_image)
-                                    .error(R.drawable.placeholder_image)
-                                    .format(DecodeFormat.PREFER_ARGB_8888))
-                            .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
-                            .into(itemView.imageViewItemGallery)
-                }
-            }
+            itemView.imageViewItemGallery.scaleType = ImageView.ScaleType.CENTER_CROP
+            Glide.with(itemView.context.applicationContext)
+                    .load(gallery.image)
+                    .apply(RequestOptions()
+                            .placeholder(R.drawable.placeholder_image)
+                            .error(R.drawable.placeholder_image)
+                            .format(DecodeFormat.PREFER_ARGB_8888))
+                    .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
+                    .into(itemView.imageViewItemGallery)
+
         }
     }
 }
