@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <fragment
-        android:id="@+id/mapLocation"
+    <data>
+        <variable
+            name="maps"
+            type="com.yoesuv.infomadiun.menu.maps.viewmodels.FragmentMapsViewModel"/>
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        class="com.google.android.gms.maps.SupportMapFragment"/>
+        android:layout_height="match_parent">
 
-    <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
-        android:id="@+id/textViewGettingDirection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:text="@string/getting_direction"
-        android:textColor="@color/default_text_color"
-        android:textSize="14sp"/>
+        <fragment
+            android:id="@+id/mapLocation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.google.android.gms.maps.SupportMapFragment"/>
 
-</RelativeLayout>
+        <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
+            android:id="@+id/textViewGettingDirection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:text="@string/getting_direction"
+            android:textColor="@color/default_text_color"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+</layout>
