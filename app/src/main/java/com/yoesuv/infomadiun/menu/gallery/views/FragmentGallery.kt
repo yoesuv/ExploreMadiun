@@ -55,17 +55,18 @@ class FragmentGallery: Fragment() {
 
     private fun setupRecyclerView(){
         val lManager = GridLayoutManager(context?.applicationContext, 3)
-        binding.recyclerViewGallery?.setHasFixedSize(true)
-        binding.recyclerViewGallery?.layoutManager = lManager
+        binding.recyclerViewGallery.setHasFixedSize(true)
+        binding.recyclerViewGallery.layoutManager = lManager
         adapter = GalleryAdapter(activity as AppCompatActivity, listGallery)
-        binding.recyclerViewGallery?.adapter = adapter
-        binding.recyclerViewGallery?.itemAnimator = DefaultItemAnimator()
+        binding.recyclerViewGallery.adapter = adapter
+        binding.recyclerViewGallery.itemAnimator = DefaultItemAnimator()
     }
 
     private fun setupSwipeRefresh(){
-        binding.swipeRefreshGallery?.setColorSchemeColors(ContextCompat.getColor(context!!, R.color.colorPrimary))
-        binding.swipeRefreshGallery?.setOnRefreshListener {
+        binding.swipeRefreshGallery.setColorSchemeColors(ContextCompat.getColor(context!!, R.color.colorPrimary))
+        binding.swipeRefreshGallery.setOnRefreshListener {
             binding.swipeRefreshGallery.isRefreshing = false
+            viewModel.getListGallery()
         }
     }
 

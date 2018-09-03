@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <import type="android.view.View"/>
@@ -16,7 +17,8 @@
             android:id="@+id/swipeRefreshGallery"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="@{safeUnbox(gallery.isError() ? View.INVISIBLE : View.VISIBLE )}">
+            tools:showView="@{safeUnbox(gallery.isLoading)}"
+            android:visibility="@{safeUnbox(gallery.isError()) ? View.INVISIBLE : View.VISIBLE }">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewGallery"
@@ -29,11 +31,12 @@
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            tools:hideView="@{safeUnbox(gallery.isLoading)}"/>
 
         <include
             android:id="@+id/layoutGalleryError"
-            android:visibility="@{safeUnbox(gallery.isError() ? View.VISIBLE : View.INVISIBLE )}"
+            android:visibility="@{safeUnbox(gallery.isError()) ? View.VISIBLE : View.INVISIBLE }"
             layout="@layout/include_error"/>
 
     </RelativeLayout>
