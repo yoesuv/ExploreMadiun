@@ -1,19 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.yoesuv.infomadiun.widgets.ForegroundRelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layoutMainItemGallery"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:clickable="true"
-    android:focusable="true"
-    android:background="@android:color/transparent"
-    android:foreground="?attr/selectableItemBackground">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.yoesuv.infomadiun.widgets.SquareImageView
-        android:id="@+id/imageViewItemGallery"
+    <data>
+        <variable
+            name="itemGallery"
+            type="com.yoesuv.infomadiun.menu.gallery.viewmodels.ItemGalleryViewModel"/>
+    </data>
+
+    <com.yoesuv.infomadiun.widgets.ForegroundRelativeLayout
+        android:id="@+id/layoutMainItemGallery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/placeholder_image"/>
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@android:color/transparent"
+        android:foreground="?attr/selectableItemBackground">
 
-</com.yoesuv.infomadiun.widgets.ForegroundRelativeLayout>
+        <com.yoesuv.infomadiun.widgets.SquareImageView
+            android:id="@+id/imageViewItemGallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            tools:loadImage="@{itemGallery.imageUrl}"/>
+
+    </com.yoesuv.infomadiun.widgets.ForegroundRelativeLayout>
+
+</layout>
