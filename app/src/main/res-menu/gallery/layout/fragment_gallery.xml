@@ -15,7 +15,8 @@
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshGallery"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="@{safeUnbox(gallery.isError() ? View.INVISIBLE : View.VISIBLE )}">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewGallery"
@@ -32,6 +33,7 @@
 
         <include
             android:id="@+id/layoutGalleryError"
+            android:visibility="@{safeUnbox(gallery.isError() ? View.VISIBLE : View.INVISIBLE )}"
             layout="@layout/include_error"/>
 
     </RelativeLayout>
