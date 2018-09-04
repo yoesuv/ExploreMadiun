@@ -11,12 +11,17 @@ import com.yoesuv.infomadiun.menu.gallery.views.FragmentGallery
 import com.yoesuv.infomadiun.menu.listplace.views.FragmentListPlace
 import com.yoesuv.infomadiun.menu.maps.views.FragmentMaps
 import com.yoesuv.infomadiun.menu.other.views.FragmentOther
+import com.yoesuv.infomadiun.utils.AppHelper
 import com.yoesuv.infomadiun.utils.BottomNavigationViewHelper
 
 /**
  *  Created by yusuf on 4/28/18.
  */
 class MainActivity: AppCompatActivity() {
+
+    companion object {
+        var BACK_PRESSED: Long = 0L
+    }
 
     private lateinit var binding: ActivityMainBinding
 
@@ -36,6 +41,15 @@ class MainActivity: AppCompatActivity() {
         for(fragment in supportFragmentManager.fragments){
             fragment.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    override fun onBackPressed() {
+        if (BACK_PRESSED+2000L>System.currentTimeMillis()) {
+            super.onBackPressed()
+        } else {
+            AppHelper.displayInfoToast(this,getString(R.string.press_again_to_exit))
+        }
+        BACK_PRESSED = System.currentTimeMillis()
     }
 
     private fun setupNavigationMenu(){

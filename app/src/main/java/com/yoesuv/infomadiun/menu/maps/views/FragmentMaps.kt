@@ -38,7 +38,6 @@ import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.menu.maps.viewmodels.FragmentMapsViewModel
 import com.yoesuv.infomadiun.utils.AppHelper
 import com.yoesuv.infomadiun.utils.BounceAnimation
-import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_map.view.*
 
 /**
@@ -93,7 +92,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
             onListDataChanged(it!!)
         })
         viewModel.error.observe(this, Observer {
-            Toasty.error(activity, activity.resources.getString(R.string.ops_message)).show()
+            AppHelper.displayErrorToast(activity, getString(R.string.ops_message))
         })
 
         return binding.root
@@ -114,7 +113,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                 //setup user location
                 requestPermission(googleMap)
             }else if(resultCode==Activity.RESULT_CANCELED){
-                Toasty.error(context!!, getString(R.string.location_setting_off)).show()
+                AppHelper.displayErrorToast(context!!, getString(R.string.location_setting_off))
             }
         }
     }
@@ -173,7 +172,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                         if(t!!){
                             enableUserLocation(googleMap)
                         }else{
-                            Toasty.error(activity, getString(R.string.access_location_denied)).show()
+                            AppHelper.displayErrorToast(activity, getString(R.string.access_location_denied))
                         }
                     }
         }else{
@@ -213,7 +212,11 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                             .transportMode(TransportMode.DRIVING)
                             .avoid(AvoidType.TOLLS)
                             .execute(this)
+                } else {
+                    AppHelper.displayErrorToast(activity, getString(R.string.error_get_user_location))
                 }
+            } else {
+                AppHelper.displayErrorToast(activity, getString(R.string.error_get_user_location))
             }
         }
     }
@@ -308,12 +311,12 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                 }
             }
         }else{
-            Toasty.error(activity, activity.resources.getString(R.string.error_get_direction))
+            AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
         }
     }
 
     override fun onDirectionFailure(t: Throwable?) {
-        Toasty.error(activity, activity.resources.getString(R.string.error_get_direction))
+        AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
     }
 
     class MarkerTag(val title:String, val type:Int, val latitude:Double?, val longitude:Double?)
