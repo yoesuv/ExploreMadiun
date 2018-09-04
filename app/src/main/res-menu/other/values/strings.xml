@@ -48,7 +48,7 @@
     <string name="retrofit_url">https://github.com/square/retrofit</string>
     <string name="retrofit_license">
         <![CDATA[
-            Copyright 2013 Square, Inc.<br/><br/>
+            Copyright © 2013 Square, Inc.<br/><br/>
             Licensed under the Apache License, Version 2.0 (the "License");
             you may not use this file except in compliance with the License.
             You may obtain a copy of the License at<br/><br/>
@@ -112,7 +112,7 @@
     <string name="glide_url">https://github.com/bumptech/glide</string>
     <string name="glide_license">
         <![CDATA[
-            Sam Judd<br/><br/>
+            © Sam Judd<br/><br/>
             Licensed under BSD, part MIT and Apache 2.0.
         ]]>
     </string>
@@ -120,7 +120,7 @@
     <string name="photoview_url">https://github.com/chrisbanes/PhotoView</string>
     <string name="photoview_license">
         <![CDATA[
-            Copyright 2017 Chris Banes<br/><br/>
+            Copyright © 2017 Chris Banes<br/><br/>
             Licensed under the Apache License, Version 2.0 (the "License");
             you may not use this file except in compliance with the License.
             You may obtain a copy of the License at<br/><br/>
@@ -178,6 +178,95 @@
     <string name="google_direction_license">
         <![CDATA[
             Copyright © 2017 Akexorcist<br/><br/>
+            Licensed under the Apache License, Version 2.0 (the "License");
+            you may not use this file except in compliance with the License.
+            You may obtain a copy of the License at<br/><br/>
+            http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+            Unless required by applicable law or agreed to in writing, software
+            distributed under the License is distributed on an "AS IS" BASIS,
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            See the License for the specific language governing permissions and
+            limitations under the License.
+        ]]>
+    </string>
+    <string name="sdp_android">SDP - a scalable size unit</string>
+    <string name="sdp_android_url">https://github.com/intuit/sdp</string>
+    <string name="sdp_android_license">
+        <![CDATA[
+            Copyright © 2013 - 2015 Intuit Inc.<br/><br/>
+            Licensed under the MIT License;
+            Permission is hereby granted, free of charge, to any person obtaining a copy
+            of this software and associated documentation files (the "Software"), to deal
+            in the Software without restriction, including without limitation the rights
+            to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+            copies of the Software, and to permit persons to whom the Software is
+            furnished to do so, subject to the following conditions:<br/><br/>
+            The above copyright notice and this permission notice shall be included in all
+            copies or substantial portions of the Software.<br/><br/>
+            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+            SOFTWARE.
+        ]]>
+    </string>
+    <string name="ssp_android">SSP - a scalable size unit for texts</string>
+    <string name="ssp_android_url">https://github.com/intuit/ssp</string>
+    <string name="okhttp">OkHttp</string>
+    <string name="okhttp_url">https://github.com/square/okhttp</string>
+    <string name="okhttp_license">
+        <![CDATA[
+            Copyright © Square, Inc.<br/><br/>
+            Licensed under the Apache License, Version 2.0 (the "License");
+            you may not use this file except in compliance with the License.
+            You may obtain a copy of the License at<br/><br/>
+            http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+            Unless required by applicable law or agreed to in writing, software
+            distributed under the License is distributed on an "AS IS" BASIS,
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            See the License for the specific language governing permissions and
+            limitations under the License.
+        ]]>
+    </string>
+    <string name="aosp">Android Open Source Project</string>
+    <string name="aosp_url">https://source.android.com/setup/start/licenses</string>
+    <string name="aosp_license">
+        <![CDATA[
+            Copyright © 2006 The Android Open Source Project<br/><br/>
+            Licensed under the Apache License, Version 2.0 (the "License");
+            you may not use this file except in compliance with the License.
+            You may obtain a copy of the License at<br/><br/>
+            http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+            Unless required by applicable law or agreed to in writing, software
+            distributed under the License is distributed on an "AS IS" BASIS,
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            See the License for the specific language governing permissions and
+            limitations under the License.
+        ]]>
+    </string>
+    <string name="gson">Gson</string>
+    <string name="gson_url">https://github.com/google/gson</string>
+    <string name="gson_license">
+        <![CDATA[
+            Copyright © 2008 Google Inc<br/><br/>
+            Licensed under the Apache License, Version 2.0 (the "License");
+            you may not use this file except in compliance with the License.
+            You may obtain a copy of the License at<br/><br/>
+            http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+            Unless required by applicable law or agreed to in writing, software
+            distributed under the License is distributed on an "AS IS" BASIS,
+            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            See the License for the specific language governing permissions and
+            limitations under the License.
+        ]]>
+    </string>
+    <string name="dexcount">Dexcount Gradle Plugin</string>
+    <string name="dexcount_url">https://github.com/KeepSafe/dexcount-gradle-plugin</string>
+    <string name="dexcount_license">
+        <![CDATA[
+            Copyright © 2015-2018 Keepsafe Software Inc<br/><br/>
             Licensed under the Apache License, Version 2.0 (the "License");
             you may not use this file except in compliance with the License.
             You may obtain a copy of the License at<br/><br/>
