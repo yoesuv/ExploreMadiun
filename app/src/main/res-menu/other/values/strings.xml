@@ -191,6 +191,13 @@
     </string>
 
     <!-- CHANGELOG -->
+    <string name="ver_10">Versi 2.0.2</string>
+    <string name="ver_10_info">
+        <![CDATA[
+            • pembaruan library<br/>
+            • perbaikan performa
+        ]]>
+    </string>
     <string name="ver_9">Versi 2.0.1</string>
     <string name="ver_9_info">
         <![CDATA[
