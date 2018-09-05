@@ -10,6 +10,7 @@ import android.graphics.Color
 import android.os.*
 import android.support.v4.app.Fragment
 import android.util.Log
+import android.util.TypedValue
 import android.view.*
 import com.akexorcist.googledirection.DirectionCallback
 import com.akexorcist.googledirection.GoogleDirection
@@ -244,6 +245,9 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     override fun onMapReady(googleMap: GoogleMap?) {
         googleMap?.clear()
+        val paddingBottom = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 108F, resources.displayMetrics))
+        googleMap?.setPadding(0, 0, 0, paddingBottom)
+        googleMap?.uiSettings?.isZoomControlsEnabled = true
         googleMap?.uiSettings?.isCompassEnabled = true
 
         //default location
