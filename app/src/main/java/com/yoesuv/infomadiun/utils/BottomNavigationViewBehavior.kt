@@ -15,13 +15,13 @@ class BottomNavigationViewBehavior(context: Context, attributeSet: AttributeSet)
 
     private val height: Int = AppHelper.getToolbarHeight(context)
 
-    override fun layoutDependsOn(parent: CoordinatorLayout?, child: BottomNavigationView?, dependency: View?): Boolean {
+    override fun layoutDependsOn(parent: CoordinatorLayout, child: BottomNavigationView, dependency: View): Boolean {
         return dependency is AppBarLayout
     }
 
-    override fun onDependentViewChanged(parent: CoordinatorLayout?, child: BottomNavigationView?, dependency: View?): Boolean {
+    override fun onDependentViewChanged(parent: CoordinatorLayout, child: BottomNavigationView, dependency: View): Boolean {
         if (dependency is AppBarLayout) {
-            val lp = child!!.layoutParams as CoordinatorLayout.LayoutParams
+            val lp = child.layoutParams as CoordinatorLayout.LayoutParams
             val bottomMargin = lp.bottomMargin
             val distanceToScroll = child.height + bottomMargin
             val ratio = dependency.y / height
