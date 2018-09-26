@@ -43,8 +43,8 @@ class FragmentListPlace: Fragment() {
         setHasOptionsMenu(true)
 
         viewModel.getListPlace()
-        viewModel.listPlace.observe(this, Observer {
-            onListDataChanged(it!!)
+        viewModel.listPlace.observe(this, Observer { listPlace ->
+            onListDataChanged(listPlace!!)
         })
 
         return binding.root

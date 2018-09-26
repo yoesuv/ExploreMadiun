@@ -89,8 +89,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         setHasOptionsMenu(true)
         binding.textViewGettingDirection.visibility = View.INVISIBLE
 
-        viewModel.listPin.observe(this, Observer {
-            onListDataChanged(it!!)
+        viewModel.listPin.observe(this, Observer { listPin ->
+            onListDataChanged(listPin!!)
         })
         viewModel.error.observe(this, Observer {
             AppHelper.displayErrorToast(activity, getString(R.string.ops_message))

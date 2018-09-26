@@ -7,10 +7,12 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.*
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.yoesuv.infomadiun.R
+import com.yoesuv.infomadiun.data.Constants
 import com.yoesuv.infomadiun.databinding.FragmentGalleryBinding
 import com.yoesuv.infomadiun.menu.gallery.adapters.GalleryAdapter
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
@@ -41,8 +43,11 @@ class FragmentGallery: Fragment() {
         setupSwipeRefresh()
 
         viewModel.getListGallery()
-        viewModel.listGallery.observe(this, Observer {
-            onListDataChanged(it!!)
+        viewModel.listGallery.observe(this, Observer { listGallery ->
+            onListDataChanged(listGallery!!)
+        })
+        viewModel.liveDataError.observe(this, Observer { isError ->
+            setupLayoutError(isError)
         })
 
         return binding.root
@@ -75,6 +80,17 @@ class FragmentGallery: Fragment() {
         listGallery.addAll(listData)
         binding.recyclerViewGallery.post {
             adapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun setupLayoutError(isError: Boolean?){
+        if (isError!!) {
+            binding.layoutGalleryError.visibility = View.VISIBLE
+            binding.layoutGalleryError.findViewById<AppCompatButton>(R.id.buttonErrorRefresh).setOnClickListener {
+                viewModel.getListGallery()
+            }
+        } else {
+            binding.layoutGalleryError.visibility = View.GONE
         }
     }
 

@@ -19,11 +19,11 @@ class FragmentGalleryViewModel: ViewModel() {
     var listGallery: MutableLiveData<MutableList<GalleryModel>> = MutableLiveData()
 
     var isLoading: ObservableField<Boolean> = ObservableField()
-    var isError: ObservableField<Boolean> = ObservableField()
+    var liveDataError: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getListGallery(){
         isLoading.set(true)
-        isError.set(false)
+        liveDataError.postValue(false)
         compositeDisposable.add(
                 restApi.getListGallery()
                         .timeout(Constants.TIME_OUT, TimeUnit.MILLISECONDS)
@@ -34,7 +34,7 @@ class FragmentGalleryViewModel: ViewModel() {
                             listGallery.value = it
                         },{
                             isLoading.set(false)
-                            isError.set(true)
+                            liveDataError.postValue(true)
                         })
         )
     }
