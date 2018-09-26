@@ -123,6 +123,7 @@
                 <include layout="@layout/divider"/>
 
                 <com.yoesuv.infomadiun.widgets.LatoRegularTextView
+                    android:id="@+id/textViewGithub"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/github_url"
