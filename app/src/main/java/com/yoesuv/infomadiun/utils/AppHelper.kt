@@ -14,8 +14,8 @@ import es.dmoral.toasty.Toasty
 
 object AppHelper {
 
-    fun displayInfoToast(context: Context, message: String){
-        Toasty.info(context, message, Toast.LENGTH_SHORT, true).show()
+    fun displayNormalToast(context: Context, message: String){
+        Toasty.normal(context, message, Toast.LENGTH_SHORT).show()
     }
 
     fun displayErrorToast(context: Context, message: String){

@@ -47,7 +47,7 @@ class MainActivity: AppCompatActivity() {
         if (BACK_PRESSED+2000L>System.currentTimeMillis()) {
             super.onBackPressed()
         } else {
-            AppHelper.displayInfoToast(this,getString(R.string.press_again_to_exit))
+            AppHelper.displayNormalToast(this,getString(R.string.press_again_to_exit))
         }
         BACK_PRESSED = System.currentTimeMillis()
     }
