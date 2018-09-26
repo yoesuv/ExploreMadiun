@@ -73,8 +73,11 @@ android {
             ]
         }
     }
-    dataBinding{
+    dataBinding {
         enabled = true
+    }
+    lintOptions {
+        checkReleaseBuilds = false
     }
 }
 
