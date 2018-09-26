@@ -38,6 +38,7 @@ class FragmentListPlace: Fragment() {
 
         setupRecycler()
         setupSwipeRefresh()
+        setupLayoutError()
 
         setHasOptionsMenu(true)
 
@@ -102,6 +103,12 @@ class FragmentListPlace: Fragment() {
             adapter.notifyDataSetChanged()
         }
         binding.recyclerViewListPlace.scrollToPosition(0)
+    }
+
+    private fun setupLayoutError(){
+        binding.layoutError.findViewById<AppCompatButton>(R.id.buttonErrorRefresh).setOnClickListener {
+            viewModel.getListPlace()
+        }
     }
 
 }
