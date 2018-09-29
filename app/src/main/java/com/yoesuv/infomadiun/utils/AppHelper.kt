@@ -5,12 +5,22 @@ import android.content.Context
 import android.location.LocationManager
 import android.os.Build
 import android.text.Html
+import android.widget.Toast
+import es.dmoral.toasty.Toasty
 
 /**
  *  Created by yusuf on 5/1/18.
  */
 
 object AppHelper {
+
+    fun displayNormalToast(context: Context, message: String){
+        Toasty.normal(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun displayErrorToast(context: Context, message: String){
+        Toasty.error(context, message, Toast.LENGTH_SHORT, true).show()
+    }
 
     fun getToolbarHeight(context: Context): Int {
         val styledAttributes = context.theme.obtainStyledAttributes(

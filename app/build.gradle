@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         maven { url 'https://maven.fabric.io/public' }
+        mavenCentral()
     }
 
     dependencies {
@@ -9,14 +10,17 @@ buildscript {
 
         // We recommend changing it to the latest version from our changelog:
         // https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
-        classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'io.fabric.tools:gradle:1.25.4'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.3'
     }
 }
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
+apply plugin: 'com.getkeepsafe.dexcount'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
@@ -26,14 +30,14 @@ repositories {
 android {
     signingConfigs {
         config {
-            keyAlias 'yoesuv'
-            keyPassword 'idamanmertua'
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
             storeFile file('../-yusuf.keystore')
-            storePassword 'idamanmertua'
+            storePassword STORE_PASSWORD
         }
     }
-    compileSdkVersion project.compileSdkVersion.toInteger()
-    buildToolsVersion project.buildToolsVersion
+    compileSdkVersion 28
+    buildToolsVersion "28.0.2"
     flavorDimensions "default"
     defaultConfig {
         applicationId "com.yoesuv.infomadiun"
@@ -42,6 +46,7 @@ android {
         versionCode project.versionCode.toInteger()
         versionName project.versionName
         vectorDrawables.useSupportLibrary true
+        setProperty("archivesBaseName", applicationId+"-v"+versionCode+"("+versionName+")")
         resValue "string", "info_madiun_google_maps_api_key", "AIzaSyBlOlCyjJ2SeJZzVS_2uV4uxjGj-AboUQ8"
     }
     buildTypes {
@@ -51,7 +56,7 @@ android {
             signingConfig signingConfigs.config
         }
         debug {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
         }
@@ -68,12 +73,24 @@ android {
             ]
         }
     }
+    dataBinding {
+        enabled = true
+    }
+    lintOptions {
+        checkReleaseBuilds = false
+    }
+}
+
+androidExtensions {
+    experimental = true
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
     implementation "com.android.support:appcompat-v7:$project.supportLibraryVersion"
+    implementation "com.android.support:support-v4:$project.supportLibraryVersion"
+    implementation "com.android.support:support-media-compat:$project.supportLibraryVersion"
     implementation "com.android.support:design:$project.supportLibraryVersion"
 
     implementation "com.android.support:recyclerview-v7:$project.supportLibraryVersion"
@@ -90,14 +107,17 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$project.httpLoggingVersion"
     implementation "io.reactivex.rxjava2:rxjava:$project.rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$project.rxAndroidVersion"
-    implementation "io.reactivex.rxjava2:rxkotlin:$project.rxKotlinVersion"
     implementation "com.github.bumptech.glide:glide:$project.glideVersion"
-    annotationProcessor "com.github.bumptech.glide:compiler:$project.glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$project.glideVersion"
     implementation "com.github.chrisbanes:PhotoView:$project.photoViewVersion"
     implementation "com.tbruyelle.rxpermissions2:rxpermissions:$project.rxPermissionVersion"
     implementation "com.github.GrenderG:Toasty:$project.toastyVersion"
     implementation "com.github.devlight.navigationtabstrip:navigationtabstrip:$project.navigationTabStripVersion"
     implementation "com.akexorcist:googledirectionlibrary:$project.googleDirectionLibraryVersion"
+    implementation "com.intuit.ssp:ssp-android:$project.sspVersion"
+    implementation "com.intuit.sdp:sdp-android:$project.sdpVersion"
+    implementation "android.arch.lifecycle:extensions:$project.archLifecycleVersion"
+    kapt "android.arch.lifecycle:compiler:$project.archLifecycleVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'

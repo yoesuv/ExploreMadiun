@@ -1,30 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshGallery"
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="gallery"
+            type="com.yoesuv.infomadiun.menu.gallery.viewmodels.FragmentGalleryViewModel"/>
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewGallery"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshGallery"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            tools:showView="@{safeUnbox(gallery.isLoading)}">
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewGallery"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:paddingBottom="55dp"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
-    <include
-        android:id="@+id/layoutGalleryError"
-        layout="@layout/include_error"/>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            tools:hideView="@{safeUnbox(gallery.isLoading)}"/>
 
-</RelativeLayout>
+        <include
+            android:id="@+id/layoutGalleryError"
+            layout="@layout/include_error"/>
+
+    </RelativeLayout>
+
+</layout>

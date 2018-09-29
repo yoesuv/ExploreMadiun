@@ -2,13 +2,15 @@ package com.yoesuv.infomadiun.menu.maps.views
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.content.IntentSender
+import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.*
 import android.support.v4.app.Fragment
-import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.util.TypedValue
 import android.view.*
 import com.akexorcist.googledirection.DirectionCallback
 import com.akexorcist.googledirection.GoogleDirection
@@ -31,20 +33,18 @@ import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yoesuv.infomadiun.App
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.data.Constants
-import com.yoesuv.infomadiun.menu.maps.contracts.MapContract
+import com.yoesuv.infomadiun.databinding.FragmentMapBinding
+import com.yoesuv.infomadiun.menu.maps.adapters.MyCustomInfoWindowAdapter
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
-import com.yoesuv.infomadiun.menu.maps.presenters.MapPresenter
+import com.yoesuv.infomadiun.menu.maps.viewmodels.FragmentMapsViewModel
 import com.yoesuv.infomadiun.utils.AppHelper
 import com.yoesuv.infomadiun.utils.BounceAnimation
-import es.dmoral.toasty.Toasty
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.custom_info_window.view.*
 import kotlinx.android.synthetic.main.fragment_map.view.*
 
 /**
  *  Created by yusuf on 4/30/18.
  */
-class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContract.ViewMaps {
+class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     companion object {
         const val REQUEST_FEATURE_LOCATION_PERMISSION_CODE:Int = 12
@@ -55,8 +55,10 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
         }
     }
 
+    private lateinit var binding: FragmentMapBinding
+    private lateinit var viewModel: FragmentMapsViewModel
+
     private lateinit var activity: Activity
-    private lateinit var mapPresenter: MapPresenter
     private var googleMap: GoogleMap? = null
     private lateinit var rxPermission: RxPermissions
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -74,27 +76,32 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_map, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false)
+        viewModel = FragmentMapsViewModel()
+        binding.maps = viewModel
 
-        mapPresenter = MapPresenter(this)
         activity = getActivity() as Activity
-        val toolbar = activity.findViewById<Toolbar>(R.id.toolbarMain)
-        toolbar.textViewToolbar.text = getString(R.string.menu_maps)
-
         rxPermission = RxPermissions(activity)
 
         val mapFragment:SupportMapFragment? = childFragmentManager.findFragmentById(R.id.mapLocation) as SupportMapFragment
         mapFragment?.getMapAsync(this)
 
         setHasOptionsMenu(true)
-        v.textViewGettingDirection.visibility = View.INVISIBLE
+        binding.textViewGettingDirection.visibility = View.INVISIBLE
 
-        return v
+        viewModel.listPin.observe(this, Observer { listPin ->
+            onListDataChanged(listPin!!)
+        })
+        viewModel.error.observe(this, Observer {
+            AppHelper.displayErrorToast(activity, getString(R.string.ops_message))
+        })
+
+        return binding.root
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mapPresenter.destroy()
+        viewModel.destroy()
         if(myLocationCallback!=null) {
             LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(myLocationCallback)
         }
@@ -107,7 +114,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
                 //setup user location
                 requestPermission(googleMap)
             }else if(resultCode==Activity.RESULT_CANCELED){
-                Toasty.error(activity, getString(R.string.location_setting_off)).show()
+                AppHelper.displayErrorToast(context!!, getString(R.string.location_setting_off))
             }
         }
     }
@@ -123,7 +130,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
             //default location
             googleMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(-7.813882, 111.371713)))
             googleMap?.animateCamera(CameraUpdateFactory.zoomTo(9f))
-            mapPresenter.getListPin()
+            viewModel.getListPin()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -166,7 +173,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
                         if(t!!){
                             enableUserLocation(googleMap)
                         }else{
-                            Toasty.error(activity, getString(R.string.access_location_denied)).show()
+                            AppHelper.displayErrorToast(activity, getString(R.string.access_location_denied))
                         }
                     }
         }else{
@@ -206,7 +213,11 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
                             .transportMode(TransportMode.DRIVING)
                             .avoid(AvoidType.TOLLS)
                             .execute(this)
+                } else {
+                    AppHelper.displayErrorToast(activity, getString(R.string.error_get_user_location))
                 }
+            } else {
+                AppHelper.displayErrorToast(activity, getString(R.string.error_get_user_location))
             }
         }
     }
@@ -219,8 +230,24 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
 
     }
 
+    private fun onListDataChanged(listPin: MutableList<PinModel>){
+        if(listPin.isNotEmpty()){
+            for(pinModel in listPin){
+                val markerOptions = MarkerOptions()
+                markerOptions.position(LatLng(pinModel.latitude!!, pinModel.longitude!!))
+                markerOptions.title(pinModel.name)
+                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
+                markerLocation = googleMap?.addMarker(markerOptions)
+                markerLocation?.tag = MarkerTag(pinModel.name!!, 0, pinModel.latitude, pinModel.longitude)
+            }
+        }
+    }
+
     override fun onMapReady(googleMap: GoogleMap?) {
         googleMap?.clear()
+        val paddingBottom = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 108F, resources.displayMetrics))
+        googleMap?.setPadding(0, 0, 0, paddingBottom)
+        googleMap?.uiSettings?.isZoomControlsEnabled = true
         googleMap?.uiSettings?.isCompassEnabled = true
 
         //default location
@@ -229,7 +256,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
         googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style_map))
 
         this.googleMap = googleMap
-        mapPresenter.getListPin()
+        viewModel.getListPin()
 
         if(AppHelper.checkLocationSetting(activity)){
             requestPermission(googleMap)
@@ -268,31 +295,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
         }
     }
 
-    override fun showLoading() {
-
-    }
-
-    override fun dismissLoading() {
-
-    }
-
-    override fun setData(listPin: MutableList<PinModel>) {
-        if(listPin.isNotEmpty()){
-            for(pinModel in listPin){
-                val markerOptions = MarkerOptions()
-                markerOptions.position(LatLng(pinModel.latitude!!, pinModel.longitude!!))
-                markerOptions.title(pinModel.name)
-                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
-                markerLocation = googleMap?.addMarker(markerOptions)
-                markerLocation?.tag = MarkerTag(pinModel.name!!, 0, pinModel.latitude, pinModel.longitude)
-            }
-        }
-    }
-
-    override fun setError() {
-        Toasty.error(activity, activity.resources.getString(R.string.ops_message)).show()
-    }
-
     override fun onDirectionSuccess(direction: Direction?, rawBody: String?) {
         Log.e(Constants.TAG_ERROR,"FragmentMaps # onDirectionSuccess ${direction?.errorMessage}")
         view?.textViewGettingDirection?.visibility = View.INVISIBLE
@@ -313,12 +315,12 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
                 }
             }
         }else{
-            Toasty.error(activity, activity.resources.getString(R.string.error_get_direction))
+            AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
         }
     }
 
     override fun onDirectionFailure(t: Throwable?) {
-        Toasty.error(activity, activity.resources.getString(R.string.error_get_direction))
+        AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
     }
 
     class MarkerTag(val title:String, val type:Int, val latitude:Double?, val longitude:Double?)
@@ -343,29 +345,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback, MapContra
                 App.prefHelper?.setString(FragmentMaps.PREFERENCE_LONGITUDE, listLocation[0].longitude.toString())
             }
         }
-    }
-
-    class MyCustomInfoWindowAdapter(private val activity: Activity?) : GoogleMap.InfoWindowAdapter{
-
-        private val mContents:View = LayoutInflater.from(activity?.applicationContext).inflate(R.layout.custom_info_window, null)
-
-        override fun getInfoContents(marker: Marker?): View {
-            return mContents
-        }
-
-        override fun getInfoWindow(marker: Marker?): View {
-            val tag: MarkerTag = marker?.tag as MarkerTag
-            if (tag.type == 1) {
-                mContents.textViewMapLocationName.text = activity?.getString(R.string.your_location)
-                mContents.imageViewMapLocationDirection.visibility = View.GONE
-            } else {
-                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_selected))
-                mContents.textViewMapLocationName.text = marker.title
-                mContents.imageViewMapLocationDirection.visibility = View.VISIBLE
-            }
-            return mContents
-        }
-
     }
 
 }

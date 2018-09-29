@@ -6,9 +6,9 @@
         android:toYScale="100%p"
         android:pivotX="50%p"
         android:pivotY="50%p"
-        android:duration="@android:integer/config_shortAnimTime" />
+        android:duration="300" />
 
     <alpha android:fromAlpha="1"
         android:toAlpha="0.5"
-        android:duration="@android:integer/config_shortAnimTime"/>
+        android:duration="300"/>
 </set>

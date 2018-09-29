@@ -1,5 +1,6 @@
 package com.yoesuv.infomadiun.menu.other.views
 
+import android.databinding.DataBindingUtil
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
@@ -11,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.yoesuv.infomadiun.R
+import com.yoesuv.infomadiun.databinding.FragmentOtherBinding
 import com.yoesuv.infomadiun.menu.other.adapters.TabOtherAdapter
 import com.yoesuv.infomadiun.utils.ZoomOutPageTransformer
 import kotlinx.android.synthetic.main.activity_main.view.*
@@ -27,39 +29,35 @@ class FragmentOther: Fragment() {
         }
     }
 
-    private lateinit var appBarLayout: AppBarLayout
+    private lateinit var binding: FragmentOtherBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_other, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_other, container, false)
 
-        val activity: AppCompatActivity = activity as AppCompatActivity
-        appBarLayout = activity.findViewById(R.id.mainAppBar)
+        binding.viewPagerOther.adapter = TabOtherAdapter(childFragmentManager)
+        binding.viewPagerOther.setPageTransformer(true, ZoomOutPageTransformer())
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            appBarLayout.elevation = 0f
-            view.navigationTabStrip.elevation = 5f
-        }
-        val toolbar = activity.findViewById<Toolbar>(R.id.toolbarMain)
-        toolbar.textViewToolbar.text = getString(R.string.menu_other)
+        binding.navigationTabStrip.setViewPager(binding.viewPagerOther)
+        binding.navigationTabStrip.setTitles(getString(R.string.informasi), getString(R.string.changelog), getString(R.string.thanks_to), getString(R.string.library))
+        binding.navigationTabStrip.inactiveColor = ContextCompat.getColor(context!!, R.color.grey_50)
+        binding.navigationTabStrip.activeColor = ContextCompat.getColor(context!!, R.color.white)
+        binding.navigationTabStrip.stripColor = ContextCompat.getColor(context!!, R.color.colorAccent)
+        binding.navigationTabStrip.titleSize = 25F
+        binding.navigationTabStrip.cornersRadius = 0F
 
-        view.viewPagerOther.adapter = TabOtherAdapter(childFragmentManager)
-        view.viewPagerOther.setPageTransformer(true, ZoomOutPageTransformer())
+        setupAppBar(0F)
 
-        view.navigationTabStrip.setViewPager(view.viewPagerOther)
-        view.navigationTabStrip.setTitles(getString(R.string.informasi), getString(R.string.changelog), getString(R.string.thanks_to), getString(R.string.library))
-        view.navigationTabStrip.inactiveColor = ContextCompat.getColor(context!!, R.color.grey_50)
-        view.navigationTabStrip.activeColor = ContextCompat.getColor(context!!, R.color.white)
-        view.navigationTabStrip.stripColor = ContextCompat.getColor(context!!, R.color.colorAccent)
-        view.navigationTabStrip.titleSize = 25f
-        view.navigationTabStrip.cornersRadius = 0f
-
-        return view
+        return binding.root
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            appBarLayout.elevation = 8f
+        setupAppBar(8F)
+    }
+
+    private fun setupAppBar(elevation: Float){
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
+            activity?.findViewById<AppBarLayout>(R.id.mainAppBar)?.elevation = elevation
         }
     }
 }

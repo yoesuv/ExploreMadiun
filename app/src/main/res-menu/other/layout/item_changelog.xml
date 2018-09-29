@@ -1,27 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/fragment_info_margin"
-    android:layout_marginRight="@dimen/fragment_info_margin">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.yoesuv.infomadiun.widgets.GothicA1BoldTextView
-        android:id="@+id/textViewChangelogTitle"
-        android:layout_width="wrap_content"
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="itemChangelog"
+            type="com.yoesuv.infomadiun.menu.other.viewmodels.ItemChangeLogViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/ver_8"
-        android:textColor="@color/default_text_color"/>
+        android:layout_marginLeft="@dimen/fragment_info_margin"
+        android:layout_marginRight="@dimen/fragment_info_margin">
 
-    <com.yoesuv.infomadiun.widgets.GothicA1RegularTextView
-        android:id="@+id/textViewChangelogDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="@color/default_text_color"/>
+        <com.yoesuv.infomadiun.widgets.LatoBoldTextView
+            android:id="@+id/textViewChangelogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{itemChangelog.name}"
+            android:textColor="@color/default_text_color"/>
 
-    <include
-        android:id="@+id/layoutDivider"
-        layout="@layout/divider"/>
+        <com.yoesuv.infomadiun.widgets.LatoRegularTextView
+            android:id="@+id/textViewChangelogDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{itemChangelog.description}"
+            android:textColor="@color/default_text_color"/>
 
-</LinearLayout>
+        <include
+            android:id="@+id/layoutDivider"
+            android:visibility="@{safeUnbox(itemChangelog.isLast()) ? View.GONE : View.VISIBLE}"
+            layout="@layout/divider"/>
+
+    </LinearLayout>
+
+</layout>
