@@ -1,0 +1,25 @@
+language: android
+sudo: required
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - tools
+    - build-tools-29.0.0
+    - android-29
+    - extra-android-m2repository
+
+jdk:
+  - oraclejdk8
+
+notifications:
+  email: false
+
+script:
+  - ./gradlew clean
+  - ./gradlew assembleProductionDebug
+  - ./gradlew assembleProductionRelease
+#  - ./gradlew assemble check
+#  - ./gradlew checkstyle
+#  - ./gradlew build
