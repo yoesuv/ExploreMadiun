@@ -44,13 +44,13 @@ import kotlinx.android.synthetic.main.fragment_map.view.*
 /**
  *  Created by yusuf on 4/30/18.
  */
-class FragmentMaps: androidx.fragment.app.Fragment(), OnMapReadyCallback, DirectionCallback {
+class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     companion object {
         const val REQUEST_FEATURE_LOCATION_PERMISSION_CODE:Int = 12
         const val PREFERENCE_LATITUDE = "preference_latitude"
         const val PREFERENCE_LONGITUDE = "preference_longitude"
-        fun getInstance(): androidx.fragment.app.Fragment {
+        fun getInstance(): Fragment {
             return FragmentMaps()
         }
     }
@@ -307,7 +307,7 @@ class FragmentMaps: androidx.fragment.app.Fragment(), OnMapReadyCallback, Direct
 
                 setCameraWithCoordinationBounds(direction.routeList[0])
 
-                for (i: Int in 0..(direction.routeList.size - 1)) {
+                for (i: Int in 0 until direction.routeList.size) {
                     val color = colors[i % colors.size]
                     val route = direction.routeList[i]
                     val directionPositionList = route.legList[0].directionPoint
@@ -341,8 +341,8 @@ class FragmentMaps: androidx.fragment.app.Fragment(), OnMapReadyCallback, Direct
                 markerUser = googleMap?.addMarker(markerOpt)
                 markerUser?.tag = MarkerTag("Lokasi Anda", 1, listLocation[0].latitude, listLocation[0].longitude)
 
-                App.prefHelper?.setString(FragmentMaps.PREFERENCE_LATITUDE, listLocation[0].latitude.toString())
-                App.prefHelper?.setString(FragmentMaps.PREFERENCE_LONGITUDE, listLocation[0].longitude.toString())
+                App.prefHelper?.setString(PREFERENCE_LATITUDE, listLocation[0].latitude.toString())
+                App.prefHelper?.setString(PREFERENCE_LONGITUDE, listLocation[0].longitude.toString())
             }
         }
     }

@@ -2,7 +2,6 @@ package com.yoesuv.infomadiun.menu.other.views
 
 import androidx.lifecycle.Observer
 import androidx.databinding.DataBindingUtil
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,12 +13,11 @@ import com.yoesuv.infomadiun.databinding.ChildFragmentLibrariesBinding
 import com.yoesuv.infomadiun.menu.other.adapters.LicenseAdapter
 import com.yoesuv.infomadiun.menu.other.models.LicenseModel
 import com.yoesuv.infomadiun.menu.other.viewmodels.ChildFragmentLibrariesViewModel
-import kotlinx.android.synthetic.main.child_fragment_libraries.view.*
 
-class ChildFragmentLibraries: androidx.fragment.app.Fragment() {
+class ChildFragmentLibraries: Fragment() {
 
     companion object {
-        fun getInstance(): androidx.fragment.app.Fragment {
+        fun getInstance(): Fragment {
             return ChildFragmentLibraries()
         }
     }
@@ -44,7 +42,7 @@ class ChildFragmentLibraries: androidx.fragment.app.Fragment() {
     }
 
     private fun setupRecycler(){
-        binding.recyclerViewLicense.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+        binding.recyclerViewLicense.layoutManager = LinearLayoutManager(context)
         adapter = LicenseAdapter(context, listLibraries)
         binding.recyclerViewLicense.adapter = adapter
     }

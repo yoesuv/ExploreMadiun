@@ -10,10 +10,10 @@ import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ChildFragmentThanksBinding
 import com.yoesuv.infomadiun.utils.AppHelper
 
-class ChildFragmentThanks: androidx.fragment.app.Fragment(){
+class ChildFragmentThanks: Fragment(){
 
     companion object {
-        fun getInstance(): androidx.fragment.app.Fragment {
+        fun getInstance(): Fragment {
             return ChildFragmentThanks()
         }
     }

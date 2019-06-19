@@ -35,7 +35,7 @@ class DetailGalleryActivity: AppCompatActivity() {
         if (item?.itemId==android.R.id.home) {
             onBackPressed()
         }
-        return super.onOptionsItemSelected(item)
+        return super.onOptionsItemSelected(item!!)
     }
 
     override fun onBackPressed() {
@@ -44,10 +44,10 @@ class DetailGalleryActivity: AppCompatActivity() {
     }
 
     private fun setupToolbar(){
-        setSupportActionBar(binding.toolbarDetailGallery?.toolbarInclude)
+        setSupportActionBar(binding.toolbarDetailGallery.toolbarInclude)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        binding.toolbarDetailGallery?.textViewToolbarInclude?.text = getString(R.string.detail_gallery)
+        binding.toolbarDetailGallery.textViewToolbarInclude.text = getString(R.string.detail_gallery)
     }
 
 }

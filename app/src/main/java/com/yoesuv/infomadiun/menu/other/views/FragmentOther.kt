@@ -6,8 +6,6 @@ import android.os.Bundle
 import com.google.android.material.appbar.AppBarLayout
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,16 +13,14 @@ import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentOtherBinding
 import com.yoesuv.infomadiun.menu.other.adapters.TabOtherAdapter
 import com.yoesuv.infomadiun.utils.ZoomOutPageTransformer
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.fragment_other.view.*
 
 /**
  *  Created by yusuf on 4/30/18.
  */
-class FragmentOther: androidx.fragment.app.Fragment() {
+class FragmentOther: Fragment() {
 
     companion object {
-        fun getInstance(): androidx.fragment.app.Fragment {
+        fun getInstance(): Fragment {
             return FragmentOther()
         }
     }

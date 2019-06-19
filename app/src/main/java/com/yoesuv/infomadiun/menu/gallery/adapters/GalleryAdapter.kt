@@ -1,13 +1,9 @@
 package com.yoesuv.infomadiun.menu.gallery.adapters
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import androidx.databinding.DataBindingUtil
-import android.os.Build
 import androidx.recyclerview.widget.RecyclerView
 import android.view.*
 import com.yoesuv.infomadiun.R
@@ -20,7 +16,7 @@ import java.lang.ref.WeakReference
 /**
  *  Created by yusuf on 5/1/18.
  */
-class GalleryAdapter(private val activity: Activity, private val listGallery: MutableList<GalleryModel>): androidx.recyclerview.widget.RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
+class GalleryAdapter(private val activity: Activity, private val listGallery: MutableList<GalleryModel>): RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
 
     private var inflater:LayoutInflater = LayoutInflater.from(activity)
 
@@ -48,7 +44,7 @@ class GalleryAdapter(private val activity: Activity, private val listGallery: Mu
         activity?.startActivity(intent)
     }
 
-    class ViewHolder(val binding: ItemGalleryBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: ItemGalleryBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun setData(context: Context, gallery: GalleryModel){
             val weakContext = WeakReference(context)

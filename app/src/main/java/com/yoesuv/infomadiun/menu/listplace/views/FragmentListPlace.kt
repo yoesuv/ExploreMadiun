@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import androidx.appcompat.widget.*
 import android.view.*
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentListplaceBinding
 import com.yoesuv.infomadiun.menu.listplace.adapters.ListPlaceAdapter
@@ -17,10 +18,10 @@ import com.yoesuv.infomadiun.menu.listplace.viewmodels.FragmentListPlaceViewMode
 /**
  *  Created by yusuf on 4/30/18.
  */
-class FragmentListPlace: androidx.fragment.app.Fragment() {
+class FragmentListPlace: Fragment() {
 
     companion object {
-        fun getInstance(): androidx.fragment.app.Fragment {
+        fun getInstance(): Fragment {
             return FragmentListPlace()
         }
     }
@@ -76,8 +77,7 @@ class FragmentListPlace: androidx.fragment.app.Fragment() {
     }
 
     private fun setupRecycler(){
-        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
-        layoutManager.orientation = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+        val layoutManager = LinearLayoutManager(activity)
 
         binding.recyclerViewListPlace.layoutManager = layoutManager
         binding.recyclerViewListPlace.setHasFixedSize(true)

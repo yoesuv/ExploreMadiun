@@ -8,9 +8,9 @@ import com.yoesuv.infomadiun.menu.other.views.ChildFragmentInfo
 import com.yoesuv.infomadiun.menu.other.views.ChildFragmentLibraries
 import com.yoesuv.infomadiun.menu.other.views.ChildFragmentThanks
 
-class TabOtherAdapter(fm: androidx.fragment.app.FragmentManager?) : androidx.fragment.app.FragmentPagerAdapter(fm) {
+class TabOtherAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
 
-    override fun getItem(position: Int): androidx.fragment.app.Fragment {
+    override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> ChildFragmentInfo.getInstance()
             1 -> ChildFragmentChangelog.getInstance()

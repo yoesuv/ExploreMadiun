@@ -7,12 +7,10 @@ import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.*
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.yoesuv.infomadiun.R
-import com.yoesuv.infomadiun.data.Constants
 import com.yoesuv.infomadiun.databinding.FragmentGalleryBinding
 import com.yoesuv.infomadiun.menu.gallery.adapters.GalleryAdapter
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
@@ -21,10 +19,10 @@ import com.yoesuv.infomadiun.menu.gallery.viewmodels.FragmentGalleryViewModel
 /**
  *  Created by yusuf on 4/30/18.
  */
-class FragmentGallery: androidx.fragment.app.Fragment() {
+class FragmentGallery: Fragment() {
 
     companion object {
-        fun getInstance(): androidx.fragment.app.Fragment {
+        fun getInstance(): Fragment {
             return FragmentGallery()
         }
     }

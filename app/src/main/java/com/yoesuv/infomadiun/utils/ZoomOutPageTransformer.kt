@@ -3,7 +3,7 @@ package com.yoesuv.infomadiun.utils
 import androidx.viewpager.widget.ViewPager
 import android.view.View
 
-class ZoomOutPageTransformer : androidx.viewpager.widget.ViewPager.PageTransformer {
+class ZoomOutPageTransformer : ViewPager.PageTransformer {
 
     override fun transformPage(view: View, position: Float) {
         val pageWidth = view.width

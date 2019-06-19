@@ -12,10 +12,10 @@ import com.yoesuv.infomadiun.BuildConfig
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ChildFragmentInfoBinding
 
-class ChildFragmentInfo: androidx.fragment.app.Fragment() {
+class ChildFragmentInfo: Fragment() {
 
     companion object {
-        fun getInstance(): androidx.fragment.app.Fragment {
+        fun getInstance(): Fragment {
             return ChildFragmentInfo()
         }
     }
