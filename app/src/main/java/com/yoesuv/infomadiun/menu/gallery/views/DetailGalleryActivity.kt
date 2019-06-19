@@ -1,5 +1,6 @@
 package com.yoesuv.infomadiun.menu.gallery.views
 
+import android.os.Build
 import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
@@ -22,7 +23,9 @@ class DetailGalleryActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        overridePendingTransition(R.anim.slide_in_bottom, R.anim.scale_down)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            overridePendingTransition(R.anim.slide_in_bottom, R.anim.scale_down)
+        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail_gallery)
         val galleryModel: GalleryModel = intent?.getParcelableExtra(EXTRA_DATA_GALLERY) as GalleryModel
         viewModel = ViewModelProviders.of(this, CustomDetailGalleryViewModelFactory(galleryModel, application)).get(DetailGalleryViewModel::class.java)
@@ -40,7 +43,9 @@ class DetailGalleryActivity: AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        overridePendingTransition(R.anim.scale_up, R.anim.slide_out_bottom)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+            overridePendingTransition(R.anim.scale_up, R.anim.slide_out_bottom)
+        }
     }
 
     private fun setupToolbar(){
