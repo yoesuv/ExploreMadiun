@@ -37,7 +37,7 @@ android {
         }
     }
     compileSdkVersion 28
-    buildToolsVersion "28.0.2"
+    buildToolsVersion "28.0.3"
     flavorDimensions "default"
     defaultConfig {
         applicationId "com.yoesuv.infomadiun"
@@ -78,6 +78,7 @@ android {
     }
     lintOptions {
         checkReleaseBuilds = false
+        abortOnError false
     }
 }
 
