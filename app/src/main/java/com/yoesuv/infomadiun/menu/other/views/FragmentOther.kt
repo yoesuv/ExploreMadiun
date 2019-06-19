@@ -1,13 +1,13 @@
 package com.yoesuv.infomadiun.menu.other.views
 
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import com.google.android.material.appbar.AppBarLayout
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,10 +21,10 @@ import kotlinx.android.synthetic.main.fragment_other.view.*
 /**
  *  Created by yusuf on 4/30/18.
  */
-class FragmentOther: Fragment() {
+class FragmentOther: androidx.fragment.app.Fragment() {
 
     companion object {
-        fun getInstance():Fragment{
+        fun getInstance(): androidx.fragment.app.Fragment {
             return FragmentOther()
         }
     }

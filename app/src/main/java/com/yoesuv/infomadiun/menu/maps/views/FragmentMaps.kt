@@ -2,13 +2,13 @@ package com.yoesuv.infomadiun.menu.maps.views
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.content.Intent
 import android.content.IntentSender
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.*
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.util.TypedValue
 import android.view.*
@@ -44,13 +44,13 @@ import kotlinx.android.synthetic.main.fragment_map.view.*
 /**
  *  Created by yusuf on 4/30/18.
  */
-class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
+class FragmentMaps: androidx.fragment.app.Fragment(), OnMapReadyCallback, DirectionCallback {
 
     companion object {
         const val REQUEST_FEATURE_LOCATION_PERMISSION_CODE:Int = 12
         const val PREFERENCE_LATITUDE = "preference_latitude"
         const val PREFERENCE_LONGITUDE = "preference_longitude"
-        fun getInstance():Fragment{
+        fun getInstance(): androidx.fragment.app.Fragment {
             return FragmentMaps()
         }
     }
@@ -150,7 +150,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         val result:Task<LocationSettingsResponse> = LocationServices.getSettingsClient(activity).checkLocationSettings(builder.build())
         result.addOnCompleteListener { task ->
             try {
-                val response: LocationSettingsResponse = task.getResult(ApiException::class.java)
+                val response: LocationSettingsResponse? = task.getResult(ApiException::class.java)
             }catch (ex:ApiException) {
                 if(ex.statusCode==LocationSettingsStatusCodes.RESOLUTION_REQUIRED){
                     val resolvableApiException = ex as ResolvableApiException

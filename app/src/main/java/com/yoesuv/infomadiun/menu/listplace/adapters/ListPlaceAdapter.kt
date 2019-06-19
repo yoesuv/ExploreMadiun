@@ -3,8 +3,8 @@ package com.yoesuv.infomadiun.menu.listplace.adapters
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.*
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ItemListPlaceBinding
@@ -16,7 +16,7 @@ import java.lang.ref.WeakReference
 /**
  *  Created by yusuf on 4/30/18.
  */
-class ListPlaceAdapter(private val activity: Activity, private val listPlace:MutableList<PlaceModel>, private val recyclerView: RecyclerView?): RecyclerView.Adapter<ListPlaceAdapter.ViewHolder>() {
+class ListPlaceAdapter(private val activity: Activity, private val listPlace:MutableList<PlaceModel>, private val recyclerView: androidx.recyclerview.widget.RecyclerView?): androidx.recyclerview.widget.RecyclerView.Adapter<ListPlaceAdapter.ViewHolder>() {
 
     private var inflater: LayoutInflater = LayoutInflater.from(activity)
 
@@ -45,7 +45,7 @@ class ListPlaceAdapter(private val activity: Activity, private val listPlace:Mut
         activity?.startActivity(intent)
     }
 
-    class ViewHolder(val binding: ItemListPlaceBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: ItemListPlaceBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
 
         fun setData(context: Context, placeModel: PlaceModel){
             binding.itemListPlace = ItemListPlaceViewModel(WeakReference(context), placeModel)

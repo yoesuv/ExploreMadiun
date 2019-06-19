@@ -1,8 +1,8 @@
 package com.yoesuv.infomadiun.menu.listplace.viewmodels
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.databinding.ObservableField
+import androidx.lifecycle.AndroidViewModel
+import androidx.databinding.ObservableField
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.utils.AppHelper
 

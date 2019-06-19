@@ -13,6 +13,6 @@ class PreferencesHelper(context: Context) {
     }
 
     fun getString(name:String): String{
-        return prefHelper.getString(name,"")
+        return prefHelper.getString(name,"")!!
     }
 }

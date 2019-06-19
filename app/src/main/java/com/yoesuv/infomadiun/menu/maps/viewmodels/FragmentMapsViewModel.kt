@@ -1,7 +1,7 @@
 package com.yoesuv.infomadiun.menu.maps.viewmodels
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.yoesuv.infomadiun.data.Constants
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.networks.ServiceFactory

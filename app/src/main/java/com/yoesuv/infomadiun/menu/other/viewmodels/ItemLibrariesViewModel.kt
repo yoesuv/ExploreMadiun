@@ -1,7 +1,7 @@
 package com.yoesuv.infomadiun.menu.other.viewmodels
 
-import android.arch.lifecycle.ViewModel
-import android.databinding.ObservableField
+import androidx.lifecycle.ViewModel
+import androidx.databinding.ObservableField
 import com.yoesuv.infomadiun.menu.other.models.LicenseModel
 import com.yoesuv.infomadiun.utils.AppHelper
 

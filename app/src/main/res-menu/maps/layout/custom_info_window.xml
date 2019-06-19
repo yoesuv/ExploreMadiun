@@ -15,7 +15,7 @@
         android:text="@string/app_name"
         android:textColor="@color/default_text_color"/>
 
-   <android.support.v7.widget.AppCompatImageView
+   <androidx.appcompat.widget.AppCompatImageView
        android:id="@+id/imageViewMapLocationDirection"
        android:layout_width="35dp"
        android:layout_height="35dp"

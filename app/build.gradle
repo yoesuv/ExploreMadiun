@@ -11,7 +11,7 @@ buildscript {
         // We recommend changing it to the latest version from our changelog:
         // https://docs.fabric.io/android/changelog.html#fabric-gradle-plugin
         classpath 'io.fabric.tools:gradle:1.25.4'
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.3'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.6'
     }
 }
 
@@ -36,8 +36,8 @@ android {
             storePassword STORE_PASSWORD
         }
     }
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.0"
     flavorDimensions "default"
     defaultConfig {
         applicationId "com.yoesuv.infomadiun"
@@ -89,12 +89,12 @@ androidExtensions {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    implementation "com.android.support:appcompat-v7:$project.supportLibraryVersion"
-    implementation "com.android.support:support-v4:$project.supportLibraryVersion"
-    implementation "com.android.support:support-media-compat:$project.supportLibraryVersion"
-    implementation "com.android.support:design:$project.supportLibraryVersion"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.media:media:1.0.1'
+    implementation 'com.google.android.material:material:1.0.0'
 
-    implementation "com.android.support:recyclerview-v7:$project.supportLibraryVersion"
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.2@aar') {
         transitive = true
     }
@@ -117,8 +117,8 @@ dependencies {
     implementation "com.akexorcist:googledirectionlibrary:$project.googleDirectionLibraryVersion"
     implementation "com.intuit.ssp:ssp-android:$project.sspVersion"
     implementation "com.intuit.sdp:sdp-android:$project.sdpVersion"
-    implementation "android.arch.lifecycle:extensions:$project.archLifecycleVersion"
-    kapt "android.arch.lifecycle:compiler:$project.archLifecycleVersion"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

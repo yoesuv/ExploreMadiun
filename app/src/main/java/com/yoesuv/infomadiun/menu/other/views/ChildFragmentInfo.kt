@@ -1,10 +1,10 @@
 package com.yoesuv.infomadiun.menu.other.views
 
 import android.content.Intent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +12,10 @@ import com.yoesuv.infomadiun.BuildConfig
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ChildFragmentInfoBinding
 
-class ChildFragmentInfo: Fragment() {
+class ChildFragmentInfo: androidx.fragment.app.Fragment() {
 
     companion object {
-        fun getInstance():Fragment{
+        fun getInstance(): androidx.fragment.app.Fragment {
             return ChildFragmentInfo()
         }
     }

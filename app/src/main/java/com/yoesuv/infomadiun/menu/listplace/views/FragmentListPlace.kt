@@ -1,12 +1,12 @@
 package com.yoesuv.infomadiun.menu.listplace.views
 
 import android.app.Activity
-import android.arch.lifecycle.Observer
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.*
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.appcompat.widget.*
 import android.view.*
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentListplaceBinding
@@ -17,10 +17,10 @@ import com.yoesuv.infomadiun.menu.listplace.viewmodels.FragmentListPlaceViewMode
 /**
  *  Created by yusuf on 4/30/18.
  */
-class FragmentListPlace: Fragment() {
+class FragmentListPlace: androidx.fragment.app.Fragment() {
 
     companion object {
-        fun getInstance():Fragment{
+        fun getInstance(): androidx.fragment.app.Fragment {
             return FragmentListPlace()
         }
     }
@@ -76,15 +76,15 @@ class FragmentListPlace: Fragment() {
     }
 
     private fun setupRecycler(){
-        val layoutManager = LinearLayoutManager(activity)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
+        val layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity)
+        layoutManager.orientation = androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 
         binding.recyclerViewListPlace.layoutManager = layoutManager
         binding.recyclerViewListPlace.setHasFixedSize(true)
 
         adapter = ListPlaceAdapter(activity as Activity, listPlace, binding.recyclerViewListPlace)
         binding.recyclerViewListPlace.adapter = adapter
-        binding.recyclerViewListPlace.itemAnimator = DefaultItemAnimator()
+        binding.recyclerViewListPlace.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
     }
 
     private fun setupSwipeRefresh(){

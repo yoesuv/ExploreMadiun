@@ -1,8 +1,8 @@
 package com.yoesuv.infomadiun.menu.other.adapters
 
 import android.content.Context
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.yoesuv.infomadiun.R
@@ -10,7 +10,7 @@ import com.yoesuv.infomadiun.databinding.ItemLibrariesBinding
 import com.yoesuv.infomadiun.menu.other.models.LicenseModel
 import com.yoesuv.infomadiun.menu.other.viewmodels.ItemLibrariesViewModel
 
-class LicenseAdapter(private val context: Context?, private var listLibraries: MutableList<LicenseModel>) : RecyclerView.Adapter<LicenseAdapter.LicenseViewHolder>(){
+class LicenseAdapter(private val context: Context?, private var listLibraries: MutableList<LicenseModel>) : androidx.recyclerview.widget.RecyclerView.Adapter<LicenseAdapter.LicenseViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LicenseViewHolder {
@@ -28,7 +28,7 @@ class LicenseAdapter(private val context: Context?, private var listLibraries: M
     }
 
 
-    class LicenseViewHolder(private val binding: ItemLibrariesBinding) : RecyclerView.ViewHolder(binding.root) {
+    class LicenseViewHolder(private val binding: ItemLibrariesBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
 
         fun setupData(model: LicenseModel){
             binding.itemLibraries = ItemLibrariesViewModel(model)

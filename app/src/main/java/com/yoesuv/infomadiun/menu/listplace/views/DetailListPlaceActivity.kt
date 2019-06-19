@@ -1,9 +1,9 @@
 package com.yoesuv.infomadiun.menu.listplace.views
 
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ActivityDetailListplaceBinding
