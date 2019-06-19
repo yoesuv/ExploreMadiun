@@ -276,7 +276,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         }
         googleMap?.setOnMarkerClickListener {
             val tag: MarkerTag = it.tag as MarkerTag
-            Log.d(Constants.TAG_DEBUG,"FragmentMaps # Marker tag type : ${tag.type}")
             if (tag.type == 0) {
                 val start = SystemClock.uptimeMillis()
                 val duration = 1200L
@@ -296,10 +295,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     }
 
     override fun onDirectionSuccess(direction: Direction?, rawBody: String?) {
-        Log.e(Constants.TAG_ERROR,"FragmentMaps # onDirectionSuccess ${direction?.errorMessage}")
         view?.textViewGettingDirection?.visibility = View.INVISIBLE
         if(direction!!.isOK){
-            Log.d(Constants.TAG_DEBUG,"FragmentMaps # found ${direction.routeList.size} direction")
             if(direction.routeList.size>0) {
                 googleMap?.clear()
                 markerLocation = googleMap?.addMarker(MarkerOptions().position(destination).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_selected)))
@@ -333,7 +330,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
             super.onLocationResult(locationResult)
             val listLocation = locationResult?.locations
             if (listLocation?.isNotEmpty()!!){
-                Log.d(Constants.TAG_DEBUG,"FragmentMaps # found ${listLocation.size} location")
                 val markerOpt = MarkerOptions()
                 markerOpt.position(LatLng(listLocation[0].latitude, listLocation[0].longitude))
                 markerOpt.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_position))
