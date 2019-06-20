@@ -2,13 +2,13 @@ package com.yoesuv.infomadiun.menu.maps.views
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.arch.lifecycle.Observer
+import androidx.lifecycle.Observer
 import android.content.Intent
 import android.content.IntentSender
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.*
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.util.TypedValue
 import android.view.*
@@ -50,7 +50,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         const val REQUEST_FEATURE_LOCATION_PERMISSION_CODE:Int = 12
         const val PREFERENCE_LATITUDE = "preference_latitude"
         const val PREFERENCE_LONGITUDE = "preference_longitude"
-        fun getInstance():Fragment{
+        fun getInstance(): Fragment {
             return FragmentMaps()
         }
     }
@@ -150,7 +150,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         val result:Task<LocationSettingsResponse> = LocationServices.getSettingsClient(activity).checkLocationSettings(builder.build())
         result.addOnCompleteListener { task ->
             try {
-                val response: LocationSettingsResponse = task.getResult(ApiException::class.java)
+                val response: LocationSettingsResponse? = task.getResult(ApiException::class.java)
             }catch (ex:ApiException) {
                 if(ex.statusCode==LocationSettingsStatusCodes.RESOLUTION_REQUIRED){
                     val resolvableApiException = ex as ResolvableApiException
@@ -276,7 +276,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         }
         googleMap?.setOnMarkerClickListener {
             val tag: MarkerTag = it.tag as MarkerTag
-            Log.d(Constants.TAG_DEBUG,"FragmentMaps # Marker tag type : ${tag.type}")
             if (tag.type == 0) {
                 val start = SystemClock.uptimeMillis()
                 val duration = 1200L
@@ -296,10 +295,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     }
 
     override fun onDirectionSuccess(direction: Direction?, rawBody: String?) {
-        Log.e(Constants.TAG_ERROR,"FragmentMaps # onDirectionSuccess ${direction?.errorMessage}")
         view?.textViewGettingDirection?.visibility = View.INVISIBLE
         if(direction!!.isOK){
-            Log.d(Constants.TAG_DEBUG,"FragmentMaps # found ${direction.routeList.size} direction")
             if(direction.routeList.size>0) {
                 googleMap?.clear()
                 markerLocation = googleMap?.addMarker(MarkerOptions().position(destination).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_selected)))
@@ -307,7 +304,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
                 setCameraWithCoordinationBounds(direction.routeList[0])
 
-                for (i: Int in 0..(direction.routeList.size - 1)) {
+                for (i: Int in 0 until direction.routeList.size) {
                     val color = colors[i % colors.size]
                     val route = direction.routeList[i]
                     val directionPositionList = route.legList[0].directionPoint
@@ -333,7 +330,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
             super.onLocationResult(locationResult)
             val listLocation = locationResult?.locations
             if (listLocation?.isNotEmpty()!!){
-                Log.d(Constants.TAG_DEBUG,"FragmentMaps # found ${listLocation.size} location")
                 val markerOpt = MarkerOptions()
                 markerOpt.position(LatLng(listLocation[0].latitude, listLocation[0].longitude))
                 markerOpt.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_position))
@@ -341,8 +337,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                 markerUser = googleMap?.addMarker(markerOpt)
                 markerUser?.tag = MarkerTag("Lokasi Anda", 1, listLocation[0].latitude, listLocation[0].longitude)
 
-                App.prefHelper?.setString(FragmentMaps.PREFERENCE_LATITUDE, listLocation[0].latitude.toString())
-                App.prefHelper?.setString(FragmentMaps.PREFERENCE_LONGITUDE, listLocation[0].longitude.toString())
+                App.prefHelper?.setString(PREFERENCE_LATITUDE, listLocation[0].latitude.toString())
+                App.prefHelper?.setString(PREFERENCE_LONGITUDE, listLocation[0].longitude.toString())
             }
         }
     }

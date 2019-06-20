@@ -1,11 +1,10 @@
 package com.yoesuv.infomadiun.menu.other.views
 
-import android.arch.lifecycle.Observer
-import android.databinding.DataBindingUtil
-import android.os.Build
+import androidx.lifecycle.Observer
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,13 +13,11 @@ import com.yoesuv.infomadiun.databinding.ChildFragmentChangelogBinding
 import com.yoesuv.infomadiun.menu.other.adapters.ChangeLogAdapter
 import com.yoesuv.infomadiun.menu.other.models.ChangeLogModel
 import com.yoesuv.infomadiun.menu.other.viewmodels.ChildFragmentChangelogViewModel
-import com.yoesuv.infomadiun.utils.AppHelper
-import kotlinx.android.synthetic.main.child_fragment_changelog.view.*
 
 class ChildFragmentChangelog: Fragment() {
 
     companion object {
-        fun getInstance():Fragment{
+        fun getInstance(): Fragment {
             return ChildFragmentChangelog()
         }
     }

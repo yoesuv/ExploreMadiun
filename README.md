@@ -1,5 +1,10 @@
-## Explore Madiun Version 2.0.2 ##
-#### Build with Kotlin, Use MVVM Pattern ####
+## Explore Madiun Version 2.0.3 ##
+[![Build Status](https://travis-ci.org/yoesuv/ExploreMadiun.svg?branch=master)](https://travis-ci.org/yoesuv/ExploreMadiun)
+
+* Kotlin
+* Data Binding
+* MVVM
+* [AndroidX](https://developer.android.com/jetpack/androidx/)
 
 [![](https://lh3.googleusercontent.com/H1t-kzaXxd6S4WYH2UqwUI0UAbqIdwqXmW9NgYKklDiah_UMO4hh_ucbG3g1nTWSYygSzFd2A4zWHfXLzuaeXXXkE3CKOCt64u3Ef7RmyxYccBStbXY-IldYfJR6XZwQPynaQVjCP0kEbK1605Tv79iouWucfnimJiGZFfaPR9YmpHmGsU6MWmYRyZtU8aZIeMphdhTfxpaArMSnYgGQVmyuq-3WdnqGjIpDvZncC2keyCVLQrw7pGovfOsGd33_zs03L0ac-FFo4FaW0BRM8CphO4iFwdZcaKvgEhW9_3lqWMbadNQrdQOG03uHLUxFX7tPNZib33nzMtqVRvOIruNatITSbVPWZuOdyzNYd4nQOJfeQ0J9UhtvRu8nkRxOxwjCWD3qSX6Jexgl9lIT0YFa1yX0pVzIu7mUCDn543OHupjh3xg3az2R7JEAG87x0WtIt0-KgbtQWKZEmWWXIvF-4aM6oBytP6dDmcb99ntnoPjxZlvdbDZPUkQ99EZSUjU_sPeucEELlHOGLRhyFqq1F4Z6V1u00ew3ZPZspczKT_iCXDxikEybrWM5kIeYkfK9e3VAdCPbeiKC89dOhdm5emUxkRvqEcOXErI=w181-h70-no)](https://play.google.com/store/apps/details?id=com.yoesuv.infomadiun)
 <br/>

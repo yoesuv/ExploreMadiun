@@ -1,7 +1,6 @@
 package com.yoesuv.infomadiun.widgets
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.os.Build

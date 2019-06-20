@@ -1,8 +1,8 @@
 package com.yoesuv.infomadiun.menu.other.adapters
 
 import android.content.Context
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.yoesuv.infomadiun.R

@@ -18,7 +18,7 @@
             android:id="@+id/toolbarDetailListPlace"
             layout="@layout/include_toolbar"/>
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/activity_detail_image_height"
                     android:scaleType="centerCrop"
@@ -58,7 +58,7 @@
 
             </LinearLayout>
 
-        </android.support.v4.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 

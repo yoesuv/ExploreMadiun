@@ -1,18 +1,16 @@
 package com.yoesuv.infomadiun.menu.gallery.views
 
-import android.arch.lifecycle.Observer
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.*
-import android.util.Log
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.yoesuv.infomadiun.R
-import com.yoesuv.infomadiun.data.Constants
 import com.yoesuv.infomadiun.databinding.FragmentGalleryBinding
 import com.yoesuv.infomadiun.menu.gallery.adapters.GalleryAdapter
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
@@ -24,7 +22,7 @@ import com.yoesuv.infomadiun.menu.gallery.viewmodels.FragmentGalleryViewModel
 class FragmentGallery: Fragment() {
 
     companion object {
-        fun getInstance():Fragment{
+        fun getInstance(): Fragment {
             return FragmentGallery()
         }
     }
@@ -59,12 +57,12 @@ class FragmentGallery: Fragment() {
     }
 
     private fun setupRecyclerView(){
-        val lManager = GridLayoutManager(context?.applicationContext, 3)
+        val lManager = androidx.recyclerview.widget.GridLayoutManager(context?.applicationContext, 3)
         binding.recyclerViewGallery.setHasFixedSize(true)
         binding.recyclerViewGallery.layoutManager = lManager
         adapter = GalleryAdapter(activity as AppCompatActivity, listGallery)
         binding.recyclerViewGallery.adapter = adapter
-        binding.recyclerViewGallery.itemAnimator = DefaultItemAnimator()
+        binding.recyclerViewGallery.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
     }
 
     private fun setupSwipeRefresh(){

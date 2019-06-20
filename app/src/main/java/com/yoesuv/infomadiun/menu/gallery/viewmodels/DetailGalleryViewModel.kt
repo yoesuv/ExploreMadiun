@@ -1,8 +1,8 @@
 package com.yoesuv.infomadiun.menu.gallery.viewmodels
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.databinding.ObservableField
+import androidx.lifecycle.AndroidViewModel
+import androidx.databinding.ObservableField
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 
 class DetailGalleryViewModel(galleryModel: GalleryModel, application: Application) : AndroidViewModel(application) {

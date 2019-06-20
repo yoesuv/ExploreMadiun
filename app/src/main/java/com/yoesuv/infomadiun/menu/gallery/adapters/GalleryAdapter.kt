@@ -1,14 +1,10 @@
 package com.yoesuv.infomadiun.menu.gallery.adapters
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
-import android.os.Build
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.*
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ItemGalleryBinding

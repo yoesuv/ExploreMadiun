@@ -1,13 +1,11 @@
 package com.yoesuv.infomadiun.menu.other.views
 
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import com.google.android.material.appbar.AppBarLayout
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +13,6 @@ import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentOtherBinding
 import com.yoesuv.infomadiun.menu.other.adapters.TabOtherAdapter
 import com.yoesuv.infomadiun.utils.ZoomOutPageTransformer
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.fragment_other.view.*
 
 /**
  *  Created by yusuf on 4/30/18.
@@ -24,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_other.view.*
 class FragmentOther: Fragment() {
 
     companion object {
-        fun getInstance():Fragment{
+        fun getInstance(): Fragment {
             return FragmentOther()
         }
     }

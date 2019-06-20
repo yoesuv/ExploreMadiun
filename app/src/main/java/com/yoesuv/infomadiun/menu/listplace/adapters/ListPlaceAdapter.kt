@@ -3,8 +3,8 @@ package com.yoesuv.infomadiun.menu.listplace.adapters
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.*
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ItemListPlaceBinding
