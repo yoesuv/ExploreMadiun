@@ -47,8 +47,7 @@
             android:screenOrientation="portrait"/>
 
         <activity android:name=".main.TransparentActivity"
-            android:theme="@style/Theme.Transparent"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/Theme.Transparent"/>
 
     </application>
 
