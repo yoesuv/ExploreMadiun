@@ -280,6 +280,12 @@
     </string>
 
     <!-- CHANGELOG -->
+    <string name="ver_12">Versi 2.0.4</string>
+    <string name="ver_12_info">
+        <![CDATA[
+            • pembaruan library
+        ]]>
+    </string>
     <string name="ver_11">Versi 2.0.3</string>
     <string name="ver_11_info">
         <![CDATA[

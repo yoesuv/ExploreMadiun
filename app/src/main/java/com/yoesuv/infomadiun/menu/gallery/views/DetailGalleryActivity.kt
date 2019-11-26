@@ -1,6 +1,5 @@
 package com.yoesuv.infomadiun.menu.gallery.views
 
-import android.os.Build
 import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
@@ -11,6 +10,7 @@ import com.yoesuv.infomadiun.databinding.ActivityDetailGalleryBinding
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import com.yoesuv.infomadiun.menu.gallery.viewmodels.CustomDetailGalleryViewModelFactory
 import com.yoesuv.infomadiun.menu.gallery.viewmodels.DetailGalleryViewModel
+import com.yoesuv.infomadiun.utils.nougatOrBelow
 
 class DetailGalleryActivity: AppCompatActivity() {
 
@@ -23,7 +23,7 @@ class DetailGalleryActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+        nougatOrBelow {
             overridePendingTransition(R.anim.slide_in_bottom, R.anim.scale_down)
         }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail_gallery)
@@ -43,7 +43,7 @@ class DetailGalleryActivity: AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+        nougatOrBelow {
             overridePendingTransition(R.anim.scale_up, R.anim.slide_out_bottom)
         }
     }

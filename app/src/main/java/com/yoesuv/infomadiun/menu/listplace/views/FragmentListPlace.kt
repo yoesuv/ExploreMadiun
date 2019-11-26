@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import androidx.appcompat.widget.*
 import android.view.*
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentListplaceBinding
@@ -34,7 +36,7 @@ class FragmentListPlace: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_listplace, container, false)
-        viewModel = FragmentListPlaceViewModel()
+        viewModel = ViewModelProviders.of(this).get(FragmentListPlaceViewModel::class.java)
         binding.listPlace = viewModel
 
         setupRecycler()
@@ -43,17 +45,15 @@ class FragmentListPlace: Fragment() {
 
         setHasOptionsMenu(true)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.getListPlace()
         viewModel.listPlace.observe(this, Observer { listPlace ->
             onListDataChanged(listPlace!!)
         })
-
-        return binding.root
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.destroy()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

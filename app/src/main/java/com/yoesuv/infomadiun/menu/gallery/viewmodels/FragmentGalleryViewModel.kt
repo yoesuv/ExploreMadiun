@@ -39,7 +39,8 @@ class FragmentGalleryViewModel: ViewModel() {
         )
     }
 
-    fun destroy(){
+    override fun onCleared() {
+        super.onCleared()
         compositeDisposable.clear()
     }
 
