@@ -40,6 +40,7 @@ import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.menu.maps.viewmodels.FragmentMapsViewModel
 import com.yoesuv.infomadiun.utils.AppHelper
 import com.yoesuv.infomadiun.utils.BounceAnimation
+import com.yoesuv.infomadiun.utils.logError
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_map.view.*
 
@@ -322,12 +323,15 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                 }
             }
         }else{
+            logError("FragmentMaps # direction not ok ${direction.errorMessage}")
             AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
         }
     }
 
     override fun onDirectionFailure(t: Throwable?) {
+        logError("FragmentMaps # onDirectionFailure ${t?.message}")
         AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
+        t?.printStackTrace()
     }
 
     class MarkerTag(val title:String, val type:Int, val latitude:Double?, val longitude:Double?)
