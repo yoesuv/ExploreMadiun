@@ -31,8 +31,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/activity_detail_image_height"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/placeholder_image"
-                    tools:loadImage="@{listPlace.imageUrl}"/>
+                    tools:srcCompat="@tools:sample/backgrounds/scenic"
+                    app:loadImage="@{listPlace.imageUrl}"/>
 
                 <com.yoesuv.infomadiun.widgets.LatoBoldTextView
                     android:id="@+id/textViewDetailListPlaceName"

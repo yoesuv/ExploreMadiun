@@ -13,15 +13,6 @@ class Converters {
     companion object {
 
         @JvmStatic
-        @BindingAdapter("loadImage")
-        fun loadImage(imageView: AppCompatImageView, imageUrl: String){
-            GlideApp.with(imageView.context.applicationContext)
-                    .load(imageUrl)
-                    .transition(GenericTransitionOptions.with(android.R.anim.fade_in))
-                    .into(imageView)
-        }
-
-        @JvmStatic
         @BindingAdapter("hideView")
         fun hideView(view: View, status: Boolean){
             if (!status) {

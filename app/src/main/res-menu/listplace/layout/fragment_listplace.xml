@@ -23,7 +23,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewListPlace"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_list_place"
+                tools:itemCount="10"/>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
