@@ -12,7 +12,6 @@ import com.yoesuv.infomadiun.menu.listplace.views.FragmentListPlace
 import com.yoesuv.infomadiun.menu.maps.views.FragmentMaps
 import com.yoesuv.infomadiun.menu.other.views.FragmentOther
 import com.yoesuv.infomadiun.utils.AppHelper
-import com.yoesuv.infomadiun.utils.BottomNavigationViewHelper
 
 /**
  *  Created by yusuf on 4/28/18.
@@ -54,7 +53,6 @@ class MainActivity: AppCompatActivity() {
 
     private fun setupNavigationMenu(){
         binding.bottomNavigationView.itemIconTintList = null
-        BottomNavigationViewHelper.disableShiftMode(binding.bottomNavigationView)
         
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when {

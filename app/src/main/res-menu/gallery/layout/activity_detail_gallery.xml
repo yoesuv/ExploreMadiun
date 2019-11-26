@@ -31,8 +31,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/activity_detail_image_height"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/placeholder_image"
-                    tools:loadImage="@{gallery.imageUrl}"/>
+                    tools:srcCompat="@tools:sample/backgrounds/scenic"
+                    app:loadImage="@{gallery.imageUrl}"/>
 
                 <com.yoesuv.infomadiun.widgets.LatoRegularTextView
                     android:layout_width="match_parent"

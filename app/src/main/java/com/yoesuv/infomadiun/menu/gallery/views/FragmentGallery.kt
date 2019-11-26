@@ -10,6 +10,7 @@ import androidx.appcompat.widget.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProviders
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentGalleryBinding
 import com.yoesuv.infomadiun.menu.gallery.adapters.GalleryAdapter
@@ -35,11 +36,16 @@ class FragmentGallery: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gallery, container, false)
-        viewModel = FragmentGalleryViewModel()
+        viewModel = ViewModelProviders.of(this).get(FragmentGalleryViewModel::class.java)
 
         setupRecyclerView()
         setupSwipeRefresh()
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel.getListGallery()
         viewModel.listGallery.observe(this, Observer { listGallery ->
             onListDataChanged(listGallery!!)
@@ -47,13 +53,6 @@ class FragmentGallery: Fragment() {
         viewModel.liveDataError.observe(this, Observer { isError ->
             setupLayoutError(isError)
         })
-
-        return binding.root
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.destroy()
     }
 
     private fun setupRecyclerView(){

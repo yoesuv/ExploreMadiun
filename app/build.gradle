@@ -30,7 +30,7 @@ android {
         }
     }
     compileSdkVersion 29
-    buildToolsVersion "29.0.0"
+    buildToolsVersion "29.0.2"
     flavorDimensions "default"
     defaultConfig {
         applicationId "com.yoesuv.infomadiun"
@@ -82,12 +82,10 @@ androidExtensions {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.media:media:1.0.1'
     implementation 'com.google.android.material:material:1.0.0'
 
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation "com.google.firebase:firebase-core:$project.firebaseCoreVersion"
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation "com.google.android.gms:play-services-maps:$project.firebaseVersion"
@@ -108,8 +106,8 @@ dependencies {
     implementation "com.akexorcist:googledirectionlibrary:$project.googleDirectionLibraryVersion"
     implementation "com.intuit.ssp:ssp-android:$project.sspVersion"
     implementation "com.intuit.sdp:sdp-android:$project.sdpVersion"
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:$project.lifeCycleVersion"
+    kapt "androidx.lifecycle:lifecycle-compiler:$project.lifeCycleVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'

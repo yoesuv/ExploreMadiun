@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.util.Log
 import android.util.TypedValue
 import android.view.*
+import androidx.lifecycle.ViewModelProviders
 import com.akexorcist.googledirection.DirectionCallback
 import com.akexorcist.googledirection.GoogleDirection
 import com.akexorcist.googledirection.constant.AvoidType
@@ -39,6 +40,8 @@ import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.menu.maps.viewmodels.FragmentMapsViewModel
 import com.yoesuv.infomadiun.utils.AppHelper
 import com.yoesuv.infomadiun.utils.BounceAnimation
+import com.yoesuv.infomadiun.utils.logError
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_map.view.*
 
 /**
@@ -70,6 +73,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     private lateinit var destination: LatLng
     private val colors = arrayListOf("#7F2196f3","#7F4CAF50","#7FF44336")
 
+    private var compositeDisposable = CompositeDisposable()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.getActivity()!!.applicationContext)
@@ -77,7 +82,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false)
-        viewModel = FragmentMapsViewModel()
+        viewModel = ViewModelProviders.of(this).get(FragmentMapsViewModel::class.java)
         binding.maps = viewModel
 
         activity = getActivity() as Activity
@@ -87,6 +92,12 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         mapFragment?.getMapAsync(this)
 
         setHasOptionsMenu(true)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.textViewGettingDirection.visibility = View.INVISIBLE
 
         viewModel.listPin.observe(this, Observer { listPin ->
@@ -95,16 +106,14 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         viewModel.error.observe(this, Observer {
             AppHelper.displayErrorToast(activity, getString(R.string.ops_message))
         })
-
-        return binding.root
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.destroy()
         if(myLocationCallback!=null) {
             LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(myLocationCallback)
         }
+        compositeDisposable.clear()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -119,16 +128,16 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.menu_map, menu)
+        inflater.inflate(R.menu.menu_map, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if(item?.itemId==R.id.menuMapRefresh){
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==R.id.menuMapRefresh){
             googleMap?.clear()
             //default location
-            googleMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(-7.813882, 111.371713)))
+            googleMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(Constants.DEFAULT_LATITUDE, Constants.DEFAULT_LONGITUDE)))
             googleMap?.animateCamera(CameraUpdateFactory.zoomTo(9f))
             viewModel.getListPin()
         }
@@ -168,14 +177,16 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     private fun requestPermission(googleMap: GoogleMap?){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-            rxPermission.request(android.Manifest.permission.ACCESS_FINE_LOCATION)
-                    .subscribe { t: Boolean? ->
-                        if(t!!){
-                            enableUserLocation(googleMap)
-                        }else{
-                            AppHelper.displayErrorToast(activity, getString(R.string.access_location_denied))
+            compositeDisposable.add(
+                rxPermission.request(android.Manifest.permission.ACCESS_FINE_LOCATION)
+                        .subscribe { t: Boolean? ->
+                            if(t!!){
+                                enableUserLocation(googleMap)
+                            }else{
+                                AppHelper.displayErrorToast(activity, getString(R.string.access_location_denied))
+                            }
                         }
-                    }
+            )
         }else{
             enableUserLocation(googleMap)
         }
@@ -251,7 +262,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         googleMap?.uiSettings?.isCompassEnabled = true
 
         //default location
-        googleMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(-7.813882, 111.371713)))
+        googleMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(Constants.DEFAULT_LATITUDE, Constants.DEFAULT_LONGITUDE)))
         googleMap?.animateCamera(CameraUpdateFactory.zoomTo(9f))
         googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style_map))
 
@@ -312,12 +323,15 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                 }
             }
         }else{
+            logError("FragmentMaps # direction not ok ${direction.errorMessage}")
             AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
         }
     }
 
     override fun onDirectionFailure(t: Throwable?) {
+        logError("FragmentMaps # onDirectionFailure ${t?.message}")
         AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
+        t?.printStackTrace()
     }
 
     class MarkerTag(val title:String, val type:Int, val latitude:Double?, val longitude:Double?)
