@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.6'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:1.0.3'
     }
 }
 
@@ -12,7 +12,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'io.fabric'
 apply plugin: 'com.getkeepsafe.dexcount'
 
 repositories {
@@ -66,8 +65,8 @@ android {
             ]
         }
     }
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
     lintOptions {
         checkReleaseBuilds = false
@@ -87,7 +86,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     implementation "com.google.firebase:firebase-core:$project.firebaseCoreVersion"
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation "com.google.android.gms:play-services-maps:$project.firebaseVersion"
     implementation "com.google.android.gms:play-services-location:$project.firebaseVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
