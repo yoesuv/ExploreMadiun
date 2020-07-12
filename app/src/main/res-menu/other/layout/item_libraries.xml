@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <import type="android.view.View"/>
@@ -16,32 +17,36 @@
         android:layout_marginRight="@dimen/fragment_info_margin">
 
         <!-- library name-->
-        <com.yoesuv.infomadiun.widgets.LatoBoldTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewLibraryName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{itemLibraries.name}"
+            android:textStyle="bold"
             android:textSize="@dimen/title_libraries"
-            android:textColor="@color/default_text_color"/>
+            android:textColor="@color/default_text_color"
+            tools:text="@tools:sample/full_names"/>
 
         <!-- library url -->
-        <com.yoesuv.infomadiun.widgets.LatoRegularTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewLibraryUrl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{itemLibraries.url}"
             android:textSize="@dimen/url_libraries"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            tools:text="@tools:sample/cities"/>
 
         <!-- library license -->
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewLibraryLicense"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="monospace"
             android:text="@{itemLibraries.license}"
             android:textSize="@dimen/license_libraries"
-            android:textColor="@color/default_text_color"/>
+            android:textColor="@color/default_text_color"
+            tools:text="@tools:sample/lorem"/>
 
         <include
             android:id="@+id/layoutDivider"
