@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <import type="android.view.View"/>
@@ -15,19 +16,24 @@
         android:layout_marginLeft="@dimen/fragment_info_margin"
         android:layout_marginRight="@dimen/fragment_info_margin">
 
-        <com.yoesuv.infomadiun.widgets.LatoBoldTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewChangelogTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{itemChangelog.name}"
-            android:textColor="@color/default_text_color"/>
+            android:textStyle="bold"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/default_text_color"
+            tools:text="@tools:sample/full_names"/>
 
-        <com.yoesuv.infomadiun.widgets.LatoRegularTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewChangelogDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{itemChangelog.description}"
-            android:textColor="@color/default_text_color"/>
+            android:textSize="@dimen/_12ssp"
+            android:textColor="@color/default_text_color"
+            tools:text="@tools:sample/lorem"/>
 
         <include
             android:id="@+id/layoutDivider"

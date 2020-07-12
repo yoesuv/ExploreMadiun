@@ -20,7 +20,7 @@
                 android:background="@color/colorPrimary"
                 app:layout_scrollFlags="scroll|enterAlways">
 
-                <com.yoesuv.infomadiun.widgets.ToolbarTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewToolbar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
