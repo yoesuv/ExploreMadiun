@@ -1,3 +1,7 @@
+def apiKeyPropertiesFile = rootProject.file("apiKey.properties")
+def apiKeyProperties = new Properties()
+apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
+
 buildscript {
     repositories {
         mavenCentral()
@@ -29,7 +33,7 @@ android {
         }
     }
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     flavorDimensions "default"
     defaultConfig {
         applicationId "com.yoesuv.infomadiun"
@@ -39,7 +43,8 @@ android {
         versionName project.versionName
         vectorDrawables.useSupportLibrary true
         setProperty("archivesBaseName", applicationId+"-v"+versionCode+"("+versionName+")")
-        resValue "string", "info_madiun_google_maps_api_key", "AIzaSyBlOlCyjJ2SeJZzVS_2uV4uxjGj-AboUQ8"
+        resValue "string", "MAPS_API_KEY", apiKeyProperties['MAPS_API_KEY']
+        resValue "string", "DIRECTION_API_KEY", apiKeyProperties['DIRECTION_API_KEY']
     }
     buildTypes {
         release {

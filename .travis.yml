@@ -6,7 +6,7 @@ android:
     - tools
     - platform-tools
     - tools
-    - build-tools-29.0.2
+    - build-tools-29.0.3
     - android-29
     - extra-android-m2repository
 
@@ -17,9 +17,4 @@ notifications:
   email: false
 
 script:
-  - ./gradlew clean
-  - ./gradlew assembleDebug
-  - ./gradlew assembleRelease
-#  - ./gradlew assemble check
-#  - ./gradlew checkstyle
-#  - ./gradlew build
+  - ./gradlew clean build

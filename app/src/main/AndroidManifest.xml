@@ -21,7 +21,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/info_madiun_google_maps_api_key" />
+            android:value="@string/MAPS_API_KEY" />
 
         <!-- fabric -->
         <meta-data

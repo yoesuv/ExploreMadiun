@@ -217,7 +217,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                 if(longitude!=""){
                     view?.textViewGettingDirection?.visibility = View.VISIBLE
                     origin = LatLng(latitude!!.toDouble(), longitude!!.toDouble())
-                    GoogleDirection.withServerKey(activity.getString(R.string.info_madiun_google_maps_api_key))
+                    GoogleDirection.withServerKey(activity.getString(R.string.DIRECTION_API_KEY))
                             .from(origin)
                             .to(destination)
                             .alternativeRoute(true)
