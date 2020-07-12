@@ -17,7 +17,7 @@
             android:layout_height="match_parent"
             class="com.google.android.gms.maps.SupportMapFragment"/>
 
-        <com.yoesuv.infomadiun.widgets.LatoRegularTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewGettingDirection"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/getting_direction"
             android:textColor="@color/default_text_color"
-            android:textSize="14sp"/>
+            android:textSize="@dimen/_14ssp"/>
 
     </RelativeLayout>
 

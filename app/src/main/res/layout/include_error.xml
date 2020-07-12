@@ -20,23 +20,26 @@
             android:layout_gravity="center"
             app:srcCompat="@drawable/ic_error"/>
 
-        <com.yoesuv.infomadiun.widgets.LatoBoldTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewErrorTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:gravity="center"
             android:textColor="@color/default_text_color"
-            android:text="@string/ops_error"/>
+            android:textStyle="bold"
+            android:text="@string/ops_error"
+            android:textSize="@dimen/_12ssp"/>
 
-        <com.yoesuv.infomadiun.widgets.LatoRegularTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewErrorMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:gravity="center"
             android:textColor="@color/default_text_color"
-            android:text="@string/ops_message"/>
+            android:text="@string/ops_message"
+            android:textSize="@dimen/_12ssp"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buttonErrorRefresh"

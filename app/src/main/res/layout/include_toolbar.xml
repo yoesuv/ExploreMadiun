@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
 
-            <com.yoesuv.infomadiun.widgets.ToolbarTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewToolbarInclude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
