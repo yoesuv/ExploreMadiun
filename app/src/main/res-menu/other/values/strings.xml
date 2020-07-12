@@ -5,6 +5,12 @@
     <string name="changelog">versi rilis</string>
     <string name="thanks_to">Terima kasih</string>
     <string name="library">Pustaka</string>
+    <string-array name="tab_other">
+        <item>@string/informasi</item>
+        <item>@string/changelog</item>
+        <item>@string/thanks_to</item>
+        <item>@string/library</item>
+    </string-array>
 
     <string name="info_app_version">Versi %1$s</string>
 

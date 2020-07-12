@@ -93,7 +93,7 @@ androidExtensions {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.1.0'
@@ -114,7 +114,6 @@ dependencies {
     implementation "com.github.chrisbanes:PhotoView:$project.photoViewVersion"
     implementation "com.tbruyelle.rxpermissions2:rxpermissions:$project.rxPermissionVersion"
     implementation "com.github.GrenderG:Toasty:$project.toastyVersion"
-    implementation "com.github.devlight.navigationtabstrip:navigationtabstrip:$project.navigationTabStripVersion"
     implementation "com.akexorcist:googledirectionlibrary:$project.googleDirectionLibraryVersion"
     implementation "com.intuit.ssp:ssp-android:$project.sspVersion"
     implementation "com.intuit.sdp:sdp-android:$project.sdpVersion"
