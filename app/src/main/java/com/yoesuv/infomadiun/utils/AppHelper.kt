@@ -1,6 +1,5 @@
 package com.yoesuv.infomadiun.utils
 
-import com.yoesuv.infomadiun.R
 import android.content.Context
 import android.location.LocationManager
 import android.os.Build
@@ -9,7 +8,7 @@ import android.widget.Toast
 import es.dmoral.toasty.Toasty
 
 /**
- *  Created by yusuf on 5/1/18.
+ *  Updated by yusuf on  12 July 2020
  */
 
 object AppHelper {
@@ -20,15 +19,6 @@ object AppHelper {
 
     fun displayErrorToast(context: Context, message: String){
         Toasty.error(context, message, Toast.LENGTH_SHORT, true).show()
-    }
-
-    fun getToolbarHeight(context: Context): Int {
-        val styledAttributes = context.theme.obtainStyledAttributes(
-                intArrayOf(R.attr.actionBarSize))
-        val toolbarHeight = styledAttributes.getDimension(0, 0f).toInt()
-        styledAttributes.recycle()
-
-        return toolbarHeight
     }
 
     fun checkLocationSetting(context: Context):Boolean{

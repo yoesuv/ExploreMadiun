@@ -49,7 +49,7 @@
             app:elevation="@dimen/_8sdp"
             app:menu="@menu/menu_main"
             app:labelVisibilityMode="labeled"
-            app:layout_behavior="com.yoesuv.infomadiun.utils.BottomNavigationViewBehavior"/>
+            app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
