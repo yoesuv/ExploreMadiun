@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.appcompat.widget.*
 import android.view.*
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentListplaceBinding
@@ -18,7 +17,7 @@ import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.menu.listplace.viewmodels.FragmentListPlaceViewModel
 
 /**
- *  Created by yusuf on 4/30/18.
+ *  Updated by yusuf on 14 July 2020.
  */
 class FragmentListPlace: Fragment() {
 
@@ -36,7 +35,8 @@ class FragmentListPlace: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_listplace, container, false)
-        viewModel = ViewModelProviders.of(this).get(FragmentListPlaceViewModel::class.java)
+        binding.lifecycleOwner = this
+        viewModel = ViewModelProvider(this).get(FragmentListPlaceViewModel::class.java)
         binding.listPlace = viewModel
 
         setupRecycler()
@@ -51,7 +51,7 @@ class FragmentListPlace: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getListPlace()
-        viewModel.listPlace.observe(this, Observer { listPlace ->
+        viewModel.listPlace.observe(viewLifecycleOwner, Observer { listPlace ->
             onListDataChanged(listPlace!!)
         })
     }

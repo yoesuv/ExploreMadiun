@@ -118,7 +118,7 @@ dependencies {
     implementation "com.intuit.ssp:ssp-android:$project.sspVersion"
     implementation "com.intuit.sdp:sdp-android:$project.sdpVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$project.lifeCycleVersion"
-    kapt "androidx.lifecycle:lifecycle-compiler:$project.lifeCycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$project.lifeCycleVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'

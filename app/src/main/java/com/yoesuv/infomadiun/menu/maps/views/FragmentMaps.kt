@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import android.util.Log
 import android.util.TypedValue
 import android.view.*
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.akexorcist.googledirection.DirectionCallback
 import com.akexorcist.googledirection.GoogleDirection
 import com.akexorcist.googledirection.constant.AvoidType
@@ -42,7 +42,6 @@ import com.yoesuv.infomadiun.utils.AppHelper
 import com.yoesuv.infomadiun.utils.BounceAnimation
 import com.yoesuv.infomadiun.utils.logError
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.fragment_map.view.*
 
 /**
  *  Created by yusuf on 4/30/18.
@@ -82,7 +81,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false)
-        viewModel = ViewModelProviders.of(this).get(FragmentMapsViewModel::class.java)
+        binding.lifecycleOwner = this
+        viewModel = ViewModelProvider(this).get(FragmentMapsViewModel::class.java)
         binding.maps = viewModel
 
         activity = getActivity() as Activity
@@ -100,10 +100,10 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         super.onViewCreated(view, savedInstanceState)
         binding.textViewGettingDirection.visibility = View.INVISIBLE
 
-        viewModel.listPin.observe(this, Observer { listPin ->
+        viewModel.listPin.observe(viewLifecycleOwner, Observer { listPin ->
             onListDataChanged(listPin!!)
         })
-        viewModel.error.observe(this, Observer {
+        viewModel.error.observe(viewLifecycleOwner, Observer {
             AppHelper.displayErrorToast(activity, getString(R.string.ops_message))
         })
     }
@@ -215,7 +215,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
             if(latitude!=""){
                 if(longitude!=""){
-                    view?.textViewGettingDirection?.visibility = View.VISIBLE
+                    binding.textViewGettingDirection.visibility = View.VISIBLE
                     origin = LatLng(latitude!!.toDouble(), longitude!!.toDouble())
                     GoogleDirection.withServerKey(activity.getString(R.string.DIRECTION_API_KEY))
                             .from(origin)
@@ -306,7 +306,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     }
 
     override fun onDirectionSuccess(direction: Direction?, rawBody: String?) {
-        view?.textViewGettingDirection?.visibility = View.INVISIBLE
+        binding.textViewGettingDirection.visibility = View.INVISIBLE
         if(direction!!.isOK){
             if(direction.routeList.size>0) {
                 googleMap?.clear()

@@ -10,7 +10,7 @@ import androidx.appcompat.widget.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentGalleryBinding
 import com.yoesuv.infomadiun.menu.gallery.adapters.GalleryAdapter
@@ -18,7 +18,7 @@ import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import com.yoesuv.infomadiun.menu.gallery.viewmodels.FragmentGalleryViewModel
 
 /**
- *  Created by yusuf on 4/30/18.
+ *  Updated by yusuf on 14 July 2020
  */
 class FragmentGallery: Fragment() {
 
@@ -36,7 +36,8 @@ class FragmentGallery: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gallery, container, false)
-        viewModel = ViewModelProviders.of(this).get(FragmentGalleryViewModel::class.java)
+        binding.lifecycleOwner = this
+        viewModel = ViewModelProvider(this).get(FragmentGalleryViewModel::class.java)
 
         setupRecyclerView()
         setupSwipeRefresh()
@@ -47,10 +48,10 @@ class FragmentGallery: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getListGallery()
-        viewModel.listGallery.observe(this, Observer { listGallery ->
+        viewModel.listGallery.observe(viewLifecycleOwner, Observer { listGallery ->
             onListDataChanged(listGallery!!)
         })
-        viewModel.liveDataError.observe(this, Observer { isError ->
+        viewModel.liveDataError.observe(viewLifecycleOwner, Observer { isError ->
             setupLayoutError(isError)
         })
     }
