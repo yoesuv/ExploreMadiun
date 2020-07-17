@@ -1,10 +1,10 @@
 package com.yoesuv.infomadiun.menu.listplace.views
 
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import androidx.lifecycle.ViewModelProvider
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ActivityDetailListplaceBinding
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
@@ -27,8 +27,9 @@ class DetailListPlaceActivity: AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_bottom, R.anim.scale_down)
         }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail_listplace)
+        binding.lifecycleOwner = this
         val placeModel: PlaceModel = intent.getParcelableExtra(EXTRA_DATA_LIST_PLACE)!!
-        viewModel = ViewModelProviders.of(this, CustomDetailListPlaceViewModelFactory(placeModel, application)).get(DetailListPlaceViewModel::class.java)
+        viewModel = ViewModelProvider(this, CustomDetailListPlaceViewModelFactory(application, placeModel)).get(DetailListPlaceViewModel::class.java)
         binding.listPlace = viewModel
 
         setupToolbar()

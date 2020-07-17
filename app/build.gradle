@@ -119,6 +119,7 @@ dependencies {
     implementation "com.intuit.sdp:sdp-android:$project.sdpVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$project.lifeCycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$project.lifeCycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$project.lifeCycleVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'

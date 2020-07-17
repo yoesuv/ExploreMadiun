@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayoutInclude"
@@ -16,7 +17,9 @@
                 android:id="@+id/textViewToolbarInclude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_16ssp"/>
+                android:textSize="@dimen/_16ssp"
+                android:textColor="@android:color/white"
+                tools:text="@string/app_name"/>
 
         </androidx.appcompat.widget.Toolbar>
 

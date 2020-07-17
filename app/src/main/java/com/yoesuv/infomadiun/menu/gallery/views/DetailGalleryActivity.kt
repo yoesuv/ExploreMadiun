@@ -1,10 +1,10 @@
 package com.yoesuv.infomadiun.menu.gallery.views
 
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import androidx.lifecycle.ViewModelProvider
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ActivityDetailGalleryBinding
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
@@ -27,8 +27,9 @@ class DetailGalleryActivity: AppCompatActivity() {
             overridePendingTransition(R.anim.slide_in_bottom, R.anim.scale_down)
         }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail_gallery)
+        binding.lifecycleOwner = this
         val galleryModel: GalleryModel = intent?.getParcelableExtra(EXTRA_DATA_GALLERY) as GalleryModel
-        viewModel = ViewModelProviders.of(this, CustomDetailGalleryViewModelFactory(galleryModel, application)).get(DetailGalleryViewModel::class.java)
+        viewModel = ViewModelProvider(this, CustomDetailGalleryViewModelFactory(application, galleryModel)).get(DetailGalleryViewModel::class.java)
         binding.gallery = viewModel
 
         setupToolbar()

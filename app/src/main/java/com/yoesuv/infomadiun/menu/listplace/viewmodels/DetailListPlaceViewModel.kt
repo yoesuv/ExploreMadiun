@@ -6,7 +6,7 @@ import androidx.databinding.ObservableField
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.utils.AppHelper
 
-class DetailListPlaceViewModel(placeModel: PlaceModel, application: Application) : AndroidViewModel(application) {
+class DetailListPlaceViewModel(application: Application, placeModel: PlaceModel) : AndroidViewModel(application) {
 
     var imageUrl: ObservableField<String> = ObservableField(placeModel.image!!)
     var title: ObservableField<String> = ObservableField(placeModel.name!!)

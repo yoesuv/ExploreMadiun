@@ -5,11 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 
-class CustomDetailListPlaceViewModelFactory(private val placeModel: PlaceModel, private val application: Application): ViewModelProvider.NewInstanceFactory() {
+class CustomDetailListPlaceViewModelFactory(private val application: Application, private val placeModel: PlaceModel): ViewModelProvider.NewInstanceFactory() {
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return DetailListPlaceViewModel(placeModel, application) as T
+        return DetailListPlaceViewModel(application, placeModel) as T
     }
-
 
 }
