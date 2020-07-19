@@ -8,8 +8,6 @@ object Constants {
     const val TAG_DEBUG = "result_debug"
     const val TAG_ERROR = "result_error"
 
-    const val FONT_PACIFICO = "fonts/pacifico.ttf"
-
     const val BASE_URL = "https://info-madiun.firebaseapp.com/"
     const val TIME_OUT = 15 * 1000L
     const val ANIMATION_TIME = 300L

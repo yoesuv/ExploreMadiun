@@ -28,7 +28,8 @@
                     android:paddingRight="@dimen/_8sdp"
                     android:text="@string/app_name"
                     android:textSize="@dimen/_16ssp"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@android:color/white"
+                    android:fontFamily="@font/pacifico"/>
 
             </androidx.appcompat.widget.Toolbar>
 
