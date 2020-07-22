@@ -5,6 +5,12 @@ import android.util.Log
 import com.yoesuv.infomadiun.BuildConfig
 import com.yoesuv.infomadiun.data.Constants
 
+fun logDebug(message: String) {
+    if (BuildConfig.DEBUG) {
+        Log.d(Constants.TAG_DEBUG, message)
+    }
+}
+
 fun logError(message: String) {
     if (BuildConfig.DEBUG) {
         Log.e(Constants.TAG_ERROR, message)

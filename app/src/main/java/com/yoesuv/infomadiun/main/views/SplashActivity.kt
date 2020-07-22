@@ -18,6 +18,8 @@ class SplashActivity: AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
         viewModel = ViewModelProvider(this).get(SplashViewModel::class.java)
         binding.splash = viewModel
+
+        viewModel.getAppData(this)
     }
 
 }

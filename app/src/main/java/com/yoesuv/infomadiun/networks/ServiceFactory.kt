@@ -1,5 +1,6 @@
 package com.yoesuv.infomadiun.networks
 
+import com.yoesuv.infomadiun.BuildConfig
 import com.yoesuv.infomadiun.data.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,7 +15,11 @@ object ServiceFactory {
     fun create(): RestApi{
 
         val logging = HttpLoggingInterceptor()
-        logging.level = HttpLoggingInterceptor.Level.BODY
+        if (BuildConfig.DEBUG) {
+            logging.level = HttpLoggingInterceptor.Level.BODY
+        } else {
+            logging.level = HttpLoggingInterceptor.Level.NONE
+        }
 
         val clientBuilder = OkHttpClient.Builder()
         clientBuilder.addInterceptor(logging)
@@ -24,7 +29,6 @@ object ServiceFactory {
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
-                .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
                 .build()
         return retrofit.create(RestApi::class.java)
     }

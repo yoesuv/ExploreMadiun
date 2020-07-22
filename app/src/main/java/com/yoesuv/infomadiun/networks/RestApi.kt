@@ -4,6 +4,7 @@ import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import io.reactivex.Observable
+import retrofit2.Response
 import retrofit2.http.GET
 
 /**
@@ -37,5 +38,14 @@ interface RestApi {
 
     @GET("maps_info.json")
     fun getListPin(): Observable<MutableList<PinModel>>
+
+    @GET("List_place.json")
+    suspend fun listPlace(): Response<MutableList<PlaceModel>>
+
+    @GET("Gallery_info.json")
+    suspend fun gallery(): Response<MutableList<GalleryModel>>
+
+    @GET("maps_info.json")
+    suspend fun mapPins(): Response<MutableList<PinModel>>
 
 }
