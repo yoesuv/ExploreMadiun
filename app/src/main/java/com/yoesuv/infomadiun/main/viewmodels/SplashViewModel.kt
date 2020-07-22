@@ -16,13 +16,10 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
     var version: ObservableField<String> = ObservableField(BuildConfig.VERSION_NAME)
 
     fun getAppData(context: Context) {
-        logDebug("SplashViewModel # get app data")
-       repo.getSplashData({
-           logDebug("SplashViewModel # list place count ${it?.size}")
-       },{
-           logDebug("SplashViewModel # gallery count ${it?.size}")
-       },{
-           logDebug("SplashViewModel # map pins count ${it?.size}")
+       repo.getSplashData({ place, gallery, pins ->
+           logDebug("SplashViewModel # list place count ${place?.size}")
+           logDebug("SplashViewModel # gallery count ${gallery?.size}")
+           logDebug("SplashViewModel # map pins count ${pins?.size}")
        },{
            it.printStackTrace()
        })
