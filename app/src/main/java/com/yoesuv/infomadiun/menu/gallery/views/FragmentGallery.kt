@@ -57,9 +57,6 @@ class FragmentGallery: Fragment() {
     }
 
     private fun setupRecyclerView(){
-        val lManager = androidx.recyclerview.widget.GridLayoutManager(context?.applicationContext, 3)
-        binding.recyclerViewGallery.setHasFixedSize(true)
-        binding.recyclerViewGallery.layoutManager = lManager
         adapter = GalleryAdapter(activity as AppCompatActivity, listGallery)
         binding.recyclerViewGallery.adapter = adapter
         binding.recyclerViewGallery.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
