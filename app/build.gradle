@@ -105,15 +105,11 @@ dependencies {
 
     implementation "com.squareup.retrofit2:retrofit:$project.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$project.retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$project.retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$project.httpLoggingVersion"
-    implementation "io.reactivex.rxjava2:rxjava:$project.rxJavaVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$project.rxAndroidVersion"
 
     implementation "com.github.bumptech.glide:glide:$project.glideVersion"
     kapt "com.github.bumptech.glide:compiler:$project.glideVersion"
     implementation "com.github.chrisbanes:PhotoView:$project.photoViewVersion"
-    implementation "com.tbruyelle.rxpermissions2:rxpermissions:$project.rxPermissionVersion"
     implementation "com.github.GrenderG:Toasty:$project.toastyVersion"
     implementation "com.akexorcist:googledirectionlibrary:$project.googleDirectionLibraryVersion"
     implementation "com.intuit.ssp:ssp-android:$project.sspVersion"

@@ -30,7 +30,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.gms.tasks.Task
-import com.tbruyelle.rxpermissions2.RxPermissions
 import com.yoesuv.infomadiun.App
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.data.Constants
@@ -41,7 +40,6 @@ import com.yoesuv.infomadiun.menu.maps.viewmodels.FragmentMapsViewModel
 import com.yoesuv.infomadiun.utils.AppHelper
 import com.yoesuv.infomadiun.utils.BounceAnimation
 import com.yoesuv.infomadiun.utils.logError
-import io.reactivex.disposables.CompositeDisposable
 
 /**
  *  Created by yusuf on 4/30/18.
@@ -62,7 +60,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     private lateinit var activity: Activity
     private var googleMap: GoogleMap? = null
-    private lateinit var rxPermission: RxPermissions
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var markerLocation: Marker? = null
     private lateinit var googleApiClient: GoogleApiClient
@@ -72,11 +69,10 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     private lateinit var destination: LatLng
     private val colors = arrayListOf("#7F2196f3","#7F4CAF50","#7FF44336")
 
-    private var compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.getActivity()!!.applicationContext)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireActivity().applicationContext)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -86,7 +82,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         binding.maps = viewModel
 
         activity = getActivity() as Activity
-        rxPermission = RxPermissions(activity)
 
         val mapFragment:SupportMapFragment? = childFragmentManager.findFragmentById(R.id.mapLocation) as SupportMapFragment
         mapFragment?.getMapAsync(this)
@@ -113,7 +108,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         if(myLocationCallback!=null) {
             LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(myLocationCallback)
         }
-        compositeDisposable.clear()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -123,7 +117,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                 //setup user location
                 requestPermission(googleMap)
             }else if(resultCode==Activity.RESULT_CANCELED){
-                AppHelper.displayErrorToast(context!!, getString(R.string.location_setting_off))
+                AppHelper.displayErrorToast(requireContext(), getString(R.string.location_setting_off))
             }
         }
     }
@@ -176,20 +170,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     }
 
     private fun requestPermission(googleMap: GoogleMap?){
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-            compositeDisposable.add(
-                rxPermission.request(android.Manifest.permission.ACCESS_FINE_LOCATION)
-                        .subscribe { t: Boolean? ->
-                            if(t!!){
-                                enableUserLocation(googleMap)
-                            }else{
-                                AppHelper.displayErrorToast(activity, getString(R.string.access_location_denied))
-                            }
-                        }
-            )
-        }else{
-            enableUserLocation(googleMap)
-        }
+
     }
 
     @SuppressLint("MissingPermission")
