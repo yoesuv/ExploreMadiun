@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/fragmentList">
+
+    <fragment android:id="@+id/fragmentList"
+        android:name="com.yoesuv.infomadiun.menu.listplace.views.FragmentListPlace"
+        tools:layout="@layout/fragment_listplace"/>
+
+    <fragment android:id="@+id/fragmentGallery"
+        android:name="com.yoesuv.infomadiun.menu.gallery.views.FragmentGallery"
+        tools:layout="@layout/fragment_gallery"/>
+
+    <fragment android:id="@+id/fragmentMap"
+        android:name="com.yoesuv.infomadiun.menu.maps.views.FragmentMaps"
+        tools:layout="@layout/fragment_map"/>
+
+    <fragment android:id="@+id/fragmentOther"
+        android:name="com.yoesuv.infomadiun.menu.other.views.FragmentOther"
+        tools:layout="@layout/fragment_other"/>
+
+</navigation>

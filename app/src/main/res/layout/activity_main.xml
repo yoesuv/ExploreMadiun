@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/mainCoordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -35,11 +36,15 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <FrameLayout
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:navGraph="@navigation/app_navigation"
+            app:defaultNavHost="true"
+            tools:layout="@layout/fragment_listplace"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView"

@@ -2,25 +2,25 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/menuList"
+    <item android:id="@+id/fragmentList"
         android:enabled="true"
         android:icon="@drawable/ic_menu_list"
         android:title="@string/menu_list"
         app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/menuGallery"
+    <item android:id="@+id/fragmentGallery"
         android:enabled="true"
         android:icon="@drawable/ic_menu_gallery"
         android:title="@string/menu_gallery"
         app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/menuMap"
+    <item android:id="@+id/fragmentMap"
         android:enabled="true"
         android:icon="@drawable/ic_menu_maps"
         android:title="@string/menu_maps"
         app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/menuOther"
+    <item android:id="@+id/fragmentOther"
         android:enabled="true"
         android:icon="@drawable/ic_menu_other"
         android:title="@string/menu_other"
