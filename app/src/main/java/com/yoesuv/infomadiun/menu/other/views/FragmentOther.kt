@@ -18,12 +18,6 @@ import com.yoesuv.infomadiun.utils.ZoomOutPageTransformer
  */
 class FragmentOther: Fragment() {
 
-    companion object {
-        fun getInstance(): Fragment {
-            return FragmentOther()
-        }
-    }
-
     private lateinit var binding: FragmentOtherBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

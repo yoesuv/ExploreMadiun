@@ -22,12 +22,6 @@ import com.yoesuv.infomadiun.menu.gallery.viewmodels.FragmentGalleryViewModel
  */
 class FragmentGallery: Fragment() {
 
-    companion object {
-        fun getInstance(): Fragment {
-            return FragmentGallery()
-        }
-    }
-
     private lateinit var binding: FragmentGalleryBinding
     private lateinit var viewModel: FragmentGalleryViewModel
 
@@ -63,7 +57,7 @@ class FragmentGallery: Fragment() {
     }
 
     private fun setupSwipeRefresh(){
-        binding.swipeRefreshGallery.setColorSchemeColors(ContextCompat.getColor(context!!, R.color.colorPrimary))
+        binding.swipeRefreshGallery.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
         binding.swipeRefreshGallery.setOnRefreshListener {
             binding.swipeRefreshGallery.isRefreshing = false
             viewModel.getListGallery()

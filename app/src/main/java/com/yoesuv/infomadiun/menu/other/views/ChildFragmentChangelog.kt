@@ -34,7 +34,7 @@ class ChildFragmentChangelog: Fragment() {
 
         setupRecycler()
         viewModel.setupData(context)
-        viewModel.listData.observe(this, Observer {
+        viewModel.listData.observe(viewLifecycleOwner, Observer {
             onListDataChanged(it!!)
         })
 

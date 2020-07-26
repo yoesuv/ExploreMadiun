@@ -34,7 +34,7 @@ class ChildFragmentLibraries: Fragment() {
 
         setupRecycler()
         viewModel.setupData(context)
-        viewModel.listData.observe(this, Observer {
+        viewModel.listData.observe(viewLifecycleOwner, Observer {
             onListDataChanged(it!!)
         })
 

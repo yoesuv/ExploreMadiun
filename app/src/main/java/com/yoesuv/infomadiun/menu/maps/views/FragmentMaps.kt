@@ -50,9 +50,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         const val REQUEST_FEATURE_LOCATION_PERMISSION_CODE:Int = 12
         const val PREFERENCE_LATITUDE = "preference_latitude"
         const val PREFERENCE_LONGITUDE = "preference_longitude"
-        fun getInstance(): Fragment {
-            return FragmentMaps()
-        }
     }
 
     private lateinit var binding: FragmentMapBinding

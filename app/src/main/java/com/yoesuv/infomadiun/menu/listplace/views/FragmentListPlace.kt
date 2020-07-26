@@ -21,12 +21,6 @@ import com.yoesuv.infomadiun.menu.listplace.viewmodels.FragmentListPlaceViewMode
  */
 class FragmentListPlace: Fragment() {
 
-    companion object {
-        fun getInstance(): Fragment {
-            return FragmentListPlace()
-        }
-    }
-
     private lateinit var binding: FragmentListplaceBinding
     private lateinit var viewModel: FragmentListPlaceViewModel
 
@@ -88,7 +82,7 @@ class FragmentListPlace: Fragment() {
     }
 
     private fun setupSwipeRefresh(){
-        binding.swipeRefreshListPlace.setColorSchemeColors(ContextCompat.getColor(context!!, R.color.colorPrimary))
+        binding.swipeRefreshListPlace.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
         binding.swipeRefreshListPlace.setOnRefreshListener{
             viewModel.getListPlace()
             binding.swipeRefreshListPlace.isRefreshing = false
