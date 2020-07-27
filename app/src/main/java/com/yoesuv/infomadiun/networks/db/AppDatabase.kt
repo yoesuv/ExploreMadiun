@@ -7,15 +7,19 @@ import androidx.room.RoomDatabase
 import com.yoesuv.infomadiun.data.DB_NAME
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
+import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.networks.db.dao.GalleryDaoAccess
+import com.yoesuv.infomadiun.networks.db.dao.PinDaoAccess
 import com.yoesuv.infomadiun.networks.db.dao.PlaceDaoAccess
 
-@Database(entities = [PlaceModel::class, GalleryModel::class], version = 1, exportSchema = false)
+@Database(entities = [PlaceModel::class, GalleryModel::class, PinModel::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun placeDaoAccess(): PlaceDaoAccess
 
     abstract fun galleryDaoAccess(): GalleryDaoAccess
+
+    abstract fun pinDaoAccess(): PinDaoAccess
 
     companion object {
         @Volatile

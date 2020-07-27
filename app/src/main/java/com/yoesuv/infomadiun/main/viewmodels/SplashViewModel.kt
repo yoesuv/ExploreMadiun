@@ -10,8 +10,10 @@ import com.yoesuv.infomadiun.BuildConfig
 import com.yoesuv.infomadiun.main.MainActivity
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
+import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.networks.AppRepository
 import com.yoesuv.infomadiun.networks.db.repositories.DbGalleryRepository
+import com.yoesuv.infomadiun.networks.db.repositories.DbPinRepository
 import com.yoesuv.infomadiun.networks.db.repositories.DbPlaceRepository
 import com.yoesuv.infomadiun.utils.logDebug
 
@@ -19,6 +21,7 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
 
     private val dbPlaceRepository = DbPlaceRepository(application.applicationContext)
     private val dbGalleryRepository = DbGalleryRepository(application.applicationContext)
+    private val dbPinRepository = DbPinRepository(application.applicationContext)
     private val repo = AppRepository(viewModelScope)
 
     var version: ObservableField<String> = ObservableField(BuildConfig.VERSION_NAME)
@@ -30,6 +33,7 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
            logDebug("SplashViewModel # map pins count ${pins?.size}")
            setupPlaces(places)
            setupGalleries(galleries)
+           setupPins(pins)
 
            goToMain(activity)
        },{
@@ -51,6 +55,15 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
             dbGalleryRepository.deleteAllGallery()
             it.forEach { gallery ->
                 dbGalleryRepository.insertGallery(gallery)
+            }
+        }
+    }
+
+    private fun setupPins(pins: List<PinModel>?) {
+        pins?.let {
+            dbPinRepository.deleteAllPin()
+            it.forEach { pin ->
+                dbPinRepository.insertPin(pin)
             }
         }
     }
