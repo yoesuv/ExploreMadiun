@@ -1,6 +1,5 @@
 package com.yoesuv.infomadiun.main
 
-import android.content.Intent
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -27,16 +26,10 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.lifecycleOwner = this
 
         setupToolbar()
         setupNavigation()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        for(fragment in supportFragmentManager.fragments){
-            fragment.onActivityResult(requestCode, resultCode, data)
-        }
     }
 
     override fun onBackPressed() {
@@ -54,9 +47,10 @@ class MainActivity: AppCompatActivity() {
     }
 
     private fun setupNavigation() {
+        binding.bottomNavigationView.itemIconTintList = null
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
         val navController = navHostFragment.findNavController()
-        NavigationUI.setupWithNavController(binding.toolbarMain, navController)
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
     }
 
 }

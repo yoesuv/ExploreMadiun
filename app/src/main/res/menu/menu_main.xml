@@ -1,29 +1,20 @@
 <menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/fragmentList"
-        android:enabled="true"
         android:icon="@drawable/ic_menu_list"
-        android:title="@string/menu_list"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/menu_list" />
 
     <item android:id="@+id/fragmentGallery"
-        android:enabled="true"
         android:icon="@drawable/ic_menu_gallery"
-        android:title="@string/menu_gallery"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/menu_gallery" />
 
     <item android:id="@+id/fragmentMap"
-        android:enabled="true"
         android:icon="@drawable/ic_menu_maps"
-        android:title="@string/menu_maps"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/menu_maps" />
 
     <item android:id="@+id/fragmentOther"
-        android:enabled="true"
         android:icon="@drawable/ic_menu_other"
-        android:title="@string/menu_other"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/menu_other" />
 
 </menu>
