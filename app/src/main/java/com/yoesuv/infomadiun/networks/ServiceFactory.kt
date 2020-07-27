@@ -1,7 +1,7 @@
 package com.yoesuv.infomadiun.networks
 
 import com.yoesuv.infomadiun.BuildConfig
-import com.yoesuv.infomadiun.data.Constants
+import com.yoesuv.infomadiun.data.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -26,7 +26,7 @@ object ServiceFactory {
         val client = clientBuilder.build()
 
         val retrofit = Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

@@ -32,7 +32,8 @@ import com.google.android.gms.maps.model.*
 import com.google.android.gms.tasks.Task
 import com.yoesuv.infomadiun.App
 import com.yoesuv.infomadiun.R
-import com.yoesuv.infomadiun.data.Constants
+import com.yoesuv.infomadiun.data.DEFAULT_LATITUDE
+import com.yoesuv.infomadiun.data.DEFAULT_LONGITUDE
 import com.yoesuv.infomadiun.databinding.FragmentMapBinding
 import com.yoesuv.infomadiun.menu.maps.adapters.MyCustomInfoWindowAdapter
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
@@ -128,7 +129,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         if(item.itemId==R.id.menuMapRefresh){
             googleMap?.clear()
             //default location
-            googleMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(Constants.DEFAULT_LATITUDE, Constants.DEFAULT_LONGITUDE)))
+            googleMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)))
             googleMap?.animateCamera(CameraUpdateFactory.zoomTo(9f))
             viewModel.getListPin()
         }
@@ -157,10 +158,10 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                     try{
                         resolvableApiException.startResolutionForResult(activity, REQUEST_FEATURE_LOCATION_PERMISSION_CODE)
                     }catch (e: IntentSender.SendIntentException){
-                        Log.e(Constants.TAG_ERROR, "FragmentMaps # RESOLUTION_REQUIRED ${e.message}")
+                        logError("FragmentMaps # RESOLUTION_REQUIRED ${e.message}")
                     }
                 }else if(ex.statusCode==LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE){
-                    Log.e(Constants.TAG_ERROR, "FragmentMaps # LocationSettings DISABLED")
+                    logError( "FragmentMaps # LocationSettings DISABLED")
                 }
             }
         }
@@ -240,7 +241,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         googleMap?.uiSettings?.isCompassEnabled = true
 
         //default location
-        googleMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(Constants.DEFAULT_LATITUDE, Constants.DEFAULT_LONGITUDE)))
+        googleMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)))
         googleMap?.animateCamera(CameraUpdateFactory.zoomTo(9f))
         googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style_map))
 

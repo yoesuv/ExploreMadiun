@@ -5,7 +5,7 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.GenericTransitionOptions
-import com.yoesuv.infomadiun.data.Constants
+import com.yoesuv.infomadiun.data.ANIMATION_TIME
 import com.yoesuv.infomadiun.utils.glide.GlideApp
 
 @BindingAdapter("loadImage")
@@ -19,7 +19,7 @@ fun AppCompatImageView.loadImage(imageUrl: String) {
 @BindingAdapter("hideView")
 fun View.hideView(status: Boolean) {
     if (!status) {
-        this.animate().alpha(0F).setDuration(Constants.ANIMATION_TIME).setListener(object : Animator.AnimatorListener{
+        this.animate().alpha(0F).setDuration(ANIMATION_TIME).setListener(object : Animator.AnimatorListener{
             override fun onAnimationRepeat(p0: Animator?) {
 
             }
@@ -47,6 +47,6 @@ fun  View.showView(status: Boolean) {
     if (status) {
         this.alpha = 0F
     } else {
-        this.animate().alpha(1F).duration = Constants.ANIMATION_TIME
+        this.animate().alpha(1F).duration = ANIMATION_TIME
     }
 }
