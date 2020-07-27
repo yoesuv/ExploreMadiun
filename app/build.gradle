@@ -119,6 +119,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$project.lifeCycleVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'
