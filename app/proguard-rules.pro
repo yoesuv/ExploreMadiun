@@ -16,5 +16,7 @@
 #   public *;
 #}
 
+-keepnames class androidx.navigation.fragment.NavHostFragment
+
 # Google Direction
 -keep interface com.google.android.gms.maps.* { *; }
