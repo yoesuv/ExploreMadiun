@@ -4,8 +4,6 @@ import androidx.lifecycle.Observer
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.core.content.ContextCompat
-import androidx.appcompat.widget.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +31,6 @@ class FragmentGallery: Fragment() {
         viewModel = ViewModelProvider(this).get(FragmentGalleryViewModel::class.java)
 
         setupRecyclerView()
-        setupSwipeRefresh()
 
         return binding.root
     }
@@ -44,9 +41,6 @@ class FragmentGallery: Fragment() {
         viewModel.listGallery.observe(viewLifecycleOwner, Observer { listGallery ->
             onListDataChanged(listGallery!!)
         })
-        viewModel.liveDataError.observe(viewLifecycleOwner, Observer { isError ->
-            setupLayoutError(isError)
-        })
     }
 
     private fun setupRecyclerView(){
@@ -55,30 +49,11 @@ class FragmentGallery: Fragment() {
         binding.recyclerViewGallery.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
     }
 
-    private fun setupSwipeRefresh(){
-        binding.swipeRefreshGallery.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
-        binding.swipeRefreshGallery.setOnRefreshListener {
-            binding.swipeRefreshGallery.isRefreshing = false
-            viewModel.getListGallery()
-        }
-    }
-
     private fun onListDataChanged(listData: MutableList<GalleryModel>){
         listGallery.clear()
         listGallery.addAll(listData)
         binding.recyclerViewGallery.post {
             adapter.notifyDataSetChanged()
-        }
-    }
-
-    private fun setupLayoutError(isError: Boolean?){
-        if (isError!!) {
-            binding.layoutGalleryError.visibility = View.VISIBLE
-            binding.layoutGalleryError.findViewById<AppCompatButton>(R.id.buttonErrorRefresh).setOnClickListener {
-                viewModel.getListGallery()
-            }
-        } else {
-            binding.layoutGalleryError.visibility = View.GONE
         }
     }
 

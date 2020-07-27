@@ -5,8 +5,6 @@ import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.core.content.ContextCompat
-import androidx.appcompat.widget.*
 import androidx.lifecycle.ViewModelProvider
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentListplaceBinding
@@ -31,11 +29,8 @@ class FragmentListPlace: Fragment() {
         viewModel = ViewModelProvider(this).get(FragmentListPlaceViewModel::class.java)
         binding.listPlace = viewModel
 
-        setupRecycler()
-        setupSwipeRefresh()
-        setupLayoutError()
-
         setHasOptionsMenu(true)
+        setupRecycler()
 
         return binding.root
     }
@@ -73,15 +68,6 @@ class FragmentListPlace: Fragment() {
         binding.recyclerViewListPlace.adapter = adapter
     }
 
-    private fun setupSwipeRefresh(){
-        binding.swipeRefreshListPlace.setColorSchemeColors(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
-        binding.swipeRefreshListPlace.setOnRefreshListener{
-            viewModel.getListPlace()
-            binding.swipeRefreshListPlace.isRefreshing = false
-            activity?.invalidateOptionsMenu()
-        }
-    }
-
     private fun onListDataChanged(listData: MutableList<PlaceModel>){
         listPlace.clear()
         listPlace.addAll(listData)
@@ -89,12 +75,6 @@ class FragmentListPlace: Fragment() {
             adapter.notifyDataSetChanged()
         }
         binding.recyclerViewListPlace.scrollToPosition(0)
-    }
-
-    private fun setupLayoutError(){
-        binding.layoutError.findViewById<AppCompatButton>(R.id.buttonErrorRefresh).setOnClickListener {
-            viewModel.getListPlace()
-        }
     }
 
 }
