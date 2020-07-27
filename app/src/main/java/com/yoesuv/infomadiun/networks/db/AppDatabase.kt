@@ -5,13 +5,17 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.yoesuv.infomadiun.data.DB_NAME
+import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
+import com.yoesuv.infomadiun.networks.db.dao.GalleryDaoAccess
 import com.yoesuv.infomadiun.networks.db.dao.PlaceDaoAccess
 
-@Database(entities = [PlaceModel::class], version = 1, exportSchema = false)
+@Database(entities = [PlaceModel::class, GalleryModel::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun placeDaoAccess(): PlaceDaoAccess
+
+    abstract fun galleryDaoAccess(): GalleryDaoAccess
 
     companion object {
         @Volatile

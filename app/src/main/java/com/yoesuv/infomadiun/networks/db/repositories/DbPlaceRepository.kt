@@ -13,6 +13,10 @@ class DbPlaceRepository(context: Context) {
         AsyncTask.execute { dbPlaces?.insertPlace(placeModel) }
     }
 
+    fun places(places:(List<PlaceModel>?) -> Unit) {
+        AsyncTask.execute { places(dbPlaces?.places()) }
+    }
+
     fun deleteAllPlace() {
         AsyncTask.execute { dbPlaces?.deleteAllPlace() }
     }

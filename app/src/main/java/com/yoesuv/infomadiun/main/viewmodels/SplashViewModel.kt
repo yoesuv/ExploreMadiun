@@ -2,31 +2,34 @@ package com.yoesuv.infomadiun.main.viewmodels
 
 import android.app.Activity
 import android.app.Application
-import android.content.Context
 import android.content.Intent
 import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.yoesuv.infomadiun.BuildConfig
 import com.yoesuv.infomadiun.main.MainActivity
+import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.networks.AppRepository
+import com.yoesuv.infomadiun.networks.db.repositories.DbGalleryRepository
 import com.yoesuv.infomadiun.networks.db.repositories.DbPlaceRepository
 import com.yoesuv.infomadiun.utils.logDebug
 
 class SplashViewModel(application: Application) : AndroidViewModel(application) {
 
     private val dbPlaceRepository = DbPlaceRepository(application.applicationContext)
+    private val dbGalleryRepository = DbGalleryRepository(application.applicationContext)
     private val repo = AppRepository(viewModelScope)
 
     var version: ObservableField<String> = ObservableField(BuildConfig.VERSION_NAME)
 
     fun getAppData(activity: Activity) {
-       repo.getSplashData({ places, gallery, pins ->
+       repo.getSplashData({ places, galleries, pins ->
            logDebug("SplashViewModel # list place count ${places?.size}")
-           logDebug("SplashViewModel # gallery count ${gallery?.size}")
+           logDebug("SplashViewModel # gallery count ${galleries?.size}")
            logDebug("SplashViewModel # map pins count ${pins?.size}")
            setupPlaces(places)
+           setupGalleries(galleries)
 
            goToMain(activity)
        },{
@@ -34,11 +37,20 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
        })
     }
 
-    private fun setupPlaces(places: MutableList<PlaceModel>?) {
+    private fun setupPlaces(places: List<PlaceModel>?) {
         places?.let {
             dbPlaceRepository.deleteAllPlace()
             it.forEach { place ->
                 dbPlaceRepository.insertPlace(place)
+            }
+        }
+    }
+
+    private fun setupGalleries(galleries: List<GalleryModel>?) {
+        galleries?.let {
+            dbGalleryRepository.deleteAllGallery()
+            it.forEach { gallery ->
+                dbGalleryRepository.insertGallery(gallery)
             }
         }
     }

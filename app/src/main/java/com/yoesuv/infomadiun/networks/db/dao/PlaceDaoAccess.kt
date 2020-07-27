@@ -13,7 +13,7 @@ interface PlaceDaoAccess {
     fun insertPlace(placeModel: PlaceModel)
 
     @Query("SELECT * FROM PLACES")
-    fun places(): MutableList<PlaceModel>
+    fun places(): List<PlaceModel>
 
     @Query("DELETE FROM places")
     fun deleteAllPlace()
