@@ -1,23 +1,22 @@
 package com.yoesuv.infomadiun.menu.gallery.viewmodels
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.databinding.ObservableField
+import androidx.lifecycle.AndroidViewModel
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
-import com.yoesuv.infomadiun.networks.ServiceFactory
+import com.yoesuv.infomadiun.networks.db.repositories.DbGalleryRepository
 
-class FragmentGalleryViewModel: ViewModel() {
+class FragmentGalleryViewModel(application: Application) : AndroidViewModel(application) {
 
-    private var restApi = ServiceFactory.create()
+    private val dbGallery = DbGalleryRepository(application.applicationContext)
+    var dataGallery: MutableLiveData<List<GalleryModel>> = MutableLiveData()
 
-    var listGallery: MutableLiveData<MutableList<GalleryModel>> = MutableLiveData()
-
-    var isLoading: ObservableField<Boolean> = ObservableField()
-    var liveDataError: MutableLiveData<Boolean> = MutableLiveData()
-
-    fun getListGallery(){
-        isLoading.set(true)
-        liveDataError.postValue(false)
+    init {
+        dbGallery.galleries {
+            it?.let { galleries ->
+                dataGallery.postValue(galleries)
+            }
+        }
     }
 
 }
