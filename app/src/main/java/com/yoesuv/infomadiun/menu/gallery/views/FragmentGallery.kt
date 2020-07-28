@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentGalleryBinding
 import com.yoesuv.infomadiun.menu.gallery.adapters.GalleryAdapter
+import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import com.yoesuv.infomadiun.menu.gallery.viewmodels.FragmentGalleryViewModel
 
 /**
@@ -41,9 +43,16 @@ class FragmentGallery: Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = GalleryAdapter().also {
+        adapter = GalleryAdapter {
+            openDetailGallery(it)
+        }.also {
             binding.recyclerViewGallery.adapter = it
         }
+    }
+
+    private fun openDetailGallery(galleryModel: GalleryModel) {
+        val action = FragmentGalleryDirections.actionToDetailGallery(galleryModel)
+        findNavController().navigate(action)
     }
 
 }

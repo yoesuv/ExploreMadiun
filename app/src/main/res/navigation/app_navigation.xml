@@ -9,9 +9,25 @@
         android:name="com.yoesuv.infomadiun.menu.listplace.views.FragmentListPlace"
         tools:layout="@layout/fragment_listplace"/>
 
+    <!-- fragment gallery -->
     <fragment android:id="@+id/fragmentGallery"
         android:name="com.yoesuv.infomadiun.menu.gallery.views.FragmentGallery"
-        tools:layout="@layout/fragment_gallery"/>
+        tools:layout="@layout/fragment_gallery">
+
+        <action android:id="@+id/actionToDetailGallery"
+            app:destination="@+id/activityDetailGallery"/>
+
+    </fragment>
+
+    <!-- detail gallery -->
+    <activity android:id="@+id/activityDetailGallery"
+        android:name="com.yoesuv.infomadiun.menu.gallery.views.DetailGalleryActivity"
+        tools:layout="@layout/activity_detail_gallery">
+
+        <argument android:name="GalleryModel"
+            app:argType="com.yoesuv.infomadiun.menu.gallery.models.GalleryModel" />
+
+    </activity>
 
     <fragment android:id="@+id/fragmentMap"
         android:name="com.yoesuv.infomadiun.menu.maps.views.FragmentMaps"
