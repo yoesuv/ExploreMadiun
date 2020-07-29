@@ -5,28 +5,25 @@ import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentListplaceBinding
 import com.yoesuv.infomadiun.menu.listplace.adapters.ListPlaceAdapter
-import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.menu.listplace.viewmodels.FragmentListPlaceViewModel
 
 /**
- *  Updated by yusuf on 14 July 2020.
+ *  Updated by yusuf on 29 July 2020.
  */
 class FragmentListPlace: Fragment() {
 
     private lateinit var binding: FragmentListplaceBinding
-    private lateinit var viewModel: FragmentListPlaceViewModel
+    private val viewModel: FragmentListPlaceViewModel by activityViewModels()
 
-    private var listPlace: MutableList<PlaceModel> = mutableListOf()
     private lateinit var adapter:ListPlaceAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_listplace, container, false)
         binding.lifecycleOwner = this
-        viewModel = ViewModelProvider(this).get(FragmentListPlaceViewModel::class.java)
         binding.listPlace = viewModel
 
         setHasOptionsMenu(true)
@@ -39,7 +36,7 @@ class FragmentListPlace: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getListPlace()
         viewModel.listPlace.observe(viewLifecycleOwner, Observer { listPlace ->
-            onListDataChanged(listPlace!!)
+            adapter.submitList(listPlace)
         })
     }
 
@@ -49,8 +46,7 @@ class FragmentListPlace: Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        when (id) {
+        when (item.itemId) {
             R.id.listSemua -> viewModel.getListPlace()
             R.id.listKabMadiun -> viewModel.getListPlaceKabMadiun()
             R.id.listKabMagetan -> viewModel.getListPlaceKabMagetan()
@@ -64,17 +60,9 @@ class FragmentListPlace: Fragment() {
     }
 
     private fun setupRecycler(){
-        adapter = ListPlaceAdapter()
-        binding.recyclerViewListPlace.adapter = adapter
-    }
-
-    private fun onListDataChanged(listData: MutableList<PlaceModel>){
-        listPlace.clear()
-        listPlace.addAll(listData)
-        binding.recyclerViewListPlace.post {
-            adapter.notifyDataSetChanged()
+        adapter = ListPlaceAdapter().also {
+            binding.recyclerViewListPlace.adapter = it
         }
-        binding.recyclerViewListPlace.scrollToPosition(0)
     }
 
 }

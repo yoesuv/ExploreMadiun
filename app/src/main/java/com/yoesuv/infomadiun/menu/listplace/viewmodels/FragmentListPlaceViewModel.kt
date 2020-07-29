@@ -1,53 +1,45 @@
 package com.yoesuv.infomadiun.menu.listplace.viewmodels
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.databinding.ObservableField
+import androidx.lifecycle.AndroidViewModel
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
-import com.yoesuv.infomadiun.networks.ServiceFactory
+import com.yoesuv.infomadiun.networks.db.repositories.DbPlaceRepository
 
-class FragmentListPlaceViewModel: ViewModel() {
+class FragmentListPlaceViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val restApi = ServiceFactory.create()
+    private val dbPlaceRepository = DbPlaceRepository(application.applicationContext)
 
-    var listPlace: MutableLiveData<MutableList<PlaceModel>> = MutableLiveData()
-
-    var isLoading: ObservableField<Boolean> = ObservableField()
-    var isError: ObservableField<Boolean> = ObservableField()
+    var listPlace: MutableLiveData<List<PlaceModel>> = MutableLiveData()
 
     fun getListPlace(){
-        isLoading.set(true)
-        isError.set(false)
+        dbPlaceRepository.places {
+            listPlace.postValue(it)
+        }
     }
 
     fun getListPlaceKabMadiun(){
-        isLoading.set(true)
-        isError.set(false)
+
     }
 
     fun getListPlaceKabMagetan(){
-        isLoading.set(true)
-        isError.set(false)
+
     }
 
     fun getListPlaceKabNgawi(){
-        isLoading.set(true)
-        isError.set(false)
+
     }
 
     fun getListPlaceKabPacitan(){
-        isLoading.set(true)
-        isError.set(false)
+
     }
 
     fun getListPlaceKabPonorogo(){
-        isLoading.set(true)
-        isError.set(false)
+
     }
 
     fun getListPlaceKotaMadiun(){
-        isLoading.set(true)
-        isError.set(false)
+
     }
 
 }
