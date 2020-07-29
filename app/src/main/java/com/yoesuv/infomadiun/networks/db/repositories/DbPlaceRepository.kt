@@ -17,6 +17,10 @@ class DbPlaceRepository(context: Context) {
         AsyncTask.execute { places(dbPlaces?.places()) }
     }
 
+    fun placesByLocation(location: String, places:(List<PlaceModel>?) -> Unit) {
+        AsyncTask.execute { places(dbPlaces?.placesByLocation(location)) }
+    }
+
     fun deleteAllPlace() {
         AsyncTask.execute { dbPlaces?.deleteAllPlace() }
     }

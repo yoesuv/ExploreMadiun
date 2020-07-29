@@ -7,6 +7,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.yoesuv.infomadiun.R
+import com.yoesuv.infomadiun.data.PlaceLocation
 import com.yoesuv.infomadiun.databinding.FragmentListplaceBinding
 import com.yoesuv.infomadiun.menu.listplace.adapters.ListPlaceAdapter
 import com.yoesuv.infomadiun.menu.listplace.viewmodels.FragmentListPlaceViewModel
@@ -34,9 +35,10 @@ class FragmentListPlace: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getListPlace()
+        viewModel.getListPlace(PlaceLocation.ALL)
         viewModel.listPlace.observe(viewLifecycleOwner, Observer { listPlace ->
             adapter.submitList(listPlace)
+            binding.recyclerViewListPlace.scrollTo(0, 0)
         })
     }
 
@@ -47,13 +49,13 @@ class FragmentListPlace: Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.listSemua -> viewModel.getListPlace()
-            R.id.listKabMadiun -> viewModel.getListPlaceKabMadiun()
-            R.id.listKabMagetan -> viewModel.getListPlaceKabMagetan()
-            R.id.listKabNgawi -> viewModel.getListPlaceKabNgawi()
-            R.id.listKabPacitan -> viewModel.getListPlaceKabPacitan()
-            R.id.listKabPonorogo -> viewModel.getListPlaceKabPonorogo()
-            R.id.listKotaMadiun-> viewModel.getListPlaceKotaMadiun()
+            R.id.listSemua -> viewModel.getListPlace(PlaceLocation.ALL)
+            R.id.listKabMadiun -> viewModel.getListPlace(PlaceLocation.KAB_MADIUN)
+            R.id.listKabMagetan -> viewModel.getListPlace(PlaceLocation.KAB_MAGETAN)
+            R.id.listKabNgawi -> viewModel.getListPlace(PlaceLocation.KAB_NGAWI)
+            R.id.listKabPacitan -> viewModel.getListPlace(PlaceLocation.KAB_PACITAN)
+            R.id.listKabPonorogo -> viewModel.getListPlace(PlaceLocation.KAB_PONOROGO)
+            R.id.listKotaMadiun-> viewModel.getListPlace(PlaceLocation.KOTA_MADIUN)
         }
         item.isChecked = true
         return super.onOptionsItemSelected(item)

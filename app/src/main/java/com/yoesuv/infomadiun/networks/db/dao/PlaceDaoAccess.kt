@@ -15,6 +15,9 @@ interface PlaceDaoAccess {
     @Query("SELECT * FROM PLACES")
     fun places(): List<PlaceModel>
 
+    @Query("SELECT * FROM places WHERE location =:location")
+    fun placesByLocation(location: String): List<PlaceModel>
+
     @Query("DELETE FROM places")
     fun deleteAllPlace()
 }
