@@ -1,10 +1,19 @@
 package com.yoesuv.infomadiun.utils
 
+import android.app.Activity
 import android.content.Context
+import android.content.IntentSender
 import android.location.LocationManager
 import android.os.Build
 import android.text.Html
 import android.widget.Toast
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.LocationSettingsStatusCodes
 import es.dmoral.toasty.Toasty
 
 /**
@@ -24,6 +33,41 @@ object AppHelper {
     fun checkLocationSetting(context: Context):Boolean{
         val locationManager: LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+    }
+
+    /**
+     * https://stackoverflow.com/a/48326744
+     */
+    fun displayLocationSettingsRequest(activity: Activity) {
+        val googleApiClient = GoogleApiClient.Builder(activity).addApi(LocationServices.API).build()
+        googleApiClient.connect()
+
+        val locationRequest = LocationRequest.create().apply {
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            interval = 10000
+            fastestInterval = 10000/2
+        }
+
+        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
+        builder.setAlwaysShow(true)
+
+        val result = LocationServices.getSettingsClient(activity).checkLocationSettings(builder.build())
+        result.addOnCompleteListener { task ->
+            try {
+                task.getResult(ApiException::class.java)
+            }catch (ex:ApiException) {
+                if (ex.statusCode== LocationSettingsStatusCodes.RESOLUTION_REQUIRED) {
+                    val resolvableApiException = ex as ResolvableApiException
+                    try {
+                        resolvableApiException.startResolutionForResult(activity, 27)
+                    }catch (e: IntentSender.SendIntentException) {
+                        logError("FragmentMaps # RESOLUTION_REQUIRED ${e.message}")
+                    }
+                }else if (ex.statusCode==LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE) {
+                    logError("FragmentMaps # LocationSettings DISABLED")
+                }
+            }
+        }
     }
 
     @Suppress("DEPRECATION")

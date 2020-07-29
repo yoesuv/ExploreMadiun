@@ -3,16 +3,13 @@ package com.yoesuv.infomadiun.menu.maps.views
 import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.lifecycle.Observer
-import android.content.Intent
-import android.content.IntentSender
 import androidx.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.*
 import androidx.fragment.app.Fragment
-import android.util.Log
 import android.util.TypedValue
 import android.view.*
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.akexorcist.googledirection.DirectionCallback
 import com.akexorcist.googledirection.GoogleDirection
 import com.akexorcist.googledirection.constant.AvoidType
@@ -20,16 +17,12 @@ import com.akexorcist.googledirection.constant.TransportMode
 import com.akexorcist.googledirection.model.Direction
 import com.akexorcist.googledirection.model.Route
 import com.akexorcist.googledirection.util.DirectionConverter
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import com.google.android.gms.tasks.Task
 import com.yoesuv.infomadiun.App
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.data.DEFAULT_LATITUDE
@@ -48,19 +41,17 @@ import com.yoesuv.infomadiun.utils.logError
 class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     companion object {
-        const val REQUEST_FEATURE_LOCATION_PERMISSION_CODE:Int = 12
         const val PREFERENCE_LATITUDE = "preference_latitude"
         const val PREFERENCE_LONGITUDE = "preference_longitude"
     }
 
     private lateinit var binding: FragmentMapBinding
-    private lateinit var viewModel: FragmentMapsViewModel
+    private val viewModel : FragmentMapsViewModel by activityViewModels()
 
     private lateinit var activity: Activity
     private var googleMap: GoogleMap? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var markerLocation: Marker? = null
-    private lateinit var googleApiClient: GoogleApiClient
     private var myLocationCallback: MyLocationCallback? = null
 
     private lateinit var origin: LatLng
@@ -76,7 +67,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false)
         binding.lifecycleOwner = this
-        viewModel = ViewModelProvider(this).get(FragmentMapsViewModel::class.java)
         binding.maps = viewModel
 
         activity = getActivity() as Activity
@@ -108,18 +98,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode==REQUEST_FEATURE_LOCATION_PERMISSION_CODE){
-            if(resultCode==Activity.RESULT_OK){
-                //setup user location
-                requestPermission(googleMap)
-            }else if(resultCode==Activity.RESULT_CANCELED){
-                AppHelper.displayErrorToast(requireContext(), getString(R.string.location_setting_off))
-            }
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_map, menu)
@@ -127,44 +105,15 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId==R.id.menuMapRefresh){
-            googleMap?.clear()
-            //default location
-            googleMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)))
-            googleMap?.animateCamera(CameraUpdateFactory.zoomTo(9f))
+            googleMap?.apply {
+                clear()
+                //default location
+                moveCamera(CameraUpdateFactory.newLatLng(LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)))
+                animateCamera(CameraUpdateFactory.zoomTo(9f))
+            }
             viewModel.getListPin()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun displayLocationSettingsRequest(){
-        googleApiClient = GoogleApiClient.Builder(activity.applicationContext).addApi(LocationServices.API).build()
-        googleApiClient.connect()
-
-        val locationRequest:LocationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = 10000
-        locationRequest.fastestInterval = 10000/2
-
-        val builder:LocationSettingsRequest.Builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
-        builder.setAlwaysShow(true)
-
-        val result:Task<LocationSettingsResponse> = LocationServices.getSettingsClient(activity).checkLocationSettings(builder.build())
-        result.addOnCompleteListener { task ->
-            try {
-                val response: LocationSettingsResponse? = task.getResult(ApiException::class.java)
-            }catch (ex:ApiException) {
-                if(ex.statusCode==LocationSettingsStatusCodes.RESOLUTION_REQUIRED){
-                    val resolvableApiException = ex as ResolvableApiException
-                    try{
-                        resolvableApiException.startResolutionForResult(activity, REQUEST_FEATURE_LOCATION_PERMISSION_CODE)
-                    }catch (e: IntentSender.SendIntentException){
-                        logError("FragmentMaps # RESOLUTION_REQUIRED ${e.message}")
-                    }
-                }else if(ex.statusCode==LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE){
-                    logError( "FragmentMaps # LocationSettings DISABLED")
-                }
-            }
-        }
     }
 
     private fun requestPermission(googleMap: GoogleMap?){
@@ -248,10 +197,10 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         this.googleMap = googleMap
         viewModel.getListPin()
 
-        if(AppHelper.checkLocationSetting(activity)){
+        if (AppHelper.checkLocationSetting(requireContext())) {
             requestPermission(googleMap)
-        }else{
-            displayLocationSettingsRequest()
+        } else {
+            AppHelper.displayLocationSettingsRequest(requireActivity())
         }
 
         googleMap?.setInfoWindowAdapter(MyCustomInfoWindowAdapter(activity))
