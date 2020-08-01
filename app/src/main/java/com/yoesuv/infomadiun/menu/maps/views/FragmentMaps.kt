@@ -29,6 +29,7 @@ import com.yoesuv.infomadiun.data.DEFAULT_LATITUDE
 import com.yoesuv.infomadiun.data.DEFAULT_LONGITUDE
 import com.yoesuv.infomadiun.databinding.FragmentMapBinding
 import com.yoesuv.infomadiun.menu.maps.adapters.MyCustomInfoWindowAdapter
+import com.yoesuv.infomadiun.menu.maps.models.MarkerTag
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.menu.maps.viewmodels.FragmentMapsViewModel
 import com.yoesuv.infomadiun.utils.AppHelper
@@ -260,29 +261,6 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         logError("FragmentMaps # onDirectionFailure ${t?.message}")
         AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
         t?.printStackTrace()
-    }
-
-    class MarkerTag(val title:String, val type:Int, val latitude:Double?, val longitude:Double?)
-
-    class MyLocationCallback(private val googleMap: GoogleMap?) : LocationCallback(){
-
-        private var markerUser: Marker? = null
-
-        override fun onLocationResult(locationResult: LocationResult?) {
-            super.onLocationResult(locationResult)
-            val listLocation = locationResult?.locations
-            if (listLocation?.isNotEmpty()!!){
-                val markerOpt = MarkerOptions()
-                markerOpt.position(LatLng(listLocation[0].latitude, listLocation[0].longitude))
-                markerOpt.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_position))
-                markerUser?.remove()
-                markerUser = googleMap?.addMarker(markerOpt)
-                markerUser?.tag = MarkerTag("Lokasi Anda", 1, listLocation[0].latitude, listLocation[0].longitude)
-
-                App.prefHelper?.setString(PREFERENCE_LATITUDE, listLocation[0].latitude.toString())
-                App.prefHelper?.setString(PREFERENCE_LONGITUDE, listLocation[0].longitude.toString())
-            }
-        }
     }
 
 }
