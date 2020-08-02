@@ -1,5 +1,6 @@
 package com.yoesuv.infomadiun.menu.maps.views
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.lifecycle.Observer
@@ -25,19 +26,14 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.yoesuv.infomadiun.App
 import com.yoesuv.infomadiun.R
-import com.yoesuv.infomadiun.data.DEFAULT_LATITUDE
-import com.yoesuv.infomadiun.data.DEFAULT_LONGITUDE
 import com.yoesuv.infomadiun.databinding.FragmentMapBinding
-import com.yoesuv.infomadiun.menu.maps.adapters.MyCustomInfoWindowAdapter
 import com.yoesuv.infomadiun.menu.maps.models.MarkerTag
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.menu.maps.viewmodels.FragmentMapsViewModel
-import com.yoesuv.infomadiun.utils.AppHelper
-import com.yoesuv.infomadiun.utils.BounceAnimation
-import com.yoesuv.infomadiun.utils.logError
+import com.yoesuv.infomadiun.utils.*
 
 /**
- *  Created by yusuf on 4/30/18.
+ *  Updated by yusuf on 2 August 2020.
  */
 class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
@@ -83,12 +79,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.textViewGettingDirection.visibility = View.INVISIBLE
-
         viewModel.listPin.observe(viewLifecycleOwner, Observer { listPin ->
-            onListDataChanged(listPin!!)
-        })
-        viewModel.error.observe(viewLifecycleOwner, Observer {
-            AppHelper.displayErrorToast(activity, getString(R.string.ops_message))
+            onListDataChanged(listPin)
         })
     }
 
@@ -106,24 +98,26 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId==R.id.menuMapRefresh){
-            googleMap?.apply {
-                clear()
-                //default location
-                moveCamera(CameraUpdateFactory.newLatLng(LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)))
-                animateCamera(CameraUpdateFactory.zoomTo(9f))
-            }
+            setDefaultLocation(googleMap)
             viewModel.getListPin()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun requestPermission(googleMap: GoogleMap?){
+    private fun requestPermission(){
+        if (checkGrantedPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
+            if (checkGrantedPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)) {
 
+            } else {
+
+            }
+        } else {
+
+        }
     }
 
     @SuppressLint("MissingPermission")
     private fun enableUserLocation(googleMap: GoogleMap?){
-
         myLocationCallback = MyLocationCallback(googleMap)
 
         googleMap?.uiSettings?.isMyLocationButtonEnabled = true
@@ -170,7 +164,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     }
 
-    private fun onListDataChanged(listPin: MutableList<PinModel>){
+    private fun onListDataChanged(listPin: List<PinModel>){
         if(listPin.isNotEmpty()){
             for(pinModel in listPin){
                 val markerOptions = MarkerOptions()
@@ -184,54 +178,27 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
-        googleMap?.clear()
+        setDefaultLocation(googleMap)
+        googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style_map))
         val paddingBottom = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 108F, resources.displayMetrics))
         googleMap?.setPadding(0, 0, 0, paddingBottom)
         googleMap?.uiSettings?.isZoomControlsEnabled = true
         googleMap?.uiSettings?.isCompassEnabled = true
 
         //default location
-        googleMap?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)))
-        googleMap?.animateCamera(CameraUpdateFactory.zoomTo(9f))
-        googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style_map))
-
         this.googleMap = googleMap
         viewModel.getListPin()
 
         if (AppHelper.checkLocationSetting(requireContext())) {
-            requestPermission(googleMap)
+            requestPermission()
         } else {
             AppHelper.displayLocationSettingsRequest(requireActivity())
         }
 
-        googleMap?.setInfoWindowAdapter(MyCustomInfoWindowAdapter(activity))
-        googleMap?.setOnInfoWindowCloseListener {
-            val tag: MarkerTag = it.tag as MarkerTag
-            if(tag.type==0) {
-                it.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
-            }
-        }
-        googleMap?.setOnInfoWindowClickListener {
+        setupInfoWindow(requireContext(), googleMap) {
             getDirection(it)
         }
-        googleMap?.setOnMarkerClickListener {
-            val tag: MarkerTag = it.tag as MarkerTag
-            if (tag.type == 0) {
-                val start = SystemClock.uptimeMillis()
-                val duration = 1200L
-
-                val handler = Handler()
-                val anim = BounceAnimation(start, duration, it, handler)
-                handler.post(anim)
-            }
-            if (tag.type==3) {
-                it.hideInfoWindow()
-            }else {
-                it.showInfoWindow()
-
-            }
-            return@setOnMarkerClickListener true
-        }
+        setupMarkerAnimation(googleMap)
     }
 
     override fun onDirectionSuccess(direction: Direction?, rawBody: String?) {
