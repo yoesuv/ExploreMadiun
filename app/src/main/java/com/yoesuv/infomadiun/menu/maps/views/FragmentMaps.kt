@@ -107,12 +107,16 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     private fun requestPermission(){
         if (checkGrantedPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
             if (checkGrantedPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)) {
-
+                enableUserLocation(googleMap)
             } else {
-
+                requestAppPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) {
+                    enableUserLocation(googleMap)
+                }
             }
         } else {
-
+            requestAppPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) {
+                enableUserLocation(googleMap)
+            }
         }
     }
 

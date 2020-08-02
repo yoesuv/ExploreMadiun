@@ -114,6 +114,7 @@ dependencies {
     implementation "com.akexorcist:googledirectionlibrary:$project.googleDirectionLibraryVersion"
     implementation "com.intuit.ssp:ssp-android:$project.sspVersion"
     implementation "com.intuit.sdp:sdp-android:$project.sdpVersion"
+    implementation "com.karumi:dexter:$dexterVersion"
 
     implementation "androidx.lifecycle:lifecycle-extensions:$project.lifeCycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$project.lifeCycleVersion"

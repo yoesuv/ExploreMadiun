@@ -38,10 +38,14 @@ fun setupInfoWindow(context: Context, googleMap: GoogleMap?, onInfoWindowClick:(
                     if (checkGrantedPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)) {
                         onInfoWindowClick(marker)
                     } else {
+                        requestAppPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) {
 
+                        }
                     }
                 } else {
+                    requestAppPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) {
 
+                    }
                 }
             }
         }
