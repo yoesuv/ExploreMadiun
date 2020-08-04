@@ -98,26 +98,26 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
 
-    implementation "com.google.firebase:firebase-core:$project.firebaseCoreVersion"
-    implementation "com.google.android.gms:play-services-maps:$project.firebaseVersion"
-    implementation "com.google.android.gms:play-services-location:$project.firebaseVersion"
+    implementation "com.google.firebase:firebase-core:$firebaseCoreVersion"
+    implementation "com.google.android.gms:play-services-maps:$firebaseVersion"
+    implementation "com.google.android.gms:play-services-location:$firebaseVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
 
-    implementation "com.squareup.retrofit2:retrofit:$project.retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$project.retrofitVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$project.httpLoggingVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$httpLoggingVersion"
 
-    implementation "com.github.bumptech.glide:glide:$project.glideVersion"
-    kapt "com.github.bumptech.glide:compiler:$project.glideVersion"
-    implementation "com.github.chrisbanes:PhotoView:$project.photoViewVersion"
-    implementation "com.github.GrenderG:Toasty:$project.toastyVersion"
-    implementation "com.akexorcist:googledirectionlibrary:$project.googleDirectionLibraryVersion"
-    implementation "com.intuit.ssp:ssp-android:$project.sspVersion"
-    implementation "com.intuit.sdp:sdp-android:$project.sdpVersion"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+    implementation "com.github.chrisbanes:PhotoView:$photoViewVersion"
+    implementation "com.github.GrenderG:Toasty:$toastyVersion"
+    implementation "com.akexorcist:googledirectionlibrary:$googleDirectionLibraryVersion"
+    implementation "com.intuit.ssp:ssp-android:$sspVersion"
+    implementation "com.intuit.sdp:sdp-android:$sdpVersion"
     implementation "com.karumi:dexter:$dexterVersion"
 
-    implementation "androidx.lifecycle:lifecycle-extensions:$project.lifeCycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$project.lifeCycleVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifeCycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCycleVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
