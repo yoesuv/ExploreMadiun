@@ -18,8 +18,8 @@ fun logError(message: String) {
     }
 }
 
-fun nougatOrBelow(body:() -> Unit) {
-    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+fun lollipopOrNewer(body:() -> Unit) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         body()
     }
 }

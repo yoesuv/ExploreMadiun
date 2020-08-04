@@ -42,8 +42,7 @@ class ChildFragmentLibraries: Fragment() {
     }
 
     private fun setupRecycler(){
-        binding.recyclerViewLicense.layoutManager = LinearLayoutManager(context)
-        adapter = LicenseAdapter(context, listLibraries)
+        adapter = LicenseAdapter(listLibraries)
         binding.recyclerViewLicense.adapter = adapter
     }
 
