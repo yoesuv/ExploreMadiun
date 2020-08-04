@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.data.PlaceLocation
 import com.yoesuv.infomadiun.databinding.FragmentListplaceBinding
 import com.yoesuv.infomadiun.menu.listplace.adapters.ListPlaceAdapter
+import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.menu.listplace.viewmodels.FragmentListPlaceViewModel
 
 /**
@@ -62,9 +64,16 @@ class FragmentListPlace: Fragment() {
     }
 
     private fun setupRecycler(){
-        adapter = ListPlaceAdapter().also {
+        adapter = ListPlaceAdapter{
+            openDetailListPlace(it)
+        }.also {
             binding.recyclerViewListPlace.adapter = it
         }
+    }
+
+    private fun openDetailListPlace(placeModel: PlaceModel) {
+        val action = FragmentListPlaceDirections.actionToDetailList(placeModel)
+        findNavController().navigate(action)
     }
 
 }

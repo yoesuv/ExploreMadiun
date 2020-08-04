@@ -9,14 +9,18 @@ import com.yoesuv.infomadiun.utils.AdapterCallback
 /**
  *  Updated by yusuf on 26 July 2020.
  */
-class ListPlaceAdapter: ListAdapter<PlaceModel, PlaceViewHolder>(AdapterCallback.diffPlaceCallback) {
+class ListPlaceAdapter(val onItemClick:(PlaceModel) -> Unit): ListAdapter<PlaceModel, PlaceViewHolder>(AdapterCallback.diffPlaceCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
         return PlaceViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val placeModel = getItem(position)
+        holder.bind(placeModel)
+        holder.itemView.setOnClickListener {
+            onItemClick(placeModel)
+        }
     }
 
 }

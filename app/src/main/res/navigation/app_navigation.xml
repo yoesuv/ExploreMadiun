@@ -5,9 +5,25 @@
     android:id="@+id/app_navigation"
     app:startDestination="@id/fragmentList">
 
+    <!-- fragment list place -->
     <fragment android:id="@+id/fragmentList"
         android:name="com.yoesuv.infomadiun.menu.listplace.views.FragmentListPlace"
-        tools:layout="@layout/fragment_listplace"/>
+        tools:layout="@layout/fragment_listplace">
+
+        <action android:id="@+id/actionToDetailList"
+            app:destination="@+id/activityDetailList"/>
+
+    </fragment>
+
+    <!-- detail list place -->
+    <activity android:id="@+id/activityDetailList"
+        android:name="com.yoesuv.infomadiun.menu.listplace.views.DetailListPlaceActivity"
+        tools:layout="@layout/activity_detail_listplace">
+
+        <argument android:name="PlaceModel"
+            app:argType="com.yoesuv.infomadiun.menu.listplace.models.PlaceModel" />
+
+    </activity>
 
     <!-- fragment gallery -->
     <fragment android:id="@+id/fragmentGallery"
