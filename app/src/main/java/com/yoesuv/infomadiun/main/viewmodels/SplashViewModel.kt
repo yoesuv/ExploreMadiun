@@ -19,7 +19,7 @@ import com.yoesuv.infomadiun.utils.logDebug
 
 class SplashViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val dbPlaceRepository = DbPlaceRepository(application.applicationContext)
+    private val dbPlaceRepository = DbPlaceRepository(application.applicationContext, viewModelScope)
     private val dbGalleryRepository = DbGalleryRepository(application.applicationContext)
     private val dbPinRepository = DbPinRepository(application.applicationContext)
     private val repo = AppRepository(viewModelScope)

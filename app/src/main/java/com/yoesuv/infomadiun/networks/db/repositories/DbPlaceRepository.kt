@@ -1,28 +1,37 @@
 package com.yoesuv.infomadiun.networks.db.repositories
 
 import android.content.Context
-import android.os.AsyncTask
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.networks.db.AppDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
-class DbPlaceRepository(context: Context) {
+class DbPlaceRepository(context: Context, private val scope: CoroutineScope) {
 
     private val dbPlaces = AppDatabase.getInstance(context)?.placeDaoAccess()
 
     fun insertPlace(placeModel: PlaceModel) {
-        AsyncTask.execute { dbPlaces?.insertPlace(placeModel) }
+        scope.launch {
+            dbPlaces?.insertPlace(placeModel)
+        }
     }
 
     fun places(places:(List<PlaceModel>?) -> Unit) {
-        AsyncTask.execute { places(dbPlaces?.places()) }
+        scope.launch {
+            places(dbPlaces?.places())
+        }
     }
 
     fun placesByLocation(location: String, places:(List<PlaceModel>?) -> Unit) {
-        AsyncTask.execute { places(dbPlaces?.placesByLocation(location)) }
+        scope.launch {
+            places(dbPlaces?.placesByLocation(location))
+        }
     }
 
     fun deleteAllPlace() {
-        AsyncTask.execute { dbPlaces?.deleteAllPlace() }
+        scope.launch {
+            dbPlaces?.deleteAllPlace()
+        }
     }
 
 }

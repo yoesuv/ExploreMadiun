@@ -95,8 +95,8 @@ androidExtensions {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.13'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.0'
 
     implementation "com.google.firebase:firebase-core:$firebaseCoreVersion"
     implementation "com.google.android.gms:play-services-maps:$firebaseVersion"
@@ -121,8 +121,9 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
-    implementation "android.arch.persistence.room:runtime:$roomVersion"
-    kapt "android.arch.persistence.room:compiler:$roomVersion"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'

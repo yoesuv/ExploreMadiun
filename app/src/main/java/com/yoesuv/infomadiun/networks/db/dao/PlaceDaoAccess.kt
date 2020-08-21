@@ -10,14 +10,14 @@ import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 interface PlaceDaoAccess {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPlace(placeModel: PlaceModel)
+    suspend fun insertPlace(placeModel: PlaceModel)
 
     @Query("SELECT * FROM PLACES")
-    fun places(): List<PlaceModel>
+    suspend fun places(): List<PlaceModel>
 
     @Query("SELECT * FROM places WHERE location =:location")
-    fun placesByLocation(location: String): List<PlaceModel>
+    suspend fun placesByLocation(location: String): List<PlaceModel>
 
     @Query("DELETE FROM places")
-    fun deleteAllPlace()
+    suspend fun deleteAllPlace()
 }
