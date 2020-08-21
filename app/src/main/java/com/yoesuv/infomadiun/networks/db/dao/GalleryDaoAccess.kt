@@ -10,12 +10,12 @@ import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 interface GalleryDaoAccess {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertGallery(galleryModel: GalleryModel)
+    suspend fun insertGallery(galleryModel: GalleryModel)
 
     @Query("SELECT * FROM galleries")
-    fun galleries(): List<GalleryModel>
+    suspend fun galleries(): List<GalleryModel>
 
     @Query("DELETE FROM galleries")
-    fun deleteAllGallery()
+    suspend fun deleteAllGallery()
 
 }
