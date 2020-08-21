@@ -21,7 +21,7 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
 
     private val dbPlaceRepository = DbPlaceRepository(application.applicationContext, viewModelScope)
     private val dbGalleryRepository = DbGalleryRepository(application.applicationContext, viewModelScope)
-    private val dbPinRepository = DbPinRepository(application.applicationContext)
+    private val dbPinRepository = DbPinRepository(application.applicationContext, viewModelScope)
     private val repo = AppRepository(viewModelScope)
 
     var version: ObservableField<String> = ObservableField(BuildConfig.VERSION_NAME)

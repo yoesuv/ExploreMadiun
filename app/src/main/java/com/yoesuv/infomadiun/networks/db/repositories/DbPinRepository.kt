@@ -1,24 +1,31 @@
 package com.yoesuv.infomadiun.networks.db.repositories
 
 import android.content.Context
-import android.os.AsyncTask
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.networks.db.AppDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
-class DbPinRepository(context: Context) {
+class DbPinRepository(context: Context, private val scope: CoroutineScope) {
 
     private val dbPin = AppDatabase.getInstance(context)?.pinDaoAccess()
 
     fun insertPin(pinModel: PinModel) {
-        AsyncTask.execute { dbPin?.insertPin(pinModel) }
+        scope.launch {
+            dbPin?.insertPin(pinModel)
+        }
     }
 
     fun pins(pins:(List<PinModel>?) -> Unit) {
-        AsyncTask.execute { pins(dbPin?.pins()) }
+        scope.launch {
+            pins(dbPin?.pins())
+        }
     }
 
     fun deleteAllPin() {
-        AsyncTask.execute { dbPin?.deleteAllPin() }
+        scope.launch {
+            dbPin?.deleteAllPin()
+        }
     }
 
 }

@@ -10,12 +10,12 @@ import com.yoesuv.infomadiun.menu.maps.models.PinModel
 interface PinDaoAccess {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPin(pinModel: PinModel)
+    suspend fun insertPin(pinModel: PinModel)
 
     @Query("SELECT * FROM pins")
-    fun pins(): List<PinModel>
+    suspend fun pins(): List<PinModel>
 
     @Query("DELETE FROM pins")
-    fun deleteAllPin()
+    suspend fun deleteAllPin()
 
 }
