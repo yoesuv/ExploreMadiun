@@ -3,7 +3,6 @@ package com.yoesuv.infomadiun.menu.maps.views
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import androidx.lifecycle.Observer
 import androidx.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.*
@@ -31,6 +30,7 @@ import com.yoesuv.infomadiun.menu.maps.models.MarkerTag
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.menu.maps.viewmodels.FragmentMapsViewModel
 import com.yoesuv.infomadiun.utils.*
+import kotlin.math.roundToInt
 
 /**
  *  Updated by yusuf on 2 August 2020.
@@ -79,7 +79,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.textViewGettingDirection.visibility = View.INVISIBLE
-        viewModel.listPin.observe(viewLifecycleOwner, Observer { listPin ->
+        viewModel.listPin.observe(viewLifecycleOwner, { listPin ->
             onListDataChanged(listPin)
         })
     }
@@ -184,7 +184,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     override fun onMapReady(googleMap: GoogleMap?) {
         setDefaultLocation(googleMap)
         googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style_map))
-        val paddingBottom = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 108F, resources.displayMetrics))
+        val paddingBottom = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 108F, resources.displayMetrics).roundToInt()
         googleMap?.setPadding(0, 0, 0, paddingBottom)
         googleMap?.uiSettings?.isZoomControlsEnabled = true
         googleMap?.uiSettings?.isCompassEnabled = true
@@ -199,9 +199,13 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
             AppHelper.displayLocationSettingsRequest(requireActivity())
         }
 
-        setupInfoWindow(requireContext(), googleMap) {
-            getDirection(it)
-        }
+        setupInfoWindow(requireContext(), googleMap, { marker ->
+                getDirection(marker)
+            }, { marker ->
+                enableUserLocation(googleMap)
+                getDirection(marker)
+            }
+        )
         setupMarkerAnimation(googleMap)
     }
 

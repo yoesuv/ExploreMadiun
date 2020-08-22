@@ -23,7 +23,7 @@ fun setDefaultLocation(googleMap: GoogleMap?) {
     }
 }
 
-fun setupInfoWindow(context: Context, googleMap: GoogleMap?, onInfoWindowClick:(Marker) -> Unit) {
+fun setupInfoWindow(context: Context, googleMap: GoogleMap?, onInfoWindowClick:(Marker) -> Unit, onPermissionGranted:(Marker) -> Unit) {
     googleMap?.apply {
         setInfoWindowAdapter(MyCustomInfoWindowAdapter(context))
         setOnInfoWindowCloseListener { marker ->
@@ -39,12 +39,12 @@ fun setupInfoWindow(context: Context, googleMap: GoogleMap?, onInfoWindowClick:(
                         onInfoWindowClick(marker)
                     } else {
                         requestAppPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) {
-
+                            onPermissionGranted(marker)
                         }
                     }
                 } else {
                     requestAppPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) {
-
+                        onPermissionGranted(marker)
                     }
                 }
             }
