@@ -10,38 +10,12 @@
             type="com.yoesuv.infomadiun.menu.listplace.viewmodels.FragmentListPlaceViewModel"/>
     </data>
 
-    <RelativeLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewListPlace"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshListPlace"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:showView="@{safeUnbox(listPlace.isLoading)}"
-            android:visibility="@{safeUnbox(listPlace.isError()) ? View.INVISIBLE : View.VISIBLE }">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewListPlace"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/item_list_place"
-                tools:itemCount="10"/>
-
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            app:hideView="@{safeUnbox(listPlace.isLoading)}"/>
-
-        <include
-            android:id="@+id/layoutError"
-            android:visibility="@{safeUnbox(listPlace.isError()) ? View.VISIBLE : View.GONE }"
-            layout="@layout/include_error"/>
-
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_list_place"
+        tools:itemCount="10"/>
 
 </layout>

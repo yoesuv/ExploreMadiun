@@ -1,58 +1,44 @@
 package com.yoesuv.infomadiun.menu.listplace.views
 
-import android.app.Activity
-import androidx.lifecycle.Observer
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.core.content.ContextCompat
-import androidx.appcompat.widget.*
 import android.view.*
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.yoesuv.infomadiun.R
+import com.yoesuv.infomadiun.data.PlaceLocation
 import com.yoesuv.infomadiun.databinding.FragmentListplaceBinding
 import com.yoesuv.infomadiun.menu.listplace.adapters.ListPlaceAdapter
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.menu.listplace.viewmodels.FragmentListPlaceViewModel
 
 /**
- *  Created by yusuf on 4/30/18.
+ *  Updated by yusuf on 29 July 2020.
  */
 class FragmentListPlace: Fragment() {
 
-    companion object {
-        fun getInstance(): Fragment {
-            return FragmentListPlace()
-        }
-    }
-
     private lateinit var binding: FragmentListplaceBinding
-    private lateinit var viewModel: FragmentListPlaceViewModel
+    private val viewModel: FragmentListPlaceViewModel by activityViewModels()
 
-    private var listPlace: MutableList<PlaceModel> = mutableListOf()
     private lateinit var adapter:ListPlaceAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_listplace, container, false)
-        viewModel = ViewModelProviders.of(this).get(FragmentListPlaceViewModel::class.java)
+        binding.lifecycleOwner = this
         binding.listPlace = viewModel
 
-        setupRecycler()
-        setupSwipeRefresh()
-        setupLayoutError()
-
         setHasOptionsMenu(true)
+        setupRecycler()
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getListPlace()
-        viewModel.listPlace.observe(this, Observer { listPlace ->
-            onListDataChanged(listPlace!!)
+        viewModel.getListPlace(PlaceLocation.ALL)
+        viewModel.listPlace.observe(viewLifecycleOwner, { listPlace ->
+            adapter.submitList(listPlace)
         })
     }
 
@@ -62,53 +48,30 @@ class FragmentListPlace: Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        when (id) {
-            R.id.listSemua -> viewModel.getListPlace()
-            R.id.listKabMadiun -> viewModel.getListPlaceKabMadiun()
-            R.id.listKabMagetan -> viewModel.getListPlaceKabMagetan()
-            R.id.listKabNgawi -> viewModel.getListPlaceKabNgawi()
-            R.id.listKabPacitan -> viewModel.getListPlaceKabPacitan()
-            R.id.listKabPonorogo -> viewModel.getListPlaceKabPonorogo()
-            R.id.listKotaMadiun-> viewModel.getListPlaceKotaMadiun()
+        when (item.itemId) {
+            R.id.listSemua -> viewModel.getListPlace(PlaceLocation.ALL)
+            R.id.listKabMadiun -> viewModel.getListPlace(PlaceLocation.KAB_MADIUN)
+            R.id.listKabMagetan -> viewModel.getListPlace(PlaceLocation.KAB_MAGETAN)
+            R.id.listKabNgawi -> viewModel.getListPlace(PlaceLocation.KAB_NGAWI)
+            R.id.listKabPacitan -> viewModel.getListPlace(PlaceLocation.KAB_PACITAN)
+            R.id.listKabPonorogo -> viewModel.getListPlace(PlaceLocation.KAB_PONOROGO)
+            R.id.listKotaMadiun-> viewModel.getListPlace(PlaceLocation.KOTA_MADIUN)
         }
         item.isChecked = true
         return super.onOptionsItemSelected(item)
     }
 
     private fun setupRecycler(){
-        val layoutManager = LinearLayoutManager(activity)
-
-        binding.recyclerViewListPlace.layoutManager = layoutManager
-        binding.recyclerViewListPlace.setHasFixedSize(true)
-
-        adapter = ListPlaceAdapter(activity as Activity, listPlace, binding.recyclerViewListPlace)
-        binding.recyclerViewListPlace.adapter = adapter
-        binding.recyclerViewListPlace.itemAnimator = androidx.recyclerview.widget.DefaultItemAnimator()
-    }
-
-    private fun setupSwipeRefresh(){
-        binding.swipeRefreshListPlace.setColorSchemeColors(ContextCompat.getColor(context!!, R.color.colorPrimary))
-        binding.swipeRefreshListPlace.setOnRefreshListener{
-            viewModel.getListPlace()
-            binding.swipeRefreshListPlace.isRefreshing = false
-            activity?.invalidateOptionsMenu()
+        adapter = ListPlaceAdapter{
+            openDetailListPlace(it)
+        }.also {
+            binding.recyclerViewListPlace.adapter = it
         }
     }
 
-    private fun onListDataChanged(listData: MutableList<PlaceModel>){
-        listPlace.clear()
-        listPlace.addAll(listData)
-        binding.recyclerViewListPlace.post {
-            adapter.notifyDataSetChanged()
-        }
-        binding.recyclerViewListPlace.scrollToPosition(0)
-    }
-
-    private fun setupLayoutError(){
-        binding.layoutError.findViewById<AppCompatButton>(R.id.buttonErrorRefresh).setOnClickListener {
-            viewModel.getListPlace()
-        }
+    private fun openDetailListPlace(placeModel: PlaceModel) {
+        val action = FragmentListPlaceDirections.actionToDetailList(placeModel)
+        findNavController().navigate(action)
     }
 
 }

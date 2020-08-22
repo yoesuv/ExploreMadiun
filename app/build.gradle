@@ -1,10 +1,14 @@
+def apiKeyPropertiesFile = rootProject.file("apiKey.properties")
+def apiKeyProperties = new Properties()
+apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
+
 buildscript {
     repositories {
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.8.6'
+        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:1.0.3'
     }
 }
 
@@ -12,7 +16,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'io.fabric'
+apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'com.getkeepsafe.dexcount'
 
 repositories {
@@ -30,8 +34,9 @@ android {
         }
     }
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
     flavorDimensions "default"
+    ndkVersion "21.1.6352462"
     defaultConfig {
         applicationId "com.yoesuv.infomadiun"
         minSdkVersion project.minApiLevel
@@ -40,7 +45,9 @@ android {
         versionName project.versionName
         vectorDrawables.useSupportLibrary true
         setProperty("archivesBaseName", applicationId+"-v"+versionCode+"("+versionName+")")
-        resValue "string", "info_madiun_google_maps_api_key", "AIzaSyBlOlCyjJ2SeJZzVS_2uV4uxjGj-AboUQ8"
+        resValue "string", "MAPS_API_KEY", apiKeyProperties['MAPS_API_KEY']
+        resValue "string", "DIRECTION_API_KEY", apiKeyProperties['DIRECTION_API_KEY']
+        resValue "string", "SENTRY_DSN", apiKeyProperties['SENTRY_DSN']
     }
     buildTypes {
         release {
@@ -66,12 +73,20 @@ android {
             ]
         }
     }
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        dataBinding = true
     }
     lintOptions {
         checkReleaseBuilds = false
         abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -81,33 +96,38 @@ androidExtensions {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.12'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    testImplementation 'junit:junit:4.13'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.0'
 
-    implementation "com.google.firebase:firebase-core:$project.firebaseCoreVersion"
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-    implementation "com.google.android.gms:play-services-maps:$project.firebaseVersion"
-    implementation "com.google.android.gms:play-services-location:$project.firebaseVersion"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.squareup.retrofit2:retrofit:$project.retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$project.retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$project.retrofitVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$project.httpLoggingVersion"
-    implementation "io.reactivex.rxjava2:rxjava:$project.rxJavaVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$project.rxAndroidVersion"
-    implementation "com.github.bumptech.glide:glide:$project.glideVersion"
-    kapt "com.github.bumptech.glide:compiler:$project.glideVersion"
-    implementation "com.github.chrisbanes:PhotoView:$project.photoViewVersion"
-    implementation "com.tbruyelle.rxpermissions2:rxpermissions:$project.rxPermissionVersion"
-    implementation "com.github.GrenderG:Toasty:$project.toastyVersion"
-    implementation "com.github.devlight.navigationtabstrip:navigationtabstrip:$project.navigationTabStripVersion"
-    implementation "com.akexorcist:googledirectionlibrary:$project.googleDirectionLibraryVersion"
-    implementation "com.intuit.ssp:ssp-android:$project.sspVersion"
-    implementation "com.intuit.sdp:sdp-android:$project.sdpVersion"
-    implementation "androidx.lifecycle:lifecycle-extensions:$project.lifeCycleVersion"
-    kapt "androidx.lifecycle:lifecycle-compiler:$project.lifeCycleVersion"
+    implementation "com.google.firebase:firebase-core:$firebaseCoreVersion"
+    implementation "com.google.android.gms:play-services-maps:$firebaseVersion"
+    implementation "com.google.android.gms:play-services-location:$firebaseVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$httpLoggingVersion"
+
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+    implementation "com.github.chrisbanes:PhotoView:$photoViewVersion"
+    implementation "com.github.GrenderG:Toasty:$toastyVersion"
+    implementation "com.akexorcist:googledirectionlibrary:$googleDirectionLibraryVersion"
+    implementation "com.intuit.ssp:ssp-android:$sspVersion"
+    implementation "com.intuit.sdp:sdp-android:$sdpVersion"
+    implementation "com.karumi:dexter:$dexterVersion"
+
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifeCycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCycleVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+
+    implementation "io.sentry:sentry-android:$sentryVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'

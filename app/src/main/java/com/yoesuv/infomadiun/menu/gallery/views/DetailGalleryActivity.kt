@@ -1,34 +1,27 @@
 package com.yoesuv.infomadiun.menu.gallery.views
 
-import androidx.lifecycle.ViewModelProviders
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import androidx.activity.viewModels
+import androidx.navigation.navArgs
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ActivityDetailGalleryBinding
-import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
-import com.yoesuv.infomadiun.menu.gallery.viewmodels.CustomDetailGalleryViewModelFactory
 import com.yoesuv.infomadiun.menu.gallery.viewmodels.DetailGalleryViewModel
-import com.yoesuv.infomadiun.utils.nougatOrBelow
+import com.yoesuv.infomadiun.utils.binding.ViewModelFactory
 
 class DetailGalleryActivity: AppCompatActivity() {
 
-    companion object {
-        const val EXTRA_DATA_GALLERY = "extra_data_gallery"
-    }
-
     private lateinit var binding: ActivityDetailGalleryBinding
-    private lateinit var viewModel: DetailGalleryViewModel
+    private val viewModel: DetailGalleryViewModel by viewModels { ViewModelFactory(args.galleryModel) }
+
+    private val args: DetailGalleryActivityArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        nougatOrBelow {
-            overridePendingTransition(R.anim.slide_in_bottom, R.anim.scale_down)
-        }
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail_gallery)
-        val galleryModel: GalleryModel = intent?.getParcelableExtra(EXTRA_DATA_GALLERY) as GalleryModel
-        viewModel = ViewModelProviders.of(this, CustomDetailGalleryViewModelFactory(galleryModel, application)).get(DetailGalleryViewModel::class.java)
+        binding.lifecycleOwner = this
         binding.gallery = viewModel
 
         setupToolbar()
@@ -41,14 +34,7 @@ class DetailGalleryActivity: AppCompatActivity() {
         return super.onOptionsItemSelected(item!!)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        nougatOrBelow {
-            overridePendingTransition(R.anim.scale_up, R.anim.slide_out_bottom)
-        }
-    }
-
-    private fun setupToolbar(){
+    private fun setupToolbar() {
         setSupportActionBar(binding.toolbarDetailGallery.toolbarInclude)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)

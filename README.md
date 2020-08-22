@@ -1,30 +1,39 @@
-## Explore Madiun Version 2.0.4 ##
-[![Build Status](https://travis-ci.org/yoesuv/ExploreMadiun.svg?branch=master)](https://travis-ci.org/yoesuv/ExploreMadiun)
+## Explore Madiun Version 2.0.5 ##
+[![Build Status](https://travis-ci.org/yoesuv/ExploreMadiun.svg?branch=master)](https://travis-ci.org/yoesuv/ExploreMadiun)  
 
 * Kotlin
-* Data Binding
-* MVVM
-* [AndroidX](https://developer.android.com/jetpack/androidx/)
+* Architecture
+  - [MVVM Data Binding](https://developer.android.com/topic/libraries/data-binding)
+* Jetpack
+  - [Lifecycle & LiveData](https://developer.android.com/jetpack/androidx/releases/lifecycle)
+  - [Navigation](https://developer.android.com/jetpack/androidx/releases/navigation)
+  - [Room](https://developer.android.com/jetpack/androidx/releases/room)
 
-[![](https://i.imgur.com/vbFJRFm.png)](https://play.google.com/store/apps/details?id=com.yoesuv.infomadiun)
-<br/>
+[![](https://i.imgur.com/vbFJRFm.png)](https://play.google.com/store/apps/details?id=com.yoesuv.infomadiun)  
 
-| ![](https://i.imgur.com/J03HxDb.jpg) | ![](https://i.imgur.com/iIMZqog.jpg) | ![](https://i.imgur.com/NdjWvnV.jpg) | ![](https://i.imgur.com/PKWFuRU.jpg) |
-| :---: | :---: | :---: | :---: |
-| ![](https://i.imgur.com/JlgJrWx.jpg) | ![](https://i.imgur.com/dwHFzIc.jpg) | ![](https://i.imgur.com/r2kwilp.jpg) | - |
+### How to Run ###
+create file ```apiKey.properties``` at root project & set api key
+```
+MAPS_API_KEY = your_map_api_key
+DIRECTION_API_KEY = your_map_direction_api_key
+SENTRY_DSN = your_sentry_DSN
+```
+## Screenshot ##
+| ![](https://i.imgur.com/Vn6BUYw.jpg) | ![](https://i.imgur.com/gEo3r6o.jpg) | ![](https://i.imgur.com/3YYLzYb.jpg) | ![](https://i.imgur.com/er18Ztc.jpg) |
+| :-----: | :-----: | :-----: | :-----: |
+| ![](https://i.imgur.com/Rb82Oa3.jpg) | ![](https://i.imgur.com/tu6He4k.jpg) | ![](https://i.imgur.com/3IPNJpX.jpg) | - |
 
 
 ## List Libraries Used in this Project ##
 * [Android-GoogleDirectionLibrary](https://github.com/akexorcist/Android-GoogleDirectionLibrary)
 * [Dexcount Gradle Plugin](https://github.com/KeepSafe/dexcount-gradle-plugin)
+* [Dexter](https://github.com/Karumi/Dexter)
 * [Glide](https://github.com/bumptech/glide)
 * [Icons8 Icon](https://icons8.com/)
-* [NavigationTabStrip](https://github.com/Devlight/NavigationTabStrip)
+* [OkHttp Logging](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)
 * [PhotoView](https://github.com/chrisbanes/PhotoView)
 * [Retrofit](https://github.com/square/retrofit)
-* [RxAndroid](https://github.com/ReactiveX/RxAndroid)
-* [RxJava](https://github.com/ReactiveX/RxJava)
-* [RxPermission](https://github.com/tbruyelle/RxPermissions)
+* [Sentry](https://sentry.io)
 * [SDP](https://github.com/intuit/sdp)
 * [SSP](https://github.com/intuit/ssp)
 * [Toasty](https://github.com/GrenderG/Toasty)

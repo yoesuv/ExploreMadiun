@@ -17,8 +17,7 @@
         android:clickable="true"
         android:focusable="true"
         android:background="@android:color/transparent"
-        android:foreground="?attr/selectableItemBackground"
-        android:onClick="@{itemListPlace::clickItemListPlace}">
+        android:foreground="?attr/selectableItemBackground">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -48,24 +47,28 @@
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp">
 
-            <com.yoesuv.infomadiun.widgets.LatoBoldTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewItemListPlaceName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{itemListPlace.name}"
+                android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/_14ssp"
                 android:maxLines="1"
-                android:ellipsize="end"/>
+                android:ellipsize="end"
+                tools:text="@tools:sample/cities"/>
 
-            <com.yoesuv.infomadiun.widgets.LatoRegularTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewItemListPlaceLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{itemListPlace.location}"
                 android:textColor="@android:color/white"
+                android:textSize="@dimen/_12ssp"
                 android:maxLines="1"
-                android:ellipsize="end"/>
+                android:ellipsize="end"
+                tools:text="@tools:sample/lorem"/>
 
         </LinearLayout>
 

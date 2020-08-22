@@ -3,7 +3,7 @@ package com.yoesuv.infomadiun.networks
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
-import io.reactivex.Observable
+import retrofit2.Response
 import retrofit2.http.GET
 
 /**
@@ -12,30 +12,12 @@ import retrofit2.http.GET
 interface RestApi {
 
     @GET("List_place.json")
-    fun getListPlace(): Observable<MutableList<PlaceModel>>
-
-    @GET("List_place_kab_madiun.json")
-    fun getListPlaceKabMadiun(): Observable<MutableList<PlaceModel>>
-
-    @GET("List_place_kab_magetan.json")
-    fun getListPlaceKabMagetan(): Observable<MutableList<PlaceModel>>
-
-    @GET("List_place_kab_ngawi.json")
-    fun getListPlaceKabNgawi(): Observable<MutableList<PlaceModel>>
-
-    @GET("List_place_kab_pacitan.json")
-    fun getListPlaceKabPacitan(): Observable<MutableList<PlaceModel>>
-
-    @GET("List_place_kab_ponorogo.json")
-    fun getListPlaceKabPonorogo(): Observable<MutableList<PlaceModel>>
-
-    @GET("List_place_kota_madiun.json")
-    fun getListPlaceKotaMadiun(): Observable<MutableList<PlaceModel>>
+    suspend fun listPlace(): Response<MutableList<PlaceModel>>
 
     @GET("Gallery_info.json")
-    fun getListGallery(): Observable<MutableList<GalleryModel>>
+    suspend fun gallery(): Response<MutableList<GalleryModel>>
 
     @GET("maps_info.json")
-    fun getListPin(): Observable<MutableList<PinModel>>
+    suspend fun mapPins(): Response<MutableList<PinModel>>
 
 }

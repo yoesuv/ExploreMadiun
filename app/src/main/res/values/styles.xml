@@ -2,12 +2,13 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/lato</item>
     </style>
 
     <style name="Theme.Transparent" parent="Theme.AppCompat.NoActionBar">
@@ -17,8 +18,8 @@
         <item name="android:colorBackgroundCacheHint">@null</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
-
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" >
+        <item name="android:fontFamily">@font/pacifico</item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -36,6 +37,10 @@
 
     <style name="buttonPrimary" parent="Theme.AppCompat.Light">
         <item name="colorButtonNormal">@color/colorPrimary</item>
+    </style>
+
+    <style name="MyTabAppearance" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:textSize">@dimen/_11ssp</item>
     </style>
 
 </resources>

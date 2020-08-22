@@ -1,9 +1,7 @@
 package com.yoesuv.infomadiun
 
 import android.app.Application
-import com.crashlytics.android.Crashlytics
 import com.yoesuv.infomadiun.utils.PreferencesHelper
-import io.fabric.sdk.android.Fabric
 
 /**
  *  Created by yusuf on 4/28/18.
@@ -17,9 +15,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         prefHelper = PreferencesHelper(this)
-        if(BuildConfig.BUILD_TYPE.equals("release", ignoreCase = true)) {
-            Fabric.with(this, Crashlytics())
-        }
     }
 
 }

@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.gigamole.navigationtabstrip.NavigationTabStrip
-            android:id="@+id/navigationTabStrip"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:background="@color/colorPrimary"/>
-
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPagerOther"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayoutViewPagerOther"
+                android:background="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabIndicatorHeight="@dimen/_2sdp"
+                app:tabIndicatorColor="@android:color/white"
+                app:tabTextColor="@android:color/white"
+                app:tabTextAppearance="@style/MyTabAppearance"
+                app:tabMode="scrollable"/>
+
+        </androidx.viewpager.widget.ViewPager>
 
     </LinearLayout>
 

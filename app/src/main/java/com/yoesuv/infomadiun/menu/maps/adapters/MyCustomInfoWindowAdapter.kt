@@ -1,34 +1,34 @@
 package com.yoesuv.infomadiun.menu.maps.adapters
 
-import android.app.Activity
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
 import com.yoesuv.infomadiun.R
-import com.yoesuv.infomadiun.menu.maps.views.FragmentMaps
-import kotlinx.android.synthetic.main.custom_info_window.view.*
+import com.yoesuv.infomadiun.databinding.CustomInfoWindowBinding
+import com.yoesuv.infomadiun.menu.maps.models.MarkerTag
 
-class MyCustomInfoWindowAdapter(private val activity: Activity?): GoogleMap.InfoWindowAdapter {
+class MyCustomInfoWindowAdapter(private val context: Context?): GoogleMap.InfoWindowAdapter {
 
-    private val mContents: View = LayoutInflater.from(activity?.applicationContext).inflate(R.layout.custom_info_window, null)
+    private val binding = CustomInfoWindowBinding.inflate(LayoutInflater.from(context))
 
     override fun getInfoContents(marker: Marker?): View {
-        return mContents
+        return binding.root
     }
 
     override fun getInfoWindow(marker: Marker?): View {
-        val tag: FragmentMaps.MarkerTag = marker?.tag as FragmentMaps.MarkerTag
+        val tag: MarkerTag = marker?.tag as MarkerTag
         if (tag.type == 1) {
-            mContents.textViewMapLocationName.text = activity?.getString(R.string.your_location)
-            mContents.imageViewMapLocationDirection.visibility = View.GONE
+            binding.textViewMapLocationName.text = context?.getString(R.string.your_location)
+            binding.imageViewMapLocationDirection.visibility = View.GONE
         } else {
             marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_selected))
-            mContents.textViewMapLocationName.text = marker.title
-            mContents.imageViewMapLocationDirection.visibility = View.VISIBLE
+            binding.textViewMapLocationName.text = marker.title
+            binding.imageViewMapLocationDirection.visibility = View.VISIBLE
         }
-        return mContents
+        return binding.root
     }
 
 }

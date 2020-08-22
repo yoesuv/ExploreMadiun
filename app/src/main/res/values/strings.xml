@@ -8,8 +8,6 @@
     <string name="menu_other">Lainnya</string>
     <!-- ERROR MESSAGE -->
     <string name="press_again_to_exit">Tekan Lagi Untuk Keluar</string>
-    <string name="ops_error">Oops… Terjadi Kesalahan</string>
     <string name="ops_message">Coba beberapa saat lagi atau periksa koneksi internet</string>
-    <string name="ops_button">MUAT ULANG</string>
 
 </resources>

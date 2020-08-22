@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -11,19 +12,21 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/fragment_info_margin">
 
-            <com.yoesuv.infomadiun.widgets.LatoRegularTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewThanks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:textColor="@color/default_text_color"/>
+                android:textSize="@dimen/_12ssp"
+                android:textColor="@color/default_text_color"
+                tools:text="@tools:sample/lorem/random"/>
 
             <include layout="@layout/divider"/>
 
-            <com.yoesuv.infomadiun.widgets.LatoRegularTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/person_1"
+                android:textSize="@dimen/_12ssp"
                 android:textColor="@color/default_text_color"/>
 
         </LinearLayout>

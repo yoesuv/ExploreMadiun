@@ -16,8 +16,7 @@
         android:clickable="true"
         android:focusable="true"
         android:background="@android:color/transparent"
-        android:foreground="?attr/selectableItemBackground"
-        android:onClick="@{itemGallery::onItemClicked}">
+        android:foreground="?attr/selectableItemBackground">
 
         <com.yoesuv.infomadiun.widgets.SquareImageView
             android:id="@+id/imageViewItemGallery"

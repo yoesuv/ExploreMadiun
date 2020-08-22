@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/fragmentList">
+
+    <!-- fragment list place -->
+    <fragment android:id="@+id/fragmentList"
+        android:name="com.yoesuv.infomadiun.menu.listplace.views.FragmentListPlace"
+        tools:layout="@layout/fragment_listplace">
+
+        <action android:id="@+id/actionToDetailList"
+            app:destination="@+id/activityDetailList"/>
+
+    </fragment>
+
+    <!-- detail list place -->
+    <activity android:id="@+id/activityDetailList"
+        android:name="com.yoesuv.infomadiun.menu.listplace.views.DetailListPlaceActivity"
+        tools:layout="@layout/activity_detail_listplace">
+
+        <argument android:name="PlaceModel"
+            app:argType="com.yoesuv.infomadiun.menu.listplace.models.PlaceModel" />
+
+    </activity>
+
+    <!-- fragment gallery -->
+    <fragment android:id="@+id/fragmentGallery"
+        android:name="com.yoesuv.infomadiun.menu.gallery.views.FragmentGallery"
+        tools:layout="@layout/fragment_gallery">
+
+        <action android:id="@+id/actionToDetailGallery"
+            app:destination="@+id/activityDetailGallery"/>
+
+    </fragment>
+
+    <!-- detail gallery -->
+    <activity android:id="@+id/activityDetailGallery"
+        android:name="com.yoesuv.infomadiun.menu.gallery.views.DetailGalleryActivity"
+        tools:layout="@layout/activity_detail_gallery">
+
+        <argument android:name="GalleryModel"
+            app:argType="com.yoesuv.infomadiun.menu.gallery.models.GalleryModel" />
+
+    </activity>
+
+    <fragment android:id="@+id/fragmentMap"
+        android:name="com.yoesuv.infomadiun.menu.maps.views.FragmentMaps"
+        tools:layout="@layout/fragment_map"/>
+
+    <fragment android:id="@+id/fragmentOther"
+        android:name="com.yoesuv.infomadiun.menu.other.views.FragmentOther"
+        tools:layout="@layout/fragment_other"/>
+
+</navigation>
