@@ -7,6 +7,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.yoesuv.infomadiun.BuildConfig
+import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.main.MainActivity
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
@@ -15,6 +16,7 @@ import com.yoesuv.infomadiun.networks.AppRepository
 import com.yoesuv.infomadiun.networks.db.repositories.DbGalleryRepository
 import com.yoesuv.infomadiun.networks.db.repositories.DbPinRepository
 import com.yoesuv.infomadiun.networks.db.repositories.DbPlaceRepository
+import com.yoesuv.infomadiun.utils.AppHelper
 import com.yoesuv.infomadiun.utils.logDebug
 
 class SplashViewModel(application: Application) : AndroidViewModel(application) {
@@ -37,7 +39,7 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
 
            goToMain(activity)
        },{
-           it.printStackTrace()
+           AppHelper.displayErrorToast(activity, activity.getString(R.string.ops_message))
        })
     }
 
