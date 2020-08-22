@@ -36,6 +36,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
     flavorDimensions "default"
+    ndkVersion "21.1.6352462"
     defaultConfig {
         applicationId "com.yoesuv.infomadiun"
         minSdkVersion project.minApiLevel
@@ -46,6 +47,7 @@ android {
         setProperty("archivesBaseName", applicationId+"-v"+versionCode+"("+versionName+")")
         resValue "string", "MAPS_API_KEY", apiKeyProperties['MAPS_API_KEY']
         resValue "string", "DIRECTION_API_KEY", apiKeyProperties['DIRECTION_API_KEY']
+        resValue "string", "SENTRY_DSN", apiKeyProperties['SENTRY_DSN']
     }
     buildTypes {
         release {
@@ -124,6 +126,8 @@ dependencies {
     implementation "androidx.room:room-runtime:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
+
+    implementation "io.sentry:sentry-android:$sentryVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'
