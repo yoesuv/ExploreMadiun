@@ -11,6 +11,14 @@
 
 [![](https://i.imgur.com/vbFJRFm.png)](https://play.google.com/store/apps/details?id=com.yoesuv.infomadiun)  
 
+### How to Run ###
+create file ```apiKey.properties``` at root project & set api key
+```
+MAPS_API_KEY = your_map_api_key
+DIRECTION_API_KEY = your_map_direction_api_key
+SENTRY_DSN = your_sentry_DSN
+```
+
 | ![](https://i.imgur.com/Vn6BUYw.jpg) | ![](https://i.imgur.com/gEo3r6o.jpg) | ![](https://i.imgur.com/3YYLzYb.jpg) | ![](https://i.imgur.com/er18Ztc.jpg) |
 | :-----: | :-----: | :-----: | :-----: |
 | ![](https://i.imgur.com/Rb82Oa3.jpg) | ![](https://i.imgur.com/tu6He4k.jpg) | ![](https://i.imgur.com/3IPNJpX.jpg) | - |
@@ -22,8 +30,10 @@
 * [Dexter](https://github.com/Karumi/Dexter)
 * [Glide](https://github.com/bumptech/glide)
 * [Icons8 Icon](https://icons8.com/)
+* [OkHttp Logging](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)
 * [PhotoView](https://github.com/chrisbanes/PhotoView)
 * [Retrofit](https://github.com/square/retrofit)
+* [Sentry](https://sentry.io)
 * [SDP](https://github.com/intuit/sdp)
 * [SSP](https://github.com/intuit/ssp)
 * [Toasty](https://github.com/GrenderG/Toasty)
