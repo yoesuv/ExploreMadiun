@@ -1,6 +1,5 @@
 package com.yoesuv.infomadiun.menu.listplace.views
 
-import androidx.lifecycle.Observer
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.*
@@ -38,9 +37,8 @@ class FragmentListPlace: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getListPlace(PlaceLocation.ALL)
-        viewModel.listPlace.observe(viewLifecycleOwner, Observer { listPlace ->
+        viewModel.listPlace.observe(viewLifecycleOwner, { listPlace ->
             adapter.submitList(listPlace)
-            binding.recyclerViewListPlace.scrollTo(0, 0)
         })
     }
 

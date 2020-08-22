@@ -1,10 +1,8 @@
 package com.yoesuv.infomadiun.menu.other.views
 
-import androidx.lifecycle.Observer
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +32,7 @@ class ChildFragmentLibraries: Fragment() {
 
         setupRecycler()
         viewModel.setupData(context)
-        viewModel.listData.observe(viewLifecycleOwner, Observer {
+        viewModel.listData.observe(viewLifecycleOwner, {
             onListDataChanged(it!!)
         })
 

@@ -1,6 +1,5 @@
 package com.yoesuv.infomadiun.menu.gallery.views
 
-import androidx.lifecycle.Observer
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -37,7 +36,7 @@ class FragmentGallery: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.dataGallery.observe(viewLifecycleOwner, Observer {
+        viewModel.dataGallery.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
     }
