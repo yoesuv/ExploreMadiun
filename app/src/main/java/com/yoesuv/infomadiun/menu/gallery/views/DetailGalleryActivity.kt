@@ -27,11 +27,11 @@ class DetailGalleryActivity: AppCompatActivity() {
         setupToolbar()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId==android.R.id.home) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId==android.R.id.home) {
             onBackPressed()
         }
-        return super.onOptionsItemSelected(item!!)
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setupToolbar() {

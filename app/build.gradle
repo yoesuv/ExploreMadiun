@@ -17,8 +17,8 @@ android {
             storePassword STORE_PASSWORD
         }
     }
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
     flavorDimensions "default"
     ndkVersion "21.1.6352462"
     defaultConfig {
