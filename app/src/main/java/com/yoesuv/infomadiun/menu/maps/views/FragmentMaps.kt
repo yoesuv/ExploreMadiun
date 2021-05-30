@@ -33,7 +33,7 @@ import com.yoesuv.infomadiun.utils.*
 import kotlin.math.roundToInt
 
 /**
- *  Updated by yusuf on 2 August 2020.
+ *  Updated by yusuf on 31 May 2021.
  */
 class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
@@ -49,7 +49,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     private var googleMap: GoogleMap? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var markerLocation: Marker? = null
-    private var myLocationCallback: MyLocationCallback? = null
+    private lateinit var myLocationCallback: MyLocationCallback
 
     private lateinit var origin: LatLng
     private lateinit var destination: LatLng
@@ -61,15 +61,15 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireActivity().applicationContext)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false)
         binding.lifecycleOwner = this
         binding.maps = viewModel
 
         activity = getActivity() as Activity
 
-        val mapFragment:SupportMapFragment? = childFragmentManager.findFragmentById(R.id.mapLocation) as SupportMapFragment
-        mapFragment?.getMapAsync(this)
+        val mapFragment:SupportMapFragment = childFragmentManager.findFragmentById(R.id.mapLocation) as SupportMapFragment
+        mapFragment.getMapAsync(this)
 
         setHasOptionsMenu(true)
 
@@ -86,9 +86,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     override fun onDestroy() {
         super.onDestroy()
-        if(myLocationCallback!=null) {
-            LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(myLocationCallback)
-        }
+        LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(myLocationCallback)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -129,7 +127,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationRequest.interval = 2000
         locationRequest.fastestInterval = 1000
-        fusedLocationClient.requestLocationUpdates(locationRequest, myLocationCallback, Looper.myLooper())
+        fusedLocationClient.requestLocationUpdates(locationRequest, myLocationCallback, Looper.getMainLooper())
     }
 
     private fun getDirection(marker: Marker?){
@@ -183,7 +181,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     override fun onMapReady(googleMap: GoogleMap?) {
         setDefaultLocation(googleMap)
-        googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style_map))
+        googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.style_map))
         val paddingBottom = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 108F, resources.displayMetrics).roundToInt()
         googleMap?.setPadding(0, 0, 0, paddingBottom)
         googleMap?.uiSettings?.isZoomControlsEnabled = true
