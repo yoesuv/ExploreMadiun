@@ -9,15 +9,13 @@ import androidx.lifecycle.viewModelScope
 import com.yoesuv.infomadiun.BuildConfig
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.main.MainActivity
-import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
-import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
-import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.networks.AppRepository
 import com.yoesuv.infomadiun.networks.db.repositories.DbGalleryRepository
 import com.yoesuv.infomadiun.networks.db.repositories.DbPinRepository
 import com.yoesuv.infomadiun.networks.db.repositories.DbPlaceRepository
 import com.yoesuv.infomadiun.utils.AppHelper
 import com.yoesuv.infomadiun.utils.logDebug
+import kotlinx.coroutines.launch
 
 class SplashViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -33,41 +31,16 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
            logDebug("SplashViewModel # list place count ${places?.size}")
            logDebug("SplashViewModel # gallery count ${galleries?.size}")
            logDebug("SplashViewModel # map pins count ${pins?.size}")
-           setupPlaces(places)
-           setupGalleries(galleries)
-           setupPins(pins)
 
-           goToMain(activity)
+           viewModelScope.launch {
+               dbPlaceRepository.setupDataPlaces(places)
+               dbGalleryRepository.setupDataGalleries(galleries)
+               dbPinRepository.setupDataPins(pins)
+               goToMain(activity)
+           }
        },{
            AppHelper.displayErrorToast(activity, activity.getString(R.string.ops_message))
        })
-    }
-
-    private fun setupPlaces(places: List<PlaceModel>?) {
-        places?.let {
-            dbPlaceRepository.deleteAllPlace()
-            it.forEach { place ->
-                dbPlaceRepository.insertPlace(place)
-            }
-        }
-    }
-
-    private fun setupGalleries(galleries: List<GalleryModel>?) {
-        galleries?.let {
-            dbGalleryRepository.deleteAllGallery()
-            it.forEach { gallery ->
-                dbGalleryRepository.insertGallery(gallery)
-            }
-        }
-    }
-
-    private fun setupPins(pins: List<PinModel>?) {
-        pins?.let {
-            dbPinRepository.deleteAllPin()
-            it.forEach { pin ->
-                dbPinRepository.insertPin(pin)
-            }
-        }
     }
 
     private fun goToMain(activity: Activity) {
