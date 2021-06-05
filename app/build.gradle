@@ -31,7 +31,6 @@ android {
         setProperty("archivesBaseName", applicationId+"-v"+versionCode+"("+versionName+")")
         resValue "string", "MAPS_API_KEY", apiKeyProperties['MAPS_API_KEY']
         resValue "string", "DIRECTION_API_KEY", apiKeyProperties['DIRECTION_API_KEY']
-        resValue "string", "SENTRY_DSN", apiKeyProperties['SENTRY_DSN']
     }
     buildTypes {
         release {
@@ -110,7 +109,6 @@ dependencies {
     implementation "com.intuit.ssp:ssp-android:$sspVersion"
     implementation "com.intuit.sdp:sdp-android:$sdpVersion"
     implementation "com.karumi:dexter:$dexterVersion"
-    implementation "io.sentry:sentry-android:$sentryVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'
