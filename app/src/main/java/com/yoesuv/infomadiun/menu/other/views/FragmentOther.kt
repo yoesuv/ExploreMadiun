@@ -12,7 +12,6 @@ import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentOtherBinding
 import com.yoesuv.infomadiun.menu.other.adapters.TabOtherAdapter
 import com.yoesuv.infomadiun.utils.ZoomOutPageTransformer
-import com.yoesuv.infomadiun.utils.lollipopOrNewer
 
 /**
  *  Updated by yusuf on 06 June 2021.
@@ -47,9 +46,7 @@ class FragmentOther: Fragment() {
     }
 
     private fun setupAppBar(elevation: Float){
-        lollipopOrNewer {
-            activity?.findViewById<AppBarLayout>(R.id.mainAppBar)?.elevation = elevation
-        }
+        activity?.findViewById<AppBarLayout>(R.id.mainAppBar)?.elevation = elevation
     }
 
     private fun setupTab() {

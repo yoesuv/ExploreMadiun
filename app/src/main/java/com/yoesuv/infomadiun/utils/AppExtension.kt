@@ -1,6 +1,5 @@
 package com.yoesuv.infomadiun.utils
 
-import android.os.Build
 import android.util.Log
 import com.yoesuv.infomadiun.BuildConfig
 import com.yoesuv.infomadiun.data.TAG_DEBUG
@@ -15,11 +14,5 @@ fun logDebug(message: String) {
 fun logError(message: String) {
     if (BuildConfig.DEBUG) {
         Log.e(TAG_ERROR, message)
-    }
-}
-
-fun lollipopOrNewer(body:() -> Unit) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        body()
     }
 }
