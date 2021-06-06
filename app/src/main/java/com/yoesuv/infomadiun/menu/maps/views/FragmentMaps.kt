@@ -33,7 +33,7 @@ import com.yoesuv.infomadiun.utils.*
 import kotlin.math.roundToInt
 
 /**
- *  Updated by yusuf on 31 May 2021.
+ *  Updated by yusuf on 06 June 2021.
  */
 class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
@@ -132,28 +132,30 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     private fun getDirection(marker: Marker?){
         val tag: MarkerTag = marker?.tag as MarkerTag
-        if(tag.type==0){
-
-            destination = LatLng(tag.latitude!!, tag.longitude!!)
-            val latitude: String? = App.prefHelper?.getString(PREFERENCE_LATITUDE)
-            val longitude: String? = App.prefHelper?.getString(PREFERENCE_LONGITUDE)
-
-            if(latitude!=""){
-                if(longitude!=""){
-                    binding.textViewGettingDirection.visibility = View.VISIBLE
-                    origin = LatLng(latitude!!.toDouble(), longitude!!.toDouble())
-                    GoogleDirection.withServerKey(activity.getString(R.string.DIRECTION_API_KEY))
-                            .from(origin)
-                            .to(destination)
-                            .alternativeRoute(true)
-                            .transportMode(TransportMode.DRIVING)
-                            .avoid(AvoidType.TOLLS)
-                            .execute(this)
-                } else {
-                    AppHelper.displayErrorToast(activity, getString(R.string.error_get_user_location))
+        if (tag.type==0) {
+            tag.latitude?.let { lat ->
+                tag.longitude?.let { lng ->
+                    destination = LatLng(lat, lng)
+                    val latitude: String? = App.prefHelper?.getString(PREFERENCE_LATITUDE)
+                    val longitude: String? = App.prefHelper?.getString(PREFERENCE_LONGITUDE)
+                    if (!latitude.isNullOrEmpty()) {
+                        if (!longitude.isNullOrEmpty()) {
+                            binding.textViewGettingDirection.visibility = View.VISIBLE
+                            origin = LatLng(latitude.toDouble(), longitude.toDouble())
+                            GoogleDirection.withServerKey(activity.getString(R.string.DIRECTION_API_KEY))
+                                .from(origin)
+                                .to(destination)
+                                .alternativeRoute(true)
+                                .transportMode(TransportMode.DRIVING)
+                                .avoid(AvoidType.TOLLS)
+                                .execute(this)
+                        } else {
+                            AppHelper.displayErrorToast(activity, getString(R.string.error_get_user_location))
+                        }
+                    } else {
+                        AppHelper.displayErrorToast(activity, getString(R.string.error_get_user_location))
+                    }
                 }
-            } else {
-                AppHelper.displayErrorToast(activity, getString(R.string.error_get_user_location))
             }
         }
     }
@@ -209,24 +211,27 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     override fun onDirectionSuccess(direction: Direction?, rawBody: String?) {
         binding.textViewGettingDirection.visibility = View.INVISIBLE
-        if(direction!!.isOK){
-            if(direction.routeList.size>0) {
-                googleMap?.clear()
-                markerLocation = googleMap?.addMarker(MarkerOptions().position(destination).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_selected)))
-                markerLocation?.tag = MarkerTag("Destination", 3, 0.0, 0.0)
+        direction?.let { dir ->
+            if (dir.isOK) {
+                if (dir.routeList.size > 0) {
+                    googleMap?.clear()
+                    markerLocation =
+                        googleMap?.addMarker(MarkerOptions().position(destination).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_selected)))
+                    markerLocation?.tag = MarkerTag("Destination", 3, 0.0, 0.0)
 
-                setCameraWithCoordinationBounds(direction.routeList[0])
+                    setCameraWithCoordinationBounds(dir.routeList[0])
 
-                for (i: Int in 0 until direction.routeList.size) {
-                    val color = colors[i % colors.size]
-                    val route = direction.routeList[i]
-                    val directionPositionList = route.legList[0].directionPoint
-                    googleMap?.addPolyline(DirectionConverter.createPolyline(context, directionPositionList, 5, Color.parseColor(color)))
+                    for (i: Int in 0 until dir.routeList.size) {
+                        val color = colors[i % colors.size]
+                        val route = dir.routeList[i]
+                        val directionPositionList = route.legList[0].directionPoint
+                        googleMap?.addPolyline(DirectionConverter.createPolyline(context, directionPositionList, 5, Color.parseColor(color)))
+                    }
                 }
+            } else {
+                logError("FragmentMaps # direction not ok ${direction.errorMessage}")
+                AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
             }
-        }else{
-            logError("FragmentMaps # direction not ok ${direction.errorMessage}")
-            AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
         }
     }
 
