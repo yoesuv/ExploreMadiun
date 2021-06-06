@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.tabs.TabLayoutMediator
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentOtherBinding
 import com.yoesuv.infomadiun.menu.other.adapters.TabOtherAdapter
@@ -14,11 +15,17 @@ import com.yoesuv.infomadiun.utils.ZoomOutPageTransformer
 import com.yoesuv.infomadiun.utils.lollipopOrNewer
 
 /**
- *  Updated by yusuf on 12 July 2020.
+ *  Updated by yusuf on 06 June 2021.
  */
 class FragmentOther: Fragment() {
 
     private lateinit var binding: FragmentOtherBinding
+    private var tabTitles = arrayOf<String>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        tabTitles = resources.getStringArray(R.array.tab_other)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_other, container, false)
@@ -28,10 +35,10 @@ class FragmentOther: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.viewPagerOther.adapter = TabOtherAdapter(context, childFragmentManager)
-        binding.viewPagerOther.setPageTransformer(true, ZoomOutPageTransformer())
-        binding.tabLayoutViewPagerOther.setupWithViewPager(binding.viewPagerOther)
+        binding.viewPagerOtherTwo.adapter = TabOtherAdapter(this, tabTitles)
+        binding.viewPagerOtherTwo.setPageTransformer(ZoomOutPageTransformer())
         setupAppBar(0F)
+        setupTab()
     }
 
     override fun onDestroy() {
@@ -43,5 +50,11 @@ class FragmentOther: Fragment() {
         lollipopOrNewer {
             activity?.findViewById<AppBarLayout>(R.id.mainAppBar)?.elevation = elevation
         }
+    }
+
+    private fun setupTab() {
+        TabLayoutMediator(binding.tabLayoutViewPagerOtherTwo, binding.viewPagerOtherTwo) { tab, position ->
+            tab.text = tabTitles[position]
+        }.attach()
     }
 }
