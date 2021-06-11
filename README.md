@@ -1,5 +1,5 @@
-## Explore Madiun Version 2.0.5 ##
-[![Build Status](https://travis-ci.org/yoesuv/ExploreMadiun.svg?branch=master)](https://travis-ci.org/yoesuv/ExploreMadiun)  
+## Explore Madiun Version 2.0.6 ##
+[![Build Status](https://travis-ci.com/yoesuv/ExploreMadiun.svg?branch=master)](https://travis-ci.com/yoesuv/ExploreMadiun)
 
 * Kotlin
 * Architecture
