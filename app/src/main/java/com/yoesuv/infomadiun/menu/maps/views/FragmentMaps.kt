@@ -209,7 +209,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         setupMarkerAnimation(googleMap)
     }
 
-    override fun onDirectionSuccess(direction: Direction?, rawBody: String?) {
+    override fun onDirectionSuccess(direction: Direction?) {
         binding.textViewGettingDirection.visibility = View.INVISIBLE
         direction?.let { dir ->
             if (dir.isOK) {
@@ -225,7 +225,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                         val color = colors[i % colors.size]
                         val route = dir.routeList[i]
                         val directionPositionList = route.legList[0].directionPoint
-                        googleMap?.addPolyline(DirectionConverter.createPolyline(context, directionPositionList, 5, Color.parseColor(color)))
+                        googleMap?.addPolyline(DirectionConverter.createPolyline(requireContext(), directionPositionList, 5, Color.parseColor(color)))
                     }
                 }
             } else {
@@ -235,10 +235,10 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         }
     }
 
-    override fun onDirectionFailure(t: Throwable?) {
-        logError("FragmentMaps # onDirectionFailure ${t?.message}")
+    override fun onDirectionFailure(t: Throwable) {
+        logError("FragmentMaps # onDirectionFailure ${t.message}")
         AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
-        t?.printStackTrace()
+        t.printStackTrace()
     }
 
 }

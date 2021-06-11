@@ -111,7 +111,7 @@ dependencies {
     kapt "com.github.bumptech.glide:compiler:$glideVersion"
     implementation "com.github.chrisbanes:PhotoView:$photoViewVersion"
     implementation "com.github.GrenderG:Toasty:$toastyVersion"
-    implementation "com.akexorcist:googledirectionlibrary:$googleDirectionLibraryVersion"
+    implementation "com.akexorcist:google-direction-library:$googleDirectionLibraryVersion"
     implementation "com.intuit.ssp:ssp-android:$sspVersion"
     implementation "com.intuit.sdp:sdp-android:$sdpVersion"
     implementation "com.karumi:dexter:$dexterVersion"
