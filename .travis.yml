@@ -9,7 +9,7 @@ android:
   - android-30
   - extra-android-m2repository
 jdk:
-- oraclejdk11
+- openjdk11
 notifications:
   email: false
 script:
