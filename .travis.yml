@@ -9,11 +9,13 @@ android:
   - android-30
   - extra-android-m2repository
 jdk:
-- oraclejdk8
+- oraclejdk11
 notifications:
   email: false
 script:
-- "./gradlew clean build"
+- "./gradlew clean"
+- "./gradlew bundleRelease"
+- "./gradlew countReleaseBundleDexMethods"
 before_install:
 - yes | sdkmanager "platforms;android-30"
 - openssl aes-256-cbc -K $encrypted_4c721a8ffc8b_key -iv $encrypted_4c721a8ffc8b_iv
