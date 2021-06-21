@@ -8,7 +8,6 @@ import android.os.Build
 import android.text.Html
 import android.widget.Toast
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -39,9 +38,6 @@ object AppHelper {
      * https://stackoverflow.com/a/48326744
      */
     fun displayLocationSettingsRequest(activity: Activity) {
-        val googleApiClient = GoogleApiClient.Builder(activity).addApi(LocationServices.API).build()
-        googleApiClient.connect()
-
         val locationRequest = LocationRequest.create().apply {
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
             interval = 10000

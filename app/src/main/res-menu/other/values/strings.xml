@@ -222,6 +222,13 @@
     </string>
 
     <!-- CHANGELOG -->
+    <string name="ver_14">Versi 2.0.6</string>
+    <string name="ver_14_info">
+        <![CDATA[
+            • pembaruan library<br/>
+            • mendukung android 11
+        ]]>
+    </string>
     <string name="ver_13">Versi 2.0.5</string>
     <string name="ver_13_info">
         <![CDATA[

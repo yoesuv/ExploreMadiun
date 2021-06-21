@@ -7,23 +7,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPagerOther"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayoutViewPagerOtherTwo"
+            android:background="@color/colorPrimary"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            app:tabIndicatorHeight="@dimen/_2sdp"
+            app:tabIndicatorColor="@android:color/white"
+            app:tabTextColor="@android:color/white"
+            app:tabTextAppearance="@style/MyTabAppearance"
+            app:tabMode="scrollable"/>
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayoutViewPagerOther"
-                android:background="@color/colorPrimary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabIndicatorHeight="@dimen/_2sdp"
-                app:tabIndicatorColor="@android:color/white"
-                app:tabTextColor="@android:color/white"
-                app:tabTextAppearance="@style/MyTabAppearance"
-                app:tabMode="scrollable"/>
-
-        </androidx.viewpager.widget.ViewPager>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerOtherTwo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 

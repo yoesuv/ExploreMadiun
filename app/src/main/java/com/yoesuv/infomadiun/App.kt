@@ -4,7 +4,7 @@ import android.app.Application
 import com.yoesuv.infomadiun.utils.PreferencesHelper
 
 /**
- *  Created by yusuf on 4/28/18.
+ *  Updated by yusuf on 02 June 2021.
  */
 class App : Application() {
 

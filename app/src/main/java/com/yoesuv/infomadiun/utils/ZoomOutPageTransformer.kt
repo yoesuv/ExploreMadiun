@@ -1,9 +1,9 @@
 package com.yoesuv.infomadiun.utils
 
-import androidx.viewpager.widget.ViewPager
 import android.view.View
+import androidx.viewpager2.widget.ViewPager2
 
-class ZoomOutPageTransformer : ViewPager.PageTransformer {
+class ZoomOutPageTransformer : ViewPager2.PageTransformer {
 
     override fun transformPage(view: View, position: Float) {
         val pageWidth = view.width
@@ -37,8 +37,7 @@ class ZoomOutPageTransformer : ViewPager.PageTransformer {
     }
 
     companion object {
-
-        private val MIN_SCALE = 0.85f
-        private val MIN_ALPHA = 0.5f
+        const val MIN_SCALE = 0.85f
+        const val MIN_ALPHA = 0.5f
     }
 }

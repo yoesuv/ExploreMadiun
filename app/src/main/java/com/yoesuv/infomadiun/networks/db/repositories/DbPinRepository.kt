@@ -10,21 +10,16 @@ class DbPinRepository(context: Context, private val scope: CoroutineScope) {
 
     private val dbPin = AppDatabase.getInstance(context)?.pinDaoAccess()
 
-    fun insertPin(pinModel: PinModel) {
-        scope.launch {
-            dbPin?.insertPin(pinModel)
-        }
-    }
-
     fun pins(pins:(List<PinModel>?) -> Unit) {
         scope.launch {
             pins(dbPin?.pins())
         }
     }
 
-    fun deleteAllPin() {
-        scope.launch {
-            dbPin?.deleteAllPin()
+    suspend fun setupDataPins(pins: (List<PinModel>?)) {
+        dbPin?.deleteAllPin()
+        pins?.forEach { pinModel ->
+            dbPin?.insertPin(pinModel)
         }
     }
 

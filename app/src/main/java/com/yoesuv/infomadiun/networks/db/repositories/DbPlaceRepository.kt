@@ -10,12 +10,6 @@ class DbPlaceRepository(context: Context, private val scope: CoroutineScope) {
 
     private val dbPlaces = AppDatabase.getInstance(context)?.placeDaoAccess()
 
-    fun insertPlace(placeModel: PlaceModel) {
-        scope.launch {
-            dbPlaces?.insertPlace(placeModel)
-        }
-    }
-
     fun places(places:(List<PlaceModel>?) -> Unit) {
         scope.launch {
             places(dbPlaces?.places())
@@ -28,9 +22,10 @@ class DbPlaceRepository(context: Context, private val scope: CoroutineScope) {
         }
     }
 
-    fun deleteAllPlace() {
-        scope.launch {
-            dbPlaces?.deleteAllPlace()
+    suspend fun setupDataPlaces(places: (List<PlaceModel>?)) {
+        dbPlaces?.deleteAllPlace()
+        places?.forEach { placeModel ->
+            dbPlaces?.insertPlace(placeModel)
         }
     }
 
