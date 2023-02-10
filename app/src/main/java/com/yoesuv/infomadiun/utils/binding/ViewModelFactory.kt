@@ -10,7 +10,7 @@ import com.yoesuv.infomadiun.menu.listplace.viewmodels.DetailListPlaceViewModel
 class ViewModelFactory(private val any: Any): ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass == DetailListPlaceViewModel::class.java) {
             return DetailListPlaceViewModel(any as PlaceModel) as T
         } else if (modelClass == DetailGalleryViewModel::class.java) {
