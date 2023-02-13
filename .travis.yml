@@ -6,9 +6,12 @@ android:
   - tools
   - platform-tools
   - tools
-  - build-tools-30.0.3
-  - android-30
+  - build-tools-33.0.0
+  - android-33
   - extra-android-m2repository
+  - extra-google-m2repository
+licenses:
+  - '.+'
 jdk:
 - oraclejdk8
 notifications:
@@ -18,6 +21,7 @@ script:
 - "./gradlew bundleRelease"
 - "./gradlew countReleaseBundleDexMethods"
 before_install:
-- yes | sdkmanager "platforms;android-30"
-- openssl aes-256-cbc -K $encrypted_4c721a8ffc8b_key -iv $encrypted_4c721a8ffc8b_iv
-  -in apiKey.properties.enc -out apiKey.properties -d
+  - yes | sdkmanager "platforms;android-33"
+  - openssl aes-256-cbc -K $encrypted_4c721a8ffc8b_key -iv $encrypted_4c721a8ffc8b_iv -in apiKey.properties.enc -out apiKey.properties -d
+before_script:
+  - chmod +x gradlew
