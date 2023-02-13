@@ -181,13 +181,13 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         }
     }
 
-    override fun onMapReady(googleMap: GoogleMap?) {
+    override fun onMapReady(googleMap: GoogleMap) {
         setDefaultLocation(googleMap)
-        googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.style_map))
+        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.style_map))
         val paddingBottom = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 108F, resources.displayMetrics).roundToInt()
-        googleMap?.setPadding(0, 0, 0, paddingBottom)
-        googleMap?.uiSettings?.isZoomControlsEnabled = true
-        googleMap?.uiSettings?.isCompassEnabled = true
+        googleMap.setPadding(0, 0, 0, paddingBottom)
+        googleMap.uiSettings.isZoomControlsEnabled = true
+        googleMap.uiSettings.isCompassEnabled = true
 
         //default location
         this.googleMap = googleMap
