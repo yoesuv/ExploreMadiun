@@ -7,6 +7,7 @@ import android.location.LocationManager
 import android.os.Build
 import android.text.Html
 import android.widget.Toast
+import androidx.annotation.StringRes
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
@@ -21,7 +22,7 @@ import es.dmoral.toasty.Toasty
 
 object AppHelper {
 
-    fun displayNormalToast(context: Context, message: String){
+    fun displayNormalToast(context: Context, @StringRes message: Int){
         Toasty.normal(context, message, Toast.LENGTH_SHORT).show()
     }
 
