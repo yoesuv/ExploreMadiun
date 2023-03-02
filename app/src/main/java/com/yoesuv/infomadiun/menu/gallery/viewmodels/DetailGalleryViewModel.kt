@@ -6,7 +6,7 @@ import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 
 class DetailGalleryViewModel(galleryModel: GalleryModel?) : ViewModel() {
 
-    var imageUrl: ObservableField<String> = ObservableField(galleryModel?.image!!)
-    var caption: ObservableField<String> = ObservableField(galleryModel?.caption!!)
+    var imageUrl: ObservableField<String> = ObservableField(galleryModel?.image)
+    var caption: ObservableField<String> = ObservableField(galleryModel?.caption)
 
 }

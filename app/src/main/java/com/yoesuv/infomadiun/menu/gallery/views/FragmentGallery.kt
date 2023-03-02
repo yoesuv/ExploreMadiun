@@ -17,14 +17,14 @@ import com.yoesuv.infomadiun.menu.gallery.viewmodels.FragmentGalleryViewModel
 /**
  *  Updated by yusuf on 28 July 2020
  */
-class FragmentGallery: Fragment() {
+class FragmentGallery : Fragment() {
 
     private lateinit var binding: FragmentGalleryBinding
     private val viewModel: FragmentGalleryViewModel by activityViewModels()
 
-    private lateinit var adapter:GalleryAdapter
+    private lateinit var adapter: GalleryAdapter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gallery, container, false)
         binding.lifecycleOwner = this
         binding.gallery = viewModel
@@ -36,9 +36,9 @@ class FragmentGallery: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.dataGallery.observe(viewLifecycleOwner, {
+        viewModel.dataGallery.observe(viewLifecycleOwner) {
             adapter.submitList(it)
-        })
+        }
     }
 
     private fun setupRecyclerView() {

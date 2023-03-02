@@ -11,7 +11,7 @@ import com.yoesuv.infomadiun.databinding.ActivityDetailGalleryBinding
 import com.yoesuv.infomadiun.menu.gallery.viewmodels.DetailGalleryViewModel
 import com.yoesuv.infomadiun.utils.binding.ViewModelFactory
 
-class DetailGalleryActivity: AppCompatActivity() {
+class DetailGalleryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailGalleryBinding
     private val viewModel: DetailGalleryViewModel by viewModels { ViewModelFactory(args.galleryModel) }
@@ -28,7 +28,7 @@ class DetailGalleryActivity: AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId==android.R.id.home) {
+        if (item.itemId == android.R.id.home) {
             onBackPressedDispatcher.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
