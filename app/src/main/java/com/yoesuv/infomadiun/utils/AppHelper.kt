@@ -68,11 +68,15 @@ object AppHelper {
     }
 
     @Suppress("DEPRECATION")
-    fun fromHtml(source: String): String {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY).toString()
+    fun fromHtml(source: String?): String {
+        return if (source != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY).toString()
+            } else {
+                Html.fromHtml(source).toString()
+            }
         } else {
-            Html.fromHtml(source).toString()
+            ""
         }
     }
 
