@@ -150,10 +150,10 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                                 .avoid(AvoidType.TOLLS)
                                 .execute(this)
                         } else {
-                            AppHelper.displayErrorToast(activity, getString(R.string.error_get_user_location))
+                            AppHelper.displayErrorToast(activity, R.string.error_get_user_location)
                         }
                     } else {
-                        AppHelper.displayErrorToast(activity, getString(R.string.error_get_user_location))
+                        AppHelper.displayErrorToast(activity, R.string.error_get_user_location)
                     }
                 }
             }
@@ -230,14 +230,14 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                 }
             } else {
                 logError("FragmentMaps # direction not ok ${direction.errorMessage}")
-                AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
+                AppHelper.displayErrorToast(activity, R.string.error_get_direction)
             }
         }
     }
 
     override fun onDirectionFailure(t: Throwable) {
         logError("FragmentMaps # onDirectionFailure ${t.message}")
-        AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
+        AppHelper.displayErrorToast(activity, R.string.error_get_direction)
         t.printStackTrace()
     }
 
