@@ -1,23 +1,20 @@
 package com.yoesuv.infomadiun.menu.other.adapters
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import com.yoesuv.infomadiun.menu.other.adapters.viewholders.LicenseViewHolder
 import com.yoesuv.infomadiun.menu.other.models.LicenseModel
+import com.yoesuv.infomadiun.utils.AdapterCallback
 
-class LicenseAdapter(private var listLibraries: MutableList<LicenseModel>) : RecyclerView.Adapter<LicenseViewHolder>(){
+class LicenseAdapter : ListAdapter<LicenseModel, LicenseViewHolder>
+    (AdapterCallback.diffLicenseCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LicenseViewHolder {
         return LicenseViewHolder.from(parent)
     }
 
-    override fun getItemCount(): Int {
-        return listLibraries.size
-    }
-
     override fun onBindViewHolder(holder: LicenseViewHolder, position: Int) {
-        val fixPosition = holder.adapterPosition
-        holder.bind(listLibraries[fixPosition])
+        holder.bind(getItem(position))
     }
 
 }

@@ -1,24 +1,20 @@
 package com.yoesuv.infomadiun.menu.other.adapters
 
-import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ListAdapter
 import com.yoesuv.infomadiun.menu.other.adapters.viewholders.ChangeLogViewHolder
 import com.yoesuv.infomadiun.menu.other.models.ChangeLogModel
+import com.yoesuv.infomadiun.utils.AdapterCallback
 
-class ChangeLogAdapter(val context: Context?, var listChangelog: MutableList<ChangeLogModel>): RecyclerView.Adapter<ChangeLogViewHolder>(){
+class ChangeLogAdapter: ListAdapter<ChangeLogModel, ChangeLogViewHolder>
+    (AdapterCallback.diffChangeLogCallback){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChangeLogViewHolder {
         return ChangeLogViewHolder.from(parent)
     }
 
-    override fun getItemCount(): Int {
-        return listChangelog.size
-    }
-
     override fun onBindViewHolder(holder: ChangeLogViewHolder, position: Int) {
-        val fixPosition = holder.adapterPosition
-        holder.bind(listChangelog[fixPosition])
+        holder.bind(getItem(position))
     }
 
 }
