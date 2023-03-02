@@ -22,7 +22,7 @@ class ChildFragmentInfo: Fragment() {
 
     private lateinit var binding: ChildFragmentInfoBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.child_fragment_info, container, false)
 
         val version = resources.getString(R.string.info_app_version, BuildConfig.VERSION_NAME)

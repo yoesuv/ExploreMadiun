@@ -20,7 +20,7 @@ class ChildFragmentThanks: Fragment(){
 
     private lateinit var binding: ChildFragmentThanksBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.child_fragment_thanks, container, false)
         binding.textViewThanks.text = AppHelper.fromHtml(getString(R.string.trims))
         return binding.root
