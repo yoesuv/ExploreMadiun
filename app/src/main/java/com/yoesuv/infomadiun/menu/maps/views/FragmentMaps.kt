@@ -9,6 +9,7 @@ import android.os.*
 import androidx.fragment.app.Fragment
 import android.util.TypedValue
 import android.view.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.activityViewModels
@@ -57,6 +58,13 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, DirectionCallback {
     private lateinit var destination: LatLng
     private val colors = arrayListOf("#7F2196f3", "#7F4CAF50", "#7FF44336")
     private lateinit var menuHost: MenuHost
+
+    private val requestPermissionLocation =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                enableUserLocation(googleMap)
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,22 +115,6 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, DirectionCallback {
             }
 
         })
-    }
-
-    private fun requestPermission() {
-        if (checkGrantedPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
-            if (checkGrantedPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                enableUserLocation(googleMap)
-            } else {
-                requestAppPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) {
-                    enableUserLocation(googleMap)
-                }
-            }
-        } else {
-            requestAppPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) {
-                enableUserLocation(googleMap)
-            }
-        }
     }
 
     @SuppressLint("MissingPermission")
@@ -201,7 +193,7 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, DirectionCallback {
         viewModel.getListPin()
 
         if (AppHelper.checkLocationSetting(requireContext())) {
-            requestPermission()
+            requestPermissionLocation.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         } else {
             AppHelper.displayLocationSettingsRequest(requireActivity())
         }
