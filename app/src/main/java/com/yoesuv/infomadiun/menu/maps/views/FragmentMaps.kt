@@ -2,7 +2,6 @@ package com.yoesuv.infomadiun.menu.maps.views
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import androidx.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.*
@@ -13,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import com.akexorcist.googledirection.DirectionCallback
 import com.akexorcist.googledirection.GoogleDirection
 import com.akexorcist.googledirection.constant.AvoidType
@@ -38,7 +38,7 @@ import kotlin.math.roundToInt
 /**
  *  Updated by yusuf on 03 March 2023.
  */
-class FragmentMaps : Fragment(), OnMapReadyCallback, DirectionCallback {
+class FragmentMaps : Fragment(), OnMapReadyCallback, MenuProvider, DirectionCallback {
 
     companion object {
         const val PREFERENCE_LATITUDE = "preference_latitude"
@@ -48,7 +48,6 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, DirectionCallback {
     private lateinit var binding: FragmentMapBinding
     private val viewModel: FragmentMapsViewModel by activityViewModels()
 
-    private lateinit var activity: Activity
     private var googleMap: GoogleMap? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var markerLocation: Marker? = null
@@ -76,12 +75,11 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, DirectionCallback {
         binding.lifecycleOwner = this
         binding.maps = viewModel
 
-        activity = getActivity() as Activity
-
         val mapFragment: SupportMapFragment = childFragmentManager.findFragmentById(R.id.mapLocation) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        setupMenu()
+        menuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         return binding.root
     }
@@ -96,25 +94,7 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, DirectionCallback {
 
     override fun onDestroy() {
         super.onDestroy()
-        LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(myLocationCallback)
-    }
-
-    private fun setupMenu() {
-        menuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
-                inflater.inflate(R.menu.menu_map, menu)
-            }
-
-            override fun onMenuItemSelected(item: MenuItem): Boolean {
-                if (item.itemId == R.id.menuMapRefresh) {
-                    setDefaultLocation(googleMap)
-                    viewModel.getListPin()
-                }
-                return false
-            }
-
-        })
+        LocationServices.getFusedLocationProviderClient(requireActivity()).removeLocationUpdates(myLocationCallback)
     }
 
     @SuppressLint("MissingPermission")
@@ -141,7 +121,7 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, DirectionCallback {
                         if (!longitude.isNullOrEmpty()) {
                             binding.textViewGettingDirection.visibility = View.VISIBLE
                             origin = LatLng(latitude.toDouble(), longitude.toDouble())
-                            GoogleDirection.withServerKey(activity.getString(R.string.DIRECTION_API_KEY))
+                            GoogleDirection.withServerKey(requireContext().getString(R.string.DIRECTION_API_KEY))
                                 .from(origin)
                                 .to(destination)
                                 .alternativeRoute(true)
@@ -149,10 +129,10 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, DirectionCallback {
                                 .avoid(AvoidType.TOLLS)
                                 .execute(this)
                         } else {
-                            AppHelper.displayErrorToast(activity, R.string.error_get_user_location)
+                            AppHelper.displayErrorToast(requireContext(), R.string.error_get_user_location)
                         }
                     } else {
-                        AppHelper.displayErrorToast(activity, R.string.error_get_user_location)
+                        AppHelper.displayErrorToast(requireContext(), R.string.error_get_user_location)
                     }
                 }
             }
@@ -164,7 +144,6 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, DirectionCallback {
         val northeast: LatLng = route.bound.northeastCoordination.coordination
         val bounds = LatLngBounds(southwest, northeast)
         googleMap?.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
-
     }
 
     private fun onListDataChanged(listPin: List<PinModel>) {
@@ -208,6 +187,18 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, DirectionCallback {
         setupMarkerAnimation(googleMap)
     }
 
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_map, menu)
+    }
+
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menuMapRefresh) {
+            setDefaultLocation(googleMap)
+            viewModel.getListPin()
+        }
+        return false
+    }
+
     override fun onDirectionSuccess(direction: Direction?) {
         binding.textViewGettingDirection.visibility = View.INVISIBLE
         direction?.let { dir ->
@@ -229,14 +220,14 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, DirectionCallback {
                 }
             } else {
                 logError("FragmentMaps # direction not ok ${direction.errorMessage}")
-                AppHelper.displayErrorToast(activity, R.string.error_get_direction)
+                AppHelper.displayErrorToast(requireContext(), R.string.error_get_direction)
             }
         }
     }
 
     override fun onDirectionFailure(t: Throwable) {
         logError("FragmentMaps # onDirectionFailure ${t.message}")
-        AppHelper.displayErrorToast(activity, R.string.error_get_direction)
+        AppHelper.displayErrorToast(requireContext(), R.string.error_get_direction)
         t.printStackTrace()
     }
 
