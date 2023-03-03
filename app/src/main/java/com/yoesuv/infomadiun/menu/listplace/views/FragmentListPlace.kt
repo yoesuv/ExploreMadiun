@@ -19,7 +19,7 @@ import com.yoesuv.infomadiun.menu.listplace.viewmodels.FragmentListPlaceViewMode
 /**
  *  Updated by yusuf on 02 March 2023.
  */
-class FragmentListPlace : Fragment() {
+class FragmentListPlace : Fragment(), MenuProvider {
 
     private lateinit var binding: FragmentListplaceBinding
     private val viewModel: FragmentListPlaceViewModel by activityViewModels()
@@ -49,25 +49,7 @@ class FragmentListPlace : Fragment() {
 
     private fun setupMenu() {
         menuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
-                inflater.inflate(R.menu.menu_list_place, menu)
-            }
-
-            override fun onMenuItemSelected(item: MenuItem): Boolean {
-                when (item.itemId) {
-                    R.id.listSemua -> viewModel.getListPlace(PlaceLocation.ALL)
-                    R.id.listKabMadiun -> viewModel.getListPlace(PlaceLocation.KAB_MADIUN)
-                    R.id.listKabMagetan -> viewModel.getListPlace(PlaceLocation.KAB_MAGETAN)
-                    R.id.listKabNgawi -> viewModel.getListPlace(PlaceLocation.KAB_NGAWI)
-                    R.id.listKabPacitan -> viewModel.getListPlace(PlaceLocation.KAB_PACITAN)
-                    R.id.listKabPonorogo -> viewModel.getListPlace(PlaceLocation.KAB_PONOROGO)
-                    R.id.listKotaMadiun -> viewModel.getListPlace(PlaceLocation.KOTA_MADIUN)
-                }
-                item.isChecked = true
-                return false
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun setupRecycler() {
@@ -81,6 +63,24 @@ class FragmentListPlace : Fragment() {
     private fun openDetailListPlace(placeModel: PlaceModel) {
         val action = FragmentListPlaceDirections.actionToDetailList(placeModel)
         findNavController().navigate(action)
+    }
+
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_list_place, menu)
+    }
+
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.listSemua -> viewModel.getListPlace(PlaceLocation.ALL)
+            R.id.listKabMadiun -> viewModel.getListPlace(PlaceLocation.KAB_MADIUN)
+            R.id.listKabMagetan -> viewModel.getListPlace(PlaceLocation.KAB_MAGETAN)
+            R.id.listKabNgawi -> viewModel.getListPlace(PlaceLocation.KAB_NGAWI)
+            R.id.listKabPacitan -> viewModel.getListPlace(PlaceLocation.KAB_PACITAN)
+            R.id.listKabPonorogo -> viewModel.getListPlace(PlaceLocation.KAB_PONOROGO)
+            R.id.listKotaMadiun -> viewModel.getListPlace(PlaceLocation.KOTA_MADIUN)
+        }
+        item.isChecked = true
+        return false
     }
 
 }
