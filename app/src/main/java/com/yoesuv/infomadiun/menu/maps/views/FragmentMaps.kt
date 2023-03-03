@@ -9,6 +9,8 @@ import android.os.*
 import androidx.fragment.app.Fragment
 import android.util.TypedValue
 import android.view.*
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.activityViewModels
 import com.akexorcist.googledirection.DirectionCallback
 import com.akexorcist.googledirection.GoogleDirection
@@ -33,9 +35,9 @@ import com.yoesuv.infomadiun.utils.*
 import kotlin.math.roundToInt
 
 /**
- *  Updated by yusuf on 06 June 2021.
+ *  Updated by yusuf on 03 March 2023.
  */
-class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
+class FragmentMaps : Fragment(), OnMapReadyCallback, DirectionCallback {
 
     companion object {
         const val PREFERENCE_LATITUDE = "preference_latitude"
@@ -43,7 +45,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     }
 
     private lateinit var binding: FragmentMapBinding
-    private val viewModel : FragmentMapsViewModel by activityViewModels()
+    private val viewModel: FragmentMapsViewModel by activityViewModels()
 
     private lateinit var activity: Activity
     private var googleMap: GoogleMap? = null
@@ -53,8 +55,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     private lateinit var origin: LatLng
     private lateinit var destination: LatLng
-    private val colors = arrayListOf("#7F2196f3","#7F4CAF50","#7FF44336")
-
+    private val colors = arrayListOf("#7F2196f3", "#7F4CAF50", "#7FF44336")
+    private lateinit var menuHost: MenuHost
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,10 +70,10 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
         activity = getActivity() as Activity
 
-        val mapFragment:SupportMapFragment = childFragmentManager.findFragmentById(R.id.mapLocation) as SupportMapFragment
+        val mapFragment: SupportMapFragment = childFragmentManager.findFragmentById(R.id.mapLocation) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        setHasOptionsMenu(true)
+        setupMenu()
 
         return binding.root
     }
@@ -79,9 +81,9 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.textViewGettingDirection.visibility = View.INVISIBLE
-        viewModel.listPin.observe(viewLifecycleOwner, { listPin ->
+        viewModel.listPin.observe(viewLifecycleOwner) { listPin ->
             onListDataChanged(listPin)
-        })
+        }
     }
 
     override fun onDestroy() {
@@ -89,20 +91,25 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(myLocationCallback)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_map, menu)
+    private fun setupMenu() {
+        menuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
+                inflater.inflate(R.menu.menu_map, menu)
+            }
+
+            override fun onMenuItemSelected(item: MenuItem): Boolean {
+                if (item.itemId == R.id.menuMapRefresh) {
+                    setDefaultLocation(googleMap)
+                    viewModel.getListPin()
+                }
+                return false
+            }
+
+        })
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==R.id.menuMapRefresh){
-            setDefaultLocation(googleMap)
-            viewModel.getListPin()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun requestPermission(){
+    private fun requestPermission() {
         if (checkGrantedPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
             if (checkGrantedPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)) {
                 enableUserLocation(googleMap)
@@ -119,20 +126,20 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     }
 
     @SuppressLint("MissingPermission")
-    private fun enableUserLocation(googleMap: GoogleMap?){
+    private fun enableUserLocation(googleMap: GoogleMap?) {
         myLocationCallback = MyLocationCallback(googleMap)
 
         googleMap?.uiSettings?.isMyLocationButtonEnabled = true
-        val locationRequest:LocationRequest = LocationRequest.create()
+        val locationRequest: LocationRequest = LocationRequest.create()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationRequest.interval = 2000
         locationRequest.fastestInterval = 1000
         fusedLocationClient.requestLocationUpdates(locationRequest, myLocationCallback, Looper.getMainLooper())
     }
 
-    private fun getDirection(marker: Marker?){
+    private fun getDirection(marker: Marker?) {
         val tag: MarkerTag = marker?.tag as MarkerTag
-        if (tag.type==0) {
+        if (tag.type == 0) {
             tag.latitude?.let { lat ->
                 tag.longitude?.let { lng ->
                     destination = LatLng(lat, lng)
@@ -160,17 +167,17 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         }
     }
 
-    private fun setCameraWithCoordinationBounds(route: Route){
-        val southwest:LatLng = route.bound.southwestCoordination.coordination
-        val northeast:LatLng = route.bound.northeastCoordination.coordination
+    private fun setCameraWithCoordinationBounds(route: Route) {
+        val southwest: LatLng = route.bound.southwestCoordination.coordination
+        val northeast: LatLng = route.bound.northeastCoordination.coordination
         val bounds = LatLngBounds(southwest, northeast)
         googleMap?.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
 
     }
 
-    private fun onListDataChanged(listPin: List<PinModel>){
-        if(listPin.isNotEmpty()){
-            for(pinModel in listPin){
+    private fun onListDataChanged(listPin: List<PinModel>) {
+        if (listPin.isNotEmpty()) {
+            for (pinModel in listPin) {
                 val markerOptions = MarkerOptions()
                 markerOptions.position(LatLng(pinModel.latitude!!, pinModel.longitude!!))
                 markerOptions.title(pinModel.name)
@@ -200,11 +207,11 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         }
 
         setupInfoWindow(requireContext(), googleMap, { marker ->
-                getDirection(marker)
-            }, { marker ->
-                enableUserLocation(googleMap)
-                getDirection(marker)
-            }
+            getDirection(marker)
+        }, { marker ->
+            enableUserLocation(googleMap)
+            getDirection(marker)
+        }
         )
         setupMarkerAnimation(googleMap)
     }
