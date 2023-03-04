@@ -17,26 +17,6 @@ fun checkGrantedPermission(context: Context, permission: String): Boolean {
     return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
 }
 
-fun requestAppPermission(context: Context, permission: String, onGranted:() -> Unit) {
-    Dexter.withContext(context)
-        .withPermission(permission)
-        .withListener(object: PermissionListener {
-            override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                onGranted()
-            }
-            override fun onPermissionRationaleShouldBeShown(p0: PermissionRequest?, token: PermissionToken?) {
-                token?.continuePermissionRequest()
-            }
-            override fun onPermissionDenied(response: PermissionDeniedResponse?) {
-                response?.apply {
-                    if (isPermanentlyDenied) {
-                        openAppSettings(context)
-                    }
-                }
-            }
-        }).check()
-}
-
 fun openAppSettings(context: Context) {
     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
     val uri = Uri.fromParts("package", context.packageName, null)

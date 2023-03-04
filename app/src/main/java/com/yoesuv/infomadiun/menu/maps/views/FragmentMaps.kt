@@ -29,6 +29,7 @@ import com.google.android.gms.maps.model.*
 import com.yoesuv.infomadiun.App
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentMapBinding
+import com.yoesuv.infomadiun.menu.maps.adapters.MyCustomInfoWindowAdapter
 import com.yoesuv.infomadiun.menu.maps.models.MarkerTag
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.menu.maps.viewmodels.FragmentMapsViewModel
@@ -177,13 +178,25 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, MenuProvider, DirectionCall
             AppHelper.displayLocationSettingsRequest(requireActivity())
         }
 
-        setupInfoWindow(requireContext(), googleMap, { marker ->
-            getDirection(marker)
-        }, { marker ->
-            enableUserLocation(googleMap)
-            getDirection(marker)
+        googleMap.setInfoWindowAdapter(MyCustomInfoWindowAdapter(context))
+        googleMap.setOnInfoWindowCloseListener { marker ->
+            val tag: MarkerTag = marker.tag as MarkerTag
+            if (tag.type == 0) {
+                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
+            }
         }
-        )
+        googleMap.setOnInfoWindowClickListener { marker ->
+            if (AppHelper.checkLocationSetting(requireContext())) {
+                if (checkGrantedPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    getDirection(marker)
+                } else {
+                    requestPermissionLocation.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+                }
+            } else {
+                AppHelper.displayErrorToast(requireContext(), R.string.location_setting_off)
+                openAppSettings(requireContext())
+            }
+        }
         setupMarkerAnimation(googleMap)
     }
 
