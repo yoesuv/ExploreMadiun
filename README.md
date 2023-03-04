@@ -26,7 +26,6 @@ DIRECTION_API_KEY = your_map_direction_api_key
 ## List Libraries Used in this Project ##
 * [Android-GoogleDirectionLibrary](https://github.com/akexorcist/Android-GoogleDirectionLibrary)
 * [Dexcount Gradle Plugin](https://github.com/KeepSafe/dexcount-gradle-plugin)
-* [Dexter](https://github.com/Karumi/Dexter)
 * [Glide](https://github.com/bumptech/glide)
 * [Icons8 Icon](https://icons8.com/)
 * [OkHttp Logging](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)

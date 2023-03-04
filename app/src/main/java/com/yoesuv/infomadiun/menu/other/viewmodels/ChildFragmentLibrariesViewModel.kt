@@ -25,12 +25,10 @@ class ChildFragmentLibrariesViewModel: ViewModel() {
         val aosp = LicenseModel(context?.getString(R.string.aosp), context?.getString(R.string.aosp_url), context?.getString(R.string.aosp_license), false)
         val gson = LicenseModel(context?.getString(R.string.gson), context?.getString(R.string.gson_url), context?.getString(R.string.gson_license), false)
         val dexcount = LicenseModel(context?.getString(R.string.dexcount), context?.getString(R.string.dexcount_url), context?.getString(R.string.dexcount_license), false)
-        val dexter = LicenseModel(context?.getString(R.string.dexter), context?.getString(R.string.dexter_url), context?.getString(R.string.dexter_license), false)
 
         listLibraries.add(aosp)
         listLibraries.add(googleDirection)
         listLibraries.add(dexcount)
-        listLibraries.add(dexter)
         listLibraries.add(glide)
         listLibraries.add(gson)
         listLibraries.add(icons8)

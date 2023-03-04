@@ -112,5 +112,4 @@ dependencies {
     implementation "com.akexorcist:google-direction-library:$googleDirectionLibraryVersion"
     implementation "com.intuit.ssp:ssp-android:$sspVersion"
     implementation "com.intuit.sdp:sdp-android:$sdpVersion"
-    implementation "com.karumi:dexter:$dexterVersion"
 }
