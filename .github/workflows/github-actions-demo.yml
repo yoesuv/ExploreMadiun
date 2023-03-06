@@ -7,9 +7,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Decrypt api keys
-        run: ./decrypt_secret.sh
         env:
-          API_KEY_PASSPHRASE: ${{ secrets.API_KEY_PASSPHRASE }}
+          CERTIFICATE_BASE64: ${{ secrets.CERTIFICATE_BASE64 }}
+        run: |
+          echo $CERTIFICATE_BASE64 | base64 --decode > apiKey.properties
+      - name: Show certificate information
+        run: |
+          openssl x509 -in apiKey.properties -inform DER -text -noout
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
