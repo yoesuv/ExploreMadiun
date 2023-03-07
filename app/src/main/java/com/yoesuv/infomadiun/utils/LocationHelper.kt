@@ -1,6 +1,7 @@
 package com.yoesuv.infomadiun.utils
 
 import android.os.Handler
+import android.os.Looper
 import android.os.SystemClock
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -24,15 +25,14 @@ fun setupMarkerAnimation(googleMap: GoogleMap?) {
             val start = SystemClock.uptimeMillis()
             val duration = 1200L
 
-            val handler = Handler()
+            val handler = Handler(Looper.getMainLooper())
             val anim = BounceAnimation(start, duration, it, handler)
             handler.post(anim)
         }
-        if (tag.type==3) {
+        if (tag.type == 3) {
             it.hideInfoWindow()
-        }else {
+        } else {
             it.showInfoWindow()
-
         }
         return@setOnMarkerClickListener true
     }
