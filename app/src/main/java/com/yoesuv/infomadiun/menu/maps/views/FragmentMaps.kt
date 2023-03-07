@@ -103,10 +103,9 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, MenuProvider, DirectionCall
         myLocationCallback = MyLocationCallback(googleMap)
 
         googleMap?.uiSettings?.isMyLocationButtonEnabled = true
-        val locationRequest: LocationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = 2000
-        locationRequest.fastestInterval = 1000
+        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 2000)
+            .setWaitForAccurateLocation(false)
+            .build()
         fusedLocationClient.requestLocationUpdates(locationRequest, myLocationCallback, Looper.getMainLooper())
     }
 
