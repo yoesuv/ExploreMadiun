@@ -4,6 +4,8 @@ import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.WindowManager
+import androidx.activity.OnBackPressedCallback
+import androidx.annotation.StringRes
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -12,9 +14,9 @@ import com.yoesuv.infomadiun.databinding.ActivityMainBinding
 import com.yoesuv.infomadiun.utils.AppHelper
 
 /**
- *  Updated by yusuf on 24 July 2020.
+ *  Updated by yusuf on 02 March 2023.
  */
-class MainActivity: AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     companion object {
         var BACK_PRESSED: Long = 0L
@@ -30,18 +32,10 @@ class MainActivity: AppCompatActivity() {
 
         setupToolbar()
         setupNavigation()
+        setupBackPressed()
     }
 
-    override fun onBackPressed() {
-        if (BACK_PRESSED+2000L>System.currentTimeMillis()) {
-            super.onBackPressed()
-        } else {
-            AppHelper.displayNormalToast(this,getString(R.string.press_again_to_exit))
-        }
-        BACK_PRESSED = System.currentTimeMillis()
-    }
-
-    private fun setupToolbar(){
+    private fun setupToolbar() {
         setSupportActionBar(binding.toolbarMain)
         supportActionBar?.setDisplayShowTitleEnabled(false)
     }
@@ -51,6 +45,20 @@ class MainActivity: AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
         val navController = navHostFragment.findNavController()
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
+    }
+
+    private fun setupBackPressed() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (BACK_PRESSED + 2000L > System.currentTimeMillis()) {
+                    finish()
+                } else {
+                    @StringRes val msg = R.string.press_again_to_exit
+                    AppHelper.displayNormalToast(this@MainActivity, msg)
+                }
+                BACK_PRESSED = System.currentTimeMillis()
+            }
+        })
     }
 
 }

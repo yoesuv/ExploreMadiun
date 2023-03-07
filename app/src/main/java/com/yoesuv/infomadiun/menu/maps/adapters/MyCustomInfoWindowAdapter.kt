@@ -14,12 +14,12 @@ class MyCustomInfoWindowAdapter(private val context: Context?): GoogleMap.InfoWi
 
     private val binding = CustomInfoWindowBinding.inflate(LayoutInflater.from(context))
 
-    override fun getInfoContents(marker: Marker?): View {
+    override fun getInfoContents(marker: Marker): View {
         return binding.root
     }
 
-    override fun getInfoWindow(marker: Marker?): View {
-        val tag: MarkerTag = marker?.tag as MarkerTag
+    override fun getInfoWindow(marker: Marker): View {
+        val tag: MarkerTag = marker.tag as MarkerTag
         if (tag.type == 1) {
             binding.textViewMapLocationName.text = context?.getString(R.string.your_location)
             binding.imageViewMapLocationDirection.visibility = View.GONE

@@ -7,12 +7,14 @@ import android.location.LocationManager
 import android.os.Build
 import android.text.Html
 import android.widget.Toast
+import androidx.annotation.StringRes
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
+import com.google.android.gms.location.Priority
 import es.dmoral.toasty.Toasty
 
 /**
@@ -21,15 +23,15 @@ import es.dmoral.toasty.Toasty
 
 object AppHelper {
 
-    fun displayNormalToast(context: Context, message: String){
+    fun displayNormalToast(context: Context, @StringRes message: Int) {
         Toasty.normal(context, message, Toast.LENGTH_SHORT).show()
     }
 
-    fun displayErrorToast(context: Context, message: String){
+    fun displayErrorToast(context: Context, @StringRes message: Int) {
         Toasty.error(context, message, Toast.LENGTH_SHORT, true).show()
     }
 
-    fun checkLocationSetting(context: Context):Boolean{
+    fun checkLocationSetting(context: Context): Boolean {
         val locationManager: LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
     }
@@ -38,12 +40,9 @@ object AppHelper {
      * https://stackoverflow.com/a/48326744
      */
     fun displayLocationSettingsRequest(activity: Activity) {
-        val locationRequest = LocationRequest.create().apply {
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            interval = 10000
-            fastestInterval = 10000/2
-        }
-
+        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 10000)
+            .setWaitForAccurateLocation(false)
+            .build()
         val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
         builder.setAlwaysShow(true)
 
@@ -51,15 +50,15 @@ object AppHelper {
         result.addOnCompleteListener { task ->
             try {
                 task.getResult(ApiException::class.java)
-            }catch (ex:ApiException) {
-                if (ex.statusCode== LocationSettingsStatusCodes.RESOLUTION_REQUIRED) {
+            } catch (ex: ApiException) {
+                if (ex.statusCode == LocationSettingsStatusCodes.RESOLUTION_REQUIRED) {
                     val resolvableApiException = ex as ResolvableApiException
                     try {
                         resolvableApiException.startResolutionForResult(activity, 27)
-                    }catch (e: IntentSender.SendIntentException) {
+                    } catch (e: IntentSender.SendIntentException) {
                         logError("FragmentMaps # RESOLUTION_REQUIRED ${e.message}")
                     }
-                }else if (ex.statusCode==LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE) {
+                } else if (ex.statusCode == LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE) {
                     logError("FragmentMaps # LocationSettings DISABLED")
                 }
             }
@@ -67,11 +66,15 @@ object AppHelper {
     }
 
     @Suppress("DEPRECATION")
-    fun fromHtml(source: String): String{
-        return if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N) {
-            Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY).toString()
-        }else{
-            Html.fromHtml(source).toString()
+    fun fromHtml(source: String?): String {
+        return if (source != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY).toString()
+            } else {
+                Html.fromHtml(source).toString()
+            }
+        } else {
+            ""
         }
     }
 

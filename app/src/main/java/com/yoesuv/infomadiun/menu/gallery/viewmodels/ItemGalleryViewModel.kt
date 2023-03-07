@@ -5,5 +5,5 @@ import androidx.databinding.ObservableField
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 
 class ItemGalleryViewModel(galleryModel: GalleryModel): ViewModel() {
-    var imageUrl: ObservableField<String> = ObservableField(galleryModel.thumbnail!!)
+    var imageUrl: ObservableField<String> = ObservableField(galleryModel.thumbnail)
 }

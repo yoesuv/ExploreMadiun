@@ -2,14 +2,17 @@ package com.yoesuv.infomadiun.menu.maps.views
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import androidx.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.*
 import androidx.fragment.app.Fragment
 import android.util.TypedValue
 import android.view.*
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import com.akexorcist.googledirection.DirectionCallback
 import com.akexorcist.googledirection.GoogleDirection
 import com.akexorcist.googledirection.constant.AvoidType
@@ -26,6 +29,7 @@ import com.google.android.gms.maps.model.*
 import com.yoesuv.infomadiun.App
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentMapBinding
+import com.yoesuv.infomadiun.menu.maps.adapters.MyCustomInfoWindowAdapter
 import com.yoesuv.infomadiun.menu.maps.models.MarkerTag
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.menu.maps.viewmodels.FragmentMapsViewModel
@@ -33,9 +37,9 @@ import com.yoesuv.infomadiun.utils.*
 import kotlin.math.roundToInt
 
 /**
- *  Updated by yusuf on 06 June 2021.
+ *  Updated by yusuf on 03 March 2023.
  */
-class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
+class FragmentMaps : Fragment(), OnMapReadyCallback, MenuProvider, DirectionCallback {
 
     companion object {
         const val PREFERENCE_LATITUDE = "preference_latitude"
@@ -43,9 +47,8 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     }
 
     private lateinit var binding: FragmentMapBinding
-    private val viewModel : FragmentMapsViewModel by activityViewModels()
+    private val viewModel: FragmentMapsViewModel by activityViewModels()
 
-    private lateinit var activity: Activity
     private var googleMap: GoogleMap? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var markerLocation: Marker? = null
@@ -53,8 +56,15 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
 
     private lateinit var origin: LatLng
     private lateinit var destination: LatLng
-    private val colors = arrayListOf("#7F2196f3","#7F4CAF50","#7FF44336")
+    private val colors = arrayListOf("#7F2196f3", "#7F4CAF50", "#7FF44336")
+    private lateinit var menuHost: MenuHost
 
+    private val requestPermissionLocation =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                enableUserLocation(googleMap)
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,12 +76,11 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         binding.lifecycleOwner = this
         binding.maps = viewModel
 
-        activity = getActivity() as Activity
-
-        val mapFragment:SupportMapFragment = childFragmentManager.findFragmentById(R.id.mapLocation) as SupportMapFragment
+        val mapFragment: SupportMapFragment = childFragmentManager.findFragmentById(R.id.mapLocation) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        setHasOptionsMenu(true)
+        menuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         return binding.root
     }
@@ -79,60 +88,30 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.textViewGettingDirection.visibility = View.INVISIBLE
-        viewModel.listPin.observe(viewLifecycleOwner, { listPin ->
+        viewModel.listPin.observe(viewLifecycleOwner) { listPin ->
             onListDataChanged(listPin)
-        })
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        LocationServices.getFusedLocationProviderClient(activity).removeLocationUpdates(myLocationCallback)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_map, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==R.id.menuMapRefresh){
-            setDefaultLocation(googleMap)
-            viewModel.getListPin()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun requestPermission(){
-        if (checkGrantedPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
-            if (checkGrantedPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)) {
-                enableUserLocation(googleMap)
-            } else {
-                requestAppPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) {
-                    enableUserLocation(googleMap)
-                }
-            }
-        } else {
-            requestAppPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) {
-                enableUserLocation(googleMap)
-            }
-        }
+        LocationServices.getFusedLocationProviderClient(requireActivity()).removeLocationUpdates(myLocationCallback)
     }
 
     @SuppressLint("MissingPermission")
-    private fun enableUserLocation(googleMap: GoogleMap?){
+    private fun enableUserLocation(googleMap: GoogleMap?) {
         myLocationCallback = MyLocationCallback(googleMap)
 
         googleMap?.uiSettings?.isMyLocationButtonEnabled = true
-        val locationRequest:LocationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = 2000
-        locationRequest.fastestInterval = 1000
+        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 2000)
+            .setWaitForAccurateLocation(false)
+            .build()
         fusedLocationClient.requestLocationUpdates(locationRequest, myLocationCallback, Looper.getMainLooper())
     }
 
-    private fun getDirection(marker: Marker?){
+    private fun getDirection(marker: Marker?) {
         val tag: MarkerTag = marker?.tag as MarkerTag
-        if (tag.type==0) {
+        if (tag.type == 0) {
             tag.latitude?.let { lat ->
                 tag.longitude?.let { lng ->
                     destination = LatLng(lat, lng)
@@ -142,7 +121,7 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                         if (!longitude.isNullOrEmpty()) {
                             binding.textViewGettingDirection.visibility = View.VISIBLE
                             origin = LatLng(latitude.toDouble(), longitude.toDouble())
-                            GoogleDirection.withServerKey(activity.getString(R.string.DIRECTION_API_KEY))
+                            GoogleDirection.withServerKey(requireContext().getString(R.string.DIRECTION_API_KEY))
                                 .from(origin)
                                 .to(destination)
                                 .alternativeRoute(true)
@@ -150,27 +129,26 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                                 .avoid(AvoidType.TOLLS)
                                 .execute(this)
                         } else {
-                            AppHelper.displayErrorToast(activity, getString(R.string.error_get_user_location))
+                            AppHelper.displayErrorToast(requireContext(), R.string.error_get_user_location)
                         }
                     } else {
-                        AppHelper.displayErrorToast(activity, getString(R.string.error_get_user_location))
+                        AppHelper.displayErrorToast(requireContext(), R.string.error_get_user_location)
                     }
                 }
             }
         }
     }
 
-    private fun setCameraWithCoordinationBounds(route: Route){
-        val southwest:LatLng = route.bound.southwestCoordination.coordination
-        val northeast:LatLng = route.bound.northeastCoordination.coordination
+    private fun setCameraWithCoordinationBounds(route: Route) {
+        val southwest: LatLng = route.bound.southwestCoordination.coordination
+        val northeast: LatLng = route.bound.northeastCoordination.coordination
         val bounds = LatLngBounds(southwest, northeast)
         googleMap?.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100))
-
     }
 
-    private fun onListDataChanged(listPin: List<PinModel>){
-        if(listPin.isNotEmpty()){
-            for(pinModel in listPin){
+    private fun onListDataChanged(listPin: List<PinModel>) {
+        if (listPin.isNotEmpty()) {
+            for (pinModel in listPin) {
                 val markerOptions = MarkerOptions()
                 markerOptions.position(LatLng(pinModel.latitude!!, pinModel.longitude!!))
                 markerOptions.title(pinModel.name)
@@ -181,32 +159,56 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
         }
     }
 
-    override fun onMapReady(googleMap: GoogleMap?) {
+    override fun onMapReady(googleMap: GoogleMap) {
         setDefaultLocation(googleMap)
-        googleMap?.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.style_map))
+        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.style_map))
         val paddingBottom = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 108F, resources.displayMetrics).roundToInt()
-        googleMap?.setPadding(0, 0, 0, paddingBottom)
-        googleMap?.uiSettings?.isZoomControlsEnabled = true
-        googleMap?.uiSettings?.isCompassEnabled = true
+        googleMap.setPadding(0, 0, 0, paddingBottom)
+        googleMap.uiSettings.isZoomControlsEnabled = true
+        googleMap.uiSettings.isCompassEnabled = true
 
         //default location
         this.googleMap = googleMap
         viewModel.getListPin()
 
         if (AppHelper.checkLocationSetting(requireContext())) {
-            requestPermission()
+            requestPermissionLocation.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         } else {
             AppHelper.displayLocationSettingsRequest(requireActivity())
         }
 
-        setupInfoWindow(requireContext(), googleMap, { marker ->
-                getDirection(marker)
-            }, { marker ->
-                enableUserLocation(googleMap)
-                getDirection(marker)
+        googleMap.setInfoWindowAdapter(MyCustomInfoWindowAdapter(context))
+        googleMap.setOnInfoWindowCloseListener { marker ->
+            val tag: MarkerTag = marker.tag as MarkerTag
+            if (tag.type == 0) {
+                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
             }
-        )
+        }
+        googleMap.setOnInfoWindowClickListener { marker ->
+            if (AppHelper.checkLocationSetting(requireContext())) {
+                if (checkGrantedPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    getDirection(marker)
+                } else {
+                    requestPermissionLocation.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+                }
+            } else {
+                AppHelper.displayErrorToast(requireContext(), R.string.location_setting_off)
+                openAppSettings(requireContext())
+            }
+        }
         setupMarkerAnimation(googleMap)
+    }
+
+    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_map, menu)
+    }
+
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menuMapRefresh) {
+            setDefaultLocation(googleMap)
+            viewModel.getListPin()
+        }
+        return false
     }
 
     override fun onDirectionSuccess(direction: Direction?) {
@@ -230,14 +232,14 @@ class FragmentMaps: Fragment(), OnMapReadyCallback, DirectionCallback {
                 }
             } else {
                 logError("FragmentMaps # direction not ok ${direction.errorMessage}")
-                AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
+                AppHelper.displayErrorToast(requireContext(), R.string.error_get_direction)
             }
         }
     }
 
     override fun onDirectionFailure(t: Throwable) {
         logError("FragmentMaps # onDirectionFailure ${t.message}")
-        AppHelper.displayErrorToast(activity, getString(R.string.error_get_direction))
+        AppHelper.displayErrorToast(requireContext(), R.string.error_get_direction)
         t.printStackTrace()
     }
 

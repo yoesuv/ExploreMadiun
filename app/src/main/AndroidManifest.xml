@@ -24,7 +24,8 @@
         <activity
             android:name=".main.views.SplashActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,9 +38,6 @@
         <activity android:name=".menu.listplace.views.DetailListPlaceActivity" />
 
         <activity android:name=".menu.gallery.views.DetailGalleryActivity" />
-
-        <activity android:name=".main.TransparentActivity"
-            android:theme="@style/Theme.Transparent"/>
 
     </application>
 

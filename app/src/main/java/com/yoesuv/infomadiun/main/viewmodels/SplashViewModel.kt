@@ -39,7 +39,7 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
                goToMain(activity)
            }
        },{
-           AppHelper.displayErrorToast(activity, activity.getString(R.string.ops_message))
+           AppHelper.displayErrorToast(activity, R.string.ops_message)
        })
     }
 

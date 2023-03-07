@@ -1,0 +1,36 @@
+name: Explore Madiun
+run-name: ${{ github.actor }} is building Explore Madiun 🚀
+on:
+  push:
+    branches:
+      - master
+      - develop
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: List files in the repository initial
+        run: ls ${{ github.workspace }}
+      - uses: actions/checkout@v3
+      - name: Decrypt GPG api keys
+        run: gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.API_KEY_PASSPHRASE }}" --output $HOME/work/ExploreMadiun/ExploreMadiun/apiKey.properties apiKey.properties.gpg
+      - name: List files in the repository decrypt
+        run: ls ${{ github.workspace }}
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3.10.0
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - name : Verify Java Version
+        run: java --version
+      - name: Setup Android SDK Tools
+        uses: android-actions/setup-android@v2.0.2
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      - name: build apk release
+        run: ./gradlew assembleRelease
+      - name: count release dex methods
+        run: ./gradlew countReleaseDexMethods
+      - run: echo "🍏 This job's status is ${{ job.status }}."

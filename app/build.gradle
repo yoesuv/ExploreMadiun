@@ -4,8 +4,8 @@ apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'com.google.firebase.firebase-perf'
@@ -21,8 +21,7 @@ android {
             storePassword STORE_PASSWORD
         }
     }
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 33
     flavorDimensions "default"
     defaultConfig {
         applicationId "com.yoesuv.infomadiun"
@@ -76,15 +75,11 @@ android {
     }
 }
 
-androidExtensions {
-    experimental = true
-}
-
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.13'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
+    implementation 'com.google.android.material:material:1.8.0'
 
     implementation "com.google.android.gms:play-services-maps:$playServiceMapsVersion"
     implementation "com.google.android.gms:play-services-location:$playServiceLocationVersion"
@@ -98,7 +93,7 @@ dependencies {
     implementation "androidx.room:room-ktx:$roomVersion"
     implementation "androidx.viewpager2:viewpager2:$viewPager2Version"
 
-    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+    implementation platform('com.google.firebase:firebase-bom:31.2.2')
     implementation 'com.google.firebase:firebase-perf'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics'
@@ -114,5 +109,4 @@ dependencies {
     implementation "com.akexorcist:google-direction-library:$googleDirectionLibraryVersion"
     implementation "com.intuit.ssp:ssp-android:$sspVersion"
     implementation "com.intuit.sdp:sdp-android:$sdpVersion"
-    implementation "com.karumi:dexter:$dexterVersion"
 }
