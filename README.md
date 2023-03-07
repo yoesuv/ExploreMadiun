@@ -1,5 +1,5 @@
-## Explore Madiun Version 2.0.6 ##
-[![Build Status](https://travis-ci.com/yoesuv/ExploreMadiun.svg?branch=master)](https://travis-ci.com/yoesuv/ExploreMadiun)
+## Explore Madiun Version 2.0.7 ##
+![Build Status](https://github.com/yoesuv/ExploreMadiun/actions/workflows/github-actions.yml/badge.svg)
 
 * Kotlin
 * Architecture

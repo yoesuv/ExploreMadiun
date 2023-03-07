@@ -1,4 +1,4 @@
-name: Explore Madiun Actions
+name: Explore Madiun
 run-name: ${{ github.actor }} is building Explore Madiun 🚀
 on:
   push:
