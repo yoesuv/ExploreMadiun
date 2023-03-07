@@ -28,5 +28,6 @@ jobs:
         uses: android-actions/setup-android@v2.0.2
       - name: Make gradlew executable
         run: chmod +x ./gradlew
-      - run: echo "Home directory $HOME"
+      - name: build apk release
+        run: ./gradlew assembleRelease
       - run: echo "🍏 This job's status is ${{ job.status }}."
