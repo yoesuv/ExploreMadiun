@@ -6,14 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Decrypt api keys
-        env:
-          CERTIFICATE_BASE64: ${{ secrets.CERTIFICATE_BASE64 }}
+      - name: Decrypt GPG api keys
         run: |
-          echo $CERTIFICATE_BASE64 | base64 --decode > apiKey.properties
-      - name: Show certificate information
-        run: |
-          openssl x509 -in apiKey.properties -inform DER -text -noout
+          gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.API_KEY_PASSPHRASE }}" --output $HOME/apiKey.properties apiKey.properties.gpg
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
