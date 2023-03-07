@@ -206,6 +206,13 @@
     </string>
 
     <!-- CHANGELOG -->
+    <string name="ver_15">Versi 2.0.7</string>
+    <string name="ver_15_info">
+        <![CDATA[
+            • pembaruan library<br/>
+            • mendukung android 13
+        ]]>
+    </string>
     <string name="ver_14">Versi 2.0.6</string>
     <string name="ver_14_info">
         <![CDATA[
