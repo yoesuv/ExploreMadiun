@@ -1,6 +1,9 @@
 name: Explore Madiun Actions
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+run-name: ${{ github.actor }} is building Explore Madiun 🚀
 on: [push]
+  branches:
+    - master
+    - develop
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
