@@ -5,15 +5,13 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
       - uses: actions/checkout@v3
       - name: Decrypt GPG api keys
         run: |
           gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.API_KEY_PASSPHRASE }}" --output $HOME/work/ExploreMadiun/ExploreMadiun/apiKey.properties apiKey.properties.gpg
+      - name: List files in the repository a
+          run: |
+            ls ${{ github.workspace }}
       - name: Setup Java JDK
         uses: actions/setup-java@v3.10.0
         with:
@@ -24,10 +22,4 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - run: echo "Home directory $HOME"
-      - name: Generate app APK.
-          run: |
-            ./gradlew assembleRelease --stacktrace
-      - name: Count methods
-        run: |
-          ./gradlew countReleaseDexMethods
       - run: echo "🍏 This job's status is ${{ job.status }}."
