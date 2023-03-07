@@ -22,6 +22,8 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '11'
+      - name : Verify Java Version
+        run: java --version
       - name: Setup Android SDK Tools
         uses: android-actions/setup-android@v2.0.2
       - name: Make gradlew executable
