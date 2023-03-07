@@ -4,8 +4,8 @@ apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'com.google.firebase.crashlytics'
@@ -72,10 +72,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-}
-
-androidExtensions {
-    experimental = true
 }
 
 dependencies {
