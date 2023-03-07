@@ -9,6 +9,10 @@ jobs:
       - name: Decrypt GPG api keys
         run: |
           gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.API_KEY_PASSPHRASE }}" --output $HOME/work/ExploreMadiun/ExploreMadiun/apiKey.properties apiKey.properties.gpg
+      - name: Setup Java JDK
+        uses: actions/setup-java@v3.10.0
+        with:
+          java-version: '11'
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "Home directory $HOME"
