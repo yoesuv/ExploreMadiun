@@ -29,7 +29,6 @@ DIRECTION_API_KEY = your_map_direction_api_key
 * [Glide](https://github.com/bumptech/glide)
 * [Icons8 Icon](https://icons8.com/)
 * [OkHttp Logging](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)
-* [PhotoView](https://github.com/chrisbanes/PhotoView)
 * [Retrofit](https://github.com/square/retrofit)
 * [SDP](https://github.com/intuit/sdp)
 * [SSP](https://github.com/intuit/ssp)
