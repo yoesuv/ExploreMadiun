@@ -1,6 +1,7 @@
 def apiKeyPropertiesFile = rootProject.file("apiKey.properties")
 def apiKeyProperties = new Properties()
 apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
+def targetSdk = project.properties["targetApiLevel"]
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -22,12 +23,12 @@ android {
             storePassword STORE_PASSWORD
         }
     }
-    compileSdkVersion 33
-    flavorDimensions "default"
+    compileSdk targetSdk.toInteger()
+    flavorDimensions =  ["default"]
     defaultConfig {
         applicationId "com.yoesuv.infomadiun"
         minSdkVersion project.minApiLevel
-        targetSdkVersion project.targetApiLevel
+        targetSdkVersion targetSdk.toInteger()
         versionCode project.versionCode.toInteger()
         versionName project.versionName
         vectorDrawables.useSupportLibrary true
