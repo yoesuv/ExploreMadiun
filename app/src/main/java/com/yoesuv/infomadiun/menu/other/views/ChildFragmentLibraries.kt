@@ -12,7 +12,7 @@ import com.yoesuv.infomadiun.databinding.ChildFragmentLibrariesBinding
 import com.yoesuv.infomadiun.menu.other.adapters.LicenseAdapter
 import com.yoesuv.infomadiun.menu.other.viewmodels.ChildFragmentLibrariesViewModel
 
-class ChildFragmentLibraries: Fragment() {
+class ChildFragmentLibraries : Fragment() {
 
     companion object {
         fun getInstance(): Fragment {
@@ -37,7 +37,7 @@ class ChildFragmentLibraries: Fragment() {
         return binding.root
     }
 
-    private fun setupRecycler(){
+    private fun setupRecycler() {
         adapter = LicenseAdapter()
         binding.recyclerViewLicense.adapter = adapter
     }

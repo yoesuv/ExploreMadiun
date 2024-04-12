@@ -14,7 +14,7 @@ class FragmentListPlaceViewModel(application: Application) : AndroidViewModel(ap
 
     var listPlace: MutableLiveData<List<PlaceModel>> = MutableLiveData()
 
-    fun getListPlace(placeLocation: PlaceLocation){
+    fun getListPlace(placeLocation: PlaceLocation) {
         if (placeLocation == PlaceLocation.ALL) {
             dbPlaceRepository.places {
                 listPlace.postValue(it)

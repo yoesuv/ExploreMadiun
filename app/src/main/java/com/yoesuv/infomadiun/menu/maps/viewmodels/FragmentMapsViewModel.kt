@@ -13,7 +13,7 @@ class FragmentMapsViewModel(application: Application) : AndroidViewModel(applica
 
     var listPin: MutableLiveData<List<PinModel>> = MutableLiveData()
 
-    fun getListPin(){
+    fun getListPin() {
         dbPin.pins {
             listPin.postValue(it)
         }

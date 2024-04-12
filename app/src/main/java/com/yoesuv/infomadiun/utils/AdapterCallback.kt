@@ -12,6 +12,7 @@ object AdapterCallback {
         override fun areItemsTheSame(oldItem: PlaceModel, newItem: PlaceModel): Boolean {
             return oldItem.name == newItem.name
         }
+
         override fun areContentsTheSame(oldItem: PlaceModel, newItem: PlaceModel): Boolean {
             return oldItem == newItem
         }
@@ -21,6 +22,7 @@ object AdapterCallback {
         override fun areItemsTheSame(oldItem: GalleryModel, newItem: GalleryModel): Boolean {
             return oldItem.caption == newItem.caption
         }
+
         override fun areContentsTheSame(oldItem: GalleryModel, newItem: GalleryModel): Boolean {
             return oldItem == newItem
         }
@@ -30,6 +32,7 @@ object AdapterCallback {
         override fun areItemsTheSame(oldItem: ChangeLogModel, newItem: ChangeLogModel): Boolean {
             return oldItem.title == newItem.title
         }
+
         override fun areContentsTheSame(oldItem: ChangeLogModel, newItem: ChangeLogModel): Boolean {
             return oldItem == newItem
         }
@@ -39,6 +42,7 @@ object AdapterCallback {
         override fun areItemsTheSame(oldItem: LicenseModel, newItem: LicenseModel): Boolean {
             return oldItem.title == newItem.title
         }
+
         override fun areContentsTheSame(oldItem: LicenseModel, newItem: LicenseModel): Boolean {
             return oldItem == newItem
         }

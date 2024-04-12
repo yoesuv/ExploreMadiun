@@ -15,10 +15,11 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "places")
 @Parcelize
 data class PlaceModel(
-        @PrimaryKey(autoGenerate = true) val id: Int,
-        @SerializedName("nama") @Expose val name:String?,
-        @SerializedName("lokasi") @Expose val location:String?,
-        @SerializedName("kategori") @Expose val category:String?,
-        @SerializedName("deskripsi") @Expose val description:String?,
-        @SerializedName("thumbnail") @Expose val thumbnail:String?,
-        @SerializedName("gambar") @Expose val image:String?): Parcelable
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    @SerializedName("nama") @Expose val name: String?,
+    @SerializedName("lokasi") @Expose val location: String?,
+    @SerializedName("kategori") @Expose val category: String?,
+    @SerializedName("deskripsi") @Expose val description: String?,
+    @SerializedName("thumbnail") @Expose val thumbnail: String?,
+    @SerializedName("gambar") @Expose val image: String?
+) : Parcelable

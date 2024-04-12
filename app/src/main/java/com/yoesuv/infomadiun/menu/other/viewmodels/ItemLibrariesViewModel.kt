@@ -5,7 +5,7 @@ import androidx.databinding.ObservableField
 import com.yoesuv.infomadiun.menu.other.models.LicenseModel
 import com.yoesuv.infomadiun.utils.AppHelper
 
-class ItemLibrariesViewModel(licenseModel: LicenseModel): ViewModel() {
+class ItemLibrariesViewModel(licenseModel: LicenseModel) : ViewModel() {
 
     var name: ObservableField<String> = ObservableField(licenseModel.title!!)
     var url: ObservableField<String> = ObservableField(licenseModel.url!!)

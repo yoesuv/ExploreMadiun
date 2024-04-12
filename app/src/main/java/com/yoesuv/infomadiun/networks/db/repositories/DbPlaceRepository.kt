@@ -10,13 +10,13 @@ class DbPlaceRepository(context: Context, private val scope: CoroutineScope) {
 
     private val dbPlaces = AppDatabase.getInstance(context)?.placeDaoAccess()
 
-    fun places(places:(List<PlaceModel>?) -> Unit) {
+    fun places(places: (List<PlaceModel>?) -> Unit) {
         scope.launch {
             places(dbPlaces?.places())
         }
     }
 
-    fun placesByLocation(location: String, places:(List<PlaceModel>?) -> Unit) {
+    fun placesByLocation(location: String, places: (List<PlaceModel>?) -> Unit) {
         scope.launch {
             places(dbPlaces?.placesByLocation(location))
         }

@@ -11,7 +11,7 @@ import com.yoesuv.infomadiun.databinding.ActivityDetailListplaceBinding
 import com.yoesuv.infomadiun.menu.listplace.viewmodels.DetailListPlaceViewModel
 import com.yoesuv.infomadiun.utils.binding.ViewModelFactory
 
-class DetailListPlaceActivity: AppCompatActivity() {
+class DetailListPlaceActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailListplaceBinding
     private val viewModel: DetailListPlaceViewModel by viewModels { ViewModelFactory(args.placeModel) }
@@ -28,13 +28,13 @@ class DetailListPlaceActivity: AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId==android.R.id.home) {
+        if (item.itemId == android.R.id.home) {
             onBackPressedDispatcher.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setupToolbar(){
+    private fun setupToolbar() {
         setSupportActionBar(binding.toolbarDetailListPlace.toolbarInclude)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)

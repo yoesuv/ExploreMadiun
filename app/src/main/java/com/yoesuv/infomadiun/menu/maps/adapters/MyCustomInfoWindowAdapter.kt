@@ -10,7 +10,7 @@ import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.CustomInfoWindowBinding
 import com.yoesuv.infomadiun.menu.maps.models.MarkerTag
 
-class MyCustomInfoWindowAdapter(private val context: Context?): GoogleMap.InfoWindowAdapter {
+class MyCustomInfoWindowAdapter(private val context: Context?) : GoogleMap.InfoWindowAdapter {
 
     private val binding = CustomInfoWindowBinding.inflate(LayoutInflater.from(context))
 

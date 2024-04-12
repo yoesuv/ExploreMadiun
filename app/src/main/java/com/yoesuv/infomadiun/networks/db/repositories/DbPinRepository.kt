@@ -10,7 +10,7 @@ class DbPinRepository(context: Context, private val scope: CoroutineScope) {
 
     private val dbPin = AppDatabase.getInstance(context)?.pinDaoAccess()
 
-    fun pins(pins:(List<PinModel>?) -> Unit) {
+    fun pins(pins: (List<PinModel>?) -> Unit) {
         scope.launch {
             pins(dbPin?.pins())
         }
