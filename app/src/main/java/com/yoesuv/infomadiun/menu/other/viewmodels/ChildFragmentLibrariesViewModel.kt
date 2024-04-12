@@ -24,8 +24,6 @@ class ChildFragmentLibrariesViewModel : ViewModel() {
             context?.getString(R.string.photoview_license),
             false
         )
-        val toasty =
-            LicenseModel(context?.getString(R.string.toasty), context?.getString(R.string.toasty_url), context?.getString(R.string.toasty_license), true)
         val googleDirection = LicenseModel(
             context?.getString(R.string.google_direction),
             context?.getString(R.string.google_direction_url),
@@ -42,7 +40,7 @@ class ChildFragmentLibrariesViewModel : ViewModel() {
             context?.getString(R.string.ssp_android),
             context?.getString(R.string.ssp_android_url),
             context?.getString(R.string.sdp_android_license),
-            false
+            true
         )
         val okhttp =
             LicenseModel(context?.getString(R.string.okhttp), context?.getString(R.string.okhttp_url), context?.getString(R.string.okhttp_license), false)
@@ -62,7 +60,6 @@ class ChildFragmentLibrariesViewModel : ViewModel() {
         listLibraries.add(retrofit)
         listLibraries.add(sdp)
         listLibraries.add(ssp)
-        listLibraries.add(toasty)
 
         listData.value = listLibraries
     }

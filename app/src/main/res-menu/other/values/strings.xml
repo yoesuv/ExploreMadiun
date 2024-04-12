@@ -90,15 +90,6 @@
             limitations under the License.
         ]]>
     </string>
-    <string name="toasty">Toasty</string>
-    <string name="toasty_url">https://github.com/GrenderG/Toasty</string>
-    <string name="toasty_license">
-        <![CDATA[
-            GNU Lesser General Public License v3.0<br/><br/>
-            Everyone is permitted to copy and distribute verbatim copies
-            of this license document, but changing it is not allowed.
-        ]]>
-    </string>
     <string name="google_direction">Android-GoogleDirectionLibrary</string>
     <string name="google_direction_url">https://github.com/akexorcist/Android-GoogleDirectionLibrary</string>
     <string name="google_direction_license">
