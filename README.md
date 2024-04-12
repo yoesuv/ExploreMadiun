@@ -32,7 +32,6 @@ DIRECTION_API_KEY = your_map_direction_api_key
 * [Retrofit](https://github.com/square/retrofit)
 * [SDP](https://github.com/intuit/sdp)
 * [SSP](https://github.com/intuit/ssp)
-* [Toasty](https://github.com/GrenderG/Toasty)
 
 
 ## License ##
