@@ -18,12 +18,6 @@ class ChildFragmentLibrariesViewModel : ViewModel() {
         val retrofit =
             LicenseModel(context?.getString(R.string.retrofit), context?.getString(R.string.retrofit_url), context?.getString(R.string.retrofit_license), false)
         val glide = LicenseModel(context?.getString(R.string.glide), context?.getString(R.string.glide_url), context?.getString(R.string.glide_license), false)
-        val photoView = LicenseModel(
-            context?.getString(R.string.photoview),
-            context?.getString(R.string.photoview_url),
-            context?.getString(R.string.photoview_license),
-            false
-        )
         val googleDirection = LicenseModel(
             context?.getString(R.string.google_direction),
             context?.getString(R.string.google_direction_url),
@@ -56,7 +50,6 @@ class ChildFragmentLibrariesViewModel : ViewModel() {
         listLibraries.add(gson)
         listLibraries.add(icons8)
         listLibraries.add(okhttp)
-        listLibraries.add(photoView)
         listLibraries.add(retrofit)
         listLibraries.add(sdp)
         listLibraries.add(ssp)
