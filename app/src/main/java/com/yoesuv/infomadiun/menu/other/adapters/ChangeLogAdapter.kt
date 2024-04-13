@@ -6,8 +6,8 @@ import com.yoesuv.infomadiun.menu.other.adapters.viewholders.ChangeLogViewHolder
 import com.yoesuv.infomadiun.menu.other.models.ChangeLogModel
 import com.yoesuv.infomadiun.utils.AdapterCallback
 
-class ChangeLogAdapter: ListAdapter<ChangeLogModel, ChangeLogViewHolder>
-    (AdapterCallback.diffChangeLogCallback){
+class ChangeLogAdapter : ListAdapter<ChangeLogModel, ChangeLogViewHolder>
+    (AdapterCallback.diffChangeLogCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChangeLogViewHolder {
         return ChangeLogViewHolder.from(parent)

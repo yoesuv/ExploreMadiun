@@ -13,7 +13,7 @@ import com.yoesuv.infomadiun.databinding.ChildFragmentChangelogBinding
 import com.yoesuv.infomadiun.menu.other.adapters.ChangeLogAdapter
 import com.yoesuv.infomadiun.menu.other.viewmodels.ChildFragmentChangelogViewModel
 
-class ChildFragmentChangelog: Fragment() {
+class ChildFragmentChangelog : Fragment() {
 
     companion object {
         fun getInstance(): Fragment {
@@ -39,7 +39,7 @@ class ChildFragmentChangelog: Fragment() {
         return binding.root
     }
 
-    private fun setupRecycler(){
+    private fun setupRecycler() {
         binding.recyclerViewChangelog.layoutManager = LinearLayoutManager(context)
         adapter = ChangeLogAdapter()
         binding.recyclerViewChangelog.adapter = adapter

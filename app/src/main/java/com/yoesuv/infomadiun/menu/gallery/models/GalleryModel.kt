@@ -15,8 +15,8 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName = "galleries")
 @Parcelize
 data class GalleryModel(
-        @PrimaryKey(autoGenerate = true) val id: Int,
-        @SerializedName("caption") @Expose val caption:String?,
-        @SerializedName("thumbnail") @Expose val thumbnail:String?,
-        @SerializedName("image") @Expose val image:String?
-): Parcelable
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    @SerializedName("caption") @Expose val caption: String?,
+    @SerializedName("thumbnail") @Expose val thumbnail: String?,
+    @SerializedName("image") @Expose val image: String?
+) : Parcelable

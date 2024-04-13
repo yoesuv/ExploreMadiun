@@ -12,7 +12,7 @@ import com.yoesuv.infomadiun.BuildConfig
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ChildFragmentInfoBinding
 
-class ChildFragmentInfo: Fragment() {
+class ChildFragmentInfo : Fragment() {
 
     companion object {
         fun getInstance(): Fragment {

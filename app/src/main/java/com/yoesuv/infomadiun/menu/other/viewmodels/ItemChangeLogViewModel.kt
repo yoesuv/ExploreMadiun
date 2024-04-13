@@ -5,7 +5,7 @@ import androidx.databinding.ObservableField
 import com.yoesuv.infomadiun.menu.other.models.ChangeLogModel
 import com.yoesuv.infomadiun.utils.AppHelper
 
-class ItemChangeLogViewModel(changeLogModel: ChangeLogModel): ViewModel() {
+class ItemChangeLogViewModel(changeLogModel: ChangeLogModel) : ViewModel() {
 
     var name: ObservableField<String> = ObservableField(changeLogModel.title!!)
     var description: ObservableField<String> = ObservableField(AppHelper.fromHtml(changeLogModel.description!!))

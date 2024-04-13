@@ -6,13 +6,14 @@ import android.content.Context
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.menu.other.models.ChangeLogModel
 
-class ChildFragmentChangelogViewModel: ViewModel() {
+class ChildFragmentChangelogViewModel : ViewModel() {
 
     private var listChangelog: MutableList<ChangeLogModel> = mutableListOf()
     var listData: MutableLiveData<MutableList<ChangeLogModel>> = MutableLiveData()
 
-    fun setupData(context: Context?){
+    fun setupData(context: Context?) {
         listChangelog.clear()
+        listChangelog.add(ChangeLogModel(context?.getString(R.string.ver_16), context?.getString(R.string.ver_16_info), false))
         listChangelog.add(ChangeLogModel(context?.getString(R.string.ver_15), context?.getString(R.string.ver_15_info), false))
         listChangelog.add(ChangeLogModel(context?.getString(R.string.ver_14), context?.getString(R.string.ver_14_info), false))
         listChangelog.add(ChangeLogModel(context?.getString(R.string.ver_13), context?.getString(R.string.ver_13_info), false))

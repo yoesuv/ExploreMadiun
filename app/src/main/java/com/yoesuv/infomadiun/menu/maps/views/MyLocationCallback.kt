@@ -11,14 +11,14 @@ import com.yoesuv.infomadiun.App
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.menu.maps.models.MarkerTag
 
-class MyLocationCallback(private val googleMap: GoogleMap?) : LocationCallback(){
+class MyLocationCallback(private val googleMap: GoogleMap?) : LocationCallback() {
 
     private var markerUser: Marker? = null
 
     override fun onLocationResult(locationResult: LocationResult) {
         super.onLocationResult(locationResult)
         val listLocation = locationResult.locations
-        if (listLocation.isNotEmpty()){
+        if (listLocation.isNotEmpty()) {
             val markerOpt = MarkerOptions()
             markerOpt.position(LatLng(listLocation[0].latitude, listLocation[0].longitude))
             markerOpt.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_position))

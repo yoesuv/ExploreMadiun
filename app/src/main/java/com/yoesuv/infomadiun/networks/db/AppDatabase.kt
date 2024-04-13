@@ -13,7 +13,7 @@ import com.yoesuv.infomadiun.networks.db.dao.PinDaoAccess
 import com.yoesuv.infomadiun.networks.db.dao.PlaceDaoAccess
 
 @Database(entities = [PlaceModel::class, GalleryModel::class, PinModel::class], version = 1, exportSchema = false)
-abstract class AppDatabase: RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun placeDaoAccess(): PlaceDaoAccess
 
@@ -24,6 +24,7 @@ abstract class AppDatabase: RoomDatabase() {
     companion object {
         @Volatile
         private var instance: AppDatabase? = null
+
         @Synchronized
         fun getInstance(context: Context): AppDatabase? {
             if (instance == null) {
@@ -32,7 +33,7 @@ abstract class AppDatabase: RoomDatabase() {
             return instance
         }
 
-        private fun create(context: Context): AppDatabase{
+        private fun create(context: Context): AppDatabase {
             return Room.databaseBuilder(context, AppDatabase::class.java, DB_NAME)
                 .fallbackToDestructiveMigration()
                 .build()

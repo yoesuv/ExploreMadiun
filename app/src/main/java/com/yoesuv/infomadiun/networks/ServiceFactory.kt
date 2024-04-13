@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
  */
 object ServiceFactory {
 
-    fun create(): RestApi{
+    fun create(): RestApi {
 
         val logging = HttpLoggingInterceptor()
         if (BuildConfig.DEBUG) {
@@ -32,10 +32,10 @@ object ServiceFactory {
         val client = clientBuilder.build()
 
         val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
         return retrofit.create(RestApi::class.java)
     }
 }

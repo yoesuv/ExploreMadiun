@@ -14,7 +14,6 @@ import com.yoesuv.infomadiun.networks.db.repositories.DbGalleryRepository
 import com.yoesuv.infomadiun.networks.db.repositories.DbPinRepository
 import com.yoesuv.infomadiun.networks.db.repositories.DbPlaceRepository
 import com.yoesuv.infomadiun.utils.AppHelper
-import com.yoesuv.infomadiun.utils.logDebug
 import kotlinx.coroutines.launch
 
 class SplashViewModel(application: Application) : AndroidViewModel(application) {
@@ -22,25 +21,23 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
     private val dbPlaceRepository = DbPlaceRepository(application.applicationContext, viewModelScope)
     private val dbGalleryRepository = DbGalleryRepository(application.applicationContext, viewModelScope)
     private val dbPinRepository = DbPinRepository(application.applicationContext, viewModelScope)
-    private val repo = AppRepository(viewModelScope)
+    private val repo = AppRepository()
 
     var version: ObservableField<String> = ObservableField(BuildConfig.VERSION_NAME)
 
     fun getAppData(activity: Activity) {
-       repo.getSplashData({ places, galleries, pins ->
-           logDebug("SplashViewModel # list place count ${places?.size}")
-           logDebug("SplashViewModel # gallery count ${galleries?.size}")
-           logDebug("SplashViewModel # map pins count ${pins?.size}")
-
-           viewModelScope.launch {
-               dbPlaceRepository.setupDataPlaces(places)
-               dbGalleryRepository.setupDataGalleries(galleries)
-               dbPinRepository.setupDataPins(pins)
-               goToMain(activity)
-           }
-       },{
-           AppHelper.displayErrorToast(activity, R.string.ops_message)
-       })
+        viewModelScope.launch {
+            repo.getSplashData({ places, galleries, pins ->
+                viewModelScope.launch {
+                    dbPlaceRepository.setupDataPlaces(places)
+                    dbGalleryRepository.setupDataGalleries(galleries)
+                    dbPinRepository.setupDataPins(pins)
+                    goToMain(activity)
+                }
+            }, {
+                AppHelper.displayErrorToast(activity, R.string.ops_message)
+            })
+        }
     }
 
     private fun goToMain(activity: Activity) {

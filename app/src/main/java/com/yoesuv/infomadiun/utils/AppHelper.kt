@@ -15,7 +15,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.location.Priority
-import es.dmoral.toasty.Toasty
 
 /**
  *  Updated by yusuf on  12 July 2020
@@ -24,11 +23,11 @@ import es.dmoral.toasty.Toasty
 object AppHelper {
 
     fun displayNormalToast(context: Context, @StringRes message: Int) {
-        Toasty.normal(context, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     fun displayErrorToast(context: Context, @StringRes message: Int) {
-        Toasty.error(context, message, Toast.LENGTH_SHORT, true).show()
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     fun checkLocationSetting(context: Context): Boolean {

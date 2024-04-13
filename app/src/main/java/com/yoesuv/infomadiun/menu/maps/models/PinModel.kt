@@ -9,10 +9,10 @@ import com.google.gson.annotations.SerializedName
 @Keep
 @Entity(tableName = "pins")
 data class PinModel(
-        @PrimaryKey(autoGenerate = true) val id:Int?,
-        @SerializedName("name") @Expose val name:String?,
-        @SerializedName("lokasi") @Expose val location:Int?,
-        @SerializedName("latitude") val latitude:Double?,
-        @SerializedName("longitude") val longitude:Double?,
-        @SerializedName("image") @Expose val image:String?
+    @PrimaryKey(autoGenerate = true) val id: Int?,
+    @SerializedName("name") @Expose val name: String?,
+    @SerializedName("lokasi") @Expose val location: Int?,
+    @SerializedName("latitude") val latitude: Double?,
+    @SerializedName("longitude") val longitude: Double?,
+    @SerializedName("image") @Expose val image: String?
 )

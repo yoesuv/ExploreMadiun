@@ -10,7 +10,7 @@ import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ChildFragmentThanksBinding
 import com.yoesuv.infomadiun.utils.AppHelper
 
-class ChildFragmentThanks: Fragment(){
+class ChildFragmentThanks : Fragment() {
 
     companion object {
         fun getInstance(): Fragment {
