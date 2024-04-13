@@ -14,6 +14,7 @@ plugins {
     id("com.google.firebase.crashlytics")
     id("androidx.navigation.safeargs")
     id("com.google.devtools.ksp")
+    id("com.getkeepsafe.dexcount")
 }
 
 android {

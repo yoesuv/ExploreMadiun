@@ -11,9 +11,11 @@ plugins {
 buildscript {
     repositories {
         google()
+        mavenCentral()
     }
     dependencies {
         val navVersion = project.properties["navigationVersion"].toString()
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$navVersion")
+        classpath("com.getkeepsafe.dexcount:dexcount-gradle-plugin:4.0.0")
     }
 }
