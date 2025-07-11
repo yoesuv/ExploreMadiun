@@ -5,7 +5,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.enableEdgeToEdge
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -26,6 +28,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (AppHelper.isVanillaIceCreamAndUp()) {
+            enableEdgeToEdge()
+        }
+
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.lifecycleOwner = this
@@ -33,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         setupToolbar()
         setupNavigation()
         setupBackPressed()
+
+        AppHelper.insetsPadding(
+            binding.mainAppBar, top = true,
+            color = ContextCompat.getColor(this, R.color.colorPrimary)
+        )
     }
 
     private fun setupToolbar() {

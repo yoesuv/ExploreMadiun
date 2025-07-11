@@ -29,10 +29,8 @@
                     android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/fragment_info_margin"
                     android:layout_marginStart="@dimen/fragment_info_margin"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/imageViewAppInfo"
                     android:layout_toEndOf="@id/imageViewAppInfo">
 
                     <com.google.android.material.textview.MaterialTextView
@@ -79,7 +77,6 @@
                     android:textColor="@color/default_text_color"
                     android:textSize="@dimen/_12ssp"
                     android:drawablePadding="10dp"
-                    android:drawableLeft="@drawable/ic_email"
                     android:drawableStart="@drawable/ic_email"/>
 
                 <com.google.android.material.textview.MaterialTextView
@@ -89,7 +86,6 @@
                     android:textColor="@color/default_text_color"
                     android:textSize="@dimen/_12ssp"
                     android:drawablePadding="10dp"
-                    android:drawableLeft="@drawable/ic_twitter"
                     android:drawableStart="@drawable/ic_twitter"/>
 
                 <include layout="@layout/divider"/>
@@ -109,7 +105,6 @@
                     android:textColor="@color/default_text_color"
                     android:textSize="@dimen/_12ssp"
                     android:drawablePadding="10dp"
-                    android:drawableLeft="@drawable/ic_heart"
                     android:drawableStart="@drawable/ic_heart"/>
 
                 <include layout="@layout/divider"/>
@@ -129,7 +124,6 @@
                     android:textColor="@color/default_text_color"
                     android:textSize="@dimen/_12ssp"
                     android:drawablePadding="10dp"
-                    android:drawableLeft="@drawable/ic_high_priority"
                     android:drawableStart="@drawable/ic_high_priority"/>
 
                 <include layout="@layout/divider"/>
@@ -142,7 +136,6 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/_12ssp"
                     android:drawablePadding="10dp"
-                    android:drawableLeft="@drawable/ic_github"
                     android:drawableStart="@drawable/ic_github"/>
 
             </LinearLayout>

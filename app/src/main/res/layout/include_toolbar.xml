@@ -5,7 +5,9 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayoutInclude"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarInclude"

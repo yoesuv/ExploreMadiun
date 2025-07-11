@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_48sdp"
             android:text="@{splash.version}"
             android:textSize="@dimen/_12ssp"
             android:textColor="@color/white"
