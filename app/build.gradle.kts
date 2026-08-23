@@ -5,16 +5,13 @@ val apiKeyProperties = Properties()
 apiKeyProperties.load(apiKeyPropertiesFile.inputStream())
 
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("kotlin-parcelize")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.firebase-perf")
-    id("com.google.firebase.crashlytics")
-    id("androidx.navigation.safeargs")
-    id("com.google.devtools.ksp")
-    id("com.getkeepsafe.dexcount")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.perf)
+    alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.androidx.navigation.safeargs)
 }
 
 android {
@@ -29,7 +26,11 @@ android {
     }
 
     namespace = "com.yoesuv.infomadiun"
-    compileSdk = project.properties["targetApiLevel"].toString().toInt()
+    compileSdk {
+        version = release(36) {
+            minorApiLevel = 1
+        }
+    }
 
     defaultConfig {
         val keyMaps = apiKeyProperties["MAPS_API_KEY"].toString()
@@ -43,7 +44,9 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        setProperty("archivesBaseName", "$applicationId-v$versionCode($versionName)")
+        tasks.withType<org.gradle.api.tasks.bundling.AbstractArchiveTask>().configureEach {
+            archiveBaseName.set("$applicationId-v$versionCode($versionName)")
+        }
         resValue("string", "MAPS_API_KEY", keyMaps)
         resValue("string", "DIRECTION_API_KEY", keyDirections)
     }
@@ -60,28 +63,29 @@ android {
             signingConfig = signingConfigs.getByName("config")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
 
     sourceSets {
         getByName("main") {
-            res.srcDirs("src/main/res")
-            res.srcDirs("src/main/res-menu")
-            res.srcDirs("src/main/res-menu/gallery")
-            res.srcDirs("src/main/res-menu/listplace")
-            res.srcDirs("src/main/res-menu/maps")
-            res.srcDirs("src/main/res-menu/other")
+            res.directories += listOf(
+                "src/main/res",
+                "src/main/res-menu",
+                "src/main/res-menu/gallery",
+                "src/main/res-menu/listplace",
+                "src/main/res-menu/maps",
+                "src/main/res-menu/other"
+            )
         }
     }
 
     buildFeatures {
         dataBinding = true
         buildConfig = true
+        resValues = true
     }
     flavorDimensions.add("default")
 
@@ -93,51 +97,38 @@ android {
 }
 
 dependencies {
-    val playServiceMapsVersion: String by project
-    val playServiceLocationVersion: String by project
-    val lifeCycleVersion: String by project
-    val navigationVersion: String by project
-    val roomVersion: String by project
-    val viewPager2Version: String by project
-    val retrofitVersion: String by project
-    val httpLoggingVersion: String by project
-    val glideVersion: String by project
-    val googleDirectionLibraryVersion: String by project
-    val sspVersion: String by project
-    val sdpVersion: String by project
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
 
-    implementation("androidx.core:core-ktx:1.16.0")
-    implementation ("androidx.appcompat:appcompat:1.7.1")
-    implementation("com.google.android.material:material:1.12.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.2.1")
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.espresso.contrib)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
+    implementation(libs.room.ktx)
+    implementation(libs.viewpager2)
 
-    implementation("com.google.android.gms:play-services-maps:$playServiceMapsVersion")
-    implementation("com.google.android.gms:play-services-location:$playServiceLocationVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCycleVersion")
-    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
-    implementation("androidx.room:room-runtime:$roomVersion")
-    ksp("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    implementation("androidx.viewpager2:viewpager2:$viewPager2Version")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.perf)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
 
-    implementation(platform("com.google.firebase:firebase-bom:33.16.0"))
-    implementation("com.google.firebase:firebase-perf")
-    implementation("com.google.firebase:firebase-crashlytics")
-    implementation("com.google.firebase:firebase-analytics")
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.okhttp.logging.interceptor)
 
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-    implementation("com.squareup.okhttp3:logging-interceptor:$httpLoggingVersion")
-
-    implementation("com.github.bumptech.glide:glide:$glideVersion")
-    ksp("com.github.bumptech.glide:compiler:$glideVersion")
-    implementation("com.akexorcist:google-direction-library:$googleDirectionLibraryVersion")
-    implementation("com.intuit.ssp:ssp-android:$sspVersion")
-    implementation("com.intuit.sdp:sdp-android:$sdpVersion")
+    implementation(libs.glide)
+    ksp(libs.glide.compiler)
+    implementation(libs.google.direction.library)
+    implementation(libs.ssp.android)
+    implementation(libs.sdp.android)
 }
