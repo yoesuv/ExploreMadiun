@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="splash"
             type="com.yoesuv.infomadiun.main.viewmodels.SplashViewModel" />
@@ -17,10 +18,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:fontFamily="@font/pacifico"
             android:text="@string/app_name"
-            android:textSize="@dimen/_18ssp"
             android:textColor="@color/white"
-            android:fontFamily="@font/pacifico"/>
+            android:textSize="@dimen/_18ssp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
@@ -29,9 +30,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/_48sdp"
             android:text="@{splash.version}"
-            android:textSize="@dimen/_12ssp"
             android:textColor="@color/white"
-            tools:text="1.0.0"/>
+            android:textSize="@dimen/_12ssp"
+            tools:text="1.0.0" />
 
     </RelativeLayout>
 

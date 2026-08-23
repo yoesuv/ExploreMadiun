@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="itemGallery"
-            type="com.yoesuv.infomadiun.menu.gallery.viewmodels.ItemGalleryViewModel"/>
+            type="com.yoesuv.infomadiun.menu.gallery.viewmodels.ItemGalleryViewModel" />
     </data>
 
     <com.yoesuv.infomadiun.widgets.ForegroundRelativeLayout
         android:id="@+id/layoutMainItemGallery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:clickable="true"
         android:focusable="true"
-        android:background="@android:color/transparent"
         android:foreground="?attr/selectableItemBackground">
 
         <com.yoesuv.infomadiun.widgets.SquareImageView
@@ -23,8 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/backgrounds/scenic"
-            app:loadImage="@{itemGallery.imageUrl}"/>
+            app:loadImage="@{itemGallery.imageUrl}"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     </com.yoesuv.infomadiun.widgets.ForegroundRelativeLayout>
 

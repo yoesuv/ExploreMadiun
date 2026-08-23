@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.core.widget.NestedScrollView
@@ -8,10 +7,10 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fragment_info_margin">
+            android:layout_margin="@dimen/fragment_info_margin"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -23,15 +22,15 @@
                     android:layout_width="@dimen/image_view_app_info"
                     android:layout_height="@dimen/image_view_app_info"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_app_info"/>
+                    app:srcCompat="@drawable/ic_app_info" />
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/fragment_info_margin"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/imageViewAppInfo">
+                    android:layout_marginStart="@dimen/fragment_info_margin"
+                    android:layout_toEndOf="@id/imageViewAppInfo"
+                    android:orientation="vertical">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewAppName"
@@ -39,104 +38,104 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="@string/app_name"
+                        android:textColor="@color/default_text_color"
                         android:textSize="@dimen/_16ssp"
-                        android:textStyle="bold"
-                        android:textColor="@color/default_text_color"/>
+                        android:textStyle="bold" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textViewVersion"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/app_name"
-                        android:textSize="@dimen/_12ssp"
-                        android:textColor="@color/default_text_color"/>
+                        android:textColor="@color/default_text_color"
+                        android:textSize="@dimen/_12ssp" />
 
                 </LinearLayout>
 
             </RelativeLayout>
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <include layout="@layout/divider"/>
+                <include layout="@layout/divider" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/contact"
-                    android:textStyle="bold"
+                    android:textColor="@color/default_text_color"
                     android:textSize="@dimen/_12ssp"
-                    android:textColor="@color/default_text_color"/>
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_email"
+                    android:drawablePadding="10dp"
                     android:text="@string/my_email"
                     android:textColor="@color/default_text_color"
-                    android:textSize="@dimen/_12ssp"
-                    android:drawablePadding="10dp"
-                    android:drawableStart="@drawable/ic_email"/>
+                    android:textSize="@dimen/_12ssp" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_twitter"
+                    android:drawablePadding="10dp"
                     android:text="@string/my_twitter"
                     android:textColor="@color/default_text_color"
-                    android:textSize="@dimen/_12ssp"
-                    android:drawablePadding="10dp"
-                    android:drawableStart="@drawable/ic_twitter"/>
+                    android:textSize="@dimen/_12ssp" />
 
-                <include layout="@layout/divider"/>
+                <include layout="@layout/divider" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/support"
-                    android:textStyle="bold"
+                    android:textColor="@color/default_text_color"
                     android:textSize="@dimen/_12ssp"
-                    android:textColor="@color/default_text_color"/>
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_heart"
+                    android:drawablePadding="10dp"
                     android:text="@string/rate"
                     android:textColor="@color/default_text_color"
-                    android:textSize="@dimen/_12ssp"
-                    android:drawablePadding="10dp"
-                    android:drawableStart="@drawable/ic_heart"/>
+                    android:textSize="@dimen/_12ssp" />
 
-                <include layout="@layout/divider"/>
+                <include layout="@layout/divider" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/discl"
-                    android:textStyle="bold"
+                    android:textColor="@color/default_text_color"
                     android:textSize="@dimen/_12ssp"
-                    android:textColor="@color/default_text_color"/>
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_high_priority"
+                    android:drawablePadding="10dp"
                     android:text="@string/disclaimer"
                     android:textColor="@color/default_text_color"
-                    android:textSize="@dimen/_12ssp"
-                    android:drawablePadding="10dp"
-                    android:drawableStart="@drawable/ic_high_priority"/>
+                    android:textSize="@dimen/_12ssp" />
 
-                <include layout="@layout/divider"/>
+                <include layout="@layout/divider" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewGithub"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:drawableStart="@drawable/ic_github"
+                    android:drawablePadding="10dp"
                     android:text="@string/github_url"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/_12ssp"
-                    android:drawablePadding="10dp"
-                    android:drawableStart="@drawable/ic_github"/>
+                    android:textSize="@dimen/_12ssp" />
 
             </LinearLayout>
 

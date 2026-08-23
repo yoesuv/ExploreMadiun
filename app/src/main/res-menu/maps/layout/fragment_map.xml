@@ -2,9 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="maps"
-            type="com.yoesuv.infomadiun.menu.maps.viewmodels.FragmentMapsViewModel"/>
+            type="com.yoesuv.infomadiun.menu.maps.viewmodels.FragmentMapsViewModel" />
     </data>
 
     <RelativeLayout
@@ -13,9 +14,9 @@
 
         <fragment
             android:id="@+id/mapLocation"
+            class="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            class="com.google.android.gms.maps.SupportMapFragment"/>
+            android:layout_height="match_parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewGettingDirection"
@@ -25,7 +26,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/getting_direction"
             android:textColor="@color/default_text_color"
-            android:textSize="@dimen/_14ssp"/>
+            android:textSize="@dimen/_14ssp" />
 
     </RelativeLayout>
 

@@ -16,17 +16,15 @@
             android:layout_centerVertical="true"
             android:text="@string/app_name"
             android:textColor="@color/default_text_color"
-            android:textSize="@dimen/_12ssp"/>
+            android:textSize="@dimen/_12ssp" />
 
-       <androidx.appcompat.widget.AppCompatImageView
-           android:id="@+id/imageViewMapLocationDirection"
-           android:layout_width="35dp"
-           android:layout_height="35dp"
-           android:layout_marginLeft="5dp"
-           android:layout_marginStart="5dp"
-           android:layout_toRightOf="@id/textViewMapLocationName"
-           android:layout_toEndOf="@id/textViewMapLocationName"
-           app:srcCompat="@drawable/ic_direction"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewMapLocationDirection"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/textViewMapLocationName"
+            app:srcCompat="@drawable/ic_direction" />
 
     </RelativeLayout>
 

@@ -19,9 +19,9 @@
                 android:id="@+id/textViewToolbarInclude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_16ssp"
                 android:textColor="@android:color/white"
-                tools:text="@string/app_name"/>
+                android:textSize="@dimen/_16ssp"
+                tools:text="@string/app_name" />
 
         </androidx.appcompat.widget.Toolbar>
 

@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayoutViewPagerOtherTwo"
-            android:background="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorHeight="@dimen/_2sdp"
+            android:background="@color/colorPrimary"
             app:tabIndicatorColor="@android:color/white"
-            app:tabTextColor="@android:color/white"
+            app:tabIndicatorHeight="@dimen/_2sdp"
+            app:tabMode="scrollable"
             app:tabTextAppearance="@style/MyTabAppearance"
-            app:tabMode="scrollable"/>
+            app:tabTextColor="@android:color/white" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPagerOtherTwo"
-            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@color/white" />
 
     </LinearLayout>
 
