@@ -14,7 +14,6 @@ import com.yoesuv.infomadiun.networks.db.dao.PlaceDaoAccess
 
 @Database(entities = [PlaceModel::class, GalleryModel::class, PinModel::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
-
     abstract fun placeDaoAccess(): PlaceDaoAccess
 
     abstract fun galleryDaoAccess(): GalleryDaoAccess
@@ -33,10 +32,10 @@ abstract class AppDatabase : RoomDatabase() {
             return instance
         }
 
-        private fun create(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, DB_NAME)
+        private fun create(context: Context): AppDatabase =
+            Room
+                .databaseBuilder(context, AppDatabase::class.java, DB_NAME)
                 .fallbackToDestructiveMigration(true)
                 .build()
-        }
     }
 }

@@ -7,8 +7,9 @@ import com.yoesuv.infomadiun.databinding.ItemGalleryBinding
 import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 import com.yoesuv.infomadiun.menu.gallery.viewmodels.ItemGalleryViewModel
 
-class GalleryViewHolder(val binding: ItemGalleryBinding) : RecyclerView.ViewHolder(binding.root) {
-
+class GalleryViewHolder(
+    val binding: ItemGalleryBinding,
+) : RecyclerView.ViewHolder(binding.root) {
     fun bind(galleryModel: GalleryModel) {
         binding.itemGallery = ItemGalleryViewModel(galleryModel)
         binding.executePendingBindings()

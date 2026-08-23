@@ -1,12 +1,12 @@
 package com.yoesuv.infomadiun.menu.other.views
 
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import com.google.android.material.appbar.AppBarLayout
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentOtherBinding
@@ -17,7 +17,6 @@ import com.yoesuv.infomadiun.utils.ZoomOutPageTransformer
  *  Updated by yusuf on 06 June 2021.
  */
 class FragmentOther : Fragment() {
-
     private lateinit var binding: FragmentOtherBinding
     private var tabTitles = arrayOf<String>()
 
@@ -26,13 +25,20 @@ class FragmentOther : Fragment() {
         tabTitles = resources.getStringArray(R.array.tab_other)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_other, container, false)
         binding.lifecycleOwner = this
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewPagerOtherTwo.adapter = TabOtherAdapter(this, tabTitles)
         binding.viewPagerOtherTwo.setPageTransformer(ZoomOutPageTransformer())

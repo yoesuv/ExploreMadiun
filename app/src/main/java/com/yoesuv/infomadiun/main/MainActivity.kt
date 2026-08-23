@@ -1,13 +1,13 @@
 package com.yoesuv.infomadiun.main
 
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
@@ -19,9 +19,8 @@ import com.yoesuv.infomadiun.utils.AppHelper
  *  Updated by yusuf on 02 March 2023.
  */
 class MainActivity : AppCompatActivity() {
-
     companion object {
-        var BACK_PRESSED: Long = 0L
+        var backPressed: Long = 0L
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -42,8 +41,9 @@ class MainActivity : AppCompatActivity() {
         setupBackPressed()
 
         AppHelper.insetsPadding(
-            binding.mainAppBar, top = true,
-            color = ContextCompat.getColor(this, R.color.colorPrimary)
+            binding.mainAppBar,
+            top = true,
+            color = ContextCompat.getColor(this, R.color.colorPrimary),
         )
     }
 
@@ -60,17 +60,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBackPressed() {
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (BACK_PRESSED + 2000L > System.currentTimeMillis()) {
-                    finish()
-                } else {
-                    @StringRes val msg = R.string.press_again_to_exit
-                    AppHelper.displayNormalToast(this@MainActivity, msg)
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (backPressed + 2000L > System.currentTimeMillis()) {
+                        finish()
+                    } else {
+                        @StringRes val msg = R.string.press_again_to_exit
+                        AppHelper.displayNormalToast(this@MainActivity, msg)
+                    }
+                    backPressed = System.currentTimeMillis()
                 }
-                BACK_PRESSED = System.currentTimeMillis()
-            }
-        })
+            },
+        )
     }
-
 }

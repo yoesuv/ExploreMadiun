@@ -6,5 +6,5 @@ import com.google.errorprone.annotations.Keep
 data class ChangeLogModel(
     val title: String?,
     val description: String?,
-    val isLast: Boolean?
+    val isLast: Boolean?,
 )

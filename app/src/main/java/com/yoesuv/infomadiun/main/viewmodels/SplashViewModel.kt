@@ -16,8 +16,9 @@ import com.yoesuv.infomadiun.networks.db.repositories.DbPlaceRepository
 import com.yoesuv.infomadiun.utils.AppHelper
 import kotlinx.coroutines.launch
 
-class SplashViewModel(application: Application) : AndroidViewModel(application) {
-
+class SplashViewModel(
+    application: Application,
+) : AndroidViewModel(application) {
     private val dbPlaceRepository = DbPlaceRepository(application.applicationContext, viewModelScope)
     private val dbGalleryRepository = DbGalleryRepository(application.applicationContext, viewModelScope)
     private val dbPinRepository = DbPinRepository(application.applicationContext, viewModelScope)
@@ -48,5 +49,4 @@ class SplashViewModel(application: Application) : AndroidViewModel(application) 
         activity.startActivity(intent)
         activity.finish()
     }
-
 }

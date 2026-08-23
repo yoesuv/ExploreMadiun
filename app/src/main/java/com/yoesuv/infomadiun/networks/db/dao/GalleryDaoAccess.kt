@@ -8,7 +8,6 @@ import com.yoesuv.infomadiun.menu.gallery.models.GalleryModel
 
 @Dao
 interface GalleryDaoAccess {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGallery(galleryModel: GalleryModel)
 
@@ -17,5 +16,4 @@ interface GalleryDaoAccess {
 
     @Query("DELETE FROM galleries")
     suspend fun deleteAllGallery()
-
 }

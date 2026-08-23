@@ -8,7 +8,6 @@ import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 
 @Dao
 interface PlaceDaoAccess {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPlace(placeModel: PlaceModel)
 

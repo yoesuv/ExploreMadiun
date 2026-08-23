@@ -1,0 +1,6 @@
+root = true
+
+[*.{kt,kts}]
+
+[**/build/**]
+ktlint = disabled

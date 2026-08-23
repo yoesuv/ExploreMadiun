@@ -7,8 +7,9 @@ import com.yoesuv.infomadiun.databinding.ItemLibrariesBinding
 import com.yoesuv.infomadiun.menu.other.models.LicenseModel
 import com.yoesuv.infomadiun.menu.other.viewmodels.ItemLibrariesViewModel
 
-class LicenseViewHolder(val binding: ItemLibrariesBinding) : RecyclerView.ViewHolder(binding.root) {
-
+class LicenseViewHolder(
+    val binding: ItemLibrariesBinding,
+) : RecyclerView.ViewHolder(binding.root) {
     fun bind(licenseModel: LicenseModel) {
         binding.itemLibraries = ItemLibrariesViewModel(licenseModel)
         binding.executePendingBindings()
@@ -21,5 +22,4 @@ class LicenseViewHolder(val binding: ItemLibrariesBinding) : RecyclerView.ViewHo
             return LicenseViewHolder(binding)
         }
     }
-
 }

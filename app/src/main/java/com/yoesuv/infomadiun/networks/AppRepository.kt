@@ -6,10 +6,12 @@ import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import java.lang.Exception
 
 class AppRepository {
-
     private val restApi = ServiceFactory.create()
 
-    suspend fun getSplashData(onSuccess: (MutableList<PlaceModel>?, MutableList<GalleryModel>?, MutableList<PinModel>?) -> Unit, onError: (Exception) -> Unit) {
+    suspend fun getSplashData(
+        onSuccess: (MutableList<PlaceModel>?, MutableList<GalleryModel>?, MutableList<PinModel>?) -> Unit,
+        onError: (Exception) -> Unit,
+    ) {
         try {
             val resultListPlace = restApi.listPlace()
             val resultGallery = restApi.gallery()
@@ -19,5 +21,4 @@ class AppRepository {
             onError(e)
         }
     }
-
 }

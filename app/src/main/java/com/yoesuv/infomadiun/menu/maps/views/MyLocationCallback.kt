@@ -11,8 +11,9 @@ import com.yoesuv.infomadiun.App
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.menu.maps.models.MarkerTag
 
-class MyLocationCallback(private val googleMap: GoogleMap?) : LocationCallback() {
-
+class MyLocationCallback(
+    private val googleMap: GoogleMap?,
+) : LocationCallback() {
     private var markerUser: Marker? = null
 
     override fun onLocationResult(locationResult: LocationResult) {
@@ -24,12 +25,13 @@ class MyLocationCallback(private val googleMap: GoogleMap?) : LocationCallback()
             markerOpt.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_user_position))
             markerUser?.remove()
             markerUser = googleMap?.addMarker(markerOpt)
-            markerUser?.tag = MarkerTag(
-                "Lokasi Anda",
-                1,
-                listLocation[0].latitude,
-                listLocation[0].longitude
-            )
+            markerUser?.tag =
+                MarkerTag(
+                    "Lokasi Anda",
+                    1,
+                    listLocation[0].latitude,
+                    listLocation[0].longitude,
+                )
 
             App.prefHelper?.setString(FragmentMaps.PREFERENCE_LATITUDE, listLocation[0].latitude.toString())
             App.prefHelper?.setString(FragmentMaps.PREFERENCE_LONGITUDE, listLocation[0].longitude.toString())

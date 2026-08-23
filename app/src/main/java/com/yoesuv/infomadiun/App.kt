@@ -7,7 +7,6 @@ import com.yoesuv.infomadiun.utils.PreferencesHelper
  *  Updated by yusuf on 02 June 2021.
  */
 class App : Application() {
-
     companion object {
         var prefHelper: PreferencesHelper? = null
     }
@@ -16,5 +15,4 @@ class App : Application() {
         super.onCreate()
         prefHelper = PreferencesHelper(this)
     }
-
 }

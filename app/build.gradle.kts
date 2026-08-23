@@ -27,9 +27,10 @@ android {
 
     namespace = "com.yoesuv.infomadiun"
     compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
+        version =
+            release(36) {
+                minorApiLevel = 1
+            }
     }
 
     defaultConfig {
@@ -71,14 +72,15 @@ android {
 
     sourceSets {
         getByName("main") {
-            res.directories += listOf(
-                "src/main/res",
-                "src/main/res-menu",
-                "src/main/res-menu/gallery",
-                "src/main/res-menu/listplace",
-                "src/main/res-menu/maps",
-                "src/main/res-menu/other"
-            )
+            res.directories +=
+                listOf(
+                    "src/main/res",
+                    "src/main/res-menu",
+                    "src/main/res-menu/gallery",
+                    "src/main/res-menu/listplace",
+                    "src/main/res-menu/maps",
+                    "src/main/res-menu/other",
+                )
         }
     }
 

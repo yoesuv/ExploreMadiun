@@ -6,8 +6,10 @@ import com.yoesuv.infomadiun.networks.db.AppDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class DbPlaceRepository(context: Context, private val scope: CoroutineScope) {
-
+class DbPlaceRepository(
+    context: Context,
+    private val scope: CoroutineScope,
+) {
     private val dbPlaces = AppDatabase.getInstance(context)?.placeDaoAccess()
 
     fun places(places: (List<PlaceModel>?) -> Unit) {
@@ -16,7 +18,10 @@ class DbPlaceRepository(context: Context, private val scope: CoroutineScope) {
         }
     }
 
-    fun placesByLocation(location: String, places: (List<PlaceModel>?) -> Unit) {
+    fun placesByLocation(
+        location: String,
+        places: (List<PlaceModel>?) -> Unit,
+    ) {
         scope.launch {
             places(dbPlaces?.placesByLocation(location))
         }
@@ -28,5 +33,4 @@ class DbPlaceRepository(context: Context, private val scope: CoroutineScope) {
             dbPlaces?.insertPlace(placeModel)
         }
     }
-
 }

@@ -14,5 +14,5 @@ data class PinModel(
     @SerializedName("lokasi") @Expose val location: Int?,
     @SerializedName("latitude") val latitude: Double?,
     @SerializedName("longitude") val longitude: Double?,
-    @SerializedName("image") @Expose val image: String?
+    @SerializedName("image") @Expose val image: String?,
 )
