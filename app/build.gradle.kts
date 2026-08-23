@@ -28,8 +28,8 @@ android {
     namespace = "com.yoesuv.infomadiun"
     compileSdk {
         version =
-            release(36) {
-                minorApiLevel = 1
+            release(37) {
+                minorApiLevel = 0
             }
     }
 
