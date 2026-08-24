@@ -51,7 +51,7 @@ class ChildFragmentLibrariesViewModel : ViewModel() {
             LicenseModel(
                 context?.getString(R.string.ssp_android),
                 context?.getString(R.string.ssp_android_url),
-                context?.getString(R.string.sdp_android_license),
+                context?.getString(R.string.ssp_android_license),
                 true,
             )
         val okhttp =
