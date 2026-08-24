@@ -8,10 +8,10 @@ import android.os.Build
 import android.text.Html
 import android.view.View
 import android.widget.Toast
-import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
@@ -89,25 +89,30 @@ object AppHelper {
 
     fun isVanillaIceCreamAndUp(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM
 
-    fun insetsPadding(
+    fun applySystemBarInsets(
         view: View,
         left: Boolean = false,
         top: Boolean = false,
         right: Boolean = false,
         bottom: Boolean = false,
-        @ColorInt color: Int? = null,
     ) {
+        val initialPaddingLeft = view.paddingLeft
+        val initialPaddingTop = view.paddingTop
+        val initialPaddingRight = view.paddingRight
+        val initialPaddingBottom = view.paddingBottom
+
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInset ->
-            val inset = windowInset.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(
-                if (left) inset.left else v.paddingLeft,
-                if (top) inset.top else v.paddingTop,
-                if (right) inset.right else v.paddingRight,
-                if (bottom) inset.bottom + 32 else v.paddingBottom,
+            val inset =
+                windowInset.getInsets(
+                    WindowInsetsCompat.Type.systemBars()
+                        or WindowInsetsCompat.Type.displayCutout(),
+                )
+            v.updatePadding(
+                left = initialPaddingLeft + if (left) inset.left else 0,
+                top = initialPaddingTop + if (top) inset.top else 0,
+                right = initialPaddingRight + if (right) inset.right else 0,
+                bottom = initialPaddingBottom + if (bottom) inset.bottom else 0,
             )
-            color?.let {
-                v.setBackgroundColor(it)
-            }
             windowInset
         }
     }

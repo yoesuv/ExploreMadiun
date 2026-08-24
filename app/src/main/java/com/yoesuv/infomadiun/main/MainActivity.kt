@@ -1,12 +1,15 @@
 package com.yoesuv.infomadiun.main
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.insets.ColorProtection
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -28,9 +31,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (AppHelper.isVanillaIceCreamAndUp()) {
-            enableEdgeToEdge()
-        }
+        enableEdgeToEdge(statusBarStyle = SystemBarStyle.dark(Color.TRANSPARENT))
 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -40,10 +41,22 @@ class MainActivity : AppCompatActivity() {
         setupNavigation()
         setupBackPressed()
 
-        AppHelper.insetsPadding(
+        AppHelper.applySystemBarInsets(
             binding.mainAppBar,
             top = true,
-            color = ContextCompat.getColor(this, R.color.colorPrimary),
+        )
+        AppHelper.applySystemBarInsets(
+            binding.bottomNavigationView,
+            bottom = true,
+        )
+
+        binding.mainProtectionLayout.setProtections(
+            listOf(
+                ColorProtection(
+                    WindowInsetsCompat.Side.TOP,
+                    getColor(R.color.colorPrimary),
+                ),
+            ),
         )
     }
 
