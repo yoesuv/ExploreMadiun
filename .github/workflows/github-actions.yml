@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '25'
       - name : Verify Java Version
         run: java --version
       - name: Setup Android SDK Tools
@@ -33,6 +33,4 @@ jobs:
         run: chmod +x ./gradlew
       - name: build apk release
         run: ./gradlew assembleRelease
-      - name: count release dex methods
-        run: ./gradlew countReleaseDexMethods
       - run: echo "🍏 This job's status is ${{ job.status }}."
