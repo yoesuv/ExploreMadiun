@@ -1,18 +1,18 @@
 package com.yoesuv.infomadiun.menu.other.viewmodels
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import android.content.Context
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.menu.other.models.ChangeLogModel
 
 class ChildFragmentChangelogViewModel : ViewModel() {
-
     private var listChangelog: MutableList<ChangeLogModel> = mutableListOf()
     var listData: MutableLiveData<MutableList<ChangeLogModel>> = MutableLiveData()
 
     fun setupData(context: Context?) {
         listChangelog.clear()
+        listChangelog.add(ChangeLogModel(context?.getString(R.string.ver_18), context?.getString(R.string.ver_18_info), false))
         listChangelog.add(ChangeLogModel(context?.getString(R.string.ver_17), context?.getString(R.string.ver_17_info), false))
         listChangelog.add(ChangeLogModel(context?.getString(R.string.ver_16), context?.getString(R.string.ver_16_info), false))
         listChangelog.add(ChangeLogModel(context?.getString(R.string.ver_15), context?.getString(R.string.ver_15_info), false))
@@ -33,5 +33,4 @@ class ChildFragmentChangelogViewModel : ViewModel() {
 
         listData.value = listChangelog
     }
-
 }

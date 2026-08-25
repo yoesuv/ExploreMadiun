@@ -7,27 +7,27 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/fragment_info_margin">
+            android:layout_margin="@dimen/fragment_info_margin"
+            android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewThanks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_12ssp"
                 android:textColor="@color/default_text_color"
-                tools:text="@tools:sample/lorem/random"/>
+                android:textSize="@dimen/_12ssp"
+                tools:text="@tools:sample/lorem/random" />
 
-            <include layout="@layout/divider"/>
+            <include layout="@layout/divider" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/person_1"
-                android:textSize="@dimen/_12ssp"
-                android:textColor="@color/default_text_color"/>
+                android:textColor="@color/default_text_color"
+                android:textSize="@dimen/_12ssp" />
 
         </LinearLayout>
 

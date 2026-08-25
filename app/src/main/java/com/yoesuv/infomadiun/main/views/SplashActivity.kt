@@ -13,7 +13,6 @@ import com.yoesuv.infomadiun.utils.AppHelper
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivitySplashBinding
     private lateinit var viewModel: SplashViewModel
 
@@ -29,5 +28,4 @@ class SplashActivity : AppCompatActivity() {
 
         viewModel.getAppData(this)
     }
-
 }

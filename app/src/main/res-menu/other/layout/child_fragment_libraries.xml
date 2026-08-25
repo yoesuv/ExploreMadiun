@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="libraries"
-            type="com.yoesuv.infomadiun.menu.other.viewmodels.ChildFragmentLibrariesViewModel"/>
+            type="com.yoesuv.infomadiun.menu.other.viewmodels.ChildFragmentLibrariesViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -14,9 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="@dimen/fragment_info_margin"
         android:paddingTop="@dimen/fragment_info_margin"
+        android:paddingBottom="@dimen/fragment_info_margin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_libraries"/>
+        tools:listitem="@layout/item_libraries" />
 
 </layout>

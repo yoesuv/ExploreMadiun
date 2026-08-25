@@ -7,19 +7,18 @@ import com.yoesuv.infomadiun.menu.other.views.ChildFragmentInfo
 import com.yoesuv.infomadiun.menu.other.views.ChildFragmentLibraries
 import com.yoesuv.infomadiun.menu.other.views.ChildFragmentThanks
 
-class TabOtherAdapter(fm: Fragment, private val titles: Array<String>) : FragmentStateAdapter(fm) {
+class TabOtherAdapter(
+    fm: Fragment,
+    private val titles: Array<String>,
+) : FragmentStateAdapter(fm) {
+    override fun getItemCount(): Int = titles.size
 
-    override fun getItemCount(): Int {
-        return titles.size
-    }
-
-    override fun createFragment(position: Int): Fragment {
-        return when (position) {
+    override fun createFragment(position: Int): Fragment =
+        when (position) {
             0 -> ChildFragmentInfo.getInstance()
             1 -> ChildFragmentChangelog.getInstance()
             2 -> ChildFragmentThanks.getInstance()
             3 -> ChildFragmentLibraries.getInstance()
             else -> ChildFragmentInfo.getInstance()
         }
-    }
 }

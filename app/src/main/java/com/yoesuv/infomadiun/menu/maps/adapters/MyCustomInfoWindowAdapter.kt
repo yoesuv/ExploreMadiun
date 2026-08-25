@@ -10,13 +10,12 @@ import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.CustomInfoWindowBinding
 import com.yoesuv.infomadiun.menu.maps.models.MarkerTag
 
-class MyCustomInfoWindowAdapter(private val context: Context?) : GoogleMap.InfoWindowAdapter {
-
+class MyCustomInfoWindowAdapter(
+    private val context: Context?,
+) : GoogleMap.InfoWindowAdapter {
     private val binding = CustomInfoWindowBinding.inflate(LayoutInflater.from(context))
 
-    override fun getInfoContents(marker: Marker): View {
-        return binding.root
-    }
+    override fun getInfoContents(marker: Marker): View = binding.root
 
     override fun getInfoWindow(marker: Marker): View {
         val tag: MarkerTag = marker.tag as MarkerTag
@@ -30,5 +29,4 @@ class MyCustomInfoWindowAdapter(private val context: Context?) : GoogleMap.InfoW
         }
         return binding.root
     }
-
 }

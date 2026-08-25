@@ -4,47 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="gallery"
-            type="com.yoesuv.infomadiun.menu.gallery.viewmodels.DetailGalleryViewModel"/>
+            type="com.yoesuv.infomadiun.menu.gallery.viewmodels.DetailGalleryViewModel" />
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:orientation="vertical">
 
         <include
             android:id="@+id/toolbarDetailGallery"
-            layout="@layout/include_toolbar"/>
+            layout="@layout/include_toolbar" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/activity_detail_image_height"
                     android:scaleType="centerCrop"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic"
-                    app:loadImage="@{gallery.imageUrl}"/>
+                    app:loadImage="@{gallery.imageUrl}"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginRight="@dimen/_8sdp"
                     android:text="@{gallery.caption}"
-                    android:textSize="@dimen/_12ssp"
                     android:textColor="@color/default_text_color"
-                    tools:text="@tools:sample/lorem/random"/>
+                    android:textSize="@dimen/_12ssp"
+                    tools:text="@tools:sample/lorem/random" />
 
             </LinearLayout>
 

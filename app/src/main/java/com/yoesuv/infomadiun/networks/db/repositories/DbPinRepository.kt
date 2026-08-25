@@ -6,8 +6,10 @@ import com.yoesuv.infomadiun.networks.db.AppDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class DbPinRepository(context: Context, private val scope: CoroutineScope) {
-
+class DbPinRepository(
+    context: Context,
+    private val scope: CoroutineScope,
+) {
     private val dbPin = AppDatabase.getInstance(context)?.pinDaoAccess()
 
     fun pins(pins: (List<PinModel>?) -> Unit) {
@@ -22,5 +24,4 @@ class DbPinRepository(context: Context, private val scope: CoroutineScope) {
             dbPin?.insertPin(pinModel)
         }
     }
-
 }

@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="listPlace"
-            type="com.yoesuv.infomadiun.menu.listplace.viewmodels.FragmentListPlaceViewModel"/>
+            type="com.yoesuv.infomadiun.menu.listplace.viewmodels.FragmentListPlaceViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -15,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_list_place"
-        tools:itemCount="10"/>
+        tools:itemCount="10"
+        tools:listitem="@layout/item_list_place" />
 
 </layout>

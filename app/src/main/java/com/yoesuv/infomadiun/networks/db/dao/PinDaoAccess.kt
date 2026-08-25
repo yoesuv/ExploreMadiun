@@ -8,7 +8,6 @@ import com.yoesuv.infomadiun.menu.maps.models.PinModel
 
 @Dao
 interface PinDaoAccess {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPin(pinModel: PinModel)
 
@@ -17,5 +16,4 @@ interface PinDaoAccess {
 
     @Query("DELETE FROM pins")
     suspend fun deleteAllPin()
-
 }

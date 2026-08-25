@@ -7,8 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.networks.db.repositories.DbPinRepository
 
-class FragmentMapsViewModel(application: Application) : AndroidViewModel(application) {
-
+class FragmentMapsViewModel(
+    application: Application,
+) : AndroidViewModel(application) {
     private val dbPin = DbPinRepository(application.applicationContext, viewModelScope)
 
     var listPin: MutableLiveData<List<PinModel>> = MutableLiveData()
@@ -18,5 +19,4 @@ class FragmentMapsViewModel(application: Application) : AndroidViewModel(applica
             listPin.postValue(it)
         }
     }
-
 }

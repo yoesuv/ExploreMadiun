@@ -7,5 +7,5 @@ data class LicenseModel(
     val title: String?,
     val url: String?,
     val license: String?,
-    val isLast: Boolean?
+    val isLast: Boolean?,
 )

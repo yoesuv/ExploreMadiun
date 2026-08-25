@@ -4,19 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="gallery"
-            type="com.yoesuv.infomadiun.menu.gallery.viewmodels.FragmentGalleryViewModel"/>
+            type="com.yoesuv.infomadiun.menu.gallery.viewmodels.FragmentGalleryViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewGallery"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:spanCount="@integer/span_count"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/item_gallery"
-        tools:itemCount="20"/>
+        app:spanCount="@integer/span_count"
+        tools:itemCount="20"
+        tools:listitem="@layout/item_gallery" />
 
 </layout>

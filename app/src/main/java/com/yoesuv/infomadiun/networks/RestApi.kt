@@ -10,7 +10,6 @@ import retrofit2.http.GET
  *  Created by yusuf on 4/30/18.
  */
 interface RestApi {
-
     @GET("List_place.json")
     suspend fun listPlace(): Response<MutableList<PlaceModel>>
 
@@ -19,5 +18,4 @@ interface RestApi {
 
     @GET("maps_info.json")
     suspend fun mapPins(): Response<MutableList<PinModel>>
-
 }

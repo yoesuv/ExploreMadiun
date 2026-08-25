@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="changelog"
-            type="com.yoesuv.infomadiun.menu.other.viewmodels.ChildFragmentChangelogViewModel"/>
+            type="com.yoesuv.infomadiun.menu.other.viewmodels.ChildFragmentChangelogViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -13,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="@dimen/fragment_info_margin"
         android:paddingTop="@dimen/fragment_info_margin"
-        tools:listitem="@layout/item_changelog"/>
+        android:paddingBottom="@dimen/fragment_info_margin"
+        tools:listitem="@layout/item_changelog" />
 
 </layout>

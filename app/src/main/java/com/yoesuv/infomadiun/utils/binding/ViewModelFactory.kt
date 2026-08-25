@@ -7,8 +7,9 @@ import com.yoesuv.infomadiun.menu.gallery.viewmodels.DetailGalleryViewModel
 import com.yoesuv.infomadiun.menu.listplace.models.PlaceModel
 import com.yoesuv.infomadiun.menu.listplace.viewmodels.DetailListPlaceViewModel
 
-class ViewModelFactory(private val any: Any) : ViewModelProvider.NewInstanceFactory() {
-
+class ViewModelFactory(
+    private val any: Any,
+) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass == DetailListPlaceViewModel::class.java) {

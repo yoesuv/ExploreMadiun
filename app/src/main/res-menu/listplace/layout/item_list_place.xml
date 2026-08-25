@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="itemListPlace"
-            type="com.yoesuv.infomadiun.menu.listplace.viewmodels.ItemListPlaceViewModel"/>
+            type="com.yoesuv.infomadiun.menu.listplace.viewmodels.ItemListPlaceViewModel" />
     </data>
 
     <com.yoesuv.infomadiun.widgets.ForegroundRelativeLayout
         android:id="@+id/layoutMainItemListPlace"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_150sdp"
+        android:background="@android:color/transparent"
         android:clickable="true"
         android:focusable="true"
-        android:background="@android:color/transparent"
         android:foreground="?attr/selectableItemBackground">
 
         <FrameLayout
@@ -29,46 +29,45 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 app:loadImage="@{itemListPlace.imageUrl}"
-                tools:srcCompat="@tools:sample/backgrounds/scenic"/>
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/list_place_gradient"/>
+                android:background="@drawable/list_place_gradient" />
 
         </FrameLayout>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewItemListPlaceName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="@{itemListPlace.name}"
-                android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/_14ssp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                tools:text="@tools:sample/cities"/>
+                android:textStyle="bold"
+                tools:text="@tools:sample/cities" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewItemListPlaceLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="@{itemListPlace.location}"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/_12ssp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                tools:text="@tools:sample/lorem"/>
+                tools:text="@tools:sample/lorem" />
 
         </LinearLayout>
 

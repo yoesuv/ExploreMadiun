@@ -8,10 +8,10 @@ import android.os.Build
 import android.text.Html
 import android.view.View
 import android.widget.Toast
-import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.LocationRequest
@@ -25,12 +25,17 @@ import com.google.android.gms.location.Priority
  */
 
 object AppHelper {
-
-    fun displayNormalToast(context: Context, @StringRes message: Int) {
+    fun displayNormalToast(
+        context: Context,
+        @StringRes message: Int,
+    ) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
-    fun displayErrorToast(context: Context, @StringRes message: Int) {
+    fun displayErrorToast(
+        context: Context,
+        @StringRes message: Int,
+    ) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
@@ -43,9 +48,11 @@ object AppHelper {
      * https://stackoverflow.com/a/48326744
      */
     fun displayLocationSettingsRequest(activity: Activity) {
-        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 10000)
-            .setWaitForAccurateLocation(false)
-            .build()
+        val locationRequest =
+            LocationRequest
+                .Builder(Priority.PRIORITY_HIGH_ACCURACY, 10000)
+                .setWaitForAccurateLocation(false)
+                .build()
         val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
         builder.setAlwaysShow(true)
 
@@ -69,8 +76,8 @@ object AppHelper {
     }
 
     @Suppress("DEPRECATION")
-    fun fromHtml(source: String?): String {
-        return if (source != null) {
+    fun fromHtml(source: String?): String =
+        if (source != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY).toString()
             } else {
@@ -79,32 +86,34 @@ object AppHelper {
         } else {
             ""
         }
-    }
 
-    fun isVanillaIceCreamAndUp(): Boolean {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM
-    }
+    fun isVanillaIceCreamAndUp(): Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM
 
-    fun insetsPadding(
-        view: View, left: Boolean = false,
+    fun applySystemBarInsets(
+        view: View,
+        left: Boolean = false,
         top: Boolean = false,
         right: Boolean = false,
         bottom: Boolean = false,
-        @ColorInt color: Int? = null,
     ) {
+        val initialPaddingLeft = view.paddingLeft
+        val initialPaddingTop = view.paddingTop
+        val initialPaddingRight = view.paddingRight
+        val initialPaddingBottom = view.paddingBottom
+
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, windowInset ->
-            val inset = windowInset.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(
-                if (left) inset.left else v.paddingLeft,
-                if (top) inset.top else v.paddingTop,
-                if (right) inset.right else v.paddingRight,
-                if (bottom) inset.bottom + 32 else v.paddingBottom
+            val inset =
+                windowInset.getInsets(
+                    WindowInsetsCompat.Type.systemBars()
+                        or WindowInsetsCompat.Type.displayCutout(),
+                )
+            v.updatePadding(
+                left = initialPaddingLeft + if (left) inset.left else 0,
+                top = initialPaddingTop + if (top) inset.top else 0,
+                right = initialPaddingRight + if (right) inset.right else 0,
+                bottom = initialPaddingBottom + if (bottom) inset.bottom else 0,
             )
-            color?.let {
-                v.setBackgroundColor(it)
-            }
             windowInset
         }
     }
-
 }

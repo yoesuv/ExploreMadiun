@@ -1,10 +1,10 @@
 package com.yoesuv.infomadiun.menu.gallery.views
 
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.navArgs
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ActivityDetailGalleryBinding
@@ -12,7 +12,6 @@ import com.yoesuv.infomadiun.menu.gallery.viewmodels.DetailGalleryViewModel
 import com.yoesuv.infomadiun.utils.binding.ViewModelFactory
 
 class DetailGalleryActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityDetailGalleryBinding
     private val viewModel: DetailGalleryViewModel by viewModels { ViewModelFactory(args.galleryModel) }
 
@@ -40,5 +39,4 @@ class DetailGalleryActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         binding.toolbarDetailGallery.textViewToolbarInclude.text = getString(R.string.detail_gallery)
     }
-
 }

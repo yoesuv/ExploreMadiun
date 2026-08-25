@@ -9,19 +9,22 @@ import com.yoesuv.infomadiun.utils.AdapterCallback
 /**
  *  Updated by yusuf on 26 July 2020.
  */
-class GalleryAdapter(val onItemClick: (galleryModel: GalleryModel) -> Unit) :
-    ListAdapter<GalleryModel, GalleryViewHolder>(AdapterCallback.diffGalleryCallback) {
+class GalleryAdapter(
+    val onItemClick: (galleryModel: GalleryModel) -> Unit,
+) : ListAdapter<GalleryModel, GalleryViewHolder>(AdapterCallback.diffGalleryCallback) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): GalleryViewHolder = GalleryViewHolder.from(parent)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {
-        return GalleryViewHolder.from(parent)
-    }
-
-    override fun onBindViewHolder(holder: GalleryViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: GalleryViewHolder,
+        position: Int,
+    ) {
         val galleryModel = getItem(position)
         holder.bind(galleryModel)
         holder.itemView.setOnClickListener {
             onItemClick(galleryModel)
         }
     }
-
 }

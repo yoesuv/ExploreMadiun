@@ -3,42 +3,44 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="itemChangelog"
-            type="com.yoesuv.infomadiun.menu.other.viewmodels.ItemChangeLogViewModel"/>
+            type="com.yoesuv.infomadiun.menu.other.viewmodels.ItemChangeLogViewModel" />
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/fragment_info_margin"
-        android:layout_marginRight="@dimen/fragment_info_margin">
+        android:layout_marginRight="@dimen/fragment_info_margin"
+        android:orientation="vertical">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewChangelogTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{itemChangelog.name}"
-            android:textStyle="bold"
-            android:textSize="@dimen/_12ssp"
             android:textColor="@color/default_text_color"
-            tools:text="@tools:sample/full_names"/>
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"
+            tools:text="@tools:sample/full_names" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textViewChangelogDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{itemChangelog.description}"
-            android:textSize="@dimen/_12ssp"
             android:textColor="@color/default_text_color"
-            tools:text="@tools:sample/lorem"/>
+            android:textSize="@dimen/_12ssp"
+            tools:text="@tools:sample/lorem" />
 
         <include
             android:id="@+id/layoutDivider"
-            android:visibility="@{safeUnbox(itemChangelog.isLast()) ? View.GONE : View.VISIBLE}"
-            layout="@layout/divider"/>
+            layout="@layout/divider"
+            android:visibility="@{safeUnbox(itemChangelog.isLast()) ? View.GONE : View.VISIBLE}" />
 
     </LinearLayout>
 

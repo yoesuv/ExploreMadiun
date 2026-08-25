@@ -70,8 +70,22 @@
     <string name="glide_url">https://github.com/bumptech/glide</string>
     <string name="glide_license">
         <![CDATA[
-            © Sam Judd<br/><br/>
-            Licensed under BSD, part MIT and Apache 2.0.
+            Copyright © 2014 Google, Inc. & Sam Judd<br/><br/>
+            Licensed under the BSD License, part MIT and Apache 2.0.<br/><br/>
+            Redistribution and use in source and binary forms, with or without
+            modification, are permitted provided that the following conditions are
+            met:<br/><br/>
+            • Redistributions of source code must retain the above copyright
+            notice, this list of conditions and the following disclaimer.<br/>
+            • Redistributions in binary form must reproduce the above copyright
+            notice, this list of conditions and the following disclaimer in the
+            documentation and/or other materials provided with the distribution.<br/><br/>
+            THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+            EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+            MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+            IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+            ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+            DAMAGES ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE.
         ]]>
     </string>
     <string name="google_direction">Android-GoogleDirectionLibrary</string>
@@ -115,6 +129,27 @@
     </string>
     <string name="ssp_android">SSP - a scalable size unit for texts</string>
     <string name="ssp_android_url">https://github.com/intuit/ssp</string>
+    <string name="ssp_android_license">
+        <![CDATA[
+            Copyright © 2013 - 2015 Intuit Inc.<br/><br/>
+            Licensed under the MIT License;
+            Permission is hereby granted, free of charge, to any person obtaining a copy
+            of this software and associated documentation files (the "Software"), to deal
+            in the Software without restriction, including without limitation the rights
+            to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+            copies of the Software, and to permit persons to whom the Software is
+            furnished to do so, subject to the following conditions:<br/><br/>
+            The above copyright notice and this permission notice shall be included in all
+            copies or substantial portions of the Software.<br/><br/>
+            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+            SOFTWARE.
+        ]]>
+    </string>
     <string name="okhttp">OkHttp</string>
     <string name="okhttp_url">https://github.com/square/okhttp</string>
     <string name="okhttp_license">
@@ -163,24 +198,15 @@
             limitations under the License.
         ]]>
     </string>
-    <string name="dexcount">Dexcount Gradle Plugin</string>
-    <string name="dexcount_url">https://github.com/KeepSafe/dexcount-gradle-plugin</string>
-    <string name="dexcount_license">
+    <!-- CHANGELOG -->
+    <string name="ver_18">Versi 2.1.0</string>
+    <string name="ver_18_info">
         <![CDATA[
-            Copyright © 2015-2018 Keepsafe Software Inc<br/><br/>
-            Licensed under the Apache License, Version 2.0 (the "License");
-            you may not use this file except in compliance with the License.
-            You may obtain a copy of the License at<br/><br/>
-            http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
-            Unless required by applicable law or agreed to in writing, software
-            distributed under the License is distributed on an "AS IS" BASIS,
-            WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-            See the License for the specific language governing permissions and
-            limitations under the License.
+            • pembaruan library<br/>
+            • mendukung android 17<br/>
+            • peningkatan tampilan & kestabilan aplikasi
         ]]>
     </string>
-
-    <!-- CHANGELOG -->
     <string name="ver_17">Versi 2.0.9</string>
     <string name="ver_17_info">
         <![CDATA[

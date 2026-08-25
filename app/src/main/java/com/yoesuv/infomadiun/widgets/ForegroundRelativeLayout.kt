@@ -13,8 +13,10 @@ import com.yoesuv.infomadiun.R
  *  Created by yusuf on 2/20/17.
  */
 
-class ForegroundRelativeLayout(context: Context, attrs: AttributeSet) : RelativeLayout(context, attrs) {
-
+class ForegroundRelativeLayout(
+    context: Context,
+    attrs: AttributeSet,
+) : RelativeLayout(context, attrs) {
     private var foreground: Drawable? = null
 
     init {
@@ -31,20 +33,21 @@ class ForegroundRelativeLayout(context: Context, attrs: AttributeSet) : Relative
         }
     }
 
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+    override fun onSizeChanged(
+        w: Int,
+        h: Int,
+        oldw: Int,
+        oldh: Int,
+    ) {
         super.onSizeChanged(w, h, oldw, oldh)
         if (foreground != null) {
             foreground!!.setBounds(0, 0, w, h)
         }
     }
 
-    override fun hasOverlappingRendering(): Boolean {
-        return false
-    }
+    override fun hasOverlappingRendering(): Boolean = false
 
-    override fun verifyDrawable(who: Drawable): Boolean {
-        return super.verifyDrawable(who) || who === foreground
-    }
+    override fun verifyDrawable(who: Drawable): Boolean = super.verifyDrawable(who) || who === foreground
 
     override fun jumpDrawablesToCurrentState() {
         super.jumpDrawablesToCurrentState()
@@ -64,9 +67,7 @@ class ForegroundRelativeLayout(context: Context, attrs: AttributeSet) : Relative
      *
      * @return A Drawable or null if no foreground was set.
      */
-    override fun getForeground(): Drawable? {
-        return foreground
-    }
+    override fun getForeground(): Drawable? = foreground
 
     /**
      * Supply a Drawable that is to be rendered on top of all of the child
@@ -106,7 +107,10 @@ class ForegroundRelativeLayout(context: Context, attrs: AttributeSet) : Relative
         }
     }
 
-    override fun drawableHotspotChanged(x: Float, y: Float) {
+    override fun drawableHotspotChanged(
+        x: Float,
+        y: Float,
+    ) {
         super.drawableHotspotChanged(x, y)
         if (foreground != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -114,5 +118,4 @@ class ForegroundRelativeLayout(context: Context, attrs: AttributeSet) : Relative
             }
         }
     }
-
 }

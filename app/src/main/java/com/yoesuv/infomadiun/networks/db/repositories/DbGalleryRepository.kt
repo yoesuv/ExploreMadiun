@@ -6,8 +6,10 @@ import com.yoesuv.infomadiun.networks.db.AppDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-class DbGalleryRepository(context: Context, private val scope: CoroutineScope) {
-
+class DbGalleryRepository(
+    context: Context,
+    private val scope: CoroutineScope,
+) {
     private val dbGallery = AppDatabase.getInstance(context)?.galleryDaoAccess()
 
     fun galleries(galleries: (List<GalleryModel>?) -> Unit) {
@@ -22,5 +24,4 @@ class DbGalleryRepository(context: Context, private val scope: CoroutineScope) {
             dbGallery?.insertGallery(galleryModel)
         }
     }
-
 }

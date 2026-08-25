@@ -2,15 +2,21 @@ package com.yoesuv.infomadiun.menu.maps.views
 
 import android.Manifest
 import android.annotation.SuppressLint
-import androidx.databinding.DataBindingUtil
-import android.graphics.Color
-import android.os.*
-import androidx.fragment.app.Fragment
+import android.os.Bundle
+import android.os.Looper
 import android.util.TypedValue
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.graphics.toColorInt
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import com.akexorcist.googledirection.DirectionCallback
@@ -20,12 +26,20 @@ import com.akexorcist.googledirection.constant.TransportMode
 import com.akexorcist.googledirection.model.Direction
 import com.akexorcist.googledirection.model.Route
 import com.akexorcist.googledirection.util.DirectionConverter
-import com.google.android.gms.location.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.yoesuv.infomadiun.App
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.FragmentMapBinding
@@ -33,14 +47,22 @@ import com.yoesuv.infomadiun.menu.maps.adapters.MyCustomInfoWindowAdapter
 import com.yoesuv.infomadiun.menu.maps.models.MarkerTag
 import com.yoesuv.infomadiun.menu.maps.models.PinModel
 import com.yoesuv.infomadiun.menu.maps.viewmodels.FragmentMapsViewModel
-import com.yoesuv.infomadiun.utils.*
+import com.yoesuv.infomadiun.utils.AppHelper
+import com.yoesuv.infomadiun.utils.checkGrantedPermission
+import com.yoesuv.infomadiun.utils.logError
+import com.yoesuv.infomadiun.utils.openAppSettings
+import com.yoesuv.infomadiun.utils.setDefaultLocation
+import com.yoesuv.infomadiun.utils.setupMarkerAnimation
 import kotlin.math.roundToInt
 
 /**
  *  Updated by yusuf on 03 March 2023.
  */
-class FragmentMaps : Fragment(), OnMapReadyCallback, MenuProvider, DirectionCallback {
-
+class FragmentMaps :
+    Fragment(),
+    OnMapReadyCallback,
+    MenuProvider,
+    DirectionCallback {
     companion object {
         const val PREFERENCE_LATITUDE = "preference_latitude"
         const val PREFERENCE_LONGITUDE = "preference_longitude"
@@ -71,7 +93,11 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, MenuProvider, DirectionCall
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.requireActivity().applicationContext)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_map, container, false)
         binding.lifecycleOwner = this
         binding.maps = viewModel
@@ -85,7 +111,10 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, MenuProvider, DirectionCall
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding.textViewGettingDirection.visibility = View.INVISIBLE
         viewModel.listPin.observe(viewLifecycleOwner) { listPin ->
@@ -103,9 +132,11 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, MenuProvider, DirectionCall
         myLocationCallback = MyLocationCallback(googleMap)
 
         googleMap?.uiSettings?.isMyLocationButtonEnabled = true
-        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 2000)
-            .setWaitForAccurateLocation(false)
-            .build()
+        val locationRequest =
+            LocationRequest
+                .Builder(Priority.PRIORITY_HIGH_ACCURACY, 2000)
+                .setWaitForAccurateLocation(false)
+                .build()
         fusedLocationClient.requestLocationUpdates(locationRequest, myLocationCallback, Looper.getMainLooper())
     }
 
@@ -121,7 +152,8 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, MenuProvider, DirectionCall
                         if (!longitude.isNullOrEmpty()) {
                             binding.textViewGettingDirection.visibility = View.VISIBLE
                             origin = LatLng(latitude.toDouble(), longitude.toDouble())
-                            GoogleDirection.withServerKey(requireContext().getString(R.string.DIRECTION_API_KEY))
+                            GoogleDirection
+                                .withServerKey(requireContext().getString(R.string.DIRECTION_API_KEY))
                                 .from(origin)
                                 .to(destination)
                                 .alternativeRoute(true)
@@ -162,12 +194,12 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, MenuProvider, DirectionCall
     override fun onMapReady(googleMap: GoogleMap) {
         setDefaultLocation(googleMap)
         googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.style_map))
-        val paddingBottom = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 108F, resources.displayMetrics).roundToInt()
+        val paddingBottom = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60F, resources.displayMetrics).roundToInt()
         googleMap.setPadding(0, 0, 0, paddingBottom)
         googleMap.uiSettings.isZoomControlsEnabled = true
         googleMap.uiSettings.isCompassEnabled = true
 
-        //default location
+        // default location
         this.googleMap = googleMap
         viewModel.getListPin()
 
@@ -199,7 +231,10 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, MenuProvider, DirectionCall
         setupMarkerAnimation(googleMap)
     }
 
-    override fun onCreateMenu(menu: Menu, inflater: MenuInflater) {
+    override fun onCreateMenu(
+        menu: Menu,
+        inflater: MenuInflater,
+    ) {
         inflater.inflate(R.menu.menu_map, menu)
     }
 
@@ -215,19 +250,23 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, MenuProvider, DirectionCall
         binding.textViewGettingDirection.visibility = View.INVISIBLE
         direction?.let { dir ->
             if (dir.isOK) {
-                if (dir.routeList.size > 0) {
+                if (dir.routeList.isNotEmpty()) {
                     googleMap?.clear()
                     markerLocation =
-                        googleMap?.addMarker(MarkerOptions().position(destination).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_selected)))
+                        googleMap?.addMarker(
+                            MarkerOptions().position(destination).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_selected)),
+                        )
                     markerLocation?.tag = MarkerTag("Destination", 3, 0.0, 0.0)
 
                     setCameraWithCoordinationBounds(dir.routeList[0])
 
-                    for (i: Int in 0 until dir.routeList.size) {
+                    for ((i, element) in dir.routeList.withIndex()) {
                         val color = colors[i % colors.size]
-                        val route = dir.routeList[i]
+                        val route = element
                         val directionPositionList = route.legList[0].directionPoint
-                        googleMap?.addPolyline(DirectionConverter.createPolyline(requireContext(), directionPositionList, 5, Color.parseColor(color)))
+                        googleMap?.addPolyline(
+                            DirectionConverter.createPolyline(requireContext(), directionPositionList, 5, color.toColorInt()),
+                        )
                     }
                 }
             } else {
@@ -242,5 +281,4 @@ class FragmentMaps : Fragment(), OnMapReadyCallback, MenuProvider, DirectionCall
         AppHelper.displayErrorToast(requireContext(), R.string.error_get_direction)
         t.printStackTrace()
     }
-
 }

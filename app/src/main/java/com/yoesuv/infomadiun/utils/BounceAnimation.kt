@@ -4,10 +4,14 @@ import android.os.Handler
 import android.os.SystemClock
 import android.view.animation.BounceInterpolator
 import android.view.animation.Interpolator
-
 import com.google.android.gms.maps.model.Marker
 
-class BounceAnimation(private val mStart: Long, private val mDuration: Long, private val mMarker: Marker, private val mHandler: Handler) : Runnable {
+class BounceAnimation(
+    private val mStart: Long,
+    private val mDuration: Long,
+    private val mMarker: Marker,
+    private val mHandler: Handler,
+) : Runnable {
     private val mInterpolator: Interpolator
 
     init {
