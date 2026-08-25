@@ -2,18 +2,25 @@ package com.yoesuv.infomadiun.main
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.ViewCompat
+import androidx.core.view.ViewGroupCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.doOnLayout
 import androidx.core.view.insets.ColorProtection
+import androidx.core.view.updateLayoutParams
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.yoesuv.infomadiun.R
 import com.yoesuv.infomadiun.databinding.ActivityMainBinding
 import com.yoesuv.infomadiun.utils.AppHelper
@@ -27,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityMainBinding
+    private var bottomSystemInset = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +49,7 @@ class MainActivity : AppCompatActivity() {
         setupNavigation()
         setupBackPressed()
 
+        ViewGroupCompat.installCompatInsetsDispatch(binding.mainProtectionLayout)
         AppHelper.applySystemBarInsets(
             binding.mainAppBar,
             top = true,
@@ -49,6 +58,28 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationView,
             bottom = true,
         )
+        ViewCompat.setOnApplyWindowInsetsListener(binding.container) { view, windowInsets ->
+            bottomSystemInset =
+                windowInsets
+                    .getInsets(
+                        WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout(),
+                    ).bottom
+            view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = contentBottomMargin()
+            }
+            windowInsets
+        }
+        binding.bottomNavigationView.doOnLayout {
+            (binding.bottomNavigationView.layoutParams as? CoordinatorLayout.LayoutParams)
+                ?.behavior
+                ?.let { it as? HideBottomViewOnScrollBehavior<*> }
+                ?.addOnScrollStateChangedListener { _, _ ->
+                    binding.container.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                        bottomMargin = contentBottomMargin()
+                    }
+                }
+            ViewCompat.requestApplyInsets(binding.container)
+        }
 
         binding.mainProtectionLayout.setProtections(
             listOf(
@@ -59,6 +90,14 @@ class MainActivity : AppCompatActivity() {
             ),
         )
     }
+
+    private fun contentBottomMargin(): Int = if (isBottomNavigationHidden()) bottomSystemInset else binding.bottomNavigationView.height
+
+    private fun isBottomNavigationHidden(): Boolean =
+        (binding.bottomNavigationView.layoutParams as? CoordinatorLayout.LayoutParams)
+            ?.behavior
+            ?.let { it as? HideBottomViewOnScrollBehavior<*> }
+            ?.isScrolledDown == true
 
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbarMain)
