@@ -2,7 +2,6 @@ package com.yoesuv.infomadiun.menu.maps.views
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Looper
 import android.util.TypedValue
@@ -13,6 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.graphics.toColorInt
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
@@ -194,7 +194,7 @@ class FragmentMaps :
     override fun onMapReady(googleMap: GoogleMap) {
         setDefaultLocation(googleMap)
         googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.style_map))
-        val paddingBottom = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 108F, resources.displayMetrics).roundToInt()
+        val paddingBottom = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60F, resources.displayMetrics).roundToInt()
         googleMap.setPadding(0, 0, 0, paddingBottom)
         googleMap.uiSettings.isZoomControlsEnabled = true
         googleMap.uiSettings.isCompassEnabled = true
@@ -250,7 +250,7 @@ class FragmentMaps :
         binding.textViewGettingDirection.visibility = View.INVISIBLE
         direction?.let { dir ->
             if (dir.isOK) {
-                if (dir.routeList.size > 0) {
+                if (dir.routeList.isNotEmpty()) {
                     googleMap?.clear()
                     markerLocation =
                         googleMap?.addMarker(
@@ -260,12 +260,12 @@ class FragmentMaps :
 
                     setCameraWithCoordinationBounds(dir.routeList[0])
 
-                    for (i: Int in 0 until dir.routeList.size) {
+                    for ((i, element) in dir.routeList.withIndex()) {
                         val color = colors[i % colors.size]
-                        val route = dir.routeList[i]
+                        val route = element
                         val directionPositionList = route.legList[0].directionPoint
                         googleMap?.addPolyline(
-                            DirectionConverter.createPolyline(requireContext(), directionPositionList, 5, Color.parseColor(color)),
+                            DirectionConverter.createPolyline(requireContext(), directionPositionList, 5, color.toColorInt()),
                         )
                     }
                 }
